@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkcaffeineshop"]=self["webpackChunkcaffeineshop"]||[]).push([[594],{603:function(n,e,u){u.r(e),u.d(e,{default:function(){return i}});var a=u(6768);const s={class:"about"};function t(n,e){return(0,a.uX)(),(0,a.CE)("div",s,[...e[0]||(e[0]=[(0,a.Lk)("h1",null,"This is an about page",-1)])])}var c=u(1241);const r={},f=(0,c.A)(r,[["render",t]]);var i=f}}]);
+//# sourceMappingURL=about.fb18d5f2.js.map
