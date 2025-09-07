@@ -1,5 +1,6 @@
 <template>
-    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" ref="carouselEl">
+  <transition>
+    <div v-show="isShow" id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" ref="carouselEl">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="../assets/banners/show-banner01.jpg" class="d-block w-100" alt="...">
@@ -35,6 +36,7 @@
       <span class="visually-hidden">Next</span>
     </button>
     </div>
+    </transition>
 </template>
 
 <script>
@@ -44,16 +46,32 @@ export default {
   name: 'SlideShow',
   data () {
     return {
-      carousel: null
+      carousel: null,
+      isShow: false
     }
   },
   mounted () {
     const el = this.$refs.carouselEl
-    this.carousel = new Carousel(el, { interval: 3000 })
-    this.carousel.cycle()
+    setTimeout(() => {
+      this.carousel = new Carousel(el, { interval: 3000 })
+      this.carousel.cycle()
+      this.isShow = true
+    }, 1500)
   },
   beforeUnmount () {
     if (this.carousel) this.carousel.dispose()
   }
 }
 </script>
+
+<style>
+.v-enter-from{
+  opacity: 0;
+}
+.v-enter-active{
+  transition: ease 1s;
+}
+.v-enter-to{
+  opacity: 1;
+}
+</style>

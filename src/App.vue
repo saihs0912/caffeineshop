@@ -1,7 +1,9 @@
 <template>
   <nav-bar></nav-bar>
-  <slide-show></slide-show>
-  <router-view/>
+  <div class="container">
+    <slide-show></slide-show>
+    <router-view/>
+  </div>
 </template>
 
 <script>
