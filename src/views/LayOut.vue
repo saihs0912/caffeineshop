@@ -1,6 +1,6 @@
 <template>
     <nav-bar></nav-bar>
-    <router-view name="home"></router-view>
+    <router-view></router-view>
     <footer-area></footer-area>
 </template>
 
