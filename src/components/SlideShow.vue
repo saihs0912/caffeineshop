@@ -1,6 +1,5 @@
 <template>
-  <transition>
-    <div v-show="isShow" id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" ref="carouselEl">
+    <div id="myCarousel" class="carousel slide carousel-fade fadeIn" data-bs-ride="carousel" ref="carouselEl">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="../assets/banners/show-banner01.jpg" class="d-block w-100" alt="...">
@@ -15,9 +14,7 @@
                 <img src="../assets/banners/show-banner04.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
-        <!-- 左右切換箭頭 -->
     </div>
-    </transition>
 </template>
 
 <script>
@@ -46,13 +43,16 @@ export default {
 </script>
 
 <style>
-.v-enter-from{
+.fadeIn {
   opacity: 0;
+  animation: fadeIn 3s ease forwards;
 }
-.v-enter-active{
-  transition: ease 1s;
-}
-.v-enter-to{
-  opacity: 1;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style>
