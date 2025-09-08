@@ -16,25 +16,6 @@
             </div>
         </div>
         <!-- 左右切換箭頭 -->
-    <button
-      class="carousel-control-prev"
-      type="button"
-      data-bs-target="#myCarousel"
-      data-bs-slide="prev"
-    >
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-
-    <button
-      class="carousel-control-next"
-      type="button"
-      data-bs-target="#myCarousel"
-      data-bs-slide="next"
-    >
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
     </div>
     </transition>
 </template>
@@ -53,7 +34,7 @@ export default {
   mounted () {
     const el = this.$refs.carouselEl
     setTimeout(() => {
-      this.carousel = new Carousel(el, { interval: 3000 })
+      this.carousel = new Carousel(el, { interval: 5000 })
       this.carousel.cycle()
       this.isShow = true
     }, 1500)
