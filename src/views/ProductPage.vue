@@ -3,6 +3,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
+                <div class="text-end">
+                  <button class="btn btn-brown" type="button" @click.prevent="openModal">增加一個產品</button>
+                </div>
                 <table class="table mt-4">
                     <thead>
                         <tr>
@@ -36,15 +39,21 @@
             </div>
         </div>
     </div>
+    <product-modal ref="productModal"></product-modal>
 </template>
 
 <script>
+import ProductModal from '@/components/ProductModal.vue'
+
 export default {
   data () {
     return {
       products: [],
       isLoading: false
     }
+  },
+  components: {
+    ProductModal
   },
   methods: {
     getProducts (page = 1) {
@@ -57,6 +66,9 @@ export default {
             this.products = res.data.products
           }
         })
+    },
+    openModal () {
+      this.$refs.productModal.showModal()
     }
   },
   created () {
