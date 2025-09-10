@@ -17,7 +17,7 @@
                 <label for="customFile" class="form-label">或 上傳圖片<i class="fas fa-spinner fa-spin"></i></label>
                 <input type="file" id="customFile" class="form-control" ref="fileInput" @change="uploadFile">
               </div>
-              <img class="img-fluid" alt="" src="">
+              <img class="img-fluid" alt="" :src="tempProduct.imageUrl">
               <div class="mt-5">
                 <div class="mb-3 input-group" >
                   <input type="url" class="form-control form-control" placeholder="請輸入連結">
@@ -31,43 +31,43 @@
             <div class="col-sm-8">
               <div class="mb-3">
                 <label for="title" class="form-label">標題</label>
-                <input type="text" class="form-control" id="title" placeholder="請輸入標題">
+                <input type="text" class="form-control" id="title" placeholder="請輸入標題" v-model="tempProduct.title">
               </div>
               <div class="row gx-2">
                 <div class="mb-3 col-md-6">
                   <label for="category" class="form-label">分類</label>
-                  <select class="form-select" aria-label="Default select example" name="" id="" v-model="selected">
+                  <select class="form-select" aria-label="Default select example" name="" id="" v-model="tempProduct.catogory">
                     <option value="" disabled>請選擇分類</option>
                     <option v-for="item in productList" :value="item" :key="item">{{ item }}</option>
                   </select>
                 </div>
                 <div class="mb-3 col-md-6">
                   <label for="price" class="form-label">單位</label>
-                  <input type="text" class="form-control" id="unit" placeholder="請輸入單位">
+                  <input type="text" class="form-control" id="unit" placeholder="請輸入單位" v-model="tempProduct.unit">
                 </div>
               </div>
               <div class="row gx-2">
                 <div class="mb-3 col-md-6">
                   <label for="origin_price" class="form-label">原價</label>
-                  <input type="number" class="form-control" id="origin_price" placeholder="請輸入原價">
+                  <input type="number" class="form-control" id="origin_price" placeholder="請輸入原價" v-model="tempProduct.origin_price">
                 </div>
                 <div class="mb-3 col-md-6">
                   <label for="price" class="form-label">售價</label>
-                  <input type="number" class="form-control" id="price" placeholder="請輸入售價">
+                  <input type="number" class="form-control" id="price" placeholder="請輸入售價" v-model="tempProduct.price">
                 </div>
               </div>
               <hr>
               <div class="mb-3">
                 <label for="description" class="form-label">產品描述</label>
-                <textarea type="text" class="form-control" id="description" placeholder="請輸入產品描述"></textarea>
+                <textarea type="text" class="form-control" id="description" placeholder="請輸入產品描述" v-model="tempProduct.description"></textarea>
               </div>
               <div class="mb-3">
                 <label for="content" class="form-label">說明內容</label>
-                <textarea type="text" class="form-control" id="content" placeholder="請輸入產品說明內容"></textarea>
+                <textarea type="text" class="form-control" id="content" placeholder="請輸入產品說明內容" v-model="tempProduct.content"></textarea>
               </div>
               <div class="mb-3">
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" :true-value="1" :false-value="0" id="is_enabled">
+                  <input class="form-check-input" type="checkbox" :true-value="1" :false-value="0" id="is_enabled" v-model="tempProduct.is_enabled">
                   <label class="form-check-label" for="is_enabled">是否上架</label>
                 </div>
               </div>
@@ -92,7 +92,6 @@ export default {
     return {
       modal: {},
       productList: ['咖啡豆', '掛耳咖啡包', '罐裝茶', '茶包', '咖啡生活用品', '茶生活用品', '禮盒專區', '甜點', '其他'],
-      selected: '',
       tempProduct: {}
     }
   },
@@ -108,7 +107,17 @@ export default {
     }
   },
   methods: {
-    uploadFile () {}
+    uploadFile () {
+      const uploadFile = this.$refs.fileInput.files[0]
+      const formData = new FormData()
+      formData.append('file-to-upload', uploadFile)
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
+      this.$http.post(url, formData)
+        .then(res => {
+          if (res.data.success) this.tempProduct.imageUrl = res.data.imageUrl
+          this.$refs.fileInput.value = ''
+        })
+    }
   },
   mixins: [modalMixin]
 }

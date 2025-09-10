@@ -4,10 +4,17 @@ h2 span{
 }
 .areaBottom {
     position: relative;
+    padding: 20px;
     border-bottom: 1px solid #FFC778;
 }
 .areaBottom::before {
+    font-family: "bootstrap-icons";
     position: absolute;
     content: '\F7EA';
     color: #FFC778;
+    font-size: 1.6rem;
+    bottom: -15px;
+    left: calc(50% - 13px);
+    background-color: #ffffff;
+    padding: 0 3px;
 }
