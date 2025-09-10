@@ -39,7 +39,7 @@
             </div>
         </div>
     </div>
-    <product-modal ref="productModal"></product-modal>
+    <product-modal ref="productModal" :product="tempProduct"></product-modal>
 </template>
 
 <script>
@@ -49,7 +49,8 @@ export default {
   data () {
     return {
       products: [],
-      isLoading: false
+      isLoading: false,
+      tempProduct: {}
     }
   },
   components: {

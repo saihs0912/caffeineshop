@@ -2,3 +2,12 @@ h2 span{
     border-bottom: double 5px #FFC778;
     padding: 5px 30px 5px 30px;
 }
+.areaBottom {
+    position: relative;
+    border-bottom: 1px solid #FFC778;
+}
+.areaBottom::before {
+    position: absolute;
+    content: '\F7EA';
+    color: #FFC778;
+}
