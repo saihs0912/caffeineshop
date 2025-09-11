@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col">
                 <div class="text-end">
-                  <button class="btn btn-brown" type="button" @click.prevent="openModal">增加一個產品</button>
+                  <button class="btn btn-brown" type="button" @click.prevent="openModal(true)">增加一個產品</button>
                 </div>
                 <table class="table mt-4">
                     <thead>
@@ -29,7 +29,7 @@
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-outline-primary btn-sm">編輯</button>
+                                    <button type="button" class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">編輯</button>
                                     <button type="button" class="btn btn-outline-danger btn-sm">刪除</button>
                                 </div>
                             </td>
@@ -39,7 +39,7 @@
             </div>
         </div>
     </div>
-    <product-modal ref="productModal" :product="tempProduct"></product-modal>
+    <product-modal ref="productModal" :product="tempProduct" @update-product="updateProduct"></product-modal>
 </template>
 
 <script>
@@ -50,7 +50,8 @@ export default {
     return {
       products: [],
       isLoading: false,
-      tempProduct: {}
+      tempProduct: {},
+      isNew: false
     }
   },
   components: {
@@ -68,8 +69,33 @@ export default {
           }
         })
     },
-    openModal () {
+    openModal (isNew, item) {
+      if (isNew) {
+        this.tempProduct = {}
+      } else {
+        this.tempProduct = { ...item }
+      }
+      this.isNew = isNew
       this.$refs.productModal.showModal()
+    },
+    updateProduct (item) {
+      console.log(item)
+      this.tempProduct = item
+      let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
+      let httpMethod = 'post'
+      if (!this.isNew) {
+        api = `${api}/${item.id}`
+        httpMethod = 'put'
+      }
+      this.$http[httpMethod](api, { data: this.tempProduct })
+        .then(res => {
+          if (res.data.success) {
+            this.getProducts()
+          } else {
+            console.log(res.data)
+          }
+          this.$refs.productModal.hideModal()
+        })
     }
   },
   created () {
