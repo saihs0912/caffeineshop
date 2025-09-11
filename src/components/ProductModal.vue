@@ -37,7 +37,7 @@
                 <div class="mb-3 col-md-6">
                   <label for="category" class="form-label">分類</label>
                   <select class="form-select" aria-label="Default select example" name="" id="" v-model="tempProduct.category">
-                    <option value="" disabled>請選擇分類</option>
+                    <option value="" selected disabled>請選擇分類</option>
                     <option v-for="item in productList" :value="item" :key="item">{{ item }}</option>
                   </select>
                 </div>
