@@ -22,9 +22,13 @@
             </form>
         </div>
     </div>
+    <toast-message></toast-message>
 </template>
 
 <script>
+import emitter from '@/methods/emitter'
+import ToastMessage from '@/components/ToastMessage.vue'
+
 export default {
   data () {
     return {
@@ -32,6 +36,14 @@ export default {
         username: '',
         password: ''
       }
+    }
+  },
+  components: {
+    ToastMessage
+  },
+  provide () {
+    return {
+      emitter
     }
   },
   methods: {

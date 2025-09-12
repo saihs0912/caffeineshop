@@ -1,44 +1,39 @@
 <template>
     <loading-modal :active="isLoading"></loading-modal>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <div class="text-end">
-                  <button class="btn btn-brown" type="button" @click.prevent="openModal(true)">增加一個產品</button>
-                </div>
-                <table class="table mt-4">
-                    <thead>
-                        <tr>
-                            <th>分類</th>
-                            <th>產品名稱</th>
-                            <th>原價</th>
-                            <th>售價</th>
-                            <th>上架狀態</th>
-                            <th>編輯</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="item in products" :key="item.id">
-                            <td>{{ item.category }}</td>
-                            <td>{{ item.title }}</td>
-                            <td>{{ item.origin_price }}</td>
-                            <td>{{ item.price }}</td>
-                            <td>
-                                <span class="text-success" v-if="item.is_enabled">已上架</span>
-                                <span class="text-muted" v-else>未上架</span>
-                            </td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">編輯</button>
-                                    <button type="button" class="btn btn-outline-danger btn-sm" @click="openDelMdodal(item)">刪除</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <h1>商品管理</h1>
+    <div class="text-end">
+      <button class="btn btn-brown" type="button" @click.prevent="openModal(true)">新增產品</button>
     </div>
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th>分類</th>
+          <th>產品名稱</th>
+          <th>原價</th>
+          <th>售價</th>
+          <th>上架狀態</th>
+          <th>編輯</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in products" :key="item.id">
+          <td>{{ item.category }}</td>
+          <td>{{ item.title }}</td>
+          <td>{{ item.origin_price }}</td>
+          <td>{{ item.price }}</td>
+          <td>
+            <span class="text-success" v-if="item.is_enabled">已上架</span>
+            <span class="text-muted" v-else>未上架</span>
+          </td>
+          <td>
+            <div class="btn-group">
+              <button type="button" class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">編輯</button>
+              <button type="button" class="btn btn-outline-danger btn-sm" @click="openDelMdodal(item)">刪除</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <product-modal ref="productModal" :product="tempProduct" @update-product="updateProduct"></product-modal>
     <del-modal ref="delModal" :item="tempProduct" @del-item="delProduct"></del-modal>
 </template>
@@ -120,9 +115,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.container{
-    background-color: #ffffff;
-}
-</style>

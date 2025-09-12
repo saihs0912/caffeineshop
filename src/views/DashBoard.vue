@@ -1,18 +1,34 @@
 <template>
-    <div class="bg">
-        <div class="container">
+  <div class="bg">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="optionArea">
             <user-nav></user-nav>
             <router-view></router-view>
+
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+  <toast-message></toast-message>
 </template>
 
 <script>
 import UserNav from '@/components/UserNav.vue'
+import emitter from '@/methods/emitter'
+import ToastMessage from '@/components/ToastMessage.vue'
 
 export default {
   components: {
-    UserNav
+    UserNav,
+    ToastMessage
+  },
+  provide () {
+    return {
+      emitter
+    }
   },
   created () {
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)makotoToken\s*=\s*([^;]*).*$)|^.*$/, '$1')

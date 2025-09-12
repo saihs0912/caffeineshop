@@ -18,3 +18,8 @@ h2 span{
     background-color: #ffffff;
     padding: 0 3px;
 }
+.optionArea{
+    background-color: #ffffff;
+    padding: 0 20px 20px 20px;
+    min-height: 100vh;
+}
