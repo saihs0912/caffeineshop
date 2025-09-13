@@ -1,5 +1,7 @@
 # caffeineshop
 
+gitpage網址： https://saihs0912.github.io/caffeineshop/#/
+
 ## Project setup
 ```
 npm install
