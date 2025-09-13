@@ -6,7 +6,6 @@
           <div class="optionArea">
             <user-nav></user-nav>
             <router-view></router-view>
-
           </div>
         </div>
       </div>
