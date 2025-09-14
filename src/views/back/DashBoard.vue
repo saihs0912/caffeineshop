@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import UserNav from '@/components/UserNav.vue'
+import UserNav from '@/components/back/UserNav.vue'
 import emitter from '@/methods/emitter'
 import ToastMessage from '@/components/ToastMessage.vue'
 
@@ -44,6 +44,6 @@ export default {
 <style>
 .bg{
     min-height: 100vh;
-    background: url(../assets/banners/wallpaper.png) no-repeat center/cover;
+    background: url(../../assets/banners/wallpaper.png) no-repeat center/cover;
 }
 </style>

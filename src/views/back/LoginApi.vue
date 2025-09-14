@@ -3,7 +3,7 @@
         <div class="container">
             <form class="row justify-content-center" @submit.prevent="signIn">
                 <div class="col-md-4 loginBox">
-                    <div style="width: 60px; margin: 0 auto;"><img src="../assets/logo/logo-1.png" width="80" alt=""></div>
+                    <div style="width: 60px; margin: 0 auto;"><img src="../../assets/logo/logo-1.png" width="80" alt=""></div>
                     <h3 style="text-align: center;">後台管理系統</h3>
                     <div class="form-group">
                         <div class="mb-2">
@@ -69,7 +69,7 @@ export default {
 <style>
 .bg{
     min-height: 100vh;
-    background: url(../assets/banners/wallpaper.png) no-repeat center/cover;
+    background: url(../../assets/banners/wallpaper.png) no-repeat center/cover;
 }
 .loginBox{
     background: #fff;

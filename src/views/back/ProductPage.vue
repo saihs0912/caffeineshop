@@ -34,18 +34,21 @@
         </tr>
       </tbody>
     </table>
+    <pagination-modal :pages="pagination" @emit-pages="getProducts"></pagination-modal>
     <product-modal ref="productModal" :product="tempProduct" @update-product="updateProduct"></product-modal>
     <del-modal ref="delModal" :item="tempProduct" @del-item="delProduct"></del-modal>
 </template>
 
 <script>
-import ProductModal from '@/components/ProductModal.vue'
-import DelModal from '@/components/DelModal.vue'
+import ProductModal from '@/components/back/ProductModal.vue'
+import DelModal from '@/components/back/DelModal.vue'
+import PaginationModal from '@/components/PaginationModal.vue'
 
 export default {
   data () {
     return {
       products: [],
+      pagination: {},
       isLoading: false,
       tempProduct: {},
       isNew: false
@@ -53,7 +56,8 @@ export default {
   },
   components: {
     ProductModal,
-    DelModal
+    DelModal,
+    PaginationModal
   },
   methods: {
     getProducts (page = 1) {
@@ -64,6 +68,7 @@ export default {
           this.isLoading = false
           if (res.data.success) {
             this.products = res.data.products
+            this.pagination = res.data.pagination
           }
         })
     },

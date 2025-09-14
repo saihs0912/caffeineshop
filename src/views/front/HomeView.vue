@@ -4,8 +4,8 @@
 </template>
 
 <script>
-import SlideShow from '@/components/SlideShow.vue'
-import NewProduct from '@/components/NewProduct.vue'
+import SlideShow from '@/components/front/SlideShow.vue'
+import NewProduct from '@/components/front/NewProduct.vue'
 
 export default {
   name: 'HomeView',

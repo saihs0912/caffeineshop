@@ -2,23 +2,23 @@
     <div id="myCarousel" class="carousel slide carousel-fade fadeIn" data-bs-ride="carousel" ref="carouselEl">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="../assets/banners/show-banner01.jpg" class="d-block w-100" alt="...">
+                <img src="../../assets/banners/show-banner01.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="../assets/banners/show-banner02.jpg" class="d-block w-100" alt="...">
+                <img src="../../assets/banners/show-banner02.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="../assets/banners/show-banner03.jpg" class="d-block w-100" alt="...">
+                <img src="../../assets/banners/show-banner03.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="../assets/banners/show-banner04.jpg" class="d-block w-100" alt="...">
+                <img src="../../assets/banners/show-banner04.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import Carousel from 'bootstrap/js/dist/carousel'
+import { Carousel } from 'bootstrap'
 
 export default {
   name: 'SlideShow',

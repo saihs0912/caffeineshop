@@ -32,18 +32,21 @@
             </tr>
         </tbody>
     </table>
+    <pagination-modal :pages="pagination" @emit-pages="getCoupons"></pagination-modal>
     <coupon-modal ref="couponModal" :coupon="tempCoupon" @update-coupon="updateCoupon"></coupon-modal>
     <del-modal ref="delModal" :item="tempCoupon" @del-item="delCoupon"></del-modal>
 </template>
 
 <script>
-import CouponModal from '@/components/CouponModal.vue'
-import DelModal from '@/components/DelModal.vue'
+import CouponModal from '@/components/back/CouponModal.vue'
+import DelModal from '@/components/back/DelModal.vue'
+import PaginationModal from '@/components/PaginationModal.vue'
 
 export default {
   components: {
     CouponModal,
-    DelModal
+    DelModal,
+    PaginationModal
   },
   data () {
     return {
@@ -54,17 +57,19 @@ export default {
         percent: 100,
         code: ''
       },
+      pagination: {},
       isNew: false,
       isLoading: false
     }
   },
   methods: {
-    getCoupons () {
+    getCoupons (page = 1) {
       this.isLoading = true
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupons`
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}`
       this.$http.get(url)
         .then(res => {
           this.coupons = res.data.coupons
+          this.pagination = res.data.pagination
           this.isLoading = false
         })
     },
