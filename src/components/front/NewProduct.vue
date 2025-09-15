@@ -13,7 +13,25 @@
 
 <script>
 export default {
-  name: 'NewProduct'
+  name: 'NewProduct',
+  data () {
+    return {
+      newProductList: []
+    }
+  },
+  methods: {
+    getNewProduct () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products?page=1`
+      this.$http(url)
+        .then(res => {
+          this.newProductList = res.data.products
+          console.log(res.data)
+        })
+    }
+  },
+  created () {
+    this.getNewProduct()
+  }
 }
 </script>
 

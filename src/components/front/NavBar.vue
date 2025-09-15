@@ -11,6 +11,7 @@
                     <li class="nav-item"><a class="nav-link" href="#">咖啡故事</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">線上商店</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">訂單查詢</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">追蹤清單</a></li>
                 </ul>
             </div>
         </div>
