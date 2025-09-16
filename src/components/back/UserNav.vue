@@ -7,10 +7,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><router-link class="nav-link" to="/dashboard/productlist">產品</router-link></li>
-                    <li class="nav-item"><router-link class="nav-link" to="/dashboard/orderlist">訂單</router-link></li>
-                    <li class="nav-item"><router-link class="nav-link" to="/dashboard/couponlist">優惠券</router-link></li>
-                    <li class="nav-item"><a class="nav-link" href="#" @click.prevent="logOut">登出</a></li>
+                    <li class="nav-item"><router-link class="nav-link" to="/dashboard/productlist"><i class="bi bi-archive-fill"></i> 產品</router-link></li>
+                    <li class="nav-item"><router-link class="nav-link" to="/dashboard/orderlist"><i class="bi bi-card-checklist"></i> 訂單</router-link></li>
+                    <li class="nav-item"><router-link class="nav-link" to="/dashboard/couponlist"><i class="bi bi-ticket-perforated-fill"></i> 優惠券</router-link></li>
+                    <li class="nav-item"><a class="nav-link" href="#" @click.prevent="logOut"><i class="bi bi-box-arrow-right"></i> 登出</a></li>
                 </ul>
             </div>
         </div>

@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="d-grid gap-2 col-md-4 col-sm-4 col-6 mx-auto" style="padding: 20px 0;">
-      <button class="btn btn-brown" type="button">查看全部商品</button>
+      <router-link class="btn btn-brown" to="/shopping">查看全部商品</router-link>
     </div>
   </div>
 </template>

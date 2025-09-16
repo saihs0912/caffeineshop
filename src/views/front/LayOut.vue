@@ -8,16 +8,20 @@
       </div>
     </div>
   </div>
+  <a class="cart" href="#"></a>
+  <cart-modal></cart-modal>
 </template>
 
 <script>
 import NavBar from '@/components/front/NavBar.vue'
 import FooterArea from '@/components/front/FooterArea.vue'
+import CartModal from '@/components/front/CartModal.vue'
 
 export default {
   components: {
     NavBar,
-    FooterArea
+    FooterArea,
+    CartModal
   },
   data () {
     return {}

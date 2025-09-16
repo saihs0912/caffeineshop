@@ -58,6 +58,29 @@ h2 span{
     left: calc(50% - 14px);
     content: '\F4C9';
 }
+.cart{
+    position: fixed;
+    right: -20px;
+    top: 50%;
+    background-color: rgba(0,0,0,0.7);
+    padding: 40px;
+    border-radius: 20px 0 0 20px;
+    transition: 0.5s ease;
+    opacity: 1;
+}
+.cart::before{
+    position: absolute;
+    font-family: "bootstrap-icons";
+    left: calc(50% - 20px);
+    top: calc(50% - 30px);
+    content: '\F245';
+    font-size: 40px;
+    color: #ffffff;
+}
+.cart:hover{
+    right: 0;
+    opacity: 0.6;
+}
 @media (max-width: 576px){
     .table thead{
         display: none;
