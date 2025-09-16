@@ -1,3 +1,8 @@
+nav{
+    max-width: 1296px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
 h2 span{
     border-bottom: double 5px #FFC778;
     padding: 5px 30px 5px 30px;
@@ -19,7 +24,58 @@ h2 span{
     padding: 0 3px;
 }
 .optionArea{
+    position: relative;
     background-color: #ffffff;
-    padding: 0 20px 20px 20px;
+    padding: 20px;
+    padding-top: 80px;
     min-height: 100vh;
+}
+.navtest{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.del, .edit{
+    position: relative;
+    padding: 15px;
+}
+.del::before{
+    font-family: "bootstrap-icons";
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: calc(50% - 10px);
+    left: calc(50% - 14px);
+    content: '\F659';
+}
+.edit::before{
+    font-family: "bootstrap-icons";
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: calc(50% - 10px);
+    left: calc(50% - 14px);
+    content: '\F4C9';
+}
+@media (max-width: 576px){
+    .table thead{
+        display: none;
+    }
+    .table tbody tr{
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+    }
+    .table tbody tr td{
+        display: block;
+        position: relative;
+        padding-left: 100px;
+    }
+    .table tbody tr td::before{
+        position: absolute;
+        left: 0;
+        top: calc(50% - 10px);
+        content: attr(data-item);
+        font-weight: bold;
+    }
 }

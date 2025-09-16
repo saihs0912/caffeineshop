@@ -2,7 +2,7 @@
     <loading-modal :active="isLoading"></loading-modal>
     <h1>商品管理</h1>
     <div class="text-end">
-      <button class="btn btn-brown" type="button" @click.prevent="openModal(true)">新增產品</button>
+      <button class="btn btn-brown" type="button" @click.prevent="openModal(true)"><i class="bi bi-plus-square"></i> 新增產品</button>
     </div>
     <table class="table mt-4">
       <thead>
@@ -17,18 +17,18 @@
       </thead>
       <tbody>
         <tr v-for="item in products" :key="item.id">
-          <td>{{ item.category }}</td>
-          <td>{{ item.title }}</td>
-          <td>{{ item.origin_price }}</td>
-          <td>{{ item.price }}</td>
-          <td>
+          <td data-item="產品名稱">{{ item.title }}</td>
+          <td data-item="分類">{{ item.category }}</td>
+          <td data-item="原價">{{ item.origin_price }}</td>
+          <td data-item="售價">{{ item.price }}</td>
+          <td data-item="上架狀態">
             <span class="text-success" v-if="item.is_enabled">已上架</span>
             <span class="text-muted" v-else>未上架</span>
           </td>
-          <td>
+          <td data-item="編輯">
             <div class="btn-group">
-              <button type="button" class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">編輯</button>
-              <button type="button" class="btn btn-outline-danger btn-sm" @click="openDelMdodal(item)">刪除</button>
+              <button type="button" class="btn btn-outline-primary btn-sm edit" @click="openModal(false, item)"></button>
+              <button type="button" class="btn btn-outline-danger btn-sm del" @click="openDelMdodal(item)"></button>
             </div>
           </td>
         </tr>

@@ -9,7 +9,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="#">關於我們</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">咖啡故事</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">線上商店</a></li>
+                    <li class="nav-item"><router-link class="nav-link" to="/shopping">線上商店</router-link></li>
                     <li class="nav-item"><a class="nav-link" href="#">訂單查詢</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">優惠代碼</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">追蹤清單</a></li>

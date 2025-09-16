@@ -2,7 +2,7 @@
     <loading-modal :active="isLoading"></loading-modal>
     <h1>優惠券管理</h1>
     <div class="text-end">
-        <button class="btn btn-brown" @click.prevent="openCouponModal(true)">建立新的優惠券</button>
+        <button class="btn btn-brown" @click.prevent="openCouponModal(true)"><i class="bi bi-plus-square"></i> 新增優惠券</button>
     </div>
     <table class="table mt-4">
         <thead>
@@ -16,17 +16,17 @@
         </thead>
         <tbody>
             <tr v-for="(item, key) in coupons" :key="key">
-                <td>{{ item.title }}</td>
-                <td>{{ item.percent }}</td>
-                <td>{{ $num.date(item.due_date) }}</td>
-                <td>
+                <td data-item="名稱">{{ item.title }}</td>
+                <td data-item="折扣百分比">{{ item.percent }}</td>
+                <td data-item="到期日">{{ $num.date(item.due_date) }}</td>
+                <td data-item="是否啟用">
                   <span v-if="item.is_enabled === 1" class="text-success">啟用</span>
                   <span v-else class="text-muted">未啟用</span>
                 </td>
-                <td>
+                <td data-item="編輯">
                     <div class="btn-group">
-                        <button class="btn btn-outline-primary btn-sm" @click="openCouponModal(false, item)">編輯</button>
-                        <button class="btn btn-outline-danger btn-sm" @click="openDelModal(item)">刪除</button>
+                        <button class="btn btn-outline-primary btn-sm edit" @click="openCouponModal(false, item)"></button>
+                        <button class="btn btn-outline-danger btn-sm del" @click="openDelModal(item)"></button>
                     </div>
                 </td>
             </tr>
