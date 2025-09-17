@@ -8,8 +8,8 @@
       </div>
     </div>
   </div>
-  <a class="cart" href="#"></a>
-  <cart-modal></cart-modal>
+  <a class="cart" href="#" @click.prevent="openCart"></a>
+  <cart-modal ref="cartModal"></cart-modal>
 </template>
 
 <script>
@@ -25,6 +25,11 @@ export default {
   },
   data () {
     return {}
+  },
+  methods: {
+    openCart () {
+      this.$refs.cartModal.showModal()
+    }
   }
 }
 </script>

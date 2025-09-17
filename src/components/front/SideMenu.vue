@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import emitter from '@/methods/emitter'
+
 export default {
   name: 'SideMenu',
   data () {
@@ -26,6 +28,7 @@ export default {
   methods: {
     typeSelect (keyword) {
       console.log(keyword)
+      emitter.emit('sednTo', keyword)
     }
   }
 }
