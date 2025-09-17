@@ -28,7 +28,7 @@ export default {
   methods: {
     typeSelect (keyword) {
       console.log(keyword)
-      emitter.emit('sednTo', keyword)
+      emitter.emit('sendTo', keyword)
     }
   }
 }

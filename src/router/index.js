@@ -13,6 +13,11 @@ const routes = [
       {
         path: 'shopping',
         component: () => import('../views/front/ShoppingPage.vue')
+      },
+      {
+        path: 'product/:productId',
+        name: 'product',
+        component: () => import('../views/front/ProductDetail.vue')
       }
     ]
   },
