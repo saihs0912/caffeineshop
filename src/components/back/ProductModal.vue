@@ -26,6 +26,9 @@
                 <div>
                   <button class="btn btn-outline-primary btn-sm d-block w-100">新增圖片</button>
                 </div>
+                <div class="d-flex flex-wrap flex-row bd-highlight">
+                  <div style="width: 50%;" v-for="(item, i) in tempProduct.imagesUrl" :key="i"><img class="img-fluid" :src="tempProduct.imagesUrl[i]" alt=""></div>
+                </div>
               </div>
             </div>
             <div class="col-sm-8">
@@ -122,7 +125,8 @@ export default {
     inputFile () {
       this.tempProduct.imageUrl = this.imageUrl
       this.imageUrl = ''
-    }
+    },
+    imagesAdd () {}
   },
   mixins: [modalMixin]
 }
