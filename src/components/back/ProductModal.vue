@@ -11,7 +11,7 @@
             <div class="col-sm-4">
               <div class="mb-3">
                 <label for="image" class="form-label">輸入圖片網址</label>
-                <input type="text" class="form-control" id="image" placeholder="請輸入圖片連結">
+                <input type="text" class="form-control" id="image" placeholder="請輸入圖片連結" @change="inputFile" v-model="imageUrl">
               </div>
               <div class="mb-3">
                 <label for="customFile" class="form-label">或 上傳圖片<i class="fas fa-spinner fa-spin"></i></label>
@@ -92,7 +92,8 @@ export default {
     return {
       modal: {},
       productList: ['咖啡豆', '掛耳咖啡包', '罐裝茶', '茶包', '咖啡生活用品', '茶生活用品', '禮盒專區', '甜點', '其他'],
-      tempProduct: {}
+      tempProduct: {},
+      imageUrl: ''
     }
   },
   props: {
@@ -117,6 +118,10 @@ export default {
           if (res.data.success) this.tempProduct.imageUrl = res.data.imageUrl
           this.$refs.fileInput.value = ''
         })
+    },
+    inputFile () {
+      this.tempProduct.imageUrl = this.imageUrl
+      this.imageUrl = ''
     }
   },
   mixins: [modalMixin]

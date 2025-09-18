@@ -1,13 +1,13 @@
 <template>
+  <nav-bar></nav-bar>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col">
-        <nav-bar></nav-bar>
         <router-view></router-view>
-        <footer-area></footer-area>
       </div>
     </div>
   </div>
+  <footer-area></footer-area>
   <a class="cart" href="#" @click.prevent="openCart"></a>
   <cart-modal ref="cartModal"></cart-modal>
 </template>
