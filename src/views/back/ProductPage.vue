@@ -2,7 +2,7 @@
     <loading-modal :active="isLoading"></loading-modal>
     <h1>商品管理</h1>
     <div class="text-end">
-      <button class="btn btn-brown" type="button" @click.prevent="openModal(true)"><i class="bi bi-plus-square"></i> 新增產品</button>
+      <button class="btn btn-brown" type="button" @click.prevent="openModal(true)"><i class="bi bi-plus-square"></i> 新增商品</button>
     </div>
     <table class="table mt-4">
       <thead>
@@ -76,8 +76,10 @@ export default {
       if (isNew) {
         this.tempProduct = {}
         this.tempProduct.category = ''
+        this.tempProduct.imagesUrl = []
       } else {
         this.tempProduct = { ...item }
+        if (!this.tempProduct.imagesUrl) this.tempProduct.imagesUrl = []
       }
       this.isNew = isNew
       this.$refs.productModal.showModal()

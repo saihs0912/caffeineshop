@@ -42,7 +42,7 @@ export default {
   },
   computed: {
     latestProducts () {
-      return this.newProductList.slice(-3)
+      return this.newProductList.slice(-4)
     }
   },
   created () {

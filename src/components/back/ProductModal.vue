@@ -1,8 +1,8 @@
 <template>
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ref="modal">
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content border-0">
-        <div class="modal-header bg-dark text-white">
+        <div class="modal-header bg-brown text-white">
           <h5 class="modal-title" id="exampleModalLabel"><span>新增商品</span></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -10,24 +10,27 @@
           <div class="row">
             <div class="col-sm-4">
               <div class="mb-3">
-                <label for="image" class="form-label">輸入圖片網址</label>
-                <input type="text" class="form-control" id="image" placeholder="請輸入圖片連結" @change="inputFile" v-model="imageUrl">
+                <label for="image" class="form-label">請輸入圖片網址</label>
+                <input type="text" class="form-control" id="image" placeholder="請輸入圖片連結" @change="inputFile('imageUrl')" v-model="imageUrl">
               </div>
               <div class="mb-3">
                 <label for="customFile" class="form-label">或 上傳圖片<i class="fas fa-spinner fa-spin"></i></label>
-                <input type="file" id="customFile" class="form-control" ref="fileInput" @change="uploadFile">
+                <input type="file" id="customFile" class="form-control" ref="fileInput" @change="uploadFile('fileInput')">
               </div>
               <img class="img-fluid" alt="" :src="tempProduct.imageUrl">
-              <div class="mt-5">
-                <div class="mb-3 input-group" >
-                  <input type="url" class="form-control form-control" placeholder="請輸入連結">
-                  <button type="button" class="btn btn-outline-danger">移除</button>
-                </div>
-                <div>
-                  <button class="btn btn-outline-primary btn-sm d-block w-100">新增圖片</button>
-                </div>
-                <div class="d-flex flex-wrap flex-row bd-highlight">
-                  <div style="width: 50%;" v-for="(item, i) in tempProduct.imagesUrl" :key="i"><img class="img-fluid" :src="tempProduct.imagesUrl[i]" alt=""></div>
+              <hr>
+              <div class="mb-3">
+                <label for="image" class="form-label">請輸入圖片網址</label>
+                <input type="text" class="form-control" id="image" placeholder="請輸入圖片連結" @change="inputFile('imagesUrl')" v-model="imagesUrl" :disabled="(tempProduct.imagesUrl || []).length >= 4">
+              </div>
+              <div class="mb-3">
+                <label for="customFile" class="form-label">或 上傳圖片<i class="fas fa-spinner fa-spin"></i></label>
+                <input type="file" id="customFile" class="form-control" ref="filesInput" @change="uploadFile('filesInput')" :disabled="(tempProduct.imagesUrl || []).length >= 4">
+              </div>
+              <div class="d-flex flex-wrap flex-row bd-highlight" style="max-height: 140px; overflow-y: auto;">
+                <div class="flex-img" v-for="(item, i) in tempProduct.imagesUrl" :key="i">
+                  <i class="bi bi-x-circle-fill img-del" @click.prevent="imageDel(i)"></i>
+                  <img class="img-fluid" :src="tempProduct.imagesUrl[i]" alt="">
                 </div>
               </div>
             </div>
@@ -96,7 +99,8 @@ export default {
       modal: {},
       productList: ['咖啡豆', '掛耳咖啡包', '罐裝茶', '茶包', '咖啡生活用品', '茶生活用品', '禮盒專區', '甜點', '其他'],
       tempProduct: {},
-      imageUrl: ''
+      imageUrl: '',
+      imagesUrl: []
     }
   },
   props: {
@@ -111,22 +115,26 @@ export default {
     }
   },
   methods: {
-    uploadFile () {
-      const uploadFile = this.$refs.fileInput.files[0]
+    uploadFile (upImg) {
+      const uploadFile = this.$refs[upImg].files[0]
       const formData = new FormData()
       formData.append('file-to-upload', uploadFile)
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
       this.$http.post(url, formData)
         .then(res => {
-          if (res.data.success) this.tempProduct.imageUrl = res.data.imageUrl
-          this.$refs.fileInput.value = ''
+          if (res.data.success) {
+            upImg === 'fileInput' ? this.tempProduct.imageUrl = res.data.imageUrl : this.tempProduct.imagesUrl.push(res.data.imageUrl)
+            this.$refs[upImg].value = ''
+          }
         })
     },
-    inputFile () {
-      this.tempProduct.imageUrl = this.imageUrl
-      this.imageUrl = ''
+    inputFile (putImg) {
+      putImg === 'imageUrl' ? this.tempProduct[putImg] = this[putImg] : this.tempProduct[putImg].push(this[putImg])
+      this[putImg] = ''
     },
-    imagesAdd () {}
+    imageDel (i) {
+      this.tempProduct.imagesUrl.splice(i, 1)
+    }
   },
   mixins: [modalMixin]
 }
