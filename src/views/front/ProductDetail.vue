@@ -3,18 +3,30 @@
     <div class="row">
       <div class="col-12">
         <div class="mt-4 mb-4">
-          <span v-if="product.category === ('咖啡豆' || '掛耳咖啡包' || '咖啡生活用品')">咖啡</span>
+          <router-link to="/shopping" style="text-decoration: none;">線上商店</router-link> > <span v-if="product.category === ('咖啡豆' || '掛耳咖啡包' || '咖啡生活用品')">咖啡</span>
           <span v-else-if="product.category === ('罐裝茶' || '茶包' || '茶生活用品')">茶</span>
           <span v-else>其他</span> > <span>{{ product.category }}</span>
         </div>
       </div>
-      <div class="col-9 col-lg-9 col-md-9 col-sm-9 col-xs-12 p-3">
-        <h2>{{ product.title }}</h2>
-        <div class="d-flex w-50">
-          <div class="w-25" v-for="(item, i) in  product.imagesUrl" :key="i"><img class="img-fluid" :src="product.imagesUrl[i]" alt=""></div>
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 p-3">
+        <div class="container">
+          <div class="row flex-row-reverse">
+            <div class="col-lg-7 col-md-7">
+              <h2>{{ product.title }}</h2>
+            </div>
+            <div class="col-lg-5 col-md-5">
+              <div class="p-2"><img class="img-fluid" :src="imgArray[num]" alt=""></div>
+              <div class="d-flex">
+                <div class="w-25" v-for="(item, i) in  imgArray" :key="i" @mouseover="imageFocus(i)" :class="{ 'hover-focus': active && num === i }"><img class="img-fluid" :src="imgArray[i]" alt=""></div>
+              </div>
+            </div>
+            <div class="col-lg-7 col-md-7">
+              <p>商品描述</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col3 col-lg-3 col-md-3 col-sm-3 col-xs-12 p-3">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 p-3">
         {{ product.price }}元
       </div>
     </div>
@@ -27,7 +39,10 @@ export default {
   data () {
     return {
       product: {},
-      id: ''
+      id: '',
+      active: false,
+      num: 0,
+      imgArray: []
     }
   },
   methods: {
@@ -36,7 +51,12 @@ export default {
       this.$http.get(api)
         .then(res => {
           this.product = res.data.product
+          this.imgArray = [].concat(this.product.imageUrl, this.product.imagesUrl)
         })
+    },
+    imageFocus (i) {
+      this.num = i
+      this.active = true
     }
   },
   created () {
