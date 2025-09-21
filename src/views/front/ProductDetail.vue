@@ -28,7 +28,15 @@
       </div>
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 p-3">
         {{ product.price }}元
-
+        <div class="d-grid gap-2 col-12 mx-auto" style="padding: 20px 0;">
+          <div class="form-floating">
+          <select class="form-select" aria-label="Default select example" name="" id="itemQty">
+            <option value="" v-for="n in 10" :key="n">{{ n }}</option>
+          </select>
+          <label for="itemQty">數量</label>
+          </div>
+          <button type="button" class="btn btn-brown fs-4"><i class="bi bi-cart3"></i> 加入購物車</button>
+        </div>
       </div>
     </div>
   </div>

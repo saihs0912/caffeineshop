@@ -22,12 +22,12 @@
             </form>
         </div>
     </div>
-    <toast-message></toast-message>
+    <toast-messages></toast-messages>
 </template>
 
 <script>
 import emitter from '@/methods/emitter'
-import ToastMessage from '@/components/ToastMessage.vue'
+import ToastMessages from '@/components/back/ToastMessages.vue'
 
 export default {
   data () {
@@ -39,7 +39,7 @@ export default {
     }
   },
   components: {
-    ToastMessage
+    ToastMessages
   },
   provide () {
     return {
@@ -53,6 +53,7 @@ export default {
         .then(res => {
           if (res.data.success) {
             const { token, expired } = res.data
+            this.$InformMessage(res, '登入')
             document.cookie = `makotoToken=${token}; expires=${expired}`
             setTimeout(() => {
               this.$router.push('/dashboard/productlist')

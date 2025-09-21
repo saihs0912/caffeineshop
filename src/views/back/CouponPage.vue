@@ -95,6 +95,7 @@ export default {
       }
       this.$http[httpMethod](api, { data: this.tempCoupon })
         .then(res => {
+          httpMethod === 'post' ? this.$InformMessage(res, '優惠券新增') : this.$InformMessage(res, '優惠券更新')
           this.$refs.couponModal.hideModal()
           this.getCoupons()
         })
@@ -108,6 +109,7 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
       this.$http.delete(api, { data: this.tempCoupon })
         .then(res => {
+          this.$InformMessage(res, `優惠券${tempCoupon.title}刪除`)
           this.$refs.delModal.hideModal()
           this.getCoupons()
         })

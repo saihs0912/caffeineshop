@@ -11,18 +11,18 @@
       </div>
     </div>
   </div>
-  <toast-message></toast-message>
+  <toast-messages></toast-messages>
 </template>
 
 <script>
 import UserNav from '@/components/back/UserNav.vue'
 import emitter from '@/methods/emitter'
-import ToastMessage from '@/components/ToastMessage.vue'
+import ToastMessages from '@/components/back/ToastMessages.vue'
 
 export default {
   components: {
     UserNav,
-    ToastMessage
+    ToastMessages
   },
   provide () {
     return {

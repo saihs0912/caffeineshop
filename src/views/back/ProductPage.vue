@@ -59,6 +59,7 @@ export default {
     DelModal,
     PaginationModal
   },
+  inject: ['emitter'],
   methods: {
     getProducts (page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
@@ -96,6 +97,7 @@ export default {
       this.$http[httpMethod](api, { data: this.tempProduct })
         .then(res => {
           if (res.data.success) {
+            httpMethod === 'post' ? this.$InformMessage(res, '商品新增') : this.$InformMessage(res, '商品更新')
             this.getProducts()
           } else {
             console.log(res.data)
@@ -112,6 +114,7 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`
       this.$http.delete(api, { data: this.tempProduct })
         .then(res => {
+          this.$InformMessage(res, `商品${item.title}刪除`)
           this.getProducts()
         })
       this.$refs.delModal.hideModal()
