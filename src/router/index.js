@@ -11,6 +11,14 @@ const routes = [
         component: () => import('../views/front/HomeView.vue')
       },
       {
+        path: 'about',
+        component: () => import('../views/front/AboutUs.vue')
+      },
+      {
+        path: 'caffeine',
+        component: () => import('../views/front/CoffeeAndTea.vue')
+      },
+      {
         path: 'shopping',
         component: () => import('../views/front/ShoppingPage.vue')
       },
@@ -18,6 +26,18 @@ const routes = [
         path: 'product/:productId',
         name: 'product',
         component: () => import('../views/front/ProductDetail.vue')
+      },
+      {
+        path: 'order',
+        component: () => import('../views/front/OrderRecord.vue')
+      },
+      {
+        path: 'coupon',
+        component: () => import('../views/front/CouponList.vue')
+      },
+      {
+        path: 'follow',
+        component: () => import('../views/front/FollowList.vue')
       }
     ]
   },
