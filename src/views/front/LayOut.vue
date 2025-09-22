@@ -1,8 +1,8 @@
 <template>
   <nav-bar></nav-bar>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col">
+  <div class="container pt-5">
+    <div class="row justify-content-center pt-5">
+      <div class="col pt-4">
         <router-view></router-view>
       </div>
     </div>

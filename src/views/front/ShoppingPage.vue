@@ -1,10 +1,10 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-3">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-12 order-md-first order-lg-first">
                 <side-menu></side-menu>
             </div>
-            <div class="col-9">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-12 order-sm-first order-first">
                 <shopping-list></shopping-list>
             </div>
         </div>

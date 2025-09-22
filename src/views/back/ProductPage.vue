@@ -4,36 +4,38 @@
     <div class="text-end">
       <button class="btn btn-brown" type="button" @click.prevent="openModal(true)"><i class="bi bi-plus-square"></i> 新增商品</button>
     </div>
-    <table class="table mt-4">
-      <thead>
-        <tr>
-          <th>分類</th>
-          <th>產品名稱</th>
-          <th>原價</th>
-          <th>售價</th>
-          <th>上架狀態</th>
-          <th>編輯</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in products" :key="item.id">
-          <td data-item="產品名稱">{{ item.title }}</td>
-          <td data-item="分類">{{ item.category }}</td>
-          <td data-item="原價">{{ item.origin_price }}</td>
-          <td data-item="售價">{{ item.price }}</td>
-          <td data-item="上架狀態">
-            <span class="text-success" v-if="item.is_enabled">已上架</span>
-            <span class="text-muted" v-else>未上架</span>
-          </td>
-          <td data-item="編輯">
-            <div class="btn-group">
-              <button type="button" class="btn btn-outline-primary btn-sm edit" @click="openModal(false, item)"></button>
-              <button type="button" class="btn btn-outline-danger btn-sm del" @click="openDelMdodal(item)"></button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div>
+      <table class="table mt-4">
+        <thead>
+          <tr>
+            <th>分類</th>
+            <th>產品名稱</th>
+            <th>原價</th>
+            <th>售價</th>
+            <th>上架狀態</th>
+            <th>編輯</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in products" :key="item.id">
+            <td data-item="產品名稱">{{ item.title }}</td>
+            <td data-item="分類">{{ item.category }}</td>
+            <td data-item="原價">{{ item.origin_price }}</td>
+            <td data-item="售價">{{ item.price }}</td>
+            <td data-item="上架狀態">
+              <span class="text-success" v-if="item.is_enabled">已上架</span>
+              <span class="text-muted" v-else>未上架</span>
+            </td>
+            <td data-item="編輯">
+              <div class="btn-group">
+                <button type="button" class="btn btn-outline-primary btn-sm edit" @click="openModal(false, item)"></button>
+                <button type="button" class="btn btn-outline-danger btn-sm del" @click="openDelMdodal(item)"></button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <pagination-modal :pages="pagination" @emit-pages="getProducts"></pagination-modal>
     <product-modal ref="productModal" :product="tempProduct" @update-product="updateProduct"></product-modal>
     <del-modal ref="delModal" :item="tempProduct" @del-item="delProduct"></del-modal>

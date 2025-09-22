@@ -1,11 +1,13 @@
 <template>
-    <div>
-      <h4 class="text-center">詳細類別</h4>
-      <div v-for="(itemOut, keyOut) in Object.keys(typecategoryList)" :key="keyOut">
-        {{ itemOut }}
-        <ul class="list-group">
-          <li class="list-group-item" v-for="(itemIn, keyIn) in typecategoryList[itemOut]" :key="keyIn"><a href="#" @click.prevent="typeSelect(itemIn)">{{ itemIn }}</a></li>
-        </ul>
+    <div class="sideBar mt-4 mb-5">
+      <h5 class="text-center p-2">找尋商品</h5>
+      <div class="ps-4 pe-4">
+        <div v-for="(itemOut, keyOut) in Object.keys(typecategoryList)" :key="keyOut" class="p-2">
+          <span class="fw-bold border-bottom d-block">{{ itemOut }}</span>
+          <ul class="list-group mb-4">
+            <li class="list-group-item border-0 border-bottom ps-0 ms-3" v-for="(itemIn, keyIn) in typecategoryList[itemOut]" :key="keyIn"><a href="#" @click.prevent="typeSelect(itemIn)" class="d-block">{{ itemIn }}</a></li>
+          </ul>
+        </div>
       </div>
     </div>
 </template>
