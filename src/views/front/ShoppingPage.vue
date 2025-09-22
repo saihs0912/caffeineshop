@@ -5,6 +5,7 @@
                 <side-menu></side-menu>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-12 order-sm-first order-first">
+                <order-and-search></order-and-search>
                 <shopping-list></shopping-list>
             </div>
         </div>
@@ -14,11 +15,13 @@
 <script>
 import SideMenu from '@/components/front/SideMenu.vue'
 import ShoppingList from '@/components/front/ShoppingList.vue'
+import OrderAndSearch from '@/components/front/OrderAndSearch.vue'
 
 export default {
   components: {
     SideMenu,
-    ShoppingList
+    ShoppingList,
+    OrderAndSearch
   }
 }
 </script>

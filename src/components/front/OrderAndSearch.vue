@@ -1,0 +1,53 @@
+<template>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                <div class="input-group mb-3">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon1">重置搜尋</button>
+                    <input type="text" placeholder="搜尋商品" class="form-control" aria-describedby="basic-addon1">
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                <div class="d-flex w-100 mx-100 mb-3">
+                    <div class="btn-group w-75">
+                        <button type="button" class="btn btn-outline-secondary"><small>價格排序</small></button>
+                    </div>
+                    <div class="btn-group-vertical w-25" role="group" aria-label="Vertical radio toggle button group">
+                        <button type="button" class="btn btn-outline-secondary arrow a-up"></button>
+                        <button type="button" class="btn btn-outline-secondary arrow a-down"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                <div class="d-flex w-100 mx-100 mb-3">
+                    <div class="btn-group w-75">
+                        <button type="button" class="btn btn-outline-secondary"><small>名稱排序</small></button>
+                    </div>
+                    <div class="btn-group-vertical w-25" role="group" aria-label="Vertical radio toggle button group">
+                        <button type="button" class="btn btn-outline-secondary arrow a-up"></button>
+                        <button type="button" class="btn btn-outline-secondary arrow a-down"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import emitter from '@/methods/emitter'
+
+export default {
+  name: 'OrderAndSearch',
+  data () {
+    return {
+      cateGory: []
+    }
+  },
+  mounted () {
+    emitter.on('sendTo', keyword => {
+      this.cateGory = keyword
+      console.log('搜尋列表的陣列', this.cateGory)
+    })
+  }
+}
+</script>

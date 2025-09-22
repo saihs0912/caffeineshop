@@ -1,6 +1,7 @@
 <template>
+  <div class="container">
   <div class="row">
-    <div v-for="item in productList" :key="item.id" class="col-6 col-sm-4 col-md-4 col-lg-4 p-4">
+    <div v-for="item in productList" :key="item.id" class="col-6 col-sm-4 col-md-4 col-lg-4 p-4 overflow-hidden">
       <div class="card h-100 shadow-sm border-0">
       <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
         <img :src="item.imageUrl" class="card-img-top" alt="商品圖片" />
@@ -19,12 +20,13 @@
             <button type="button" class="d-block btn pt-2 pb-2 btn-danger rounded-pill w-100" style="font-size: 0.8rem; outline: none;"><i class="bi bi-cart3"></i> 加入購物車</button>
           </div>
           <div class="col-4">
-            <button type="button" class="d-block btn pt-1 pb-1 rounded-circle shadow border-0 text-center" style="outline: none; width: 36px; height: 36px; font-size: 0.9rem;"><i class="bi bi-heart text-warning"></i></button>
+            <button type="button" class="d-block btn rounded-circle shadow border-0 text-center heart" style="outline: none; width: 36px; height: 36px; font-size: 0.9rem;"></button>
           </div>
         </div>
       </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 

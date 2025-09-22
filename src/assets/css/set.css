@@ -137,6 +137,42 @@ h2 span{
 .sideBar .list-group .list-group-item a:hover{
     opacity: 0.4;
 }
+.heart{
+    position: relative;
+    transition: 0.5s ease;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+.heart::before{
+    position: absolute;
+    top: calc(50% - 12px);
+    left: calc(50% - 9.6px);
+    content: '\F417';
+    font-family: "bootstrap-icons";
+    color: #ffc107;
+    font-size: 1.2rem;
+}
+.heart:hover{
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.2)!important;
+}
+.arrow{
+    position: relative;
+}
+.a-up::before{
+    position: absolute;
+    top: calc(50% - 9px);
+    left: calc(50% - 5px);
+    font-family: "bootstrap-icons";
+    content: '\F235';
+    font-size: 0.7rem;
+}
+.a-down::before{
+    position: absolute;
+    top: calc(50% - 9px);
+    left: calc(50% - 5px);
+    font-family: "bootstrap-icons";
+    content: '\F229';
+    font-size: 0.7rem;
+}
 @media (max-width: 576px){
     .table thead{
         display: none;
