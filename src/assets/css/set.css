@@ -167,7 +167,7 @@ h2 span{
 }
 .a-down::before{
     position: absolute;
-    top: calc(50% - 9px);
+    top: calc(50% - 8px);
     left: calc(50% - 5px);
     font-family: "bootstrap-icons";
     content: '\F229';

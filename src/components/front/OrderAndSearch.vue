@@ -4,7 +4,7 @@
             <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                 <div class="input-group mb-3">
                     <button class="btn btn-outline-secondary" type="button" id="button-addon1">重置搜尋</button>
-                    <input type="text" placeholder="搜尋商品" class="form-control" aria-describedby="basic-addon1">
+                    <input type="text" placeholder="搜尋商品" class="form-control" aria-describedby="basic-addon1" v-model="cacheSearch">
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-6">
@@ -40,14 +40,13 @@ export default {
   name: 'OrderAndSearch',
   data () {
     return {
-      cateGory: []
+      cacheSearch: ''
     }
   },
-  mounted () {
-    emitter.on('sendTo', keyword => {
-      this.cateGory = keyword
-      console.log('搜尋列表的陣列', this.cateGory)
-    })
+  watch: {
+    cacheSearch () {
+      emitter.emit('sendWord', this.cacheSearch)
+    }
   }
 }
 </script>

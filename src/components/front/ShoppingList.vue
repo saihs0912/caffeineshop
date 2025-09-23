@@ -1,12 +1,12 @@
 <template>
   <div class="container">
   <div class="row">
-    <div v-for="item in productList" :key="item.id" class="col-6 col-sm-4 col-md-4 col-lg-4 p-4 overflow-hidden">
+    <div v-for="item in filterData" :key="item.id" class="col-6 col-sm-4 col-md-4 col-lg-4 p-4 overflow-hidden">
       <div class="card h-100 shadow-sm border-0">
       <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
         <img :src="item.imageUrl" class="card-img-top" alt="商品圖片" />
       </router-link>
-      <div class="card-body d-flex flex-column">
+      <div class="card-body d-flex flex-column pb-0">
         <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
           <h6 class="card-title">{{ item.title }}</h6>
         </router-link>
@@ -14,7 +14,7 @@
           <span class="fw-bold text-danger">{{ item.price }} 元</span>
         </div>
       </div>
-      <div class="container mb-3">
+      <div class="container pt-4 pb-3 overflow-hidden">
         <div class="row">
           <div class="col-8">
             <button type="button" class="d-block btn pt-2 pb-2 btn-danger rounded-pill w-100" style="font-size: 0.8rem; outline: none;"><i class="bi bi-cart3"></i> 加入購物車</button>
@@ -40,7 +40,9 @@ export default {
       productList: [],
       selectedList: [],
       copyList: [],
-      cateGory: ''
+      cateGory: '',
+      filterData: [],
+      cacheSearch: ''
     }
   },
   watch: {
@@ -51,11 +53,24 @@ export default {
       })
       this.productList = [...this.selectedList]
       this.selectedList = []
+    },
+    cacheSearch (newVal) {
+      if (!newVal) {
+        this.filterData = this.productList
+      } else {
+        this.filterData = this.productList.filter(function (item) {
+          return item.title.match(newVal)
+        })
+      }
     }
   },
   mounted () {
     emitter.on('sendTo', keyword => {
       this.cateGory = keyword
+    })
+    emitter.on('sendWord', word => {
+      this.cacheSearch = word
+      console.log('搜尋關鍵字', this.cacheSearch)
     })
   },
   unmounted () {
@@ -67,8 +82,6 @@ export default {
       .then(res => {
         this.productList = res.data.products
         this.copyList = [...this.productList]
-        console.log('全部的陣列', this.productList)
-        console.log('複製的陣列', this.copyList)
       })
   }
 }
