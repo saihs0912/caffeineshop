@@ -38,30 +38,23 @@ export default {
   data () {
     return {
       productList: [],
-      selectedList: [],
       copyList: [],
       cateGory: '',
-      filterData: [],
-      cacheSearch: ''
+      cacheSearch: '',
+      order: {}
     }
   },
-  watch: {
-    cateGory () {
-      this.productList = [...this.copyList]
-      this.selectedList = this.productList.filter(item => {
-        return item.category === this.cateGory
-      })
-      this.productList = [...this.selectedList]
-      this.selectedList = []
-    },
-    cacheSearch (newVal) {
-      if (!newVal) {
-        this.filterData = this.productList
-      } else {
-        this.filterData = this.productList.filter(function (item) {
-          return item.title.match(newVal)
-        })
+  computed: {
+    filterData () {
+      let result = this.copyList
+      if (this.cateGory) {
+        result = result.filter(item => item.category === this.cateGory)
       }
+      if (this.cacheSearch) {
+        const keyword = this.cacheSearch.toLowerCase()
+        result = result.filter(item => item.title.toLowerCase().includes(keyword))
+      }
+      return result
     }
   },
   mounted () {
@@ -70,7 +63,14 @@ export default {
     })
     emitter.on('sendWord', word => {
       this.cacheSearch = word
-      console.log('搜尋關鍵字', this.cacheSearch)
+    })
+    emitter.on('resetAll', () => {
+      this.cateGory = ''
+    })
+    emitter.on('arrOrder', (orderOut, upDownOut) => {
+      console.log(orderOut, upDownOut)
+      this.order = orderOut
+      console.log(this.order)
     })
   },
   unmounted () {

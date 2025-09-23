@@ -29,7 +29,6 @@ export default {
   },
   methods: {
     typeSelect (keyword) {
-      console.log(keyword)
       emitter.emit('sendTo', keyword)
     }
   }
