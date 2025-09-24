@@ -42,7 +42,7 @@ export default {
       cateGory: '',
       cacheSearch: '',
       order: {},
-      releaseOrder: 'up'
+      releaseOrder: true
     }
   },
   computed: {
@@ -58,6 +58,10 @@ export default {
       if (this.order) {
         if (this.order.order === 'price') {
           this.order.upDown === 'down' ? result = result.sort((a, b) => a.price - b.price) : result = result.sort((a, b) => b.price - a.price)
+        } else if (this.order.order === 'release') {
+          if (!this.order.upDown) {
+            result.reverse()
+          }
         }
       }
       return result
@@ -75,12 +79,6 @@ export default {
     })
     emitter.on('arrOrder', (orderItem) => {
       this.order = orderItem
-      if (this.order.order === 'release' && !this.order.upDown) {
-        this.copyList.reverse()
-        this.releaseOrder !== 'up' ? this.releaseOrder = 'up' : this.releaseOrder = 'down'
-      }
-      // if (this.order.order === 'release' && this.order.upDown !== this.releaseOrder) {
-      // }
     })
   },
   unmounted () {
