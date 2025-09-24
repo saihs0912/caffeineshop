@@ -41,7 +41,8 @@ export default {
       copyList: [],
       cateGory: '',
       cacheSearch: '',
-      order: {}
+      order: {},
+      releaseOrder: 'up'
     }
   },
   computed: {
@@ -53,6 +54,11 @@ export default {
       if (this.cacheSearch) {
         const keyword = this.cacheSearch.toLowerCase()
         result = result.filter(item => item.title.toLowerCase().includes(keyword))
+      }
+      if (this.order) {
+        if (this.order.order === 'price') {
+          this.order.upDown === 'down' ? result = result.sort((a, b) => a.price - b.price) : result = result.sort((a, b) => b.price - a.price)
+        }
       }
       return result
     }
@@ -67,10 +73,14 @@ export default {
     emitter.on('resetAll', () => {
       this.cateGory = ''
     })
-    emitter.on('arrOrder', (orderOut, upDownOut) => {
-      console.log(orderOut, upDownOut)
-      this.order = orderOut
-      console.log(this.order)
+    emitter.on('arrOrder', (orderItem) => {
+      this.order = orderItem
+      if (this.order.order === 'release' && !this.order.upDown) {
+        this.copyList.reverse()
+        this.releaseOrder !== 'up' ? this.releaseOrder = 'up' : this.releaseOrder = 'down'
+      }
+      // if (this.order.order === 'release' && this.order.upDown !== this.releaseOrder) {
+      // }
     })
   },
   unmounted () {
@@ -82,6 +92,7 @@ export default {
       .then(res => {
         this.productList = res.data.products
         this.copyList = [...this.productList]
+        this.copyList.reverse()
       })
   }
 }
