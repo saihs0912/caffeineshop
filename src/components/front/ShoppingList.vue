@@ -55,15 +55,6 @@ export default {
         const keyword = this.cacheSearch.toLowerCase()
         result = result.filter(item => item.title.toLowerCase().includes(keyword))
       }
-      if (this.order) {
-        if (this.order.order === 'price') {
-          this.order.upDown === 'down' ? result = result.sort((a, b) => a.price - b.price) : result = result.sort((a, b) => b.price - a.price)
-        } else if (this.order.order === 'release') {
-          if (!this.order.upDown) {
-            result.reverse()
-          }
-        }
-      }
       return result
     }
   },
@@ -79,6 +70,21 @@ export default {
     })
     emitter.on('arrOrder', (orderItem) => {
       this.order = orderItem
+    })
+    emitter.on('sort', ({ type, order }) => {
+      console.log(type, order)
+      if (type === 'price') {
+        console.log('種類', type)
+        this.filterData.sort((a, b) => {
+          return order === 'asc' ? a.price - b.price : b.price - a.price
+        })
+      } else if (type === 'date') {
+        console.log('種類', type)
+        this.filterData = [...this.copyList]
+        if (order === 'desc') {
+          this.filterData.reverse()
+        }
+      }
     })
   },
   unmounted () {
