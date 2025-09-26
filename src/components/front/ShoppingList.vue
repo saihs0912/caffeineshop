@@ -71,20 +71,21 @@ export default {
     emitter.on('arrOrder', (orderItem) => {
       this.order = orderItem
     })
-    emitter.on('sort', ({ type, order }) => {
+    emitter.on('sort', sort => {
+      const { type, order } = sort
       console.log(type, order)
-      if (type === 'price') {
-        console.log('種類', type)
-        this.filterData.sort((a, b) => {
-          return order === 'asc' ? a.price - b.price : b.price - a.price
-        })
-      } else if (type === 'date') {
-        console.log('種類', type)
-        this.filterData = [...this.copyList]
-        if (order === 'desc') {
-          this.filterData.reverse()
-        }
-      }
+      // if (type === 'price') {
+      //   console.log('種類', type)
+      //   this.filterData.sort((a, b) => {
+      //     return order === 'asc' ? a.price - b.price : b.price - a.price
+      //   })
+      // } else if (type === 'date') {
+      //   console.log('種類', type)
+      //   this.filterData = [...this.copyList]
+      //   if (order === 'desc') {
+      //     this.filterData.reverse()
+      //   }
+      // }
     })
   },
   unmounted () {

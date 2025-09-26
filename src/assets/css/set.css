@@ -157,6 +157,12 @@ h2 span{
 .arrow{
     position: relative;
 }
+.arrow:hover{
+    opacity: 0.5;
+}
+.sort:hover{
+    opacity: 0.5;
+}
 .a-up::before{
     position: absolute;
     top: calc(50% - 9px);
