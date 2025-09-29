@@ -17,7 +17,7 @@
       <div class="container pt-4 pb-3 overflow-hidden">
         <div class="row">
           <div class="col-8">
-            <button type="button" class="d-block btn pt-2 pb-2 btn-danger rounded-pill w-100" style="font-size: 0.8rem; outline: none;"><i class="bi bi-cart3"></i> 加入購物車</button>
+            <button type="button" class="d-block btn pt-2 pb-2 btn-danger rounded-pill w-100" style="font-size: 0.8rem; outline: none;" @click="addToCart(item.id, 1)"><i class="bi bi-cart3"></i> 加入購物車</button>
           </div>
           <div class="col-4">
             <button type="button" class="d-block btn rounded-circle shadow border-0 text-center heart" style="outline: none; width: 36px; height: 36px; font-size: 0.9rem;"></button>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import { addToCart } from '@/methods/cartMethods'
 import emitter from '@/methods/emitter'
 
 export default {
@@ -42,12 +43,15 @@ export default {
       cateGory: '',
       cacheSearch: '',
       order: {},
-      releaseOrder: true
+      afterPrice: false,
+      status: {
+        loadingItem: ''
+      }
     }
   },
   computed: {
     filterData () {
-      let result = this.copyList
+      let result = [...this.copyList]
       if (this.cateGory) {
         result = result.filter(item => item.category === this.cateGory)
       }
@@ -55,8 +59,21 @@ export default {
         const keyword = this.cacheSearch.toLowerCase()
         result = result.filter(item => item.title.toLowerCase().includes(keyword))
       }
+      if (this.order) {
+        if (this.order.type === 'price') {
+          result.sort((a, b) => {
+            return this.order.order === 'asc' ? a.price - b.price : b.price - a.price
+          })
+        } else if (this.order.type === 'date') {
+          result = [...result]
+          return this.order.order === 'asc' ? [...result] : [...result].reverse()
+        }
+      }
       return result
     }
+  },
+  methods: {
+    addToCart
   },
   mounted () {
     emitter.on('sendTo', keyword => {
@@ -67,25 +84,10 @@ export default {
     })
     emitter.on('resetAll', () => {
       this.cateGory = ''
-    })
-    emitter.on('arrOrder', (orderItem) => {
-      this.order = orderItem
+      this.order = {}
     })
     emitter.on('sort', sort => {
-      const { type, order } = sort
-      console.log(type, order)
-      // if (type === 'price') {
-      //   console.log('種類', type)
-      //   this.filterData.sort((a, b) => {
-      //     return order === 'asc' ? a.price - b.price : b.price - a.price
-      //   })
-      // } else if (type === 'date') {
-      //   console.log('種類', type)
-      //   this.filterData = [...this.copyList]
-      //   if (order === 'desc') {
-      //     this.filterData.reverse()
-      //   }
-      // }
+      this.order = { ...sort }
     })
   },
   unmounted () {
