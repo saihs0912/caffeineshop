@@ -3,11 +3,15 @@
     <h2 class="text-center"><span>新商品</span></h2>
     <div class="container-fluid">
         <div class="row">
-          <div v-for="item in latestProducts" :key="item.id" class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div v-for="item in latestProducts" :key="item.id" class="col-12 col-sm-4 col-md-4 col-lg-3 mb-3">
               <div class="card h-100 shadow-sm">
-                <img :src="item.imageUrl" class="card-img-top" alt="商品圖片" />
+                <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
+                  <img :src="item.imageUrl" class="card-img-top" alt="商品圖片" />
+                </router-link>
                 <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">{{ item.title }}</h5>
+                  <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                  </router-link>
                   <div class="d-flex justify-content-between align-items-center">
                     <span class="fw-bold text-danger">{{ item.price }} 元</span>
                   </div>

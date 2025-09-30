@@ -1,6 +1,6 @@
 <template>
   <nav-bar></nav-bar>
-  <div class="container pt-5">
+  <div class="container pt-4">
     <div class="row justify-content-center pt-5">
       <div class="col pt-4">
         <router-view></router-view>
@@ -8,8 +8,8 @@
     </div>
   </div>
   <footer-area></footer-area>
-  <a class="cart" href="#" @click.prevent="openCart"></a>
-  <cart-modal ref="cartModal"></cart-modal>
+  <a class="cart" href="#" @click.prevent="openCart"><span class="cartNum">{{ num }}</span></a>
+  <cart-modal ref="cartModal" @updateNum="cartNum"></cart-modal>
 </template>
 
 <script>
@@ -24,11 +24,16 @@ export default {
     CartModal
   },
   data () {
-    return {}
+    return {
+      num: ''
+    }
   },
   methods: {
     openCart () {
       this.$refs.cartModal.showModal()
+    },
+    cartNum (num) {
+      this.num = num
     }
   }
 }

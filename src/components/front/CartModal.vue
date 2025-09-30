@@ -15,26 +15,33 @@
                   <th></th>
                   <th>商品</th>
                   <th>價格</th>
-                  <th>數量</th>
+                  <th style="width: 90px;">數量</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="(item, i) in cart.carts" :key="i">
-                  <th></th>
+                  <th><div style="width: 40px;"><img :src="cart.carts[i].product.imageUrl" alt="" class="img-fluid"></div></th>
                   <td>{{ item.product.title }}</td>
-                  <td></td>
-                  <td></td>
+                  <td>{{ item.final_total }}</td>
+                  <td><input type="number" class="form-control" v-model.number="item.qty" min="1" @change="updateCart(item)"></td>
+                  <td><button type="button" class="btn btn-outline-danger btn-sm del" @click="deleteCartItem(item.id)"></button></td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div class="modal-footer"></div>
+          <div class="modal-footer">
+            <div class="btn-group">
+              <button class="btn btn-outline-brown">前往結帳</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 </template>
 
 <script>
+import emitter from '@/methods/emitter'
 import modalMixin from '@/mixins/modalMixin'
 
 export default {
@@ -52,11 +59,37 @@ export default {
       this.$http.get(url).then(res => {
         console.log('取得購物車資訊', res)
         this.cart = res.data.data
+        const num = this.cart.carts.length
+        this.$emit('updateNum', num)
       })
+    },
+    updateCart (item) {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
+      const cart = {
+        product_id: item.product_id,
+        qty: item.qty
+      }
+      this.$http.put(url, { data: cart })
+        .then(res => {
+          console.log(res)
+          this.getCart()
+        })
+    },
+    deleteCartItem (id) {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`
+      this.$http.delete(url, { data: id })
+        .then(res => {
+          this.getCart()
+        })
     }
   },
   created () {
     this.getCart()
+  },
+  mounted () {
+    emitter.on('updateCart', () => {
+      this.getCart()
+    })
   }
 }
 </script>
