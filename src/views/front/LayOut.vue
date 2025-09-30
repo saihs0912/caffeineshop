@@ -8,7 +8,7 @@
     </div>
   </div>
   <footer-area></footer-area>
-  <a class="cart" href="#" @click.prevent="openCart"><span class="cartNum">{{ num }}</span></a>
+  <a class="cart" href="#" @click.prevent="openCart"><span class="cartNum" v-show="num > 0">{{ num }}</span></a>
   <cart-modal ref="cartModal" @updateNum="cartNum"></cart-modal>
 </template>
 

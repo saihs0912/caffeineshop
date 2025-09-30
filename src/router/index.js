@@ -32,10 +32,6 @@ const routes = [
         component: () => import('../views/front/OrderRecord.vue')
       },
       {
-        path: 'coupon',
-        component: () => import('../views/front/CouponList.vue')
-      },
-      {
         path: 'follow',
         component: () => import('../views/front/FollowList.vue')
       }

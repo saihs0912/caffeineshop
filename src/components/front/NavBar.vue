@@ -15,7 +15,6 @@
                             <li class="nav-item"><router-link class="nav-link" @click="navbarHide" to="/caffeine">咖啡與茶</router-link></li>
                             <li class="nav-item"><router-link class="nav-link" @click="navbarHide" to="/shopping">線上商店</router-link></li>
                             <li class="nav-item"><router-link class="nav-link" @click="navbarHide" to="/order">訂單查詢</router-link></li>
-                            <li class="nav-item"><router-link class="nav-link" @click="navbarHide" to="/coupon">優惠代碼</router-link></li>
                             <li class="nav-item"><router-link class="nav-link" @click="navbarHide" to="/follow">追蹤清單</router-link></li>
                         </ul>
                     </div>
@@ -26,12 +25,36 @@
 </template>
 
 <script>
+import { useWindowSize } from '@vueuse/core'
+
 export default {
   name: 'NavBar',
+  data () {
+    return {
+      widthSize: '',
+      widthSwitch: false
+    }
+  },
   methods: {
     navbarHide () {
-      this.$refs.navbar.click()
+      if (this.widthSwitch === true) {
+        this.$refs.navbar.click()
+      }
     }
+  },
+  watch: {
+    widthSize (newWidth, oldWidth) {
+      if (newWidth <= 992) {
+        this.widthSwitch = true
+      } else {
+        this.widthSwitch = false
+      }
+    }
+  },
+  created () {
+    const { width } = useWindowSize()
+    this.widthSize = width
+    console.log(this.widthSize)
   }
 }
 </script>
