@@ -3,10 +3,10 @@
         <div class="container">
             <div class="row" style="width: 100%;">
                 <div class="col-lg-12 col-md-10 col-sm-10 col-8">
-                    <h1><a class="navbar-brand" href="#" style="margin: 10px;"><img class="img-fluid align-top" src="../../assets/logo/logo-1.png" width="40" alt=""></a> 咖啡因商店</h1>
+                    <h1><a class="navbar-brand" href="#" style="margin: 10px;" @click="navbarHide"><img class="img-fluid align-top" src="../../assets/logo/logo-1.png" width="40" alt=""></a> 咖啡因商店</h1>
                 </div>
                 <div class="col-lg-12 col-md-2 col-sm-2 col-4 text-end">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav01" aria-controls="navbarNav01" aria-expanded="false" aria-label="Toggle navigation" ref="navbar">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav01" aria-controls="navbarNav01" aria-expanded="false" aria-label="Toggle navigation" ref="navbar" @click="navOpen = !navOpen">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav01">
@@ -32,13 +32,15 @@ export default {
   data () {
     return {
       widthSize: '',
-      widthSwitch: false
+      widthSwitch: false,
+      navOpen: false
     }
   },
   methods: {
     navbarHide () {
-      if (this.widthSwitch === true) {
+      if ((this.widthSwitch === true) && (this.navOpen === true)) {
         this.$refs.navbar.click()
+        this.navOpen = false
       }
     }
   },
@@ -54,7 +56,6 @@ export default {
   created () {
     const { width } = useWindowSize()
     this.widthSize = width
-    console.log(this.widthSize)
   }
 }
 </script>

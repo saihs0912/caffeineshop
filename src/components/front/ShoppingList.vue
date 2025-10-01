@@ -49,7 +49,6 @@ export default {
       }
     }
   },
-  props: ['updateCart'],
   computed: {
     filterData () {
       let result = [...this.copyList]
