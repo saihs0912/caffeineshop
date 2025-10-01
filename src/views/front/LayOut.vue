@@ -1,6 +1,6 @@
 <template>
   <nav-bar></nav-bar>
-  <div class="container pt-4">
+  <div class="container pt-4" style="max-width: 1140px!;">
     <div class="row justify-content-center pt-5">
       <div class="col pt-4">
         <router-view></router-view>
@@ -8,7 +8,7 @@
     </div>
   </div>
   <footer-area></footer-area>
-  <a class="cart" href="#" @click.prevent="openCart"><span class="cartNum" v-show="num > 0">{{ num }}</span></a>
+  <a class="cart" href="#" @click.prevent="openCart" @mousedown="cartMove" :style="moveDelay"><span class="cartNum" v-show="num > 0">{{ num }}</span></a>
   <cart-modal ref="cartModal" @updateNum="cartNum"></cart-modal>
 </template>
 
@@ -25,7 +25,10 @@ export default {
   },
   data () {
     return {
-      num: ''
+      num: '',
+      moveDelay: {
+        transitionDelay: '0s'
+      }
     }
   },
   methods: {
@@ -34,13 +37,13 @@ export default {
     },
     cartNum (num) {
       this.num = num
+    },
+    cartMove () {
+      this.moveDelay.transitionDelay = '1s'
+      setTimeout(() => {
+        this.moveDelay.transitionDelay = '0s'
+      }, 1000)
     }
   }
 }
 </script>
-
-<style>
-.container{
-  max-width: 1140px;
-}
-</style>

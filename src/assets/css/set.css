@@ -3,6 +3,10 @@
     font-optical-sizing: auto;
     font-style: normal;
 }
+.bg{
+    min-height: 100vh;
+    background: url(../../assets/banners/wallpaper.png) no-repeat center/cover;
+}
 .no-underline{
     text-decoration: none!important;
 }

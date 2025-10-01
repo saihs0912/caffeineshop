@@ -1,7 +1,7 @@
 <template>
   <div class="areaBottom">
     <h2 class="text-center"><span>新商品</span></h2>
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding: 20px 0!important;">
         <div class="row">
           <div v-for="item in latestProducts" :key="item.id" class="col-12 col-sm-4 col-md-4 col-lg-3 mb-3">
               <div class="card h-100 shadow-sm">
@@ -54,9 +54,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.container-fluid{
-    padding: 20px 0;
-}
-</style>

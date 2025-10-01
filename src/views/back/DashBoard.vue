@@ -40,10 +40,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.bg{
-    min-height: 100vh;
-    background: url(../../assets/banners/wallpaper.png) no-repeat center/cover;
-}
-</style>
