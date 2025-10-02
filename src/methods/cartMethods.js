@@ -1,6 +1,7 @@
 import emitter from './emitter'
 
 export function addToCart (id, num) {
+  console.log(id, num)
   const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
   this.status.loadingItem = id
   const cart = {

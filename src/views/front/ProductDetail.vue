@@ -26,23 +26,43 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 p-3">
-        {{ product.price }}元
-        <div class="d-grid gap-2 col-12 mx-auto" style="padding: 20px 0;">
-          <div class="form-floating">
-          <select class="form-select" aria-label="Default select example" name="" id="itemQty">
-            <option value="" v-for="n in 10" :key="n">{{ n }}</option>
-          </select>
-          <label for="itemQty">數量</label>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+        <div class="border p-3">
+          <p class="fs-3">每{{ product.unit }}</p>
+          <p class="fs-3 fw-bold text-success" v-if="product.price !== product.origin_price">
+            {{ product.price }} 元
+          </p>
+          <p class="fs-3">
+            <del v-if="product.price !== product.origin_price" class="text-secondary fs-6">售價：{{ product.origin_price }} 元</del>
+            <span v-else class="fw-bold">{{ product.origin_price }}</span>
+          </p>
+          <div class="d-grid gap-2 col-12 mx-auto" style="padding: 20px 0;">
+            <div class="form-floating">
+              <select v-model="qty" class="form-select" aria-label="Default select example" name="" id="itemQty">
+                <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
+              </select>
+              <label for="itemQty">數量</label>
+            </div>
+            <button type="button" class="btn btn-brown fs-4" @click="addToCart(product.id, qty)"><i class="bi bi-cart3"></i> 加入購物車</button>
+            <p class="fs-6">購買且付款後最快３天出貨</p>
+            <p class="fs-6">購買後將會寄確認信至您的信箱，可選擇信用卡結帳或是銀行轉帳</p>
           </div>
-          <button type="button" class="btn btn-brown fs-4"><i class="bi bi-cart3"></i> 加入購物車</button>
         </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-3 pb-5">
+        <p class="fs-4 fw-bold">商品注意事項：</p>
+        {{ product.content }}
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-3 pb-5">
+        <p class="fs-4 fw-bold">運送注意事項：</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { addToCart } from '@/methods/cartMethods'
+
 export default {
   name: 'ProductDetail',
   data () {
@@ -51,7 +71,11 @@ export default {
       id: '',
       active: false,
       num: 0,
-      imgArray: []
+      imgArray: [],
+      qty: 1,
+      status: {
+        loadingItem: ''
+      }
     }
   },
   methods: {
@@ -62,7 +86,8 @@ export default {
           this.product = res.data.product
           this.imgArray = [].concat(this.product.imageUrl, this.product.imagesUrl)
         })
-    }
+    },
+    addToCart
   },
   created () {
     this.id = this.$route.params.productId
