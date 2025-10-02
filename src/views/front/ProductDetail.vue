@@ -15,13 +15,13 @@
               <h2>{{ product.title }}</h2>
             </div>
             <div class="col-lg-5 col-md-5">
-              <div class="p-2"><img class="img-fluid" :src="imgArray[num]" alt=""></div>
+              <div class="p-2 sqLarge"><div><img class="img-fluid" :src="imgArray[num]" alt=""></div></div>
               <div class="d-flex p-2">
-                <div class="w-25" v-for="(item, i) in  imgArray" :key="i" @mouseover="num = i" :class="{ 'hover-focus': num === i }"><img class="img-fluid" :src="imgArray[i]" alt=""></div>
+                <div class="w-25 sqSmall m-1" v-for="(item, i) in  imgArray" :key="i" @mouseover="num = i" :class="{ 'hover-focus': num === i }"><div><img class="img-fluid" :src="imgArray[i]" alt=""></div></div>
               </div>
             </div>
             <div class="col-lg-7 col-md-7">
-              <p>商品描述</p>
+              <p>{{ product.description }}</p>
             </div>
           </div>
         </div>
