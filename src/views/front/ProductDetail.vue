@@ -8,10 +8,10 @@
           <span v-else>其他</span> > <span>{{ product.category }}</span>
         </div>
       </div>
-      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 p-3">
+      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 p-3">
         <div class="container">
-          <div class="row flex-row-reverse">
-            <div class="col-lg-7 col-md-7">
+          <div class="row">
+            <div class="col-sm-12 col-12 pb-3" v-if="widthSize <= 767">
               <h2>{{ product.title }}</h2>
             </div>
             <div class="col-lg-5 col-md-5">
@@ -21,12 +21,19 @@
               </div>
             </div>
             <div class="col-lg-7 col-md-7">
-              <p>{{ product.description }}</p>
+              <div class="d-flex flex-column">
+                <div class="pb-4" v-if="widthSize >= 768">
+                  <h2>{{ product.title }}</h2>
+                </div>
+                <div class="pt-4 border-top">
+                  <p>{{ product.description }}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
         <div class="border p-3">
           <p class="fs-3">每{{ product.unit }}</p>
           <p class="fs-3 fw-bold text-success" v-if="product.price !== product.origin_price">
@@ -47,13 +54,16 @@
             <p class="fs-6">購買且付款後最快３天出貨</p>
             <p class="fs-6">購買後將會寄確認信至您的信箱，可選擇信用卡結帳或是銀行轉帳</p>
           </div>
+          <div class="text-center">
+            <div class="btn-group w-100">
+              <button type="button" class="btn border"><i class="bi bi-heart text-warning"></i> 加入追蹤</button>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-3 pb-5">
+      <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 p-3 pb-5 offset-lg-2 offset-md-2 offset-sm-2">
         <p class="fs-4 fw-bold">商品注意事項：</p>
         {{ product.content }}
-      </div>
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-3 pb-5">
         <p class="fs-4 fw-bold">運送注意事項：</p>
       </div>
     </div>
@@ -62,6 +72,7 @@
 
 <script>
 import { addToCart } from '@/methods/cartMethods'
+import { useWindowSize } from '@vueuse/core'
 
 export default {
   name: 'ProductDetail',
@@ -75,7 +86,8 @@ export default {
       qty: 1,
       status: {
         loadingItem: ''
-      }
+      },
+      widthSize: ''
     }
   },
   methods: {
@@ -92,6 +104,8 @@ export default {
   created () {
     this.id = this.$route.params.productId
     this.getProduct()
+    const { width } = useWindowSize()
+    this.widthSize = width
   }
 }
 </script>
