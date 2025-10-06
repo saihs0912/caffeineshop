@@ -16,15 +16,18 @@
                             <li class="nav-item"><router-link class="nav-link" @click="navbarHide" to="/shopping">線上商店</router-link></li>
                             <li class="nav-item"><router-link class="nav-link" @click="navbarHide" to="/order">訂單查詢</router-link></li>
                             <li class="nav-item"><router-link class="nav-link" @click="navbarHide" to="/follow">追蹤清單</router-link></li>
+                            <li class="nav-item"><a class="nav-link" @click="navbarHide('cart')" href="#">購物車</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
+    <cart-modal ref="cartModal"></cart-modal>
 </template>
 
 <script>
+import CartModal from './CartModal.vue'
 import { useWindowSize } from '@vueuse/core'
 
 export default {
@@ -36,11 +39,17 @@ export default {
       navOpen: false
     }
   },
+  components: {
+    CartModal
+  },
   methods: {
-    navbarHide () {
+    navbarHide (cart) {
       if ((this.widthSwitch === true) && (this.navOpen === true)) {
         this.$refs.navbar.click()
         this.navOpen = false
+      }
+      if (cart) {
+        this.$refs.cartModal.showModal()
       }
     }
   },

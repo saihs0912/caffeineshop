@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     latestProducts () {
-      return this.newProductList.slice(-4)
+      return this.newProductList.slice(-4).reverse()
     }
   },
   created () {

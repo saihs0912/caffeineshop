@@ -30,9 +30,10 @@
               </tbody>
             </table>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer justify-content-between">
+            <div class="d-block fs-4 text-success">商品總金額：{{ cart.total }}</div>
             <div class="btn-group">
-              <button class="btn btn-outline-brown">前往結帳</button>
+              <button class="btn btn-outline-brown" @click="goToCheck">前往結帳</button>
             </div>
           </div>
         </div>
@@ -81,6 +82,10 @@ export default {
         .then(res => {
           this.getCart()
         })
+    },
+    goToCheck () {
+      this.hideModal()
+      this.$router.push('check')
     }
   },
   created () {

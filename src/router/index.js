@@ -38,6 +38,10 @@ const routes = [
     ]
   },
   {
+    path: '/check',
+    component: () => import('../views/front/CheckPage.vue')
+  },
+  {
     path: '/login',
     component: () => import('../views/back/LoginApi.vue')
   },

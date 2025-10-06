@@ -8,21 +8,21 @@
           <span v-else>其他</span> > <span>{{ product.category }}</span>
         </div>
       </div>
-      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 p-3">
+      <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 p-3">
         <div class="container">
           <div class="row">
-            <div class="col-sm-12 col-12 pb-3" v-if="widthSize <= 767">
+            <div class="col-sm-12 col-12 pb-3" v-if="widthSize <= 991">
               <h2>{{ product.title }}</h2>
             </div>
-            <div class="col-lg-5 col-md-5">
+            <div class="col-lg-5 col-md-12">
               <div class="p-2 sqLarge"><div><img class="img-fluid" :src="imgArray[num]" alt=""></div></div>
               <div class="d-flex p-2">
                 <div class="w-25 sqSmall m-1" v-for="(item, i) in  imgArray" :key="i" @mouseover="num = i" :class="{ 'hover-focus': num === i }"><div><img class="img-fluid" :src="imgArray[i]" alt=""></div></div>
               </div>
             </div>
-            <div class="col-lg-7 col-md-7">
+            <div class="col-lg-7 col-md-12">
               <div class="d-flex flex-column">
-                <div class="pb-4" v-if="widthSize >= 768">
+                <div class="pb-4" v-if="widthSize >= 992">
                   <h2>{{ product.title }}</h2>
                 </div>
                 <div class="pt-4 border-top">
@@ -33,7 +33,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+      <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
         <div class="border p-3">
           <p class="fs-3">每{{ product.unit }}</p>
           <p class="fs-3 fw-bold text-success" v-if="product.price !== product.origin_price">
@@ -96,7 +96,11 @@ export default {
       this.$http.get(api)
         .then(res => {
           this.product = res.data.product
-          this.imgArray = [].concat(this.product.imageUrl, this.product.imagesUrl)
+          if (this.product.imagesUrl) {
+            this.imgArray = [].concat(this.product.imageUrl, this.product.imagesUrl)
+          } else if (!this.product.imagesUrl) {
+            this.imgArray = [].concat(this.product.imageUrl)
+          }
         })
     },
     addToCart
