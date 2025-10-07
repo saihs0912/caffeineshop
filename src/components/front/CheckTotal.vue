@@ -1,5 +1,13 @@
 <template>
-    <div>總金額</div>
+    <div class="d-flex">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
 </template>
 
 <script>
