@@ -1,4 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import CheckTotal from '../components/front/CheckTotal.vue'
+import CheckCustomer from '@/components/front/CheckCustomer.vue'
+import CheckFinal from '@/components/front/CheckFinal.vue'
+import CheckOver from '@/components/front/CheckOver.vue'
 
 const routes = [
   {
@@ -38,8 +42,27 @@ const routes = [
     ]
   },
   {
-    path: '/check',
-    component: () => import('../views/front/CheckPage.vue')
+    path: '/checkout',
+    component: () => import('../views/front/CheckoutPage.vue'),
+    redirect: '/checkout/total',
+    children: [
+      {
+        path: 'total',
+        component: CheckTotal
+      },
+      {
+        path: 'customer',
+        component: CheckCustomer
+      },
+      {
+        path: 'final',
+        component: CheckFinal
+      },
+      {
+        path: 'over',
+        component: CheckOver
+      }
+    ]
   },
   {
     path: '/login',

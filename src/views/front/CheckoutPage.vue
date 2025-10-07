@@ -11,7 +11,7 @@
   <div class="container" style="max-width: 991px;">
     <div class="row">
       <div class="col-12">
-        結帳
+        <router-view class="view two" name="total"></router-view>
       </div>
     </div>
   </div>

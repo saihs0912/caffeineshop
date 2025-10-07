@@ -85,7 +85,7 @@ export default {
     },
     goToCheck () {
       this.hideModal()
-      this.$router.push('check')
+      this.$router.push('checkout/total')
     }
   },
   created () {
