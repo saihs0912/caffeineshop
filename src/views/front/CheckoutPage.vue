@@ -11,9 +11,9 @@
   <div class="container" style="max-width: 991px;">
     <div class="row">
       <div class="col-12">
-        <checkout-process></checkout-process>
+        <checkout-process :step="currentStep"></checkout-process>
         <component :is="currentStepComponent"></component>
-        <button type="button" class="btn btn-primary" @click="preStep" v-if="(currentStep !== 1) || (currentStep <= totalSteps)">上一步</button>
+        <button type="button" class="btn btn-primary" @click="preStep" v-if="pre">上一步</button>
         <button type="button" class="btn btn-primary" @click="nextStep" v-if="currentStep !== totalSteps">下一步</button>
       </div>
     </div>
@@ -32,7 +32,9 @@ export default {
   data () {
     return {
       currentStep: 1,
-      totalSteps: 4
+      totalSteps: 4,
+      pre: false,
+      next: true
     }
   },
   components: {
@@ -45,6 +47,11 @@ export default {
   methods: {
     nextStep () {
       if (this.currentStep < this.totalSteps) this.currentStep++
+      if (this.currentStep === 1 || this.currentStep === 4) {
+        this.pre = false
+      } else {
+        this.pre = true
+      }
     },
     preStep () {
       if (this.currentStep > 1) this.currentStep--
