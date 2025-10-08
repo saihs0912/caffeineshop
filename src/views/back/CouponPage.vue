@@ -69,6 +69,7 @@ export default {
       this.$http.get(url)
         .then(res => {
           this.coupons = res.data.coupons
+          console.log(this.coupons)
           this.pagination = res.data.pagination
           this.isLoading = false
         })

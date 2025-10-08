@@ -29,7 +29,6 @@
           </div>
         </div>
       </div>
-      {{ this.step }}
     </div>
 </template>
 

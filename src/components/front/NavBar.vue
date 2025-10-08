@@ -16,7 +16,7 @@
                             <li class="nav-item"><router-link class="nav-link" @click="navbarHide" to="/shopping">線上商店</router-link></li>
                             <li class="nav-item"><router-link class="nav-link" @click="navbarHide" to="/order">訂單查詢</router-link></li>
                             <li class="nav-item"><router-link class="nav-link" @click="navbarHide" to="/follow">追蹤清單</router-link></li>
-                            <li class="nav-item"><a class="nav-link" @click="navbarHide('cart')" href="#">購物車</a></li>
+                            <li class="nav-item"><a class="nav-link" @click.prevent="navbarHide('cart')" href="#">購物車</a></li>
                         </ul>
                     </div>
                 </div>
@@ -48,7 +48,7 @@ export default {
         this.$refs.navbar.click()
         this.navOpen = false
       }
-      if (cart) {
+      if (cart === 'cart') {
         this.$refs.cartModal.showModal()
       }
     }

@@ -8,13 +8,15 @@
       </div>
     </div>
   </nav>
-  <div class="container" style="max-width: 991px;">
+  <div class="container mb-5" style="max-width: 991px;">
     <div class="row">
       <div class="col-12">
         <checkout-process :step="currentStep"></checkout-process>
-        <component :is="currentStepComponent"></component>
-        <button type="button" class="btn btn-primary" @click="preStep" v-if="pre">上一步</button>
-        <button type="button" class="btn btn-primary" @click="nextStep" v-if="currentStep !== totalSteps">下一步</button>
+        <component :is="currentStepComponent" @send-data="formReceive"></component>
+        <div class="d-flex mx-auto justify-content-center" style="max-width: 300px;">
+          <button type="button" class="btn btn-outline-brown m-1 py-2 px-4 fs-4" @click="preStep" v-if="pre">上一步</button>
+          <button type="button" class="btn btn-outline-brown m-1 py-2 px-4 fs-4" @click="nextStep" v-if="currentStep !== totalSteps">下一步</button>
+        </div>
       </div>
     </div>
   </div>
@@ -34,7 +36,8 @@ export default {
       currentStep: 1,
       totalSteps: 4,
       pre: false,
-      next: true
+      next: true,
+      form: {}
     }
   },
   components: {
@@ -55,12 +58,18 @@ export default {
     },
     preStep () {
       if (this.currentStep > 1) this.currentStep--
+    },
+    formReceive (info) {
+      console.log(info)
     }
   },
   computed: {
     currentStepComponent () {
       return ['CheckTotal', 'CheckCustomer', 'CheckFinal', 'CheckOver'][this.currentStep - 1]
     }
+  },
+  watch: {
+    form () {}
   }
 }
 </script>
