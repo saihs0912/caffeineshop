@@ -3,14 +3,15 @@
       <p class="text-center fw-bolder fs-3">請輸入購買者資料</p>
       <div class="my-5 justify-content-center">
         <v-form class="col-md-6 mx-auto" v-slot="{ errors }">
+          {{ errors }}
           <div class="md-3 mb-3">
             <label for="email" class="form-label">Email</label>
-            <v-field id="email" name="email" type="email" class="form-control" :class="{ 'is-invalid': errors['email'] }" placeholder="請輸入 Email" rules="email|required" v-model="form.user.email" @change="emailEmit"></v-field>
+            <v-field id="email" name="email" type="email" class="form-control" :class="{ 'is-invalid': errors['email'] }" placeholder="請輸入 Email" rules="email|required" v-model="form.user.email" @change="sendData"></v-field>
             <error-message name="email" class="invalid-feedback"></error-message>
           </div>
           <div class="md-3 mb-3">
             <label for="name" class="form-label">姓名</label>
-            <v-field id="name" name="name" type="text" class="form-control" :class="{ 'is-invalid': errors['name'] }" placeholder="請輸入姓名" :rules="isName" v-model="form.user.name"></v-field>
+            <v-field id="name" name="name" type="text" class="form-control" :class="{ 'is-invalid': errors['name'] }" placeholder="請輸入姓名" :rules="isName" v-model="form.user.name" @change="sendData"></v-field>
             <error-message name="name" class="invalid-feedback"></error-message>
           </div>
           <div class="md-3 mb-3">
@@ -27,6 +28,7 @@
             <label for="message" class="form-label">留言</label>
             <textarea name="" id="message" class="form-control" v-model="form.message" cols="30" role="10"></textarea>
           </div>
+          <button type="button" class="btn">送出</button>
         </v-form>
       </div>
     </div>
@@ -61,9 +63,14 @@ export default {
     isAddress (value) {
       return value ? true : '請輸入地址'
     },
-    emailEmit () {
-      console.log(this.form)
+    sendData () {
+      console.log(this)
       this.$emit('sendData', this.form)
+    }
+  },
+  watch: {
+    error (newValue, oldValue) {
+      console.log(newValue)
     }
   }
 }
