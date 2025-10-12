@@ -9,7 +9,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <table class="table align-middle">
+            <p v-if="num === 0" class="text-center fw-bolder fs-4">購物車內沒有商品</p>
+            <table class="table align-middle" v-else>
               <thead>
                 <tr>
                   <th></th>
@@ -31,9 +32,10 @@
             </table>
           </div>
           <div class="modal-footer justify-content-between">
-            <div class="d-block fs-4 text-success">商品總金額：{{ cart.total }}</div>
+            <div class="d-block fs-5 text-danger" v-if="num === 0">請選購至少一項商品後再結帳！</div>
+            <div class="d-block fs-4 text-success" v-else>商品總金額：{{ cart.total }}</div>
             <div class="btn-group">
-              <button class="btn btn-outline-brown" @click="goToCheck">前往結帳</button>
+              <button class="btn btn-outline-brown" @click="goToCheck" :disabled="num === 0">前往結帳</button>
             </div>
           </div>
         </div>
@@ -50,7 +52,8 @@ export default {
   data () {
     return {
       cart: {},
-      getIt: ''
+      getIt: '',
+      num: 0
     }
   },
   mixins: [modalMixin],
@@ -58,10 +61,11 @@ export default {
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(url).then(res => {
-        console.log('取得購物車資訊', res)
         this.cart = res.data.data
+        console.log('取得cart資訊', this.cart.carts)
         const num = this.cart.carts.length
         this.$emit('updateNum', num)
+        this.num = num
       })
     },
     updateCart (item) {

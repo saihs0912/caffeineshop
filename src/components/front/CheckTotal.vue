@@ -31,11 +31,11 @@
           <button class="btn btn-outline-secondary" type="button" id="button-addon1" @click="addCouponCode">套用</button>
           <input type="text" class="form-control" placeholder="輸入優惠代碼" aria-label="Example text with button addon" aria-describedby="button-addon1" v-model="coupon_code">
         </div>
-        <span v-if="cart.final_total" class="text-success fs-6">※ 已套用優惠券</span>
+        <span v-if="cart.final_total < cart.total" class="text-success fs-6">※ 已套用優惠券</span>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-8 col-12 mb-5">
-        <div class="d-block fs-4" :class="{'text-decoration-line-through': cart.final_total }">總金額：{{ cart.total }}</div>
-        <div class="d-block fs-4 text-success mt-3">折扣價：{{ $num.currency(cart.final_total) }}</div>
+        <div class="d-block fs-4" :class="{'text-decoration-line-through': cart.final_total < cart.total }">總金額：{{ cart.total }}</div>
+        <div class="d-block fs-4 text-success mt-3" v-if="cart.final_total < cart.total">折扣價：{{ $num.currency(cart.final_total) }}</div>
       </div>
     </div>
   </div>
@@ -50,12 +50,24 @@ export default {
       coupon_code: ''
     }
   },
-  emits: ['sendData'],
+  emits: ['sendData', 'sendCart', 'sendTry'],
+  props: {
+    sendFormFinal: {
+      type: Object,
+      default () { return {} }
+    },
+    sendCartFinal: {
+      type: Object,
+      default () { return {} }
+    }
+  },
   methods: {
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(url).then(res => {
         this.cart = res.data.data
+        const cart = this.cart
+        this.$emit('sendCart', cart)
       })
     },
     updateCart (item) {
@@ -86,7 +98,8 @@ export default {
       this.$http.post(url, { data: coupon }).then(res => {
         this.getCart()
       })
-    }
+    },
+    validateForm () {}
   },
   created () {
     this.getCart()
