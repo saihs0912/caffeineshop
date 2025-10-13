@@ -59,17 +59,18 @@ export default {
     const { height } = useWindowSize()
     this.heightSize = height
     const refBody = this.$refs.body
-    this.bodyHeightSize = refBody.clientHeight
+    this.bodyHeightSize = refBody.scrollHeight
     if (this.heightSize <= this.bodyHeightSize) {
       this.isHeight = false
     } else {
       this.isHeight = true
     }
+    console.log(this.heightSize, this.bodyHeightSize)
   },
   updated () {
     const refBody = this.$refs.body
-    this.bodyHeightSize = refBody.clientHeight
-    if (this.heightSize <= (this.bodyHeightSize + 300)) {
+    this.bodyHeightSize = refBody.scrollHeight
+    if (this.heightSize <= (this.bodyHeightSize)) {
       this.isHeight = false
     } else {
       this.isHeight = true
