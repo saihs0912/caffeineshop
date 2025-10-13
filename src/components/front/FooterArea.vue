@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-light">
+  <footer class="bg-light" ref="footerArea" :class="{ footerFixed: fixed }">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6 p-4">
@@ -22,6 +22,33 @@
 
 <script>
 export default {
-  name: 'FooterArea'
+  name: 'FooterArea',
+  data () {
+    return {
+      fixed: false,
+      footerHeight: ''
+    }
+  },
+  props: ['heightChange'],
+  emits: ['sendHeight'],
+  watch: {
+    heightChange (newHeight, oldHeight) {
+      this.fixed = newHeight
+    }
+  },
+  mounted () {
+    const footerArea = this.$refs.footerArea
+    this.footerHeight = footerArea.offsetHeight
+    this.$emit('sendHeight', this.footerHeight)
+  }
 }
 </script>
+
+<style>
+.footerFixed{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+</style>
