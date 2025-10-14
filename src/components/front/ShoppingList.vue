@@ -16,8 +16,8 @@
           </div>
           <div class="container pt-4 pb-3 overflow-hidden">
             <div class="row">
-              <div class="col-8">
-                <button type="button" class="d-block btn pt-2 pb-2 btn-danger rounded-pill w-100" style="font-size: 0.8rem; outline: none;" @click="addToCart(item.id, 1)"><i class="bi bi-cart3"></i> 加入購物車</button>
+              <div class="col-4">
+                <button type="button" class="d-block btn rounded-circle shadow border-0 text-center cart btn-danger" style="outline: none; width: 36px; height: 36px; font-size: 0.9rem;" @click="addToCart(item.id, 1)"></button>
               </div>
               <div class="col-4">
                 <button type="button" class="d-block btn rounded-circle shadow border-0 text-center heart" style="outline: none; width: 36px; height: 36px; font-size: 0.9rem;"></button>

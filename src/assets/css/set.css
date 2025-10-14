@@ -1,40 +1,23 @@
+/*------------全域------------*/
 *{
     font-family: "Noto Serif TC", serif;
     font-optical-sizing: auto;
     font-style: normal;
 }
+/*------------後台------------*/
+/*背景*/
 .bg{
     min-height: 100vh;
     background: url(../../assets/banners/wallpaper.png) no-repeat center/cover;
 }
-.no-underline{
-    text-decoration: none!important;
-}
-nav{
-    max-width: 1296px;
-    margin: 0 auto;
-    box-sizing: border-box;
-}
-h2 span{
-    border-bottom: double 5px #FFC778;
-    padding: 5px 30px 5px 30px;
-}
-.areaBottom {
-    position: relative;
-    padding: 20px;
-    border-bottom: 1px solid #FFC778;
-}
-.areaBottom::before {
-    font-family: "bootstrap-icons";
+/*Navbar*/
+.navtest{
     position: absolute;
-    content: '\F7EA';
-    color: #FFC778;
-    font-size: 1.6rem;
-    bottom: -15px;
-    left: calc(50% - 13px);
-    background-color: #ffffff;
-    padding: 0 3px;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
+/*後台的操作區*/
 .optionArea{
     position: relative;
     background-color: #ffffff;
@@ -42,12 +25,7 @@ h2 span{
     padding-top: 80px;
     min-height: 100vh;
 }
-.navtest{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
+/*編輯、刪除按鈕*/
 .del, .edit{
     position: relative;
     padding: 15px;
@@ -70,65 +48,7 @@ h2 span{
     left: calc(50% - 14px);
     content: '\F4C9';
 }
-.cart{
-    position: fixed;
-    right: -20px;
-    bottom: 50%;
-    background-color: rgba(0,0,0,0.7);
-    padding: 40px;
-    border-radius: 20px 0 0 20px;
-    transition: 0.5s ease;
-    opacity: 1;
-}
-.cart::before{
-    position: absolute;
-    font-family: "bootstrap-icons";
-    left: calc(50% - 20px);
-    top: calc(50% - 30px);
-    content: '\F245';
-    font-size: 40px;
-    color: #ffffff;
-}
-.cartNum{
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-family: 'Arial';
-    font-weight: bold;
-    color: #ffffff;
-    z-index: 1;
-    text-align: center;
-}
-.cartNum::before{
-    position: absolute;
-    content: '';
-    top: -1px;
-    left: -7px;
-    background-color: #ff0000;
-    padding: 12px;
-    border-radius: 50%;
-    z-index: -1;
-}
-@media (max-width: 767px) {
-    .cart{
-        right: 0;
-        bottom: 0;
-        border-radius: 0;
-        width: 100%;
-        height: 30px;
-    }
-    footer{
-        padding-bottom: 60px;
-    }
-    .cartNum{
-        left: calc(50% - 40px);
-        top: 5px;
-    }
-}
-.cart:hover{
-    right: 0;
-    opacity: 0.6;
-}
+/*商品編輯頁組圖*/
 .flex-img{
     width: 50%;
     padding: 2px;
@@ -146,9 +66,84 @@ h2 span{
 .flex-img:hover .img-del{
     visibility: visible;
 }
-.hover-focus {
-    border: 1px solid #dee2e6;
+/*------------前台------------*/
+/*Navbar*/
+nav{
+    max-width: 1296px;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
+/*首頁區塊*/
+.areaBottom {
+    position: relative;
+    padding: 20px;
+    border-bottom: 1px solid #FFC778;
+}
+.areaBottom::before {
+    font-family: "bootstrap-icons";
+    position: absolute;
+    content: '\F7EA';
+    color: #FFC778;
+    font-size: 1.6rem;
+    bottom: -15px;
+    left: calc(50% - 13px);
+    background-color: #ffffff;
+    padding: 0 3px;
+}
+/*首頁區塊大標題*/
+h2 span{
+    border-bottom: double 5px #FFC778;
+    padding: 5px 30px 5px 30px;
+}
+/*連結不設底線*/
+.no-underline{
+    text-decoration: none!important;
+}
+/*Fixed於官網的購物車按鈕*/
+.cartOpen{
+    position: fixed;
+    right: -20px;
+    bottom: 50%;
+    background-color: rgba(0,0,0,0.7);
+    padding: 40px;
+    border-radius: 20px 0 0 20px;
+    transition: 0.5s ease;
+    opacity: 1;
+}
+.cartOpen:hover{
+    right: 0;
+    opacity: 0.6;
+}
+.cartOpen::before{
+    position: absolute;
+    font-family: "bootstrap-icons";
+    left: calc(50% - 20px);
+    top: calc(50% - 30px);
+    content: '\F245';
+    font-size: 40px;
+    color: #ffffff;
+}
+.cartOpenNum{
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: 'Arial';
+    font-weight: bold;
+    color: #ffffff;
+    z-index: 1;
+    text-align: center;
+}
+.cartOpenNum::before{
+    position: absolute;
+    content: '';
+    top: -1px;
+    left: -7px;
+    background-color: #ff0000;
+    padding: 12px;
+    border-radius: 50%;
+    z-index: -1;
+}
+/*找尋商品區塊*/
 .sideBar h5{
     color: #ffffff;
     background-color: rgb(102, 77.2, 2.8);
@@ -165,10 +160,20 @@ h2 span{
 .sideBar .list-group .list-group-item a:hover{
     opacity: 0.4;
 }
-.heart{
+/*商品列表頁的加入購物車、加入關注按鈕*/
+.cart, .heart{
     position: relative;
     transition: 0.5s ease;
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+.cart::before{
+    position: absolute;
+    top: calc(50% - 13px);
+    left: calc(50% - 9.6px);
+    content: '\F244';
+    font-family: "bootstrap-icons";
+    color: #ffffff;
+    font-size: 1.2rem;
 }
 .heart::before{
     position: absolute;
@@ -179,12 +184,13 @@ h2 span{
     color: #ffc107;
     font-size: 1.2rem;
 }
-.heart:hover{
+.cart:hover, .heart:hover{
     box-shadow: 0 1rem 3rem rgba(0,0,0,.2)!important;
 }
 .arrow{
     position: relative;
 }
+/*商品排序按鈕*/
 .arrow:hover{
     opacity: 0.5;
 }
@@ -207,27 +213,7 @@ h2 span{
     content: '\F229';
     font-size: 0.7rem;
 }
-@media (max-width: 576px){
-    .table thead{
-        display: none;
-    }
-    .table tbody tr{
-        border: 1px solid #dee2e6;
-        border-radius: 10px;
-    }
-    .table tbody tr td{
-        display: block;
-        position: relative;
-        padding-left: 100px;
-    }
-    .table tbody tr td::before{
-        position: absolute;
-        left: 0;
-        top: calc(50% - 10px);
-        content: attr(data-item);
-        font-weight: bold;
-    }
-}
+/*商品頁面大圖與縮圖區*/
 .sqLarge{
     position: relative;    
     border: #c9c9c9 solid 2px;
@@ -252,4 +238,48 @@ h2 span{
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
+}
+/*hover商品頁面縮圖區塊*/
+.hover-focus {
+    border: 1px solid #dee2e6;
+}
+@media (max-width: 767px) {
+    /*Fixed的購物車顯示於官網底部*/
+    .cart{
+        right: 0;
+        bottom: 0;
+        border-radius: 0;
+        width: 100%;
+        height: 30px;
+    }
+    .cartNum{
+        left: calc(50% - 40px);
+        top: 5px;
+    }
+    /*避免footer被Fixed底部的購物車擋住*/
+    footer{
+        padding-bottom: 60px;
+    }
+}
+@media (max-width: 576px){
+    /*td排序改為block*/
+    .table thead{
+        display: none;
+    }
+    .table tbody tr{
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+    }
+    .table tbody tr td{
+        display: block;
+        position: relative;
+        padding-left: 100px;
+    }
+    .table tbody tr td::before{
+        position: absolute;
+        left: 0;
+        top: calc(50% - 10px);
+        content: attr(data-item);
+        font-weight: bold;
+    }
 }

@@ -9,7 +9,7 @@
       </div>
     </div>
     <footer-area :heightChange="isHeight" @send-height="getHeight"></footer-area>
-    <a class="cart" href="#" @click.prevent="openCart" @mousedown="cartMove" :style="moveDelay"><span class="cartNum" v-show="num > 0">{{ num }}</span></a>
+    <a class="cartOpen" href="#" @click.prevent="openCart" @mousedown="cartMove" :style="moveDelay"><span class="cartOpenNum" v-show="num > 0">{{ num }}</span></a>
     <cart-modal ref="cartModal" @updateNum="cartNum"></cart-modal>
   </div>
 </template>

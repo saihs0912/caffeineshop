@@ -1,13 +1,13 @@
 <template>
-    <loading-modal :active="isLoading"></loading-modal>
-    <h1>商品管理</h1>
-    <div class="text-end">
-      <button class="btn btn-brown" type="button" @click.prevent="openModal(true)"><i class="bi bi-plus-square"></i> 新增商品</button>
-    </div>
-    <div>
-      <table class="table mt-4">
-        <thead>
-          <tr>
+  <loading-modal :active="isLoading"></loading-modal>
+  <h1>商品管理</h1>
+  <div class="text-end">
+    <button class="btn btn-brown" type="button" @click.prevent="openModal(true)"><i class="bi bi-plus-square"></i> 新增商品</button>
+  </div>
+  <div>
+    <table class="table mt-4">
+      <thead>
+        <tr>
             <th>分類</th>
             <th>產品名稱</th>
             <th>原價</th>
@@ -36,7 +36,7 @@
         </tbody>
       </table>
     </div>
-    <pagination-modal :pages="pagination" @emit-pages="getProducts"></pagination-modal>
+    <pagination-modal :pages="pagination" @emit-page="getProducts"></pagination-modal>
     <product-modal ref="productModal" :product="tempProduct" @update-product="updateProduct"></product-modal>
     <del-modal ref="delModal" :item="tempProduct" @del-item="delProduct"></del-modal>
 </template>
@@ -65,6 +65,7 @@ export default {
   methods: {
     getProducts (page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
+      console.log(page)
       this.isLoading = true
       this.$http.get(api)
         .then(res => {
@@ -88,7 +89,6 @@ export default {
       this.$refs.productModal.showModal()
     },
     updateProduct (item) {
-      console.log(item)
       this.tempProduct = item
       let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
       let httpMethod = 'post'
