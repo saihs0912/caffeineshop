@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import PaginationModal from '@/components/PaginationModal.vue'
+import PaginationModal from '@/components/back/PaginationModal.vue'
 
 export default {
   data () {

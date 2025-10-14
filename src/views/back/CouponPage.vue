@@ -40,7 +40,7 @@
 <script>
 import CouponModal from '@/components/back/CouponModal.vue'
 import DelModal from '@/components/back/DelModal.vue'
-import PaginationModal from '@/components/PaginationModal.vue'
+import PaginationModal from '@/components/back/PaginationModal.vue'
 
 export default {
   components: {

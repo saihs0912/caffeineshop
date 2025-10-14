@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div class="row">
-      <div v-for="item in filterData" :key="item.id" class="col-6 col-sm-4 col-md-4 col-lg-4 p-4 overflow-hidden">
+      <template v-for="(item, i) in filterData" :key="item.id">
+      <div v-if="i <= (page.pageNow*10) && i > ((page.pageNow*10)-10)" class="col-6 col-sm-4 col-md-4 col-lg-4 p-4 overflow-hidden">
         <div class="card h-100 shadow-sm border-0">
           <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
             <img :src="item.imageUrl" class="card-img-top" alt="商品圖片" />
@@ -26,6 +27,7 @@
           </div>
         </div>
       </div>
+      </template>
     </div>
   </div>
 </template>
@@ -46,6 +48,10 @@ export default {
       afterPrice: false,
       status: {
         loadingItem: ''
+      },
+      page: {
+        pageTotal: 0,
+        pageNow: 1
       }
     }
   },
@@ -72,6 +78,12 @@ export default {
       return result
     }
   },
+  watch: {
+    filterData () {
+      this.page.pageTotal = Math.ceil(this.filterData.length / 10)
+      emitter.emit('sendPage', this.page)
+    }
+  },
   methods: {
     addToCart
   },
@@ -89,6 +101,11 @@ export default {
     emitter.on('sort', sort => {
       this.order = { ...sort }
     })
+    emitter.on('newPage', num => {
+      console.log('num', num)
+      this.page.pageNow = num
+      emitter.emit('updatePage', this.page.pageNow)
+    })
   },
   unmounted () {
     this.productList = []
@@ -104,3 +121,7 @@ export default {
   }
 }
 </script>
+
+<!--1. ShoppingList先從遠端呼叫全部的資料-->
+<!--2. 計算總共幾筆資料，接著計算總共要有幾頁，將總頁數傳到FrontPagination-->
+<!--3. FrontPagination依照總頁數總數，渲染頁數列表，並預設目前為第一頁，並以v-if渲染第1~10筆資料-->

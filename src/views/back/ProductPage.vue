@@ -44,7 +44,7 @@
 <script>
 import ProductModal from '@/components/back/ProductModal.vue'
 import DelModal from '@/components/back/DelModal.vue'
-import PaginationModal from '@/components/PaginationModal.vue'
+import PaginationModal from '@/components/back/PaginationModal.vue'
 
 export default {
   data () {
@@ -65,7 +65,6 @@ export default {
   methods: {
     getProducts (page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
-      console.log(page)
       this.isLoading = true
       this.$http.get(api)
         .then(res => {
