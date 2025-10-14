@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <template v-for="(item, i) in filterData" :key="item.id">
-      <div v-if="i <= (page.pageNow*10) && i > ((page.pageNow*10)-10)" class="col-6 col-sm-4 col-md-4 col-lg-4 p-4 overflow-hidden">
+      <div v-if="(i+1 <= (page.pageNow*10)) && (i+1 > ((page.pageNow*10)-10))" class="col-6 col-sm-4 col-md-4 col-lg-4 p-4 overflow-hidden">
         <div class="card h-100 shadow-sm border-0">
           <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
             <img :src="item.imageUrl" class="card-img-top" alt="商品圖片" />
