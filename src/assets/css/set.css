@@ -161,7 +161,7 @@ h2 span{
     opacity: 0.4;
 }
 /*商品列表頁的加入購物車、加入關注按鈕*/
-.cart, .heart{
+.cart, .heart, .heart-fill{
     position: relative;
     transition: 0.5s ease;
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
@@ -184,6 +184,15 @@ h2 span{
     top: calc(50% - 12px);
     left: calc(50% - 9.6px);
     content: '\F417';
+    font-family: "bootstrap-icons";
+    color: #ffc107;
+    font-size: 1.2rem;
+}
+.heart-fill::before{
+    position: absolute;
+    top: calc(50% - 12px);
+    left: calc(50% - 9.6px);
+    content: '\F415';
     font-family: "bootstrap-icons";
     color: #ffc107;
     font-size: 1.2rem;

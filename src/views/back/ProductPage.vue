@@ -88,6 +88,7 @@ export default {
       this.$refs.productModal.showModal()
     },
     updateProduct (item) {
+      console.log(item)
       this.tempProduct = item
       let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
       let httpMethod = 'post'

@@ -33,7 +33,7 @@
         </tbody>
     </table>
   </div>
-  <order-modal ref="orderModal" :order="tempOrder"></order-modal>
+  <order-modal ref="orderModal" :order="tempOrder" @send-order="updateOrder"></order-modal>
   <del-modal ref="delModal" :item="tempOrder" @del-item="delOrder"></del-modal>
   <pagination-modal :pages="pagination" @emit-pages="getOrderList"></pagination-modal>
 </template>
@@ -76,6 +76,17 @@ export default {
     openDelModal (item) {
       this.tempOrder = { ...item }
       this.$refs.delModal.showModal()
+    },
+    updateOrder (item) {
+      this.tempOrder = item
+      console.log(item)
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
+      this.$http.put(api, { data: this.tempOrder })
+        .then(res => {
+          this.$refs.orderModal.hideModal()
+          console.log(res)
+          this.getOrderList()
+        })
     },
     delOrder (item) {
       this.tempOrder = item

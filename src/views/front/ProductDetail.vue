@@ -56,7 +56,8 @@
           </div>
           <div class="text-center">
             <div class="btn-group w-100">
-              <button type="button" class="btn border"><i class="bi bi-heart text-warning"></i> 加入追蹤</button>
+              <button type="button" class="btn border" v-if="favorite.indexOf(product.id) === -1"><i class="bi bi-heart text-warning" @click="editFavorite(product.id)"></i> 加入追蹤</button>
+              <button type="button" class="btn border" v-else><i class="bi bi-heart-fill text-warning" @click="editFavorite(product.id)"></i> 已追蹤</button>
             </div>
           </div>
         </div>
@@ -86,7 +87,8 @@ export default {
       status: {
         loadingItem: ''
       },
-      widthSize: ''
+      widthSize: '',
+      favorite: JSON.parse(localStorage.getItem('favoriteList')) || []
     }
   },
   methods: {
@@ -102,7 +104,16 @@ export default {
           }
         })
     },
-    addToCart
+    addToCart,
+    editFavorite (id) {
+      const favoriteId = this.favorite.indexOf(id)
+      if (favoriteId === -1) {
+        this.favorite.push(id)
+      } else {
+        this.favorite.splice(favoriteId, 1)
+      }
+      localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
+    }
   },
   created () {
     this.id = this.$route.params.productId

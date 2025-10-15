@@ -21,14 +21,14 @@
                     </div>
                     <div class="mb-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" :true-value="1" :false-value="0" v-model="tempOrder.is_paid" id="is_paid">
-                            <label class="form-check-label" for="is_enabled">是否已付款</label>
+                            <input class="form-check-input" type="checkbox" :true-value="true" :false-value="false" v-model="tempOrder.is_paid" id="is_paid">
+                            <label class="form-check-label" for="is_paid">是否已付款</label>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">更新訂單</button>
+                    <button type="button" class="btn btn-primary" @click="$emit('sendOrder', tempOrder)">更新訂單</button>
                 </div>
             </div>
         </div>
@@ -49,6 +49,7 @@ export default {
     }
   },
   props: ['order'],
+  emits: ['sendOrder'],
   watch: {
     order (newOrder, oldOrder) {
       this.tempOrder = newOrder

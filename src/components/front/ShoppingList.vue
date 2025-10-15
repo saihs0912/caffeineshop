@@ -17,11 +17,12 @@
             </div>
             <div class="container pt-4 pb-3 overflow-hidden">
               <div class="row justify-content-end h-100">
-                <div class="pb-2 col-lg-4 col-md-4 col-sm-3 col-5">
-                  <button type="button" class="d-block btn rounded-circle shadow border-0 text-center cart btn-danger" @click="addToCart(item.id, 1)"></button>
-                </div>
-                <div class="pb-2 col-lg-4 col-md-4 col-sm-3 col-5">
-                  <button type="button" class="d-block btn rounded-circle shadow border-0 text-center heart" ></button>
+                <div class="pb-2 col-12 text-end">
+                  <div class="btn-group">
+                    <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center cart btn-danger" @click="addToCart(item.id, 1)"></button>
+                    <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center heart" @click="editFavorite(item.id)" v-if="favorite.indexOf(item.id) === -1"></button>
+                    <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center heart-fill" @click="editFavorite(item.id)" v-else></button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -54,7 +55,8 @@ export default {
         pageTotal: 0,
         pageNow: 1
       },
-      widthSize: ''
+      widthSize: '',
+      favorite: JSON.parse(localStorage.getItem('favoriteList')) || []
     }
   },
   computed: {
@@ -88,7 +90,16 @@ export default {
     }
   },
   methods: {
-    addToCart
+    addToCart,
+    editFavorite (id) {
+      const favoriteId = this.favorite.indexOf(id)
+      if (favoriteId === -1) {
+        this.favorite.push(id)
+      } else {
+        this.favorite.splice(favoriteId, 1)
+      }
+      localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
+    }
   },
   mounted () {
     emitter.on('sendTo', keyword => {

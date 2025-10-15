@@ -18,6 +18,14 @@
 
 <script>
 export default {
-  name: 'FollowList'
+  name: 'FollowList',
+  data () {
+    return {
+      favorite: JSON.parse(localStorage.getItem('favoriteList')) || []
+    }
+  },
+  created () {
+    console.log(this.favorite)
+  }
 }
 </script>
