@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container mt-4 mb-4">
         <div class="row">
             <div class="col-12">
                 <nav aria-label="Page navigation example">
@@ -28,7 +28,6 @@
             </div>
         </div>
     </div>
-    {{ pages }}
 </template>
 
 <script>

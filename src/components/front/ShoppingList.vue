@@ -2,31 +2,31 @@
   <div class="container">
     <div class="row">
       <template v-for="(item, i) in filterData" :key="item.id">
-      <div v-if="(i+1 <= (page.pageNow*10)) && (i+1 > ((page.pageNow*10)-10))" class="col-6 col-sm-4 col-md-4 col-lg-4 p-4 overflow-hidden">
-        <div class="card h-100 shadow-sm border-0">
-          <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
-            <img :src="item.imageUrl" class="card-img-top" alt="商品圖片" />
-          </router-link>
-          <div class="card-body d-flex flex-column pb-0">
-            <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
-              <h6 class="card-title">{{ item.title }}</h6>
+        <div v-if="(i+1 <= (page.pageNow*10)) && (i+1 > ((page.pageNow*10)-10))" class="col-6 col-sm-6 col-md-6 col-lg-4 p-2 overflow-hidden">
+          <div class="card h-100 shadow-sm border-0">
+            <router-link class="no-underline xs-img" :to="{ name: 'product', params: { productId: item.id } }">
+              <img :src="item.imageUrl" class="card-img-top" alt="商品圖片" />
             </router-link>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="fw-bold text-danger">{{ item.price }} 元</span>
-            </div>
-          </div>
-          <div class="container pt-4 pb-3 overflow-hidden">
-            <div class="row">
-              <div class="col-4">
-                <button type="button" class="d-block btn rounded-circle shadow border-0 text-center cart btn-danger" style="outline: none; width: 36px; height: 36px; font-size: 0.9rem;" @click="addToCart(item.id, 1)"></button>
+            <div class="card-body d-flex flex-column pb-0 justify-content-between">
+              <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
+                <h6 class="card-title">{{ item.title }}</h6>
+              </router-link>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-bold text-danger">{{ item.price }} 元</span>
               </div>
-              <div class="col-4">
-                <button type="button" class="d-block btn rounded-circle shadow border-0 text-center heart" style="outline: none; width: 36px; height: 36px; font-size: 0.9rem;"></button>
+            </div>
+            <div class="container pt-4 pb-3 overflow-hidden">
+              <div class="row justify-content-end h-100">
+                <div class="pb-2 col-lg-4 col-md-4 col-sm-3 col-5">
+                  <button type="button" class="d-block btn rounded-circle shadow border-0 text-center cart btn-danger" @click="addToCart(item.id, 1)"></button>
+                </div>
+                <div class="pb-2 col-lg-4 col-md-4 col-sm-3 col-5">
+                  <button type="button" class="d-block btn rounded-circle shadow border-0 text-center heart" ></button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       </template>
     </div>
   </div>
@@ -35,6 +35,7 @@
 <script>
 import { addToCart } from '@/methods/cartMethods'
 import emitter from '@/methods/emitter'
+import { useWindowSize } from '@vueuse/core'
 
 export default {
   name: 'ShoppingList',
@@ -52,7 +53,8 @@ export default {
       page: {
         pageTotal: 0,
         pageNow: 1
-      }
+      },
+      widthSize: ''
     }
   },
   computed: {
@@ -81,6 +83,7 @@ export default {
   watch: {
     filterData () {
       this.page.pageTotal = Math.ceil(this.filterData.length / 10)
+      if (this.page.pageNow > this.page.pageTotal) this.page.pageNow = this.page.pageTotal
       emitter.emit('sendPage', this.page)
     }
   },
@@ -118,6 +121,8 @@ export default {
         this.copyList = [...this.productList]
         this.copyList.reverse()
       })
+    const { width } = useWindowSize()
+    this.widthSize = width
   }
 }
 </script>
