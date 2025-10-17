@@ -21,11 +21,21 @@ export default {
   name: 'FollowList',
   data () {
     return {
+      productList: [],
       favorite: JSON.parse(localStorage.getItem('favoriteList')) || []
     }
   },
+  methods: {
+    getAllProducts () {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+      this.$http.get(api)
+        .then(res => {
+          this.productList = res.data.products
+        })
+    }
+  },
   created () {
-    console.log(this.favorite)
+    this.getAllProducts()
   }
 }
 </script>
