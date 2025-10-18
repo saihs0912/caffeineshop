@@ -60,7 +60,7 @@ export default {
       cart: {}
     }
   },
-  emits: ['sendData'],
+  emits: ['sendData', 'sendCart'],
   props: {
     sendFormFinal: {
       type: Object,
@@ -69,6 +69,9 @@ export default {
     sendCartFinal: {
       type: Object,
       default () { return {} }
+    },
+    sendOrder: {
+      type: String
     }
   },
   methods: {

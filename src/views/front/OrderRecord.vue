@@ -1,5 +1,5 @@
 <template>
-  <div class="container" ref="orderPage">
+  <div class="container">
     <div class="row">
       <div class="col-12">
         <div class="mt-4 mb-4">
@@ -21,7 +21,6 @@
                 <option value="2">過去3個月</option>
                 <option value="3">過去半年</option>
                 <option value="4">過去一年</option>
-                <option value="5">過去兩年</option>
               </select>
             </div>
             <div class="col-12">
@@ -42,35 +41,38 @@ export default {
   data () {
     return {
       searchId: '',
-      searchResult: ''
+      searchResult: '',
+      id: '',
+      date: {
+        todayDate: '',
+        earliestDate: ''
+      }
     }
   },
   components: {
     orderShow
   },
   methods: {
-    getOrder () {
-      const orderId = this.searchId
+    getOrder (id) {
+      let orderId = id
+      if (this.searchId !== '') orderId = this.searchId
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${orderId}`
       this.$http.get(url)
         .then(res => {
           this.searchId = ''
-          console.log(res.data)
           this.searchResult = res.data.order
-          const orderPage = this.$refs.orderPage
-          const orderHeight = orderPage.scrollHeight
-          console.log(orderHeight)
         })
     },
     getOrderAll () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/orders`
       this.$http.get(url)
         .then(res => {
-          console.log(res)
+          if (this.$route.query.orderId) this.getOrder(this.$route.query.orderId)
         })
     }
   },
   created () {
+    this.date.todayDate = new Date()
     this.getOrderAll()
   }
 }

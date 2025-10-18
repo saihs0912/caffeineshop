@@ -13,7 +13,12 @@
       <div class="col-12">
         <checkout-process :step="currentStep"></checkout-process>
         <keep-alive>
-          <component :is="currentStepComponent" ref="infoForm" :send-form-final="form" :send-cart-final="cart" @send-cart="getCart" @send-data="getForm"></component>
+          <component :is="currentStepComponent" ref="infoForm"
+          :send-form-final="form"
+          :send-cart-final="cart"
+          :send-order="orderId"
+          @send-cart="getCart"
+          @send-data="getForm"></component>
         </keep-alive>
         <div class="d-flex mx-auto justify-content-center" style="max-width: 300px;">
           <button type="button" class="btn btn-outline-brown m-1 py-2 px-4 fs-4" @click="preStep" v-if="pre">上一步</button>
@@ -45,7 +50,8 @@ export default {
       cart: {},
       tempCart: {},
       form: {},
-      cartAndForm: {}
+      cartAndForm: {},
+      orderId: ''
     }
   },
   components: {
@@ -94,7 +100,7 @@ export default {
       const order = this.form
       this.$http.post(url, { data: order })
         .then(res => {
-          console.log(res)
+          this.orderId = res.data.orderId
         })
     }
   },

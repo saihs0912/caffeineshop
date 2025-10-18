@@ -35,6 +35,6 @@
 <script>
 export default {
   name: 'orderShow',
-  props: ['sendOrder']
+  props: ['sendOrder', 'sendId']
 }
 </script>

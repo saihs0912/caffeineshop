@@ -59,6 +59,9 @@ export default {
     sendCartFinal: {
       type: Object,
       default () { return {} }
+    },
+    sendOrder: {
+      type: String
     }
   },
   methods: {

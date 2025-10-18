@@ -8,7 +8,7 @@
         </div>
       </div>
     </div>
-    <footer-area :heightChange="isHeight" @send-height="getHeight"></footer-area>
+    <footer-area></footer-area>
     <a class="cartOpen" href="#" @click.prevent="openCart" @mousedown="cartMove" :style="moveDelay"><span class="cartOpenNum" v-show="num > 0">{{ num }}</span></a>
     <cart-modal ref="cartModal" @updateNum="cartNum"></cart-modal>
   </div>
@@ -18,7 +18,6 @@
 import NavBar from '@/components/front/NavBar.vue'
 import FooterArea from '@/components/front/FooterArea.vue'
 import CartModal from '@/components/front/CartModal.vue'
-import { useWindowSize } from '@vueuse/core'
 
 export default {
   components: {
@@ -31,11 +30,7 @@ export default {
       num: '',
       moveDelay: {
         transitionDelay: '0s'
-      },
-      heightSize: '',
-      bodyHeightSize: '',
-      isHeight: false,
-      footerHeight: ''
+      }
     }
   },
   methods: {
@@ -50,30 +45,6 @@ export default {
       setTimeout(() => {
         this.moveDelay.transitionDelay = '0s'
       }, 1000)
-    },
-    getHeight (num) {
-      this.footerHeight = num
-    }
-  },
-  mounted () {
-    const { height } = useWindowSize()
-    this.heightSize = height
-    const refBody = this.$refs.body
-    this.bodyHeightSize = refBody.scrollHeight
-    if (this.heightSize <= this.bodyHeightSize) {
-      this.isHeight = false
-    } else {
-      this.isHeight = true
-    }
-    console.log(this.heightSize, this.bodyHeightSize)
-  },
-  updated () {
-    const refBody = this.$refs.body
-    this.bodyHeightSize = refBody.scrollHeight
-    if (this.heightSize <= (this.bodyHeightSize)) {
-      this.isHeight = false
-    } else {
-      this.isHeight = true
     }
   }
 }

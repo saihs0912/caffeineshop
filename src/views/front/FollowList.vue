@@ -15,20 +15,32 @@
                                 <tr>
                                   <th></th>
                                   <th>商品名稱</th>
-                                  <th>加入購物車/取消追蹤</th>
+                                  <th>加入購物車</th>
+                                  <th>取消追蹤</th>
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr v-for="(item, i) in filterData" :key="i">
+                                <tr v-if="num === 0">
+                                  <td colspan="4" class="text-center">
+                                    <span class="fs-3 fw-bold">沒有追蹤商品哦...要不要加一點進來呢</span>
+                                  </td>
+                                </tr>
+                                <template v-else>
+                                  <tr v-for="(item, i) in filterData" :key="i">
                                   <td><div style="width: 100px;"><img class="img-fluid" :src="filterData[i].imageUrl" alt=""></div></td>
-                                  <td>{{ item.title }}</td>
-                                  <td>
+                                  <td class="align-middle">{{ item.title }}</td>
+                                  <td class="align-middle">
                                     <div class="btn-group">
-                                      <button class="btn btn-outline-success btn-sm carts" type="button"></button>
-                                      <button class="btn btn-outline-danger btn-sm del" type="button"></button>
+                                      <button class="d-block btn btn-lg btn-outline-success" type="button" @click="addToCart(item.id, 1, true)"><i class="bi bi-cart3"></i></button>
+                                    </div>
+                                  </td>
+                                  <td class="align-middle">
+                                    <div class="btn-group">
+                                      <button class="d-block btn btn-lg btn-outline-danger" type="button" @click="deleteFavorite(item.id)"><i class="bi bi-x-lg"></i></button>
                                     </div>
                                   </td>
                                 </tr>
+                                </template>
                               </tbody>
                             </table>
                           </div>
@@ -41,11 +53,17 @@
 </template>
 
 <script>
+import { addToCart } from '@/methods/cartMethods'
+
 export default {
   name: 'FollowList',
   data () {
     return {
       productList: [],
+      num: 0,
+      status: {
+        loadingItem: ''
+      },
       favorite: JSON.parse(localStorage.getItem('favoriteList')) || []
     }
   },
@@ -56,7 +74,13 @@ export default {
         .then(res => {
           this.productList = res.data.products
         })
-    }
+    },
+    deleteFavorite (id) {
+      const favoriteId = this.favorite.indexOf(id)
+      this.favorite.splice(favoriteId, 1)
+      localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
+    },
+    addToCart
   },
   computed: {
     filterData () {
@@ -68,6 +92,11 @@ export default {
         }
       })
       return result
+    }
+  },
+  watch: {
+    filterData (newNum, oldNum) {
+      this.num = newNum.length
     }
   },
   created () {

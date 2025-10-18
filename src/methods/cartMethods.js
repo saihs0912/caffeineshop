@@ -1,6 +1,11 @@
 import emitter from './emitter'
 
-export function addToCart (id, num) {
+export function addToCart (id, num, favor) {
+  if (favor === true) {
+    const favoriteId = this.favorite.indexOf(id)
+    this.favorite.splice(favoriteId, 1)
+    localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
+  }
   console.log(id, num)
   const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
   this.status.loadingItem = id
