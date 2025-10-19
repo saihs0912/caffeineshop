@@ -8,22 +8,27 @@
         <h1>訂單查詢</h1>
         <div class="container">
           <div class="row">
-            <div class="col-6">
-              <div class="input-group mb-3">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon1" @click="getOrder">以訂單編號搜尋</button>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-3 mb-3">
+              <div class="input-group h-100">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon1" @click="searchOrder">以訂單編號搜尋</button>
                 <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" v-model="searchId">
               </div>
             </div>
-            <div class="col-6">
-              <select class="form-select" aria-label="Default select example">
-                <option selected>過去一週</option>
-                <option value="1">過去30天</option>
-                <option value="2">過去3個月</option>
-                <option value="3">過去半年</option>
-                <option value="4">過去一年</option>
-              </select>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12 mt-3 mb-3">
+              <div class="form-floating">
+                <select class="form-select" aria-label="Default select example" id="ordersSearch" v-model="searchDate">
+                  <option selected value="" disabled>請選擇日期範圍</option>
+                  <option :value="0">過去一週</option>
+                  <option :value="1">過去30天</option>
+                  <option :value="2">過去3個月</option>
+                  <option :value="3">過去半年</option>
+                  <option :value="4">過去一年</option>
+                </select>
+                <label for="ordersSearch">以日期搜尋</label>
+              </div>
             </div>
             <div class="col-12">
+              {{ searchResult }}
               <order-show :sendOrder="searchResult"></order-show>
             </div>
           </div>
@@ -41,39 +46,23 @@ export default {
   data () {
     return {
       searchId: '',
-      searchResult: '',
-      id: '',
-      date: {
-        todayDate: '',
-        earliestDate: ''
-      }
+      searchDate: '',
+      searchResult: ''
     }
   },
   components: {
     orderShow
   },
   methods: {
-    getOrder (id) {
-      let orderId = id
-      if (this.searchId !== '') orderId = this.searchId
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${orderId}`
-      this.$http.get(url)
-        .then(res => {
-          this.searchId = ''
-          this.searchResult = res.data.order
-        })
-    },
-    getOrderAll () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/orders`
-      this.$http.get(url)
-        .then(res => {
-          if (this.$route.query.orderId) this.getOrder(this.$route.query.orderId)
-        })
+    searchOrder () {
+      this.searchResult = this.searchId
+      this.searchId = ''
     }
   },
-  created () {
-    this.date.todayDate = new Date()
-    this.getOrderAll()
+  watch: {
+    searchDate (newDate, oldDate) {
+      this.searchResult = newDate
+    }
   }
 }
 </script>

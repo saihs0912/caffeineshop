@@ -35,7 +35,7 @@
   </div>
   <order-modal ref="orderModal" :order="tempOrder" @send-order="updateOrder"></order-modal>
   <del-modal ref="delModal" :item="tempOrder" @del-item="delOrder"></del-modal>
-  <pagination-modal :pages="pagination" @emit-pages="getOrderList"></pagination-modal>
+  <pagination-modal :pages="pagination" @emit-page="getOrderList"></pagination-modal>
 </template>
 
 <script>

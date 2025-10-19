@@ -36,9 +36,9 @@
         </tbody>
       </table>
     </div>
-    <pagination-modal :pages="pagination" @emit-page="getProducts"></pagination-modal>
     <product-modal ref="productModal" :product="tempProduct" @update-product="updateProduct"></product-modal>
     <del-modal ref="delModal" :item="tempProduct" @del-item="delProduct"></del-modal>
+    <pagination-modal :pages="pagination" @emit-page="getProducts"></pagination-modal>
 </template>
 
 <script>
