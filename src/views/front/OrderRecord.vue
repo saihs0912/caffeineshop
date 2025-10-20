@@ -1,4 +1,5 @@
 <template>
+  <loading-modal :active="isLoading"></loading-modal>
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -18,18 +19,18 @@
               <div class="form-floating">
                 <select class="form-select" aria-label="Default select example" id="ordersSearch" v-model="searchDate">
                   <option selected value="" disabled>請選擇日期範圍</option>
-                  <option :value="0">過去一週</option>
-                  <option :value="1">過去30天</option>
-                  <option :value="2">過去3個月</option>
-                  <option :value="3">過去半年</option>
-                  <option :value="4">過去一年</option>
+                  <option :value="3">過去三天</option>
+                  <option :value="7">過去一週</option>
+                  <option :value="30">過去30天</option>
+                  <option :value="90">過去90天</option>
+                  <option :value="182">過去半年</option>
+                  <option :value="365">過去一年</option>
                 </select>
                 <label for="ordersSearch">以日期搜尋</label>
               </div>
             </div>
-            <div class="col-12">
-              {{ searchResult }}
-              <order-show :sendOrder="searchResult"></order-show>
+            <div class="col-12 pt-3 pb-3">
+              <order-show :sendOrder="searchResult" @send-status="resetStatus"></order-show>
             </div>
           </div>
         </div>
@@ -47,6 +48,7 @@ export default {
     return {
       searchId: '',
       searchDate: '',
+      isLoading: false,
       searchResult: ''
     }
   },
@@ -55,13 +57,27 @@ export default {
   },
   methods: {
     searchOrder () {
+      if (this.searchId === '') {
+        alert('輸入欄不能是空的！')
+        return
+      }
+      this.isLoading = true
       this.searchResult = this.searchId
       this.searchId = ''
+    },
+    resetStatus () {
+      this.isLoading = false
     }
   },
   watch: {
     searchDate (newDate, oldDate) {
+      this.isLoading = true
       this.searchResult = newDate
+    }
+  },
+  mounted () {
+    if (this.$route.query.orderId) {
+      this.searchResult = this.$route.query.orderId
     }
   }
 }
