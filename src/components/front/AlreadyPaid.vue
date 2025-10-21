@@ -15,7 +15,7 @@
           <button type="button" class="btn btn-outline-secondary"
                   data-bs-dismiss="modal">取消
           </button>
-          <button type="button" class="btn btn-brown">確定</button>
+          <button type="button" class="btn btn-brown" @click="$emit('emit-pay', tempPay)">確定</button>
         </div>
       </div>
     </div>
@@ -32,13 +32,14 @@ export default {
       tempPay: {}
     }
   },
-  //   props: ['paycheck'],
-  //   emits: ['emit-pay'],
-  //   watch: {
-  //     package (newPay, oldPay) {
-  //       this.tempPay = { ...newPay }
-  //     }
-  //   },
+  props: ['sendPayInfo'],
+  emits: ['emit-pay'],
+  watch: {
+    sendPayInfo (newPay, oldPay) {
+      console.log(newPay)
+      this.tempPay = { ...newPay }
+    }
+  },
   mixins: [modalMixin]
 }
 </script>

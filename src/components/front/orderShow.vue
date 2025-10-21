@@ -41,7 +41,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- <table class="table">
+                <table class="table">
                   <tbody>
                     <tr>
                       <td>姓名：</td>
@@ -63,7 +63,7 @@
                       <td>{{ item.message }}</td>
                     </tr>
                   </tbody>
-                </table> -->
+                </table>
             </div>
             <div class="card-footer">
               <div class="container">
@@ -72,8 +72,8 @@
                     <p class="card-text fw-bolder fs-4">總金額：{{ item.total }}</p>
                   </div>
                   <div class="col-6 text-end h-auto">
-                    <a href="#" class="btn btn-brown" v-if="item.is_paid === false" @click.prevent="alreadyPaid(item.id, i)">通知已付款</a>
-                    <span class="border border-brown rounded p-1 align-items-end mt-1 btn" style="cursor: text;" v-else>已付款</span>
+                    <a href="#" class="btn btn-brown" v-if="item.is_paid === false" @click.prevent="openPaidModal(item.id, i)">通知已付款</a>
+                    <span class="border border-brown rounded p-1 align-items-end mt-1 btn" style="cursor: text;" v-else>已於{{ $num.date(item.paid_date) }}通知付款</span>
                   </div>
                 </div>
               </div>
@@ -81,10 +81,12 @@
         </div>
     </div>
   </template>
+  <already-paid ref="paidModal" :sendPayInfo="tempPay" @emit-pay="alreadyPaid"></already-paid>
   <pagination-modal v-if="pageShow" :pages="pagination" @emit-page="getOrderAll"></pagination-modal>
 </template>
 
 <script>
+import AlreadyPaid from './AlreadyPaid.vue'
 import PaginationModal from '../back/PaginationModal.vue'
 
 export default {
@@ -98,10 +100,12 @@ export default {
       pageShow: true,
       connectError: false,
       isLoading: false,
-      num: 0
+      num: 0,
+      tempPay: {}
     }
   },
   components: {
+    AlreadyPaid,
     PaginationModal
   },
   props: ['sendOrder'],
@@ -157,13 +161,24 @@ export default {
         this.$refs.arrowDown[i].style.transform = 'rotate(0deg)'
       }
     },
-    alreadyPaid (id, i) {
+    openPaidModal (id, i) {
+      this.tempPay = {
+        tempId: id,
+        tempNum: i
+      }
+      this.$refs.paidModal.showModal()
+    },
+    alreadyPaid (item) {
+      this.$refs.paidModal.hideModal()
       this.isLoading = true
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${id}`
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${item.tempId}`
       this.$http.post(url)
         .then(res => {
           this.isLoading = false
-          this.searchResult[i].is_paid = true
+          this.searchResult[item.tempNum].is_paid = true
+          const now = new Date()
+          this.searchResult[item.tempNum].paid_date = Math.floor(now / 1000)
+          this.tempPay = {}
         })
     }
   },

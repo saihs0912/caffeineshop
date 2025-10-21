@@ -1,7 +1,7 @@
 <template>
   <div ref="body">
     <nav-bar></nav-bar>
-    <div class="container pt-4" style="max-width: 1140px!;">
+    <div class="container pt-4 content-height" style="max-width: 1140px!;">
       <div class="row justify-content-center pt-5">
         <div class="col pt-4">
           <router-view></router-view>
@@ -49,3 +49,14 @@ export default {
   }
 }
 </script>
+
+<style>
+.content-height{
+  min-height: calc(100vh - 110px)
+}
+@media (max-width: 767px){
+  .content-height{
+    min-height: calc(100vh - 166px);
+  }
+}
+</style>

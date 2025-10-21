@@ -20,7 +20,7 @@
             <td>{{ item.id }}</td>
             <td>
               <span v-if="item.is_paid == false" class="text-danger">尚未付款</span>
-              <span v-else class="text-success">已付款</span>
+              <span v-else class="text-success">已於{{ $num.date(item.paid_date) }}通知付款</span>
             </td>
             <td>{{ item.total }}</td>
             <td>
