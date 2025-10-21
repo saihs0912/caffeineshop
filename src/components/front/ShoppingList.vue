@@ -86,6 +86,8 @@ export default {
     filterData () {
       this.page.pageTotal = Math.ceil(this.filterData.length / 10)
       if (this.page.pageNow > this.page.pageTotal) this.page.pageNow = this.page.pageTotal
+      if (this.page.pageTotal === 0) this.page.pageNow = 1
+      console.log(this.page)
       emitter.emit('sendPage', this.page)
     }
   },

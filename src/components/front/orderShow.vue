@@ -183,7 +183,7 @@ export default {
     }
   },
   created () {
-    this.getOrderAll()
+    if (!this.$route.query.orderId) this.getOrderAll()
   }
 }
 </script>

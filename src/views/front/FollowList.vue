@@ -28,7 +28,7 @@
                                 <template v-else>
                                   <tr v-for="(item, i) in filterData" :key="i">
                                   <td><div style="width: 100px;"><img class="img-fluid" :src="filterData[i].imageUrl" alt=""></div></td>
-                                  <td class="align-middle">{{ item.title }}</td>
+                                  <td class="align-middle"><router-link class="no-underline d-block pt-3 pb-3" :to="{ name: 'product', params: { productId: item.id } }">{{ item.title }}</router-link></td>
                                   <td class="align-middle">
                                     <div class="btn-group">
                                       <button class="d-block btn btn-lg btn-outline-success" type="button" @click="addToCart(item.id, 1, true)"><i class="bi bi-cart3"></i></button>
