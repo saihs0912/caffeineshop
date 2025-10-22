@@ -73,7 +73,7 @@
                   </div>
                   <div class="col-6 text-end h-auto">
                     <a href="#" class="btn btn-brown" v-if="item.is_paid === false" @click.prevent="openPaidModal(item.id, i)">通知已付款</a>
-                    <span class="border border-brown rounded p-1 align-items-end mt-1 btn" style="cursor: text;" v-else>已於{{ $num.date(item.paid_date) }}通知付款</span>
+                    <span class="border border-brown rounded p-1 align-items-end mt-1 btn" style="cursor: text;" v-else><i class="bi bi-check-lg"></i>已於{{ $num.date(item.paid_date) }}通知付款</span>
                   </div>
                 </div>
               </div>
