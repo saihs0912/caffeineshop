@@ -16,7 +16,7 @@
           <td><div style="width: 60px;"><img :src="cart.carts[i].product.imageUrl" alt="" class="img-fluid"></div></td>
           <td data-item="商品">{{ item.product.title }}</td>
           <td data-item="價格">{{ item.final_total }}</td>
-          <td data-item="數量"><input type="number" class="form-control" v-model.number="item.qty" min="1" @change="updateCart(item)"></td>
+          <td data-item="數量"><input type="number" class="form-control" v-model.number="item.qty" min="1" @change="updateCart(item)" :disabled="item.id === status.loadingItem"></td>
           <td data-item="清除"><button type="button" class="btn btn-outline-danger btn-sm del" @click="deleteCartItem(item.id)"></button></td>
         </tr>
       </tbody>
@@ -47,7 +47,10 @@ export default {
   data () {
     return {
       cart: {},
-      coupon_code: ''
+      coupon_code: '',
+      status: {
+        loadingItem: ''
+      }
     }
   },
   emits: ['sendData', 'sendCart', 'sendTry'],
@@ -78,6 +81,7 @@ export default {
         })
     },
     updateCart (item) {
+      this.status.loadingItem = item.id
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
       const cart = {
         product_id: item.product_id,
@@ -85,19 +89,24 @@ export default {
       }
       this.$http.put(url, { data: cart })
         .then(res => {
+          this.status.loadingItem = ''
           this.getCart()
         })
         .catch(err => {
+          this.status.loadingItem = ''
           this.$InformMessage(err, '更新購物車內容')
         })
     },
     deleteCartItem (id) {
+      this.status.loadingItem = id
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`
       this.$http.delete(url, { data: id })
         .then(res => {
+          this.status.loadingItem = ''
           this.getCart()
         })
         .catch(err => {
+          this.status.loadingItem = ''
           this.$InformMessage(err, '刪除購物車內容')
         })
     },
