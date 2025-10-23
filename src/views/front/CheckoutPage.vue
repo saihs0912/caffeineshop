@@ -102,6 +102,9 @@ export default {
         .then(res => {
           this.orderId = res.data.orderId
         })
+        .catch(err => {
+          this.$InformMessage(err, '送出訂單')
+        })
     }
   },
   computed: {

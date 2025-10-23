@@ -73,6 +73,10 @@ export default {
           this.pagination = res.data.pagination
           this.isLoading = false
         })
+        .catch(err => {
+          this.isLoading = false
+          this.$InformMessage(err, '取得優惠券列表')
+        })
     },
     openCouponModal (isNew, item) {
       this.isNew = isNew
@@ -100,6 +104,10 @@ export default {
           this.$refs.couponModal.hideModal()
           this.getCoupons()
         })
+        .catch(err => {
+          this.$refs.couponModal.hideModal()
+          this.$InformMessage(err, '更新優惠券')
+        })
     },
     openDelModal (item) {
       this.tempCoupon = { ...item }
@@ -113,6 +121,10 @@ export default {
           this.$InformMessage(res, `優惠券${tempCoupon.title}刪除`)
           this.$refs.delModal.hideModal()
           this.getCoupons()
+        })
+        .catch(err => {
+          this.$refs.delModal.hideModal()
+          this.$InformMessage(err, '優惠券刪除')
         })
     }
   },

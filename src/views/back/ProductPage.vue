@@ -74,6 +74,9 @@ export default {
             this.pagination = res.data.pagination
           }
         })
+        .catch(err => {
+          this.$InformMessage(err, '取得頁面資訊')
+        })
     },
     openModal (isNew, item) {
       if (isNew) {
@@ -106,6 +109,9 @@ export default {
           }
           this.$refs.productModal.hideModal()
         })
+        .catch(err => {
+          this.$InformMessage(err, '商品更新')
+        })
     },
     openDelMdodal (item) {
       this.tempProduct = { ...item }
@@ -118,6 +124,9 @@ export default {
         .then(res => {
           this.$InformMessage(res, `商品${item.title}刪除`)
           this.getProducts()
+        })
+        .catch(err => {
+          this.$InformMessage(err, '商品刪除')
         })
       this.$refs.delModal.hideModal()
     }

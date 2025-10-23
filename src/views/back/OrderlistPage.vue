@@ -68,6 +68,9 @@ export default {
           this.pagination = res.data.pagination
           console.log(this.orderList)
         })
+        .catch(err => {
+          this.$InformMessage(err, '取得訂單列表')
+        })
     },
     openOrderModal (item) {
       this.tempOrder = { ...item }
@@ -87,6 +90,9 @@ export default {
           console.log(res)
           this.getOrderList()
         })
+        .catch(err => {
+          this.$InformMessage(err, '訂單更新')
+        })
     },
     delOrder (item) {
       this.tempOrder = item
@@ -96,6 +102,9 @@ export default {
           this.$InformMessage(res, '訂單刪除')
           this.$refs.delModal.hideModal()
           this.getOrderList()
+        })
+        .catch(err => {
+          this.$InformMessage(err, '訂單刪除')
         })
     }
   },

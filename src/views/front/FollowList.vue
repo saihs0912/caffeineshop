@@ -74,6 +74,9 @@ export default {
         .then(res => {
           this.productList = res.data.products
         })
+        .catch(err => {
+          this.$InformMessage(err, '取得商品')
+        })
     },
     deleteFavorite (id) {
       const favoriteId = this.favorite.indexOf(id)

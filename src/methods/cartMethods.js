@@ -6,7 +6,6 @@ export function addToCart (id, num, favor) {
     this.favorite.splice(favoriteId, 1)
     localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
   }
-  console.log(id, num)
   const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
   this.status.loadingItem = id
   const cart = {
@@ -17,14 +16,11 @@ export function addToCart (id, num, favor) {
     .then(res => {
       this.status.loadingItem = ''
       console.log(res.data)
+      this.$InformMessage(res, '商品放入購物車')
       emitter.emit('updateCart')
     })
-}
-
-export function getCart () {
-  const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-  this.$http.get(url).then(res => {
-    console.log('取得購物車資訊', res)
-    this.cart = res.data.data
-  })
+    .catch(err => {
+      this.status.loadingItem = ''
+      this.$InformMessage(err, '商品放入購物車')
+    })
 }

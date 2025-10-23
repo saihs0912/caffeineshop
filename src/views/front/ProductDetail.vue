@@ -50,7 +50,7 @@
               </select>
               <label for="itemQty">數量</label>
             </div>
-            <button type="button" class="btn btn-brown fs-4" @click="addToCart(product.id, qty)"><i class="bi bi-cart3"></i> 加入購物車</button>
+            <button type="button" class="btn btn-brown fs-4" @click="addToCart(product.id, qty)" :disabled="product.id === status.loadingItem"><i class="bi bi-cart3"></i> 加入購物車</button>
             <p class="fs-6">購買且付款後最快３天出貨</p>
             <p class="fs-6">購買後將會寄確認信至您的信箱，可選擇信用卡結帳或是銀行轉帳</p>
           </div>
@@ -102,6 +102,9 @@ export default {
           } else if (!this.product.imagesUrl) {
             this.imgArray = [].concat(this.product.imageUrl)
           }
+        })
+        .catch(err => {
+          this.$InformMessage(err, '取得商品資訊')
         })
     },
     addToCart,

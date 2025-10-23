@@ -25,11 +25,14 @@
                   <th><div style="width: 40px;"><img :src="cart.carts[i].product.imageUrl" alt="" class="img-fluid"></div></th>
                   <td>{{ item.product.title }}</td>
                   <td>{{ item.final_total }}</td>
-                  <td><input type="number" class="form-control" v-model.number="item.qty" min="1" @change="updateCart(item)"></td>
-                  <td><button type="button" class="btn btn-outline-danger btn-sm del" @click="deleteCartItem(item.id)"></button></td>
+                  <td><input type="number" class="form-control" v-model.number="item.qty" min="1" @change="updateCart(item)" :disabled="item.id === status.loadingItem"></td>
+                  <td><button type="button" class="btn btn-outline-danger btn-sm del" @click="deleteCartItem(item.id)" :disabled="item.id === status.loadingItem"></button></td>
                 </tr>
               </tbody>
             </table>
+            <div v-if="err" class="text-center fw-bold pt-3 pb-3 text-danger">
+              無法取得購物車資訊！請重新連線
+            </div>
           </div>
           <div class="modal-footer justify-content-between">
             <div class="d-block fs-5 text-danger" v-if="num === 0">請選購至少一項商品後再結帳！</div>
@@ -53,21 +56,31 @@ export default {
     return {
       cart: {},
       getIt: '',
-      num: 0
+      num: 0,
+      status: {
+        loadingItem: ''
+      },
+      err: false
     }
   },
   mixins: [modalMixin],
   methods: {
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.$http.get(url).then(res => {
-        this.cart = res.data.data
-        const num = this.cart.carts.length
-        this.$emit('updateNum', num)
-        this.num = num
-      })
+      this.$http.get(url)
+        .then(res => {
+          this.cart = res.data.data
+          const num = this.cart.carts.length
+          this.$emit('updateNum', num)
+          this.num = num
+        })
+        .catch(err => {
+          this.$InformMessage(err, '取得購物車資訊')
+          this.err = true
+        })
     },
     updateCart (item) {
+      this.status.loadingItem = item.id
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
       const cart = {
         product_id: item.product_id,
@@ -75,14 +88,23 @@ export default {
       }
       this.$http.put(url, { data: cart })
         .then(res => {
+          this.status.loadingItem = ''
           this.getCart()
+        })
+        .catch(err => {
+          this.$InformMessage(err, '購物車更新')
         })
     },
     deleteCartItem (id) {
+      this.status.loadingItem = id
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`
       this.$http.delete(url, { data: id })
         .then(res => {
+          this.status.loadingItem = ''
           this.getCart()
+        })
+        .catch(err => {
+          this.$InformMessage(err, '商品刪除')
         })
     },
     goToCheck () {

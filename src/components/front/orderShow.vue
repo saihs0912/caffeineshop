@@ -151,6 +151,10 @@ export default {
             this.pagination = res.data.pagination
           }
         })
+        .catch(err => {
+          this.isLoading = false
+          this.$InformMessage(err, '取得訂單列表')
+        })
     },
     boxToggle (i) {
       if (this.$refs.cards[i].style.maxHeight === '0px') {
@@ -179,6 +183,9 @@ export default {
           const now = new Date()
           this.searchResult[item.tempNum].paid_date = Math.floor(now / 1000)
           this.tempPay = {}
+        })
+        .catch(err => {
+          this.$InformMessage(err, '通知付款')
         })
     }
   },

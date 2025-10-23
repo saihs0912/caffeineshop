@@ -12,18 +12,22 @@
     <a class="cartOpen" href="#" @click.prevent="openCart" @mousedown="cartMove" :style="moveDelay"><span class="cartOpenNum" v-show="num > 0">{{ num }}</span></a>
     <cart-modal ref="cartModal" @updateNum="cartNum"></cart-modal>
   </div>
+  <toast-messages></toast-messages>
 </template>
 
 <script>
 import NavBar from '@/components/front/NavBar.vue'
 import FooterArea from '@/components/front/FooterArea.vue'
 import CartModal from '@/components/front/CartModal.vue'
+import ToastMessages from '@/components/back/ToastMessages.vue'
+import emitter from '@/methods/emitter'
 
 export default {
   components: {
     NavBar,
     FooterArea,
-    CartModal
+    CartModal,
+    ToastMessages
   },
   data () {
     return {
@@ -31,6 +35,11 @@ export default {
       moveDelay: {
         transitionDelay: '0s'
       }
+    }
+  },
+  provide () {
+    return {
+      emitter
     }
   },
   methods: {

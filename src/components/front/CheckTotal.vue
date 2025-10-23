@@ -67,11 +67,15 @@ export default {
   methods: {
     getCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.$http.get(url).then(res => {
-        this.cart = res.data.data
-        const cart = this.cart
-        this.$emit('sendCart', cart)
-      })
+      this.$http.get(url)
+        .then(res => {
+          this.cart = res.data.data
+          const cart = this.cart
+          this.$emit('sendCart', cart)
+        })
+        .catch(err => {
+          this.$InformMessage(err, '取得購物車內容')
+        })
     },
     updateCart (item) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
@@ -83,12 +87,18 @@ export default {
         .then(res => {
           this.getCart()
         })
+        .catch(err => {
+          this.$InformMessage(err, '更新購物車內容')
+        })
     },
     deleteCartItem (id) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`
       this.$http.delete(url, { data: id })
         .then(res => {
           this.getCart()
+        })
+        .catch(err => {
+          this.$InformMessage(err, '刪除購物車內容')
         })
     },
     addCouponCode () {
@@ -98,9 +108,13 @@ export default {
       const coupon = {
         code: this.usedCoupon_code
       }
-      this.$http.post(url, { data: coupon }).then(res => {
-        this.getCart()
-      })
+      this.$http.post(url, { data: coupon })
+        .then(res => {
+          this.getCart()
+        })
+        .catch(err => {
+          this.$InformMessage(err, '添加優惠券')
+        })
     },
     validateForm () {}
   },

@@ -19,7 +19,7 @@
               <div class="row justify-content-end h-100">
                 <div class="pb-2 col-12 text-end">
                   <div class="btn-group">
-                    <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center cart btn-danger" @click="addToCart(item.id, 1)"></button>
+                    <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center cart btn-danger" @click="addToCart(item.id, 1)" :disabled="item.id === status.loadingItem"></button>
                     <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center heart" @click="editFavorite(item.id)" v-if="favorite.indexOf(item.id) === -1"></button>
                     <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center heart-fill" @click="editFavorite(item.id)" v-else></button>
                   </div>

@@ -12,8 +12,9 @@
                   <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
                     <h5 class="card-title">{{ item.title }}</h5>
                   </router-link>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <span class="fw-bold text-danger">{{ item.price }} 元</span>
+                  <div>
+                    <span class="fw-bold text-danger">{{ item.price }} 元</span><br>
+                    <span>{{ item.description }}</span>
                   </div>
                 </div>
               </div>
