@@ -69,7 +69,7 @@
               <div class="container">
                 <div class="row">
                   <div class="col-6">
-                    <p class="card-text fw-bolder fs-4">總金額：{{ item.total }}</p>
+                    <p class="card-text fw-bolder fs-4">總金額：{{ $num.currency(item.total) }}</p>
                   </div>
                   <div class="col-6 text-end h-auto">
                     <a href="#" class="btn btn-brown" v-if="item.is_paid === false" @click.prevent="openPaidModal(item.id, i)">通知已付款</a>

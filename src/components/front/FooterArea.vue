@@ -4,7 +4,10 @@
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6 p-4">
           <div class="d-flex flex-nowrap align-items-center h-100">
-            <div>本網站僅供學習使用</div>
+            <div class="px-1">
+              本網站僅供學習使用<br>
+              <router-link class="no-underline" to="login">管理員登入</router-link>
+            </div>
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6 p-4">

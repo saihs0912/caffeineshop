@@ -152,6 +152,18 @@ h2 span{
     border-radius: 50%;
     z-index: -1;
 }
+/*Fixed於官網的回頁首按鈕*/
+.backToTop{
+    position: fixed;
+    right: 10px;
+    bottom: 120px;
+    font-size: 40px;
+    color: rgba(0,0,0,0.7);
+    transition: 0.5s ease;
+}
+.backToTop:hover{
+    color: rgba(0,0,0,0.4);
+}
 /*找尋商品區塊*/
 .sideBar h5{
     color: #ffffff;
@@ -164,7 +176,6 @@ h2 span{
     text-decoration: none;
     color: #000000;
     transition: 0.5s ease;
-
 }
 .sideBar .list-group .list-group-item a:hover{
     opacity: 0.4;

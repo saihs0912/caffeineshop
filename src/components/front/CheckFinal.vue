@@ -46,7 +46,7 @@
           </table>
         </div>
         <div>
-          <p class="fs-2">總金額：{{ sendCartFinal.final_total }}</p>
+          <p class="fs-2">總金額：{{ $num.currency(sendCartFinal.final_total) }}</p>
           <p class="text-success" v-if="sendCartFinal.final_total < sendCartFinal.total">已套用優惠券</p>
         </div>
     </div>

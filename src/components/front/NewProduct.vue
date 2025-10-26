@@ -1,5 +1,5 @@
 <template>
-  <div class="areaBottom">
+  <div class="areaBottom mb-4">
     <h2 class="text-center"><span>新商品</span></h2>
     <div class="container-fluid" style="padding: 20px 0!important;">
         <div class="row">

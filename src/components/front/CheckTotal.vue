@@ -15,7 +15,7 @@
         <tr v-for="(item, i) in cart.carts" :key="i">
           <td><div style="width: 60px;"><img :src="cart.carts[i].product.imageUrl" alt="" class="img-fluid"></div></td>
           <td data-item="商品">{{ item.product.title }}</td>
-          <td data-item="價格">{{ item.final_total }}</td>
+          <td data-item="價格">{{ $num.currency(item.final_total) }}</td>
           <td data-item="數量"><input type="number" class="form-control" v-model.number="item.qty" min="1" @change="updateCart(item)" :disabled="item.id === status.loadingItem"></td>
           <td data-item="清除"><button type="button" class="btn btn-outline-danger btn-sm del" @click="deleteCartItem(item.id)"></button></td>
         </tr>

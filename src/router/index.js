@@ -33,6 +33,10 @@ const routes = [
         component: () => import('../views/front/OrderRecord.vue')
       },
       {
+        path: 'coupon',
+        component: () => import('../views/front/CouponList.vue')
+      },
+      {
         path: 'follow',
         component: () => import('../views/front/FollowList.vue')
       }
@@ -68,7 +72,10 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    return { top: 0 }
+  }
 })
 
 export default router
