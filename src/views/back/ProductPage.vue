@@ -72,6 +72,7 @@ export default {
           if (res.data.success) {
             this.products = res.data.products
             this.pagination = res.data.pagination
+            console.log(this.pagination)
           }
         })
         .catch(err => {
@@ -103,7 +104,7 @@ export default {
         .then(res => {
           if (res.data.success) {
             httpMethod === 'post' ? this.$InformMessage(res, '商品新增') : this.$InformMessage(res, '商品更新')
-            this.getProducts()
+            this.getProducts(this.pagination.current_page)
           } else {
             console.log(res.data)
           }

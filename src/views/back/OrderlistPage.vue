@@ -88,7 +88,7 @@ export default {
         .then(res => {
           this.$refs.orderModal.hideModal()
           console.log(res)
-          this.getOrderList()
+          this.getOrderList(this.pagination.current_page)
         })
         .catch(err => {
           this.$InformMessage(err, '訂單更新')

@@ -102,7 +102,7 @@ export default {
         .then(res => {
           httpMethod === 'post' ? this.$InformMessage(res, '優惠券新增') : this.$InformMessage(res, '優惠券更新')
           this.$refs.couponModal.hideModal()
-          this.getCoupons()
+          this.getCoupons(this.pagination.current_page)
         })
         .catch(err => {
           this.$refs.couponModal.hideModal()
