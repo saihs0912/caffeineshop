@@ -42,6 +42,9 @@ export default {
   },
   methods: {
     updatePage (updatePage) {
+      window.scrollTo({
+        top: 0
+      })
       emitter.emit('newPage', updatePage)
     }
   },

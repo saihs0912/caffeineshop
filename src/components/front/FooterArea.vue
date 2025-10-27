@@ -6,7 +6,7 @@
           <div class="d-flex flex-nowrap align-items-center h-100">
             <div class="px-1">
               本網站僅供學習使用<br>
-              <router-link class="no-underline" to="login">管理員登入</router-link>
+              <router-link class="no-underline" to="login"><i class="bi bi-pc-display-horizontal"></i> 管理員登入</router-link>
             </div>
           </div>
         </div>

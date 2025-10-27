@@ -29,6 +29,9 @@ export default {
   },
   methods: {
     typeSelect (keyword) {
+      window.scrollTo({
+        top: 0
+      })
       emitter.emit('sendTo', keyword)
     }
   }

@@ -36,6 +36,9 @@ export default {
   props: ['pages'],
   methods: {
     updatePage (page) {
+      window.scrollTo({
+        top: 0
+      })
       this.$emit('emit-page', page)
     }
   }

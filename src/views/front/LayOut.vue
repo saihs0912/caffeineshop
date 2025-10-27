@@ -78,6 +78,11 @@ export default {
 .content-height{
   min-height: calc(100vh - 110px)
 }
+@media (min-width: 1400px){
+  .container{
+    max-width: 1170px!important;
+  }
+}
 @media (max-width: 767px){
   .content-height{
     min-height: calc(100vh - 166px);

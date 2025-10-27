@@ -9,7 +9,7 @@
 import SlideShow from '@/components/front/SlideShow.vue'
 import NewProduct from '@/components/front/NewProduct.vue'
 import ShopIntro from './ShopIntro.vue'
-import FollowUs from './FollowUs.vue'
+import FollowUs from '@/components/front/FollowUs.vue'
 
 export default {
   name: 'HomeView',
