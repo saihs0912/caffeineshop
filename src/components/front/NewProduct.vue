@@ -4,7 +4,7 @@
     <div class="container-fluid blockOut" style="padding: 20px 0!important;">
       <div class="row blockIn">
         <div v-for="(item, i) in latestProducts" :key="item.id" class="col-3 col-sm-3 col-md-3 col-lg-3 mb-3" :ref="el => boxesRefs[i] = el">
-          <div class="card h-100 shadow-sm">
+          <div class="card h-100 shadow-sm newTag">
             <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
               <img :src="item.imageUrl" class="card-img-top" alt="商品圖片" />
             </router-link>
@@ -75,6 +75,23 @@ export default {
 </script>
 
 <style>
+.newTag {
+  position: relative;
+  overflow: hidden;
+}
+.newTag::before {
+  position: absolute;
+  text-align: center;
+  width: 100px;
+  content: 'NEW';
+  color: #ff0000;
+  font-family: '微軟正黑體';
+  font-weight: bolder;
+  transform: rotate(315deg);
+  top: 10px;
+  left: -30px;
+  background-color: rgba(255, 255, 0, 1)
+}
 @media (max-width: 991px){
   .blockOut{
     overflow: hidden;

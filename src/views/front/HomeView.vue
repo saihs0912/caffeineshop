@@ -8,7 +8,7 @@
 <script>
 import SlideShow from '@/components/front/SlideShow.vue'
 import NewProduct from '@/components/front/NewProduct.vue'
-import ShopIntro from './ShopIntro.vue'
+import ShopIntro from '@/components/front/ShopIntro.vue'
 import FollowUs from '@/components/front/FollowUs.vue'
 
 export default {
