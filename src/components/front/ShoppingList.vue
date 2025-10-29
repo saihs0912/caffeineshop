@@ -87,7 +87,6 @@ export default {
       this.page.pageTotal = Math.ceil(this.filterData.length / 10)
       if (this.page.pageNow > this.page.pageTotal) this.page.pageNow = this.page.pageTotal
       if (this.page.pageTotal === 0) this.page.pageNow = 1
-      console.log(this.page)
       emitter.emit('sendPage', this.page)
     }
   },
@@ -118,7 +117,6 @@ export default {
       this.order = { ...sort }
     })
     emitter.on('newPage', num => {
-      console.log('num', num)
       this.page.pageNow = num
       emitter.emit('updatePage', this.page.pageNow)
     })
@@ -139,7 +137,3 @@ export default {
   }
 }
 </script>
-
-<!--1. ShoppingList先從遠端呼叫全部的資料-->
-<!--2. 計算總共幾筆資料，接著計算總共要有幾頁，將總頁數傳到FrontPagination-->
-<!--3. FrontPagination依照總頁數總數，渲染頁數列表，並預設目前為第一頁，並以v-if渲染第1~10筆資料-->
