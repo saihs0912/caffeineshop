@@ -2,7 +2,10 @@
   <div class="container">
     <div class="row">
       <template v-for="(item, i) in filterData" :key="item.id">
-        <div v-if="(i+1 <= (page.pageNow*10)) && (i+1 > ((page.pageNow*10)-10))" class="col-6 col-sm-6 col-md-6 col-lg-4 p-2 overflow-hidden">
+        <div v-if="!item.id" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 py-5">
+          <p class="text-center fw-bold fs-3 my-5">{{ item.title }} <i class="bi bi-search"></i></p>
+        </div>
+        <div v-else-if="(i+1 <= (page.pageNow*10)) && (i+1 > ((page.pageNow*10)-10))" class="col-6 col-sm-6 col-md-6 col-lg-4 p-2 overflow-hidden">
           <div class="card h-100 shadow-sm border-0">
             <router-link class="no-underline xs-img" :to="{ name: 'product', params: { productId: item.id } }">
               <img :src="item.imageUrl" class="card-img-top" alt="商品圖片" />
@@ -79,6 +82,12 @@ export default {
           return this.order.order === 'asc' ? [...result] : [...result].reverse()
         }
       }
+      if (result.length === 0) {
+        const item = {
+          title: '唉呀...商品不存在'
+        }
+        result.push(item)
+      }
       return result
     }
   },
@@ -89,6 +98,13 @@ export default {
       if (this.page.pageTotal === 0) this.page.pageNow = 1
       console.log(this.page)
       emitter.emit('sendPage', this.page)
+      let result = ''
+      if ((this.filterData.length === 1) && (!this.filterData[0].id)) {
+        result = false
+      } else {
+        result = true
+      }
+      emitter.emit('sendResult', result)
     }
   },
   methods: {
