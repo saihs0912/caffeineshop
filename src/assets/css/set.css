@@ -276,6 +276,37 @@ h2 span{
 .hover-focus {
     border: 1px solid #dee2e6;
 }
+/*可左右移動的商品列表*/
+.box-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+.box {
+    overflow: hidden;
+}
+.boxInside {
+    display: flex;
+    transition: 0.3s ease;
+    width: 1800px;
+}
+.boxInside .card{
+    width: 300px;
+}
+.icons {
+    position: absolute;
+    z-index: 999;
+}
+.i-l {
+    left: 0;
+}
+.i-r {
+    right: 0;
+}
+.i-l, .i-r {
+    top: calc(50% - 20px);
+}
 @media (max-width: 767px) {
     /*Fixed的購物車顯示於官網底部*/
     .cartOpen{

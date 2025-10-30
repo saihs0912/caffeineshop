@@ -62,7 +62,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 p-3 pb-5 offset-lg-2 offset-md-2 offset-sm-2">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12 p-3 pb-5">
         <p><span class="fs-4 fw-bold">商品注意事項：</span><br>{{ product.content }}</p>
         <p><span class="fs-4 fw-bold">運送注意事項：</span><br>免運費<br>運送僅限台澎金馬，恕不接受海外運送<br>商品到貨後享十天猶豫期，欲退貨需保持商品全新狀態或包裝完整</p>
       </div>
