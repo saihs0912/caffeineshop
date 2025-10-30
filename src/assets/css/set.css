@@ -118,6 +118,7 @@ h2 span{
     border-radius: 20px 0 0 20px;
     transition: 0.5s ease;
     opacity: 1;
+    z-index: 999;
 }
 .cartOpen:hover{
     right: 0;
@@ -160,6 +161,7 @@ h2 span{
     font-size: 40px;
     color: rgba(0,0,0,0.7);
     transition: 0.5s ease;
+    z-index: 999;
 }
 .backToTop:hover{
     color: rgba(0,0,0,0.4);
@@ -297,15 +299,39 @@ h2 span{
 .icons {
     position: absolute;
     z-index: 999;
+    cursor: pointer;
+    font-size: 60px;
+    opacity: 0;
+    transition: 0.3s ease;
 }
 .i-l {
-    left: 0;
+    left: -100px;
 }
 .i-r {
-    right: 0;
+    right: -100px;
 }
 .i-l, .i-r {
     top: calc(50% - 20px);
+}
+.box-container:hover .icons{
+    opacity: 1;
+}
+.box-container:hover .i-l{
+    left: 10px;
+}
+.box-container:hover .i-r{
+    right: 10px;
+}
+@media (max-width: 991px) {
+    .icons{
+        opacity: 1;
+    }
+    .i-l{
+        left: 10px;
+    }
+    .i-r{
+        right: 10px;
+    }
 }
 @media (max-width: 767px) {
     /*Fixed的購物車顯示於官網底部*/
