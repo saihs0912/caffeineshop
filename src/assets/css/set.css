@@ -291,7 +291,6 @@ h2 span{
 .boxInside {
     display: flex;
     transition: 0.3s ease;
-    width: 1800px;
 }
 .boxInside .card{
     width: 300px;

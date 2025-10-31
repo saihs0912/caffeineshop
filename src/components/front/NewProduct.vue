@@ -41,7 +41,8 @@ export default {
         width: ''
       },
       boxInsideMove: {
-        transform: 'translate3d(0, 0, 0)'
+        transform: 'translate3d(0, 0, 0)',
+        width: 225 * 8 + 'px'
       },
       x: 0,
       step: 0,
@@ -49,16 +50,12 @@ export default {
     }
   },
   methods: {
-    getNewProduct () {
+    getNewProducts () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
       this.$http.get(url)
         .then(res => {
           this.newProductList = res.data.products
         })
-    },
-    setItemRef (el) {
-      console.log(el)
-      if (el) this.itemRefs.push(el)
     },
     moveList (arrow) {
       if (arrow === true) {
@@ -102,7 +99,7 @@ export default {
   mounted () {
     const { width } = useWindowSize()
     this.widthSize = width
-    this.getNewProduct()
+    this.getNewProducts()
     const box = this.$refs.ProductBox
     this.step = box.clientWidth / 8
   }

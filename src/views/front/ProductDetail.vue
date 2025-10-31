@@ -66,11 +66,16 @@
         <p><span class="fs-4 fw-bold">商品注意事項：</span><br>{{ product.content }}</p>
         <p><span class="fs-4 fw-bold">運送注意事項：</span><br>免運費<br>運送僅限台澎金馬，恕不接受海外運送<br>商品到貨後享十天猶豫期，欲退貨需保持商品全新狀態或包裝完整</p>
       </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12 p-3 pb-5">
+        <span class="fs-4 fw-bold">相關商品：</span>
+        <related-products :sendProduct="product"></related-products>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import RelatedProducts from '@/components/front/RelatedProducts.vue'
 import { addToCart } from '@/methods/cartMethods'
 import { useWindowSize } from '@vueuse/core'
 
@@ -91,6 +96,9 @@ export default {
       favorite: JSON.parse(localStorage.getItem('favoriteList')) || []
     }
   },
+  components: {
+    RelatedProducts
+  },
   methods: {
     getProduct () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`
@@ -102,6 +110,7 @@ export default {
           } else if (!this.product.imagesUrl) {
             this.imgArray = [].concat(this.product.imageUrl)
           }
+          this.num = 0
         })
         .catch(err => {
           this.$InformMessage(err, '取得商品資訊')
@@ -116,6 +125,14 @@ export default {
         this.favorite.splice(favoriteId, 1)
       }
       localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
+    }
+  },
+  watch: {
+    '$route.params.productId': {
+      handler (newId, oldId) {
+        this.id = newId
+        this.getProduct()
+      }
     }
   },
   created () {
