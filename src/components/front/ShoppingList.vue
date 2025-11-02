@@ -83,9 +83,8 @@ export default {
         }
       }
       if (result.length === 0) {
-        const item = {
-          title: '唉呀...商品不存在'
-        }
+        const item = {}
+        this.productList.length === 0 ? item.title = '商品載入中...' : item.title = '唉呀...商品不存在'
         result.push(item)
       }
       return result

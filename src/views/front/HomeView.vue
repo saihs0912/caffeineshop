@@ -1,7 +1,7 @@
 <template>
   <slide-show></slide-show>
-  <new-product></new-product>
   <shop-intro></shop-intro>
+  <new-product></new-product>
   <follow-us></follow-us>
 </template>
 

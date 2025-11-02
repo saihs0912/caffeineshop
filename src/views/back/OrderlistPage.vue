@@ -20,7 +20,7 @@
             <td>{{ item.id }}</td>
             <td>
               <span v-if="item.is_paid == false" class="text-danger">尚未付款</span>
-              <span v-else class="text-success">已於{{ $num.date(item.paid_date) }}通知付款</span>
+              <span v-else class="text-success">{{ $num.date(item.paid_date) }}付款</span>
             </td>
             <td>{{ $num.currency(item.total) }}</td>
             <td>
@@ -33,7 +33,7 @@
         </tbody>
     </table>
   </div>
-  <order-modal ref="orderModal" :order="tempOrder" @send-order="updateOrder"></order-modal>
+  <order-modal ref="orderModal" :order="tempOrder" :resetNum="num" @send-order="updateOrder"></order-modal>
   <del-modal ref="delModal" :item="tempOrder" @del-item="delOrder"></del-modal>
   <pagination-modal :pages="pagination" @emit-page="getOrderList"></pagination-modal>
 </template>
@@ -49,7 +49,8 @@ export default {
       orderList: [],
       pagination: {},
       isLoading: false,
-      tempOrder: {}
+      tempOrder: {},
+      num: ''
     }
   },
   components: {
@@ -81,12 +82,13 @@ export default {
       this.$refs.delModal.showModal()
     },
     updateOrder (item) {
-      this.tempOrder = item
       console.log(item)
+      this.tempOrder = item
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
       this.$http.put(api, { data: this.tempOrder })
         .then(res => {
           this.$refs.orderModal.hideModal()
+          this.num = 0
           console.log(res)
           this.getOrderList(this.pagination.current_page)
         })

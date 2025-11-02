@@ -25,7 +25,7 @@
                   <th><div style="width: 40px;"><img :src="cart.carts[i].product.imageUrl" alt="" class="img-fluid"></div></th>
                   <td>{{ item.product.title }}</td>
                   <td>{{ item.final_total }}</td>
-                  <td><input type="number" class="form-control" v-model.number="item.qty" min="1" @change="updateCart(item)" :disabled="item.id === status.loadingItem"></td>
+                  <td><input type="number" class="form-control" v-model.number="item.qty" min="1" max="20" @change="updateCart(item)" :disabled="item.id === status.loadingItem"></td>
                   <td><button type="button" class="btn btn-outline-danger btn-sm del" @click="deleteCartItem(item.id)" :disabled="item.id === status.loadingItem"></button></td>
                 </tr>
               </tbody>

@@ -46,7 +46,7 @@
           <div class="d-grid gap-2 col-12 mx-auto" style="padding: 20px 0;">
             <div class="form-floating">
               <select v-model="qty" class="form-select" aria-label="Default select example" name="" id="itemQty">
-                <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
+                <option v-for="n in 20" :key="n" :value="n">{{ n }}</option>
               </select>
               <label for="itemQty">數量</label>
             </div>

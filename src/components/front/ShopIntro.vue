@@ -1,5 +1,5 @@
 <template>
-    <div class="areaBottom mb-4">
+    <div class="areaBottom px-0 mb-4">
         <h2 class="text-center"><span>咖啡因商店是？</span></h2>
         <div class="container">
             <div class="row no-gutters my-5" style="background-color: #090907;">
