@@ -321,7 +321,7 @@ h2 span{
 .box-container:hover .i-r{
     right: 10px;
 }
-@media (max-width: 991px) {
+@media (max-width: 1199px) {
     .icons{
         opacity: 1;
     }

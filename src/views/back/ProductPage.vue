@@ -8,8 +8,8 @@
     <table class="table mt-4">
       <thead>
         <tr>
-            <th>分類</th>
             <th>產品名稱</th>
+            <th>分類</th>
             <th>原價</th>
             <th>售價</th>
             <th>上架狀態</th>
