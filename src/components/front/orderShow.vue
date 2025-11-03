@@ -159,9 +159,11 @@ export default {
     boxToggle (i) {
       if (this.$refs.cards[i].style.maxHeight === '0px') {
         this.$refs.cards[i].style.maxHeight = '500px'
+        this.$refs.cards[i].style.overflowY = 'auto'
         this.$refs.arrowDown[i].style.transform = 'rotate(180deg)'
       } else {
         this.$refs.cards[i].style.maxHeight = '0'
+        this.$refs.cards[i].style.overflowY = 'hidden'
         this.$refs.arrowDown[i].style.transform = 'rotate(0deg)'
       }
     },

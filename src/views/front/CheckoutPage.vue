@@ -72,6 +72,10 @@ export default {
     //   }
     // },
     async nextStep () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
       if (this.$refs.infoForm.validateForm()) {
         const valid = await this.$refs.infoForm.validateForm()
         console.log(valid)
@@ -86,6 +90,10 @@ export default {
       }
     },
     preStep () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
       if (this.currentStep > 1) this.currentStep--
       if (this.currentStep === 1) this.pre = false
     },
