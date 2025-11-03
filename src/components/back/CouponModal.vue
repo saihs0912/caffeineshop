@@ -32,7 +32,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" @click="$emit('update-coupon', tempCoupon)">更新優惠券</button>
+                    <button type="button" class="btn btn-primary" @click="sendCoupon">更新優惠券</button>
                 </div>
             </div>
         </div>
@@ -63,6 +63,24 @@ export default {
     },
     due_date () {
       this.tempCoupon.due_date = Math.floor(new Date(this.due_date) / 1000)
+    }
+  },
+  methods: {
+    sendCoupon () {
+      if (!this.tempCoupon.title) {
+        alert('沒有填寫優惠券名稱！')
+        return false
+      } else if (!this.tempCoupon.code) {
+        alert('沒有填寫優惠碼！')
+        return false
+      } else if (!this.due_date) {
+        alert('沒有填寫到期日！')
+        return false
+      } else if (!this.tempCoupon.percent) {
+        alert('沒有填寫折扣百分比！')
+        return false
+      }
+      this.$emit('update-coupon', this.tempCoupon)
     }
   },
   mixins: [modalMixin]

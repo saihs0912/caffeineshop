@@ -1,6 +1,6 @@
 <template>
   <div class="bg">
-    <div class="container">
+    <div class="container" style="max-width: 1140px!important;">
       <div class="row">
         <div class="col">
           <div class="optionArea">

@@ -82,7 +82,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary" @click="$emit('update-product', tempProduct)">確認</button>
+          <button type="button" class="btn btn-primary" @click="sendProduct">確認</button>
         </div>
       </div>
     </div>
@@ -134,6 +134,31 @@ export default {
     },
     imageDel (i) {
       this.tempProduct.imagesUrl.splice(i, 1)
+    },
+    sendProduct () {
+      if (!this.tempProduct.title) {
+        alert('沒有填商品名稱！')
+        return false
+      } else if (!this.tempProduct.category) {
+        alert('沒有選擇類別！')
+        return false
+      } else if (!this.tempProduct.unit) {
+        alert('沒有選擇單位！')
+        return false
+      } else if (!this.tempProduct.origin_price) {
+        alert('沒有填寫原價！')
+        return false
+      } else if (!this.tempProduct.price) {
+        alert('沒有填寫售價！')
+        return false
+      } else if (this.tempProduct.price > this.tempProduct.origin_price) {
+        alert('售價不得高於原價！')
+        return false
+      } else if (!this.tempProduct.imageUrl) {
+        alert('沒有上傳圖片！')
+        return false
+      }
+      this.$emit('update-product', this.tempProduct)
     }
   },
   mixins: [modalMixin]
