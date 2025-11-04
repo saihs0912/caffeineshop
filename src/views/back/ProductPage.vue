@@ -47,6 +47,11 @@ import DelModal from '@/components/back/DelModal.vue'
 import PaginationModal from '@/components/back/PaginationModal.vue'
 
 export default {
+  head () {
+    return {
+      title: '商品管理'
+    }
+  },
   data () {
     return {
       products: [],

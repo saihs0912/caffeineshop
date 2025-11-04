@@ -14,7 +14,7 @@ import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate'
 import { localize, setLocale } from '@vee-validate/i18n'
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 import * as AllRules from '@vee-validate/rules'
-import { createUnhead } from '@unhead/vue'
+import { createHead, VueHeadMixin } from '@unhead/vue/client'
 
 Object.keys(AllRules).forEach((rule) => {
   if (rule === 'all' || rule === 'toTypedSchema') return
@@ -29,10 +29,11 @@ configure({
 setLocale('zh_TW')
 
 const app = createApp(App)
-const head = createUnhead()
+const head = createHead()
 app.use(VueAxios, axios)
 app.use(router)
-app.config.globalProperties.$head = head
+app.use(head)
+app.mixin(VueHeadMixin)
 app.config.globalProperties.$InformMessage = $InformMessage
 app.config.globalProperties.$num = { date, currency }
 app.component('VForm', Form)

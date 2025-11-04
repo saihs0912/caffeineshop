@@ -55,9 +55,17 @@
             <p class="fs-6">購買後將會寄確認信至您的信箱，可選擇信用卡結帳或是銀行轉帳</p>
           </div>
           <div class="text-center">
+            <div class="btn-group w-100 mb-3">
+              <button type="button" class="btn border" v-if="favorite.indexOf(product.id) === -1" @click="editFavorite(product.id)">
+                <i class="bi bi-heart text-warning"></i> 加入追蹤
+              </button>
+              <button type="button" class="btn border" v-else @click="editFavorite(product.id)">
+                <i class="bi bi-heart-fill text-warning"></i> 已追蹤
+              </button>
+            </div>
             <div class="btn-group w-100">
-              <button type="button" class="btn border" v-if="favorite.indexOf(product.id) === -1"><i class="bi bi-heart text-warning" @click="editFavorite(product.id)"></i> 加入追蹤</button>
-              <button type="button" class="btn border" v-else><i class="bi bi-heart-fill text-warning" @click="editFavorite(product.id)"></i> 已追蹤</button>
+              <button type="button" class="btn border-0" v-if="copySuccess === false" @click="copyToClipBoard"><i class="bi bi-link-45deg"></i> 分享商品</button>
+              <button type="button" class="btn border-0" v-else @click="copyToClipBoard"><i class="bi bi-check-lg"></i> 網址複製成功！</button>
             </div>
           </div>
         </div>
@@ -77,10 +85,22 @@
 <script>
 import RelatedProducts from '@/components/front/RelatedProducts.vue'
 import { addToCart } from '@/methods/cartMethods'
-import { useWindowSize } from '@vueuse/core'
+import { useWindowSize, useClipboard } from '@vueuse/core'
 
 export default {
   name: 'ProductDetail',
+  head () {
+    return {
+      title: `${this.product.title} - 咖啡因商店`,
+      meta: [
+        { name: 'description', content: `${this.product.title}：${this.product.description}` },
+        { name: 'keywords', content: '咖啡因商店,咖啡豆,濾掛式咖啡,茶葉,茶包,甜點' },
+        { property: 'og:title', content: '咖啡因商店' },
+        { property: 'og:image', content: `${this.product.imageUrl}` },
+        { property: 'og:description', content: `${this.product.title}：${this.product.description}` }
+      ]
+    }
+  },
   data () {
     return {
       product: {},
@@ -93,7 +113,10 @@ export default {
         loadingItem: ''
       },
       widthSize: '',
-      favorite: JSON.parse(localStorage.getItem('favoriteList')) || []
+      favorite: JSON.parse(localStorage.getItem('favoriteList')) || [],
+      copy: '',
+      copySuccess: false,
+      copied: false
     }
   },
   components: {
@@ -125,6 +148,18 @@ export default {
         this.favorite.splice(favoriteId, 1)
       }
       localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
+    },
+    async copyToClipBoard () {
+      try {
+        await this._copy(window.location.href)
+        this.copySuccess = true
+        this.copied = true
+        setTimeout(() => {
+          this.copied = false
+        }, 1500)
+      } catch (err) {
+        alert('不好意思，您的瀏覽器可能不支援此功能！請手動複製')
+      }
     }
   },
   watch: {
@@ -140,6 +175,11 @@ export default {
     this.getProduct()
     const { width } = useWindowSize()
     this.widthSize = width
+  },
+  mounted () {
+    const { copy, copied } = useClipboard()
+    this._copy = copy
+    this._copiedRef = copied
   }
 }
 </script>

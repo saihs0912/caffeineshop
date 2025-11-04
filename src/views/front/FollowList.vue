@@ -57,6 +57,18 @@ import { addToCart } from '@/methods/cartMethods'
 
 export default {
   name: 'FollowList',
+  head () {
+    return {
+      title: '追蹤清單 - 咖啡因商店',
+      meta: [
+        { name: 'description', content: '一間販賣咖啡因商品的網路店鋪' },
+        { name: 'keywords', content: '咖啡因商店,咖啡豆,濾掛式咖啡,茶葉,茶包,甜點' },
+        { property: 'og:title', content: '咖啡因商店' },
+        { property: 'og:image', content: '../../assets/logo/logo.png' },
+        { property: 'og:description', content: '一間販賣咖啡因商品的網路店鋪' }
+      ]
+    }
+  },
   data () {
     return {
       productList: [],

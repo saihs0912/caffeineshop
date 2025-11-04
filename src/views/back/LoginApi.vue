@@ -30,6 +30,11 @@ import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/back/ToastMessages.vue'
 
 export default {
+  head () {
+    return {
+      title: '登入'
+    }
+  },
   data () {
     return {
       user: {

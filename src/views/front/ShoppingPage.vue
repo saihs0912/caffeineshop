@@ -22,9 +22,10 @@ import FrontPagination from '@/components/front/FrontPagination.vue'
 export default {
   head () {
     return {
-      title: '商品列表',
+      title: '商品列表 - 咖啡因商店',
       meta: [
-        { name: '商品列表', content: '一間販賣咖啡因商品的網路店鋪' }
+        { name: 'description', content: '一間販賣咖啡因商品的網路店鋪' },
+        { name: 'keywords', content: '咖啡因商店,咖啡豆,濾掛式咖啡,茶葉,茶包,甜點' }
       ]
     }
   },

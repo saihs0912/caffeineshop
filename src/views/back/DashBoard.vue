@@ -20,6 +20,11 @@ import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/back/ToastMessages.vue'
 
 export default {
+  head () {
+    return {
+      title: '咖啡因商店網站管理系統'
+    }
+  },
   components: {
     UserNav,
     ToastMessages

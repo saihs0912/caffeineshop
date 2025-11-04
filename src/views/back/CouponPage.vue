@@ -43,6 +43,11 @@ import DelModal from '@/components/back/DelModal.vue'
 import PaginationModal from '@/components/back/PaginationModal.vue'
 
 export default {
+  head () {
+    return {
+      title: '優惠券管理'
+    }
+  },
   components: {
     CouponModal,
     DelModal,

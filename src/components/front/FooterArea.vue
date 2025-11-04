@@ -6,7 +6,7 @@
           <div class="d-flex flex-nowrap align-items-center h-100">
             <div class="px-1">
               本網站僅供學習使用<br>
-              <router-link class="no-underline" to="login"><i class="bi bi-pc-display-horizontal"></i> 管理員登入</router-link>
+              <a class="no-underline" @click.prevent="goLogin" href="#"><i class="bi bi-pc-display-horizontal"></i> 管理員登入</a>
             </div>
           </div>
         </div>
@@ -37,6 +37,11 @@ export default {
   watch: {
     heightChange (newHeight, oldHeight) {
       this.fixed = newHeight
+    }
+  },
+  methods: {
+    goLogin () {
+      this.$router.push('/login')
     }
   },
   mounted () {

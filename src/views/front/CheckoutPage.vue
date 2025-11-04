@@ -41,6 +41,11 @@ import CheckOver from '@/components/front/CheckOver.vue'
 
 export default {
   name: 'CheckPage',
+  head () {
+    return {
+      title: `${this.step[this.currentStep - 1]} - 顧客結帳`
+    }
+  },
   data () {
     return {
       currentStep: 1,
@@ -51,7 +56,8 @@ export default {
       tempCart: {},
       form: {},
       cartAndForm: {},
-      orderId: ''
+      orderId: '',
+      step: ['商品與金額', '購買者資料', '最終確認', '已完成購買']
     }
   },
   components: {
@@ -63,14 +69,6 @@ export default {
   },
   props: ['sendForm'],
   methods: {
-    // nextStep () {
-    //   if (this.currentStep < this.totalSteps) this.currentStep++
-    //   if (this.currentStep === 1 || this.currentStep === 4) {
-    //     this.pre = false
-    //   } else {
-    //     this.pre = true
-    //   }
-    // },
     async nextStep () {
       window.scrollTo({
         top: 0,
