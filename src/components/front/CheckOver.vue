@@ -30,7 +30,6 @@ export default {
   methods: {
     validateForm () {},
     goTo (where) {
-      console.log(where)
       if (where === '/') {
         this.$router.push('/')
       } else if (where === '/shopping') {

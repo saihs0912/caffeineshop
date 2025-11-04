@@ -36,7 +36,6 @@ export default {
   emits: ['emit-pay'],
   watch: {
     sendPayInfo (newPay, oldPay) {
-      console.log(newPay)
       this.tempPay = { ...newPay }
     }
   },

@@ -67,7 +67,6 @@ export default {
           this.isLoading = false
           this.orderList = res.data.orders
           this.pagination = res.data.pagination
-          console.log(this.orderList)
         })
         .catch(err => {
           this.$InformMessage(err, '取得訂單列表')

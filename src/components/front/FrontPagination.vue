@@ -5,12 +5,12 @@
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
                         <li class="page-item" v-if="pages.pageNow !== 1">
-                            <a class="page-link" href="#" aria-label="Previous" @click.prevent="updatePage(pages.pageNow - 1)">
+                            <a class="page-link text-brown" href="#" aria-label="Previous" @click.prevent="updatePage(pages.pageNow - 1)">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                         <li class="page-item disabled" v-else>
-                            <span class="page-link" aria-hidden="true">&laquo;</span>
+                            <span class="page-link text-brown" aria-hidden="true">&laquo;</span>
                         </li>
                         <li class="page-item" v-for="page in pages.pageTotal" :key="page" :class="{ 'active': page === pages.pageNow }">
                             <a class="page-link" href="#" @click.prevent="updatePage(page)">{{ page }}</a>
@@ -21,7 +21,7 @@
                             </a>
                         </li>
                         <li class="page-item disabled" v-else>
-                            <span class="page-link" aria-hidden="true">&raquo;</span>
+                            <span class="page-link text-brown" aria-hidden="true">&raquo;</span>
                         </li>
                     </ul>
                 </nav>
@@ -42,16 +42,17 @@ export default {
   },
   methods: {
     updatePage (updatePage) {
-      window.scrollTo({
-        top: 0
-      })
-      emitter.emit('newPage', updatePage)
+      if (!this.pages.pageNow === updatePage) {
+        window.scrollTo({
+          top: 0
+        })
+        emitter.emit('newPage', updatePage)
+      }
     }
   },
   mounted () {
     emitter.on('sendPage', num => {
       this.pages = { ...num }
-      console.log('num', num)
     })
     emitter.on('updatePage', num => {
       this.pages.pageNow = num

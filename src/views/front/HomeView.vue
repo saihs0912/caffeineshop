@@ -13,6 +13,14 @@ import FollowUs from '@/components/front/FollowUs.vue'
 
 export default {
   name: 'HomeView',
+  head () {
+    return {
+      title: '咖啡因商店',
+      meta: [
+        { name: '咖啡因商店', content: '一間販賣咖啡因商品的網路店鋪' }
+      ]
+    }
+  },
   components: {
     SlideShow,
     NewProduct,

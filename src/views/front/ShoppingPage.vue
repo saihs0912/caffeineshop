@@ -20,6 +20,14 @@ import OrderAndSearch from '@/components/front/OrderAndSearch.vue'
 import FrontPagination from '@/components/front/FrontPagination.vue'
 
 export default {
+  head () {
+    return {
+      title: '商品列表',
+      meta: [
+        { name: '商品列表', content: '一間販賣咖啡因商品的網路店鋪' }
+      ]
+    }
+  },
   components: {
     SideMenu,
     ShoppingList,

@@ -144,7 +144,6 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/orders?page=${page}`
       this.$http.get(url)
         .then(res => {
-          console.log(res)
           this.isLoading = false
           if (res.data.success) {
             this.searchResult = res.data.orders

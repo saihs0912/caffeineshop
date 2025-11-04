@@ -58,8 +58,6 @@ export default {
             setTimeout(() => {
               this.$router.push('/dashboard/productlist')
             }, 3000)
-          } else {
-            console.log(res)
           }
         })
     }

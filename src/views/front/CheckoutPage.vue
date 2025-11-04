@@ -78,7 +78,6 @@ export default {
       })
       if (this.$refs.infoForm.validateForm()) {
         const valid = await this.$refs.infoForm.validateForm()
-        console.log(valid)
         if (!valid) return
       }
       if (this.currentStep < this.totalSteps) this.currentStep++

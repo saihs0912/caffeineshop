@@ -4,6 +4,21 @@
     font-optical-sizing: auto;
     font-style: normal;
 }
+/*------------頁碼------------*/
+.pagination > li > a {
+  color: #4d3900!important;
+}
+.pagination > .active > a {
+  color: #ffffff!important;
+  background-color: #4d3900!important;
+  border: 1px solid #4d3900!important;
+}
+.pagination > li > a:active {
+  box-shadow: none!important;
+}
+.pagination > li > a:focus {
+  box-shadow: none!important;
+}
 /*------------後台------------*/
 /*背景*/
 .bg{
