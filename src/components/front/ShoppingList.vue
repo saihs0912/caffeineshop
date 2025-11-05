@@ -23,8 +23,8 @@
                 <div class="pb-2 col-12 text-end">
                   <div class="btn-group">
                     <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center cart btn-danger" @click="addToCart(item.id, 1)" :disabled="item.id === status.loadingItem"></button>
-                    <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center heart" @click="editFavorite(item.id)" v-if="favorite.indexOf(item.id) === -1"></button>
-                    <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center heart-fill" @click="editFavorite(item.id)" v-else></button>
+                    <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center heart" @click="editFavorite(item.id, i)" v-if="favorite.indexOf(item.id) === -1"></button>
+                    <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center heart-fill" :class="{ 'heartAnimation' : heart === i }" @click="editFavorite(item.id)" v-else></button>
                   </div>
                 </div>
               </div>
@@ -59,7 +59,8 @@ export default {
         pageNow: 1
       },
       widthSize: '',
-      favorite: JSON.parse(localStorage.getItem('favoriteList')) || []
+      favorite: JSON.parse(localStorage.getItem('favoriteList')) || [],
+      heart: ''
     }
   },
   computed: {
@@ -107,10 +108,11 @@ export default {
   },
   methods: {
     addToCart,
-    editFavorite (id) {
+    editFavorite (id, i) {
       const favoriteId = this.favorite.indexOf(id)
       if (favoriteId === -1) {
         this.favorite.push(id)
+        this.heart = i
       } else {
         this.favorite.splice(favoriteId, 1)
       }

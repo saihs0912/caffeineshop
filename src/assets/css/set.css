@@ -234,6 +234,21 @@ h2 span{
     color: #ffc107;
     font-size: 1.2rem;
 }
+.heartAnimation{
+  animation-name: heart;
+  animation-duration: 2s;
+}
+@keyframes heart{
+  0%{
+    text-shadow: 0 0 5px #ffc107;
+  }
+  50%{
+    text-shadow: 0 0 30px #ffc107;
+  }
+  100%{
+    text-shadow: 0 0 0 rgb(255, 255, 255,0);
+  }
+}
 .cart:hover, .heart:hover{
     box-shadow: 0 1rem 3rem rgba(0,0,0,.2)!important;
 }

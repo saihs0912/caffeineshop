@@ -60,12 +60,12 @@
                 <i class="bi bi-heart text-warning"></i> 加入追蹤
               </button>
               <button type="button" class="btn border" v-else @click="editFavorite(product.id)">
-                <i class="bi bi-heart-fill text-warning"></i> 已追蹤
+                <i class="bi bi-heart-fill text-warning" :class="{ heartAnimation : heart }"></i> 已經追蹤
               </button>
             </div>
             <div class="btn-group w-100">
               <button type="button" class="btn border-0" v-if="copySuccess === false" @click="copyToClipBoard"><i class="bi bi-link-45deg"></i> 分享商品</button>
-              <button type="button" class="btn border-0" v-else @click="copyToClipBoard"><i class="bi bi-check-lg"></i> 網址複製成功！</button>
+              <button type="button" class="btn border-0" v-else @click="copyToClipBoard"><i class="bi bi-check-lg"></i> 分享成功！</button>
             </div>
           </div>
         </div>
@@ -116,7 +116,8 @@ export default {
       favorite: JSON.parse(localStorage.getItem('favoriteList')) || [],
       copy: '',
       copySuccess: false,
-      copied: false
+      copied: false,
+      heart: false
     }
   },
   components: {
@@ -143,8 +144,10 @@ export default {
     editFavorite (id) {
       const favoriteId = this.favorite.indexOf(id)
       if (favoriteId === -1) {
+        this.heart = true
         this.favorite.push(id)
       } else {
+        this.heart = false
         this.favorite.splice(favoriteId, 1)
       }
       localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
