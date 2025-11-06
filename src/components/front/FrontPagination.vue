@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     updatePage (updatePage) {
-      if (!this.pages.pageNow === updatePage) {
+      if (this.pages.pageNow !== updatePage) {
         window.scrollTo({
           top: 0
         })

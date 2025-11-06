@@ -2,7 +2,7 @@
   <div ref="body">
     <nav-bar></nav-bar>
     <div class="container pt-4 content-height" style="max-width: 1140px!;">
-      <div class="row justify-content-center pt-5">
+      <div class="row justify-content-center pt-lg-md">
         <div class="col pt-4">
           <router-view></router-view>
         </div>
@@ -75,12 +75,20 @@ export default {
 </script>
 
 <style>
+.pt-lg-md{
+  padding-top: 3rem!important;
+}
 .content-height{
   min-height: calc(100vh - 110px)
 }
 @media (min-width: 1400px){
   .container{
     max-width: 1170px!important;
+  }
+}
+@media (max-width: 991px) {
+  .pt-4-5{
+    padding-top: 1.5rem!important;
   }
 }
 @media (max-width: 767px){

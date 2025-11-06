@@ -37,7 +37,7 @@
         <div class="border p-3">
           <p class="fs-3">每{{ product.unit }}</p>
           <p class="fs-3 fw-bold text-success" v-if="product.price !== product.origin_price">
-            {{ product.price }} 元
+            {{ product.price }} 元 <i class="bi bi-tag"></i>
           </p>
           <p class="fs-3">
             <del v-if="product.price !== product.origin_price" class="text-secondary fs-6">售價：{{ product.origin_price }} 元</del>
@@ -50,22 +50,34 @@
               </select>
               <label for="itemQty">數量</label>
             </div>
-            <button type="button" class="btn btn-brown fs-4" @click="addToCart(product.id, qty)" :disabled="product.id === status.loadingItem"><i class="bi bi-cart3"></i> 加入購物車</button>
+            <button type="button" class="btn btn-brown btn-flex fs-4" @click="addToCart(product.id, qty)" :disabled="product.id === status.loadingItem">
+              <div style="width: 23px;" v-if="!cart">
+                <i class="bi bi-cart"></i>
+              </div>
+              <div class="addToCartAnimation" style="width: 23px;" v-else>
+                <i class="bi bi-cart-check-fill"></i>
+              </div>
+              <div style="width: 122px;">
+                加入購物車
+              </div>
+            </button>
             <p class="fs-6">購買且付款後最快３天出貨</p>
             <p class="fs-6">購買後將會寄確認信至您的信箱，可選擇信用卡結帳或是銀行轉帳</p>
           </div>
           <div class="text-center">
             <div class="btn-group w-100 mb-3">
-              <button type="button" class="btn border" v-if="favorite.indexOf(product.id) === -1" @click="editFavorite(product.id)">
-                <i class="bi bi-heart text-warning"></i> 加入追蹤
+              <button type="button" class="btn btn-flex border" v-if="favorite.indexOf(product.id) === -1" @click="editFavorite(product.id)">
+                <div style="width: 16px;"><i class="bi bi-heart text-warning"></i></div>
+                <div style="width: 68px;">加入追蹤</div>
               </button>
-              <button type="button" class="btn border" v-else @click="editFavorite(product.id)">
-                <i class="bi bi-heart-fill text-warning" :class="{ heartAnimation : heart }"></i> 已經追蹤
+              <button type="button" class="btn btn-flex border" v-else @click="editFavorite(product.id)">
+                <div style="width: 16px;" :class="{ heartAnimation : heart }"><i class="bi bi-heart-fill text-warning"></i></div>
+                <div style="width: 70px;">已經追蹤</div>
               </button>
             </div>
             <div class="btn-group w-100">
               <button type="button" class="btn border-0" v-if="copySuccess === false" @click="copyToClipBoard"><i class="bi bi-link-45deg"></i> 分享商品</button>
-              <button type="button" class="btn border-0" v-else @click="copyToClipBoard"><i class="bi bi-check-lg"></i> 分享成功！</button>
+              <button type="button" class="btn border-0" v-else @click="copyToClipBoard"><i class="bi bi-check-lg text-success"></i> 分享成功！</button>
             </div>
           </div>
         </div>
@@ -84,7 +96,7 @@
 
 <script>
 import RelatedProducts from '@/components/front/RelatedProducts.vue'
-import { addToCart } from '@/methods/cartMethods'
+import emitter from '@/methods/emitter'
 import { useWindowSize, useClipboard } from '@vueuse/core'
 
 export default {
@@ -117,6 +129,7 @@ export default {
       copy: '',
       copySuccess: false,
       copied: false,
+      cart: false,
       heart: false
     }
   },
@@ -140,7 +153,26 @@ export default {
           this.$InformMessage(err, '取得商品資訊')
         })
     },
-    addToCart,
+    addToCart (id, num) {
+      if (this.cart) this.cart = !this.cart
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      this.status.loadingItem = id
+      const cart = {
+        product_id: id,
+        qty: num
+      }
+      this.$http.post(api, { data: cart })
+        .then(res => {
+          this.cart = true
+          this.status.loadingItem = ''
+          this.$InformMessage(res, '商品放入購物車')
+          emitter.emit('updateCart')
+        })
+        .catch(err => {
+          this.status.loadingItem = ''
+          this.$InformMessage(err, '商品放入購物車')
+        })
+    },
     editFavorite (id) {
       const favoriteId = this.favorite.indexOf(id)
       if (favoriteId === -1) {
@@ -186,3 +218,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.btn-flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>

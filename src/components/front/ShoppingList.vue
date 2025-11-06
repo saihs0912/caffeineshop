@@ -22,7 +22,7 @@
               <div class="row justify-content-end h-100">
                 <div class="pb-2 col-12 text-end">
                   <div class="btn-group">
-                    <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center cart btn-danger" @click="addToCart(item.id, 1)" :disabled="item.id === status.loadingItem"></button>
+                    <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center cart btn-danger" @click="addToCart(item.id, 1, i)" :disabled="item.id === status.loadingItem" :class="{ 'addToCartAnimation' : cart === i }"></button>
                     <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center heart" @click="editFavorite(item.id, i)" v-if="favorite.indexOf(item.id) === -1"></button>
                     <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center heart-fill" :class="{ 'heartAnimation' : heart === i }" @click="editFavorite(item.id)" v-else></button>
                   </div>
@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import { addToCart } from '@/methods/cartMethods'
 import emitter from '@/methods/emitter'
 import { useWindowSize } from '@vueuse/core'
 
@@ -60,7 +59,8 @@ export default {
       },
       widthSize: '',
       favorite: JSON.parse(localStorage.getItem('favoriteList')) || [],
-      heart: ''
+      heart: '',
+      cart: ''
     }
   },
   computed: {
@@ -107,7 +107,25 @@ export default {
     }
   },
   methods: {
-    addToCart,
+    addToCart (id, num, i) {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      this.status.loadingItem = id
+      const cart = {
+        product_id: id,
+        qty: num
+      }
+      this.$http.post(api, { data: cart })
+        .then(res => {
+          this.cart = i
+          this.status.loadingItem = ''
+          this.$InformMessage(res, '商品放入購物車')
+          emitter.emit('updateCart')
+        })
+        .catch(err => {
+          this.status.loadingItem = ''
+          this.$InformMessage(err, '商品放入購物車')
+        })
+    },
     editFavorite (id, i) {
       const favoriteId = this.favorite.indexOf(id)
       if (favoriteId === -1) {

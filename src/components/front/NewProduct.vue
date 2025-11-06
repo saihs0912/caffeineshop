@@ -2,7 +2,7 @@
   <div class="areaBottom mb-4">
     <h2 class="text-center"><span>新商品</span></h2>
     <div class="box-container">
-      <i v-if="x < 0" class="bi bi-arrow-left-circle-fill icons i-l text-brown" @click="moveList(true)"></i>
+      <i v-if="x < 0" class="bi bi-arrow-left-circle-fill icons-lg i-lg-l text-brown" @click="moveList(true)"></i>
       <div class="box mx-auto my-3" :style="boxWidth">
         <div class="boxInside" ref="ProductBox" :style="boxInsideMove">
           <div class="card shadow-sm newTag m-2" v-for="item in latestProducts" :key="item.id">
@@ -21,7 +21,7 @@
           </div>
         </div>
       </div>
-      <i v-if="x > step*-4" class="bi bi-arrow-right-circle-fill icons i-r text-brown" @click="moveList(false)"></i>
+      <i v-if="x > step*-4" class="bi bi-arrow-right-circle-fill icons-lg i-lg-r text-brown" @click="moveList(false)"></i>
     </div>
     <div class="d-grid gap-2 col-md-4 col-sm-4 col-6 mx-auto" style="padding: 20px 0;">
       <router-link class="btn btn-brown" to="/shopping">查看全部商品</router-link>

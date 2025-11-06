@@ -69,8 +69,11 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(url)
         .then(res => {
+          let num = 0
           this.cart = res.data.data
-          const num = this.cart.carts.length
+          this.cart.carts.forEach((item, i) => {
+            num += item.qty
+          })
           this.$emit('updateNum', num)
           this.num = num
         })
