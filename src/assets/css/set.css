@@ -246,20 +246,20 @@ h2 span{
 /*點擊商品列表頁加入購物車的按鈕動畫*/
 .addToCartAnimation{
     animation-name: cart;
-    animation-duration: 2s;
+    animation-duration: 1.5s;
 }
 @keyframes cart{
   0%{
     text-shadow: 0 0 5px #dc3545;
   }
-  25%{
-    transform: rotate(-45deg);
+  20%{
+    transform: rotate(-40deg);
   }
   50%{
     text-shadow: 0 0 30px #dc3545;
   }
-  75%{
-    transform: rotate(45deg);
+  70%{
+    transform: rotate(40deg);
   }
   100%{
     text-shadow: 0 0 0 rgb(255, 255, 255,0);
@@ -268,20 +268,20 @@ h2 span{
 /*點擊商品列表頁及商品介紹頁加入追蹤的按鈕動畫*/
 .heartAnimation{
   animation-name: heart;
-  animation-duration: 2s;
+  animation-duration: 1.5s;
 }
 @keyframes heart{
   0%{
     text-shadow: 0 0 5px #ffc107;
   }
-  25%{
-    transform: rotate(-45deg);
+  20%{
+    transform: rotate(-40deg);
   }
   50%{
     text-shadow: 0 0 30px #ffc107;
   }
-  75%{
-    transform: rotate(45deg);
+  70%{
+    transform: rotate(40deg);
   }
   100%{
     text-shadow: 0 0 0 rgb(255, 255, 255,0);

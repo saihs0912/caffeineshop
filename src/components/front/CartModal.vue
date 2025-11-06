@@ -1,14 +1,14 @@
 <template>
     <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" ref="modal">
       <div class="modal-dialog" role="document">
-        <div class="modal-content border-0">
+        <div class="modal-content border-0" style="max-height: 80vh;">
           <div class="modal-header bg-brown text-white">
             <h5 class="modal-title">
               <span>購物車</span>
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body overflow-auto">
             <p v-if="num === 0" class="text-center fw-bolder fs-4">購物車內沒有商品</p>
             <table class="table align-middle" v-else>
               <thead>
