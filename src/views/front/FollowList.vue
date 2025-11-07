@@ -25,8 +25,8 @@
                                     </td>
                                     <td class="align-middle td-rwd">
                                       <div class="btn-group" style="max-width: 260px;">
-                                        <button class="d-block btn btn-outline-success" type="button" @click="addToCart(item.id, i)"><i class="bi bi-cart3"></i> 加入購物車</button>
-                                        <button class="d-block btn btn-outline-danger" type="button" @click="deleteFavorite(item.id, i)"><i class="bi bi-x-lg"></i> 取消追蹤</button>
+                                        <button class="d-block btn btn-outline-success" type="button" @click="addToCart(item.id, i)" :disabled="num !== i && num !== ''"><i class="bi bi-cart3"></i> 加入購物車</button>
+                                        <button class="d-block btn btn-outline-danger" type="button" @click="deleteFavorite(item.id, i)" :disabled="num !== i && num !== ''"><i class="bi bi-x-lg"></i> 取消追蹤</button>
                                       </div>
                                     </td>
                                   </tr>
@@ -89,7 +89,7 @@ export default {
         this.num = ''
         this.favorite.splice(favoriteId, 1)
         localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
-      }, 1000)
+      }, 500)
     },
     addToCart (id, i) {
       const favoriteId = this.favorite.indexOf(id)
@@ -143,7 +143,7 @@ export default {
 
 <style>
 .fadeOut{
-  transition: opacity 1s ease;
+  transition: opacity 0.5s ease;
   opacity: 0;
 }
 @media (max-width: 767px) {
