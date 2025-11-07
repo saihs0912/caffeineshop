@@ -26,3 +26,11 @@ export default {
   }
 }
 </script>
+
+<style>
+@media (max-width: 767px) {
+  .toast-container{
+    margin-bottom: 80px!important;
+  }
+}
+</style>

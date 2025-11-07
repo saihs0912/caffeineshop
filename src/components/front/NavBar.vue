@@ -43,7 +43,8 @@ export default {
       widthSize: '',
       widthSwitch: false,
       navOpen: false,
-      activeIndex: null
+      activeIndex: null,
+      nowPath: ['/about', '/caffeine', '/shopping', '/order', '/follow', '/coupon']
     }
   },
   components: {
@@ -92,11 +93,27 @@ export default {
       } else {
         this.widthSwitch = false
       }
+    },
+    '$route.fullPath' (newPath, oldPath) {
+      console.log(newPath, oldPath)
     }
   },
   created () {
     const { width } = useWindowSize()
     this.widthSize = width
+  },
+  mounted () {
+    const underline = this.$refs.underline
+    const navbarEl = this.$refs.navbar
+    const items = navbarEl.querySelectorAll('.nav-item')
+    this.nowPath.forEach((item, i) => {
+      if (this.$route.fullPath === item) {
+        this.activeIndex = i
+        const activeEl = items[this.activeIndex]
+        underline.style.width = `${activeEl.offsetWidth - 12}px`
+        underline.style.transform = `translateX(${activeEl.offsetLeft + 6}px)`
+      }
+    })
   }
 }
 </script>
