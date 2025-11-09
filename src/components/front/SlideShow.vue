@@ -79,7 +79,7 @@ export default {
   }
   .vertical-word {
     writing-mode: vertical-lr;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     left: 5%;
     top: 20px;
   }

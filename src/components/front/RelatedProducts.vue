@@ -68,8 +68,8 @@ export default {
             this.showNum = 3
             this.num > this.showNum ? boxWidth = (boxInsideWidth / this.num) * 3 : boxWidth = this.step * this.num
           } else if (this.widthSize <= 767) {
-            this.showNum = 2
-            this.num > this.showNum ? boxWidth = (boxInsideWidth / this.num) * 2 : boxWidth = this.step * this.num
+            this.showNum = 1
+            this.num > this.showNum ? boxWidth = boxInsideWidth / this.num : boxWidth = this.step * this.num
           }
           this.boxInsideWidth.width = `${boxInsideWidth}px`
           this.boxWidth.width = `${boxWidth}px`
@@ -126,8 +126,8 @@ export default {
         } else if (newWidth <= 767 && oldWidth > 767) {
           this.x = 0
           this.boxInsideWidth.transform = 'translate3d(0, 0, 0)'
-          this.showNum = 2
-          this.num > this.showNum ? boxWidth = (box.clientWidth / this.num) * 2 : boxWidth = this.step * this.num
+          this.showNum = 1
+          this.num > this.showNum ? boxWidth = box.clientWidth / this.num : boxWidth = this.step * this.num
         }
         this.boxWidth.width = `${Math.floor(boxWidth)}px`
       }

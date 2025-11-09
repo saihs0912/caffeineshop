@@ -9,14 +9,14 @@
             <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
               <img :src="item.imageUrl" alt="" class="card-img-top">
             </router-link>
-            <div class="card-body d-flex flex-column">
-              <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
+            <div class="card-body d-flex flex-column p-0">
+              <router-link class="no-underline d-block p-2 h-100" :to="{ name: 'product', params: { productId: item.id } }">
                 <p class="card-title">{{ item.title }}</p>
+                <div>
+                  <span class="fw-bold text-danger">{{ item.price }} 元</span><br>
+                  <span class="text-dark">{{ item.description }}</span>
+                </div>
               </router-link>
-              <div>
-                <span class="fw-bold text-danger">{{ item.price }} 元</span><br>
-                <span>{{ item.description }}</span>
-              </div>
             </div>
           </div>
         </div>
