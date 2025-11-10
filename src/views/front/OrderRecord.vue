@@ -10,9 +10,8 @@
           <div class="row justify-content-center">
             <div class="col-lg-9 col-md-10 col-sm-12 col-12 mt-3 mb-3">
               <div class="input-group h-100">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon1" @click="searchOrder">以訂單編號搜尋</button>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" v-model="searchId">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon1" @click="resetSearch">重置搜尋</button>
+                <button class="btn btn-outline-secondary" type="button" id="button-addon1" @click="searchOrder">搜尋</button>
+                <input type="search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" v-model="searchId" placeholder="輸入訂單編號">
               </div>
             </div>
             <div class="col-lg-9 col-md-10 col-sm-12 col-12 pt-3 pb-5">
@@ -58,10 +57,14 @@ export default {
         return
       }
       this.searchResult = this.searchId
-      this.searchId = ''
     },
     resetSearch () {
       this.searchResult = ''
+    }
+  },
+  watch: {
+    searchId (newSearch, oldSearch) {
+      if (newSearch === '') this.searchResult = ''
     }
   },
   mounted () {

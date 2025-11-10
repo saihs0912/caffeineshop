@@ -461,24 +461,18 @@ h2 span{
     .i-lg-r{
         right: -10px;
     }
-    /*td排序改為block*/
-    .table-block thead{
+    .thead-none{
         display: none;
     }
-    .table-block tbody tr{
-        border: 1px solid #dee2e6;
-        border-radius: 10px;
+    .td-img {
+        border: none;
+        height: 140px;
     }
-    .table-block tbody tr td{
+    .td-block {
+        border: none;
         display: block;
-        position: relative;
-        padding-left: 100px;
     }
-    .table-block tbody tr td::before{
-        position: absolute;
-        left: 0;
-        top: calc(50% - 10px);
-        content: attr(data-item);
-        font-weight: bold;
+    .tr-border {
+        border: 1px solid #dee2e6;
     }
 }

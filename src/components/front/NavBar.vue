@@ -14,15 +14,29 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav01">
-            <ul class="navbar-nav" @mouseleave="mouseLeave" ref="navbar">
+            <ul class="navbar-nav" @mouseleave="mouseLeave" ref="navbarList">
               <span class="target-underline" ref="underline"></span>
-              <li class="nav-item" @mouseenter="mouseEnter(0)" @click="setActive(0)"><router-link class="nav-link" @click="navbarHide" to="/about">關於我們</router-link></li>
-              <li class="nav-item" @mouseenter="mouseEnter(1)" @click="setActive(1)"><router-link class="nav-link" @click="navbarHide" to="/caffeine">咖啡與茶</router-link></li>
-              <li class="nav-item" @mouseenter="mouseEnter(2)" @click="setActive(2)"><router-link class="nav-link" @click="navbarHide" to="/shopping">線上商店</router-link></li>
-              <li class="nav-item" @mouseenter="mouseEnter(3)" @click="setActive(3)"><router-link class="nav-link" @click="navbarHide" to="/order">訂單查詢</router-link></li>
-              <li class="nav-item" @mouseenter="mouseEnter(4)" @click="setActive(4)"><router-link class="nav-link" @click="navbarHide" to="/follow">追蹤清單</router-link></li>
-              <li class="nav-item" @mouseenter="mouseEnter(5)" @click="setActive(5)"><router-link class="nav-link" @click="navbarHide" to="/coupon">優惠碼</router-link></li>
-              <li @mouseenter="mouseEnter(6)"><a class="nav-link" @click.prevent="navbarHide('cart')" href="#">購物車</a></li>
+              <li class="nav-item" @mouseenter="mouseEnter(0)" @click="setActive(0)">
+                <router-link class="nav-link" @click="navbarHide" to="/about">關於我們</router-link>
+              </li>
+              <li class="nav-item" @mouseenter="mouseEnter(1)" @click="setActive(1)">
+                <router-link class="nav-link" @click="navbarHide" to="/caffeine">咖啡與茶</router-link>
+              </li>
+              <li class="nav-item" @mouseenter="mouseEnter(2)" @click="setActive(2)">
+                <router-link class="nav-link" @click="navbarHide" to="/shopping">線上商店</router-link>
+              </li>
+              <li class="nav-item" @mouseenter="mouseEnter(3)" @click="setActive(3)">
+                <router-link class="nav-link" @click="navbarHide" to="/order">訂單查詢</router-link>
+              </li>
+              <li class="nav-item" @mouseenter="mouseEnter(4)" @click="setActive(4)">
+                <router-link class="nav-link" @click="navbarHide" to="/follow">追蹤清單</router-link>
+              </li>
+              <li class="nav-item" @mouseenter="mouseEnter(5)" @click="setActive(5)">
+                <router-link class="nav-link" @click="navbarHide" to="/coupon">優惠碼</router-link>
+              </li>
+              <li @mouseenter="mouseEnter(6)">
+                <a class="nav-link" @click.prevent="navbarHide('cart')" href="#">購物車</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -72,7 +86,7 @@ export default {
     },
     mouseLeave () {
       const underline = this.$refs.underline
-      const navbarEl = this.$refs.navbar
+      const navbarEl = this.$refs.navbarList
       const items = navbarEl.querySelectorAll('.nav-item')
       if (this.activeIndex !== null) {
         const activeEl = items[this.activeIndex]
@@ -93,9 +107,6 @@ export default {
       } else {
         this.widthSwitch = false
       }
-    },
-    '$route.fullPath' (newPath, oldPath) {
-      console.log(newPath, oldPath)
     }
   },
   created () {
@@ -104,7 +115,7 @@ export default {
   },
   mounted () {
     const underline = this.$refs.underline
-    const navbarEl = this.$refs.navbar
+    const navbarEl = this.$refs.navbarList
     const items = navbarEl.querySelectorAll('.nav-item')
     this.nowPath.forEach((item, i) => {
       if (this.$route.fullPath === item) {

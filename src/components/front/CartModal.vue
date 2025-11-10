@@ -11,7 +11,7 @@
           <div class="modal-body overflow-auto">
             <p v-if="num === 0" class="text-center fw-bolder fs-4">購物車內沒有商品</p>
             <table class="table align-middle" v-else>
-              <thead>
+              <thead class="thead-none">
                 <tr>
                   <th></th>
                   <th>商品</th>
@@ -22,11 +22,11 @@
               </thead>
               <tbody>
                 <tr v-for="(item, i) in cart.carts" :key="i">
-                  <th><div style="width: 40px;"><img :src="cart.carts[i].product.imageUrl" alt="" class="img-fluid"></div></th>
-                  <td>{{ item.product.title }}</td>
-                  <td>{{ item.final_total }}</td>
-                  <td><input type="number" class="form-control" v-model.number="item.qty" min="1" max="20" @change="updateCart(item)" :disabled="item.id === status.loadingItem"></td>
-                  <td><button type="button" class="btn btn-outline-danger btn-sm del" @click="deleteCartItem(item.id)" :disabled="item.id === status.loadingItem"></button></td>
+                  <td class="float-lg-none float-md-none float-sm-none float-start td-img"><div style="width: 40px;"><img :src="cart.carts[i].product.imageUrl" alt="" class="img-fluid"></div></td>
+                  <td class="td-block">{{ item.product.title }}</td>
+                  <td class="td-block">{{ item.final_total }}</td>
+                  <td class="td-block"><input type="number" class="form-control" v-model.number="item.qty" min="1" max="20" @change="updateCart(item)" :disabled="item.id === status.loadingItem"></td>
+                  <td class="td-block"><button type="button" class="btn btn-outline-danger btn-sm del" @click="deleteCartItem(item.id)" :disabled="item.id === status.loadingItem"></button></td>
                 </tr>
               </tbody>
             </table>
