@@ -4,11 +4,11 @@
         <div class="container">
             <div class="row my-5">
                 <div class="col-12 p-0">
-                    <div class="followUs px-5 py-5">
+                    <div class="followUs p-5-0">
                         <div class="followBox px-3 py-5 mx-auto">
                             <label for="follow" id="followLabel" class="mb-4 d-block w-100">留下您的Email，以獲得最新資訊及最新優惠！</label>
                             <div class="d-flex">
-                                <input type="email" id="follow" placeholder="輸入Email"><button type="button" class="btn btn-brown">送出</button>
+                                <input type="email" id="follow" placeholder="輸入Email"><button type="button" class="btn btn-brown"><i class="bi bi-send"></i></button>
                             </div>
                             <div class="text_underline"></div>
                         </div>
@@ -62,5 +62,11 @@ export default {
     width: 75%;
     position: relative;
     border-top: 1px solid #c2c2c2;
+}
+
+@media (min-width: 576px){
+    .p-5-0 {
+        padding: 3rem!important;
+    }
 }
 </style>

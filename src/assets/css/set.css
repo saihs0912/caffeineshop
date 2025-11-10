@@ -376,7 +376,7 @@ h2 span{
     position: absolute;
     z-index: 999;
     cursor: pointer;
-    font-size: 40px;
+    font-size: 60px;
     opacity: 0;
     transition: 0.3s ease;
 }
@@ -408,14 +408,16 @@ h2 span{
     top: calc(50% - 30px);
 }
 /**首頁icons跟商品介紹頁icons共通樣式**/
-.box-container:hover .icons-lg, .box-container:hover .icons-sm{
-    opacity: 1;
-}
-.box-container:hover .i-lg-l, .box-container:hover .i-sm-l{
-    left: 0;
-}
-.box-container:hover .i-lg-r, .box-container:hover .i-sm-r{
-    right: 0;
+@media (min-width: 1200px) {
+    .box-container:hover .icons-lg, .box-container:hover .icons-sm{
+        opacity: 1;
+    }
+    .box-container:hover .i-lg-l, .box-container:hover .i-sm-l{
+        left: 0;
+    }
+    .box-container:hover .i-lg-r, .box-container:hover .i-sm-r{
+        right: 0;
+    }
 }
 @media (max-width: 1199px) {
     .icons-lg, .icons-sm{
@@ -446,7 +448,19 @@ h2 span{
         padding-bottom: 60px;
     }
 }
-@media (max-width: 576px){
+@media (max-width: 575px){
+    .box-container{
+        overflow: visible;
+    }
+    .icons-lg{
+        font-size: 40px;
+    }
+    .i-lg-l{
+        left: -10px;
+    }
+    .i-lg-r{
+        right: -10px;
+    }
     /*td排序改為block*/
     .table-block thead{
         display: none;
