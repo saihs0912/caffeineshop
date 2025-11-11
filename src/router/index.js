@@ -33,6 +33,11 @@ const routes = [
         component: () => import('../views/front/OrderRecord.vue')
       },
       {
+        path: 'orderDetail/:orderId',
+        name: 'orderDetail',
+        component: () => import('../views/front/OrderDetail.vue')
+      },
+      {
         path: 'coupon',
         component: () => import('../views/front/CouponList.vue')
       },

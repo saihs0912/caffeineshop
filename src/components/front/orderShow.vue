@@ -18,51 +18,26 @@
             <div class="card-header">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                            訂單編號：<br>{{ item.id }}
+                        <div class="col-lg-9 col-md-8 col-sm-8 col-12 py-1 px-0">
+                            <span>訂購日期：{{ $num.date(item.create_at) }}</span><br>
+                            <span>訂單編號：{{ item.id }}</span>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-12 pb-2 fs-6 txt-end">
-                            訂購日期：<br>{{ $num.date(item.create_at) }}
-                        </div>
-                        <div class="col-12 text-center" ref="arrowDown" style="transform: rotate(0deg); transition: 1s ease;" @click="boxToggle(i)">
-                          <i class="bi bi-caret-down-fill"></i>
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-12 py-1 px-0 d-flex flex-lg-row-reverse flex-md-row-reverse flex-sm-row-reverse">
+                          <div class="btn-group">
+                            <button class="btn btn-brown" @click="goToDetail(item.id)">訂單明細</button>
+                          </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card-body boxClose" ref="cards" style="max-height: 0; padding: 0;">
+            <div class="card-body boxClose" ref="cards">
                 <table class="table">
                     <tbody>
                         <tr v-for="(productItem, index) in item.products" :key="index" class="tr-border">
-                            <td class="float-lg-none float-md-none float-sm-none float-start td-img"><div style="width: 50px;"><img class="img-fluid" :src="productItem.product.imageUrl" alt=""></div></td>
-                            <td class="td-block"><router-link class="no-underline d-block p-2 h-100" :to="{ name: 'product', params: { productId: productItem.product.id } }">{{ productItem.product.title }}</router-link></td>
-                            <td class="td-block">數量：{{ productItem.qty }}</td>
-                            <td class="td-block">小計：{{ productItem.total }}</td>
+                            <td class="float-lg-none float-md-none float-sm-none float-start td-img" style="width: 50px;"><img class="img-fluid" :src="productItem.product.imageUrl" alt=""></td>
+                            <td class="td-block"><router-link class="no-underline d-block h-100" :to="{ name: 'product', params: { productId: productItem.product.id } }">{{ productItem.product.title }}</router-link></td>
                         </tr>
                     </tbody>
-                </table>
-                <table class="table">
-                  <tbody>
-                    <tr>
-                      <td>姓名：</td>
-                      <td>{{ item.user.name }}</td>
-                    </tr>
-                    <tr>
-                      <td>Email：</td>
-                      <td>{{ item.user.email }}</td>
-                    </tr><tr>
-                      <td>電話：</td>
-                      <td>{{ item.user.tel }}</td>
-                    </tr>
-                    <tr>
-                      <td>地址：</td>
-                      <td>{{ item.user.address }}</td>
-                    </tr>
-                    <tr>
-                      <td>留言：</td>
-                      <td>{{ item.message }}</td>
-                    </tr>
-                  </tbody>
                 </table>
             </div>
             <div class="card-footer">
@@ -72,7 +47,7 @@
                     <p class="card-text fw-bolder fs-4">總金額：{{ $num.currency(item.total) }}</p>
                   </div>
                   <div class="col-6 text-end h-auto d-flex align-items-center justify-content-end">
-                    <a href="#" class="btn btn-brown" v-if="item.is_paid === false" @click.prevent="openPaidModal(item.id, i)">付款</a>
+                    <span class="border border-brown rounded p-1 align-items-end mt-1 btn" style="cursor: text;" v-if="item.is_paid === false">尚未付款</span>
                     <span class="border border-brown rounded p-1 align-items-end mt-1 btn" style="cursor: text;" v-else>{{ $num.date(item.paid_date) }}已付款</span>
                   </div>
                 </div>
@@ -155,15 +130,6 @@ export default {
           this.$InformMessage(err, '取得訂單列表')
         })
     },
-    boxToggle (i) {
-      if (this.$refs.cards[i].style.maxHeight === '0px') {
-        this.$refs.cards[i].style.maxHeight = '800px'
-        this.$refs.arrowDown[i].style.transform = 'rotate(180deg)'
-      } else {
-        this.$refs.cards[i].style.maxHeight = '0'
-        this.$refs.arrowDown[i].style.transform = 'rotate(0deg)'
-      }
-    },
     openPaidModal (id, i) {
       this.tempPay = {
         tempId: id,
@@ -186,6 +152,9 @@ export default {
         .catch(err => {
           this.$InformMessage(err, '通知付款')
         })
+    },
+    goToDetail (id) {
+      this.$router.push({ name: 'orderDetail', params: { orderId: id } })
     }
   },
   created () {
@@ -195,10 +164,6 @@ export default {
 </script>
 
 <style>
-.boxClose {
-  overflow: hidden;
-  transition: 1.5s ease;
-}
 @media (min-width: 576px) {
   .txt-end {
     text-align: right;
