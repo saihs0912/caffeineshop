@@ -5,17 +5,17 @@
       <div class="modal-content border-0">
         <div class="modal-header bg-brown text-white">
           <h5 class="modal-title">
-            <span>通知付款</span>
+            <span>付款</span>
           </h5>
           <button type="button" class="btn-close"
                   data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">確定要已付款嗎？</div>
+        <div class="modal-body">確定要付款嗎？</div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary"
                   data-bs-dismiss="modal">取消
           </button>
-          <button type="button" class="btn btn-brown" @click="$emit('emit-pay', tempPay)">確定</button>
+          <button type="button" class="btn btn-brown" @click="$emit('emit-pay', tempId)">確定</button>
         </div>
       </div>
     </div>
@@ -29,14 +29,14 @@ export default {
   name: 'PayModal',
   data () {
     return {
-      tempPay: {}
+      tempId: ''
     }
   },
   props: ['sendPayInfo'],
   emits: ['emit-pay'],
   watch: {
     sendPayInfo (newPay, oldPay) {
-      this.tempPay = { ...newPay }
+      this.tempId = newPay
     }
   },
   mixins: [modalMixin]

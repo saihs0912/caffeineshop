@@ -56,12 +56,10 @@
         </div>
     </div>
   </template>
-  <already-paid ref="paidModal" :sendPayInfo="tempPay" @emit-pay="alreadyPaid"></already-paid>
   <pagination-modal v-if="pageShow" :pages="pagination" @emit-page="getOrderAll"></pagination-modal>
 </template>
 
 <script>
-import AlreadyPaid from './AlreadyPaid.vue'
 import PaginationModal from '../back/PaginationModal.vue'
 
 export default {
@@ -80,7 +78,6 @@ export default {
     }
   },
   components: {
-    AlreadyPaid,
     PaginationModal
   },
   props: ['sendOrder'],
@@ -128,29 +125,6 @@ export default {
         .catch(err => {
           this.isLoading = false
           this.$InformMessage(err, '取得訂單列表')
-        })
-    },
-    openPaidModal (id, i) {
-      this.tempPay = {
-        tempId: id,
-        tempNum: i
-      }
-      this.$refs.paidModal.showModal()
-    },
-    alreadyPaid (item) {
-      this.$refs.paidModal.hideModal()
-      this.isLoading = true
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${item.tempId}`
-      this.$http.post(url)
-        .then(res => {
-          this.isLoading = false
-          this.searchResult[item.tempNum].is_paid = true
-          const now = new Date()
-          this.searchResult[item.tempNum].paid_date = Math.floor(now / 1000)
-          this.tempPay = {}
-        })
-        .catch(err => {
-          this.$InformMessage(err, '通知付款')
         })
     },
     goToDetail (id) {

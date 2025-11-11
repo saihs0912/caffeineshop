@@ -35,7 +35,7 @@ export default {
       } else if (where === '/shopping') {
         this.$router.push('/shopping')
       } else {
-        this.$router.push({ name: 'order', query: { orderId: where } })
+        this.$router.push({ name: 'orderDetail', params: { orderId: where } })
       }
     }
   }
