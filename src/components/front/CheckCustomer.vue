@@ -2,7 +2,7 @@
     <div class="mb-5 mt-5">
       <p class="text-center fw-bolder fs-3">請輸入購買者資料</p>
       <div class="my-5 justify-content-center">
-        <v-form class="col-md-6 mx-auto" v-slot="{ errors }" ref="infoForm">
+        <v-form class="col-lg-10 col-md-10 col-sm-10 col-12 mx-auto" v-slot="{ errors }" ref="infoForm">
           <div class="md-3 mb-3">
             <label for="email" class="form-label">Email</label>
             <v-field id="email" name="email" type="email" class="form-control" :class="{ 'is-invalid': errors['email'] }" placeholder="請輸入 Email" rules="email|required" v-model="form.user.email" @change="formSend"></v-field>

@@ -68,10 +68,10 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td colspan="2" class="text-center">
+                                                                <td colspan="2" class="text-end">
                                                                     <span class="fs-4 text-success fw-bold">總金額：{{ $num.currency(order.total) }}</span>
                                                                     <div class="d-block text-danger" v-if="order.total < total">
-                                                                        <span class="border border-danger rounded" style="font-size: 0.8rem;">有套用優惠券</span>
+                                                                        <span class="border border-danger rounded fw-bold" style="font-size: 0.8rem;">已套用優惠券</span>
                                                                     </div>
                                                                 </td>
                                                             </tr>

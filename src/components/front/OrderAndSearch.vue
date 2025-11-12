@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                 <div class="input-group mb-3">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon1" @click="resetCategoryAndSearch">重置全部</button>
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon1" @click="resetCategoryAndSearch"><i class="bi bi-x-lg"></i></button>
                     <input type="text" placeholder="搜尋商品" class="form-control" aria-describedby="basic-addon1" v-model="cacheSearch">
                 </div>
             </div>

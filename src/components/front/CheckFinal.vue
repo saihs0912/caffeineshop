@@ -33,7 +33,7 @@
               <tr>
                 <th>商品名稱</th>
                 <th>數量</th>
-                <th>總金額</th>
+                <th>小計</th>
               </tr>
             </thead>
             <tbody>
@@ -47,7 +47,7 @@
         </div>
         <div>
           <p class="fs-2">總金額：{{ $num.currency(sendCartFinal.final_total) }}</p>
-          <p class="text-success" v-if="sendCartFinal.final_total < sendCartFinal.total">已套用優惠券</p>
+          <p class="text-success" v-if="sendCartFinal.final_total < sendCartFinal.total">※ 已套用優惠券</p>
         </div>
     </div>
 </template>

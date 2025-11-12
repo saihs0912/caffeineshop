@@ -10,23 +10,28 @@
           </div>
           <div class="modal-body overflow-auto">
             <p v-if="num === 0" class="text-center fw-bolder fs-4">購物車內沒有商品</p>
-            <table class="table align-middle" v-else>
-              <thead class="thead-none">
-                <tr>
-                  <th></th>
-                  <th>商品</th>
-                  <th>價格</th>
-                  <th style="width: 90px;">數量</th>
-                  <th></th>
-                </tr>
-              </thead>
+            <table class="table align-middle mb-0" v-else>
               <tbody>
                 <tr v-for="(item, i) in cart.carts" :key="i">
-                  <td class="float-lg-none float-md-none float-sm-none float-start td-img"><div style="width: 40px;"><img :src="cart.carts[i].product.imageUrl" alt="" class="img-fluid"></div></td>
-                  <td class="td-block">{{ item.product.title }}</td>
-                  <td class="td-block">{{ item.final_total }}</td>
-                  <td class="td-block"><input type="number" class="form-control" v-model.number="item.qty" min="1" max="20" @change="updateCart(item)" :disabled="item.id === status.loadingItem"></td>
-                  <td class="td-block"><button type="button" class="btn btn-outline-danger btn-sm del" @click="deleteCartItem(item.id)" :disabled="item.id === status.loadingItem"></button></td>
+                  <td style="width: 80px;">
+                    <div><img :src="cart.carts[i].product.imageUrl" alt="" class="img-fluid"></div>
+                  </td>
+                  <td>
+                    <ul class="list-group-horizontal d-flex flex-wrap cart-list ps-0">
+                      <li class="list-group-item border-0 pt-0 pb-2">
+                        <router-link class="no-underline d-block h-100" :to="{ name: 'product', params: { productId: item.product.id } }" @click="hideModal">{{ item.product.title }}</router-link>
+                      </li>
+                      <li class="list-group-item border-0 d-flex align-items-center">
+                        單價：{{ item.final_total }}
+                      </li>
+                      <li class="list-group-item border-0 d-flex align-items-center">
+                        數量：<input type="number" class="form-control" v-model.number="item.qty" min="1" max="20" @change="updateCart(item)" :disabled="item.id === status.loadingItem">
+                      </li>
+                    </ul>
+                  </td>
+                  <td class="text-end" style="width: 50px;">
+                    <button type="button" class="btn btn-outline-danger btn" @click="deleteCartItem(item.id)" :disabled="item.id === status.loadingItem"><i class="bi bi-trash3"></i></button>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -36,7 +41,7 @@
           </div>
           <div class="modal-footer justify-content-between">
             <div class="d-block fs-5 text-danger" v-if="num === 0">請選購至少一項商品後再結帳！</div>
-            <div class="d-block fs-4 text-success" v-else>商品總金額：{{ cart.total }}</div>
+            <div class="d-block fs-4 text-success" v-else>總金額：{{ cart.total }}</div>
             <div class="btn-group">
               <button class="btn btn-outline-brown" @click="goToCheck" :disabled="num === 0">前往結帳</button>
             </div>
@@ -125,3 +130,20 @@ export default {
   }
 }
 </script>
+
+<style>
+.cart-list li:first-child {
+  width: 100%;
+}
+.cart-list li:nth-child(2), .cart-list li:nth-child(3) {
+  width: 50%;
+}
+.cart-list li input {
+  width: 50%;
+}
+@media (max-width: 575px) {
+  .cart-list li:nth-child(2), .cart-list li:nth-child(3) {
+    width: 100%;
+  }
+}
+</style>
