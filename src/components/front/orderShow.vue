@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-lg-3 col-md-4 col-sm-4 col-12 py-1 px-0 d-flex flex-lg-row-reverse flex-md-row-reverse flex-sm-row-reverse">
                           <div class="btn-group">
-                            <button class="btn btn-brown" @click="goToDetail(item.id)">訂單明細</button>
+                            <button class="btn btn-brown" @click="goToDetail(item.id)"><i class="bi bi-receipt"></i> 訂單明細</button>
                           </div>
                         </div>
                     </div>

@@ -43,23 +43,36 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr v-for="(productItem, index) in order.products" :key="index">
-                                                                <td class="border-0" style="width: 60px;">
+                                                                <td class="border-0" style="width: 80px;">
                                                                     <img class="img-fluid" :src="productItem.product.imageUrl" alt="">
                                                                 </td>
                                                                 <td class="border-0">
-                                                                    <ul class="list-group-horizontal d-flex flex-nowrap">
+                                                                    <ul class="list-group-horizontal d-flex flex-wrap order-list ps-0">
                                                                         <li class="list-group-item border-0 pt-0">
                                                                             <router-link class="no-underline d-block h-100" :to="{ name: 'product', params: { productId: productItem.product.id } }">
                                                                                 {{ productItem.product.title }}
                                                                             </router-link>
                                                                         </li>
-                                                                        <li class="list-group-item border-0 pt-0">
-                                                                            數量：{{ productItem.qty }}
+                                                                        <li class="list-group-item border-0 d-flex align-items-center">
+                                                                            <span>數量：{{ productItem.qty }}</span>
                                                                         </li>
-                                                                        <li class="list-group-item border-0 pt-0">
-                                                                            小計：{{ productItem.final_total }}
+                                                                        <li class="list-group-item border-0 d-flex align-items-center">
+                                                                            <span>小計：{{ $num.currency(productItem.final_total) }}</span>
+                                                                        </li>
+                                                                        <li class="list-group-item border-0">
+                                                                            <button type="button" class="btn btn-outline-brown btn-sm rounded-3" @click="addToCart(productItem.product_id)" :disabled="productItem.product_id === status.loadingItem">
+                                                                                <i class="bi bi-cart"></i> 再次購買
+                                                                            </button>
                                                                         </li>
                                                                     </ul>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2" class="text-center">
+                                                                    <span class="fs-4 text-success fw-bold">總金額：{{ $num.currency(order.total) }}</span>
+                                                                    <div class="d-block text-danger" v-if="order.total < total">
+                                                                        <span class="border border-danger rounded" style="font-size: 0.8rem;">有套用優惠券</span>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -114,6 +127,7 @@
 
 <script>
 import AlreadyPaid from '@/components/front/AlreadyPaid.vue'
+import emitter from '@/methods/emitter'
 
 export default {
   name: 'OrderDetail',
@@ -126,8 +140,12 @@ export default {
     return {
       order: {},
       user: {},
+      total: 0,
       tempId: '',
-      isLoading: false
+      isLoading: false,
+      status: {
+        loadingItem: ''
+      }
     }
   },
   components: {
@@ -143,6 +161,9 @@ export default {
           this.isLoading = false
           this.order = res.data.order
           this.user = res.data.order.user
+          Object.values(this.order.products).forEach((item, i) => {
+            this.total += item.total
+          })
         })
         .catch(() => {
           this.isLoading = false
@@ -166,11 +187,48 @@ export default {
           this.isLoading = false
           this.$InformMessage(err, '付款')
         })
+    },
+    addToCart (id) {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      this.status.loadingItem = id
+      const cart = {
+        product_id: id,
+        qty: 1
+      }
+      console.log(cart)
+      this.$http.post(api, { data: cart })
+        .then(res => {
+          this.status.loadingItem = ''
+          this.$InformMessage(res, '商品放入購物車')
+          emitter.emit('updateCart')
+        })
+        .catch(err => {
+          this.status.loadingItem = ''
+          this.$InformMessage(err, '商品放入購物車')
+        })
     }
   },
   created () {
-    console.log(this.$route.params.orderId)
     this.getOrder(this.$route.params.orderId)
   }
 }
 </script>
+
+<style>
+.order-list li:first-child {
+    width: 100%;
+}
+.order-list li:nth-child(2), .order-list li:nth-child(3), .order-list li:last-child {
+    width: calc(100% / 3);
+}
+@media (max-width: 991px) {
+    .order-list li:nth-child(2), .order-list li:nth-child(3), .order-list li:last-child {
+        width: 50%;
+    }
+}
+@media (max-width: 575px) {
+    .order-list li:nth-child(2), .order-list li:nth-child(3), .order-list li:last-child {
+        width: 100%;
+    }
+}
+</style>
