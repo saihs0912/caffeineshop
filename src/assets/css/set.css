@@ -461,18 +461,4 @@ h2 span{
     .i-lg-r{
         right: -10px;
     }
-    .thead-none{
-        display: none;
-    }
-    .td-img {
-        border: none;
-        height: 140px;
-    }
-    .td-block {
-        border: none;
-        display: block;
-    }
-    .tr-border {
-        border: 1px solid #dee2e6;
-    }
 }

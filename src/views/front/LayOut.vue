@@ -4,14 +4,14 @@
     <div class="container pt-4 content-height" style="max-width: 1140px!;">
       <div class="row justify-content-center pt-lg-md">
         <div class="col pt-4">
-          <router-view></router-view>
+          <router-view :sendId="idInCart"></router-view>
         </div>
       </div>
     </div>
     <footer-area></footer-area>
     <a class="cartOpen" href="#" @click.prevent="openCart" @mousedown="cartMove" :style="moveDelay"><span class="cartOpenNum" v-show="num > 0">{{ num }}</span></a>
     <a class="backToTop" href="#" v-if="showScrollTop" @click.prevent="scrollToTop"><i class="bi bi-arrow-up-circle-fill"></i></a>
-    <cart-modal ref="cartModal" @updateNum="cartNum"></cart-modal>
+    <cart-modal ref="cartModal" @updateNum="cartInfo"></cart-modal>
   </div>
   <toast-messages></toast-messages>
 </template>
@@ -37,7 +37,8 @@ export default {
       moveDelay: {
         transitionDelay: '0s'
       },
-      showScrollTop: false
+      showScrollTop: false,
+      idInCart: []
     }
   },
   provide () {
@@ -49,8 +50,9 @@ export default {
     openCart () {
       this.$refs.cartModal.showModal()
     },
-    cartNum (num) {
+    cartInfo (num, idList) {
       this.num = num
+      this.idInCart = idList
     },
     cartMove () {
       this.moveDelay.transitionDelay = '1s'
@@ -70,7 +72,8 @@ export default {
   },
   mounted () {
     window.addEventListener('scroll', _.throttle(this.handleScroll, 200))
-  }
+  },
+  watch: {}
 }
 </script>
 

@@ -80,12 +80,11 @@ export default {
           this.cart.carts.forEach((item, i) => {
             num += item.qty
           })
-          this.$emit('updateNum', num)
           this.num = num
           productId = this.cart.carts.map(item => {
             return item.product_id
           })
-          emitter.emit('updateId', productId)
+          this.$emit('updateNum', num, productId)
         })
         .catch(err => {
           this.$InformMessage(err, '取得購物車資訊')
