@@ -71,6 +71,7 @@ export default {
   mixins: [modalMixin],
   methods: {
     getCart () {
+      let productId = []
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(url)
         .then(res => {
@@ -81,6 +82,10 @@ export default {
           })
           this.$emit('updateNum', num)
           this.num = num
+          productId = this.cart.carts.map(item => {
+            return item.product_id
+          })
+          emitter.emit('updateId', productId)
         })
         .catch(err => {
           this.$InformMessage(err, '取得購物車資訊')

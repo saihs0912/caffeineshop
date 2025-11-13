@@ -8,7 +8,7 @@
           <span v-else>其他</span> > <span>{{ product.category }}</span>
         </div>
       </div>
-      <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 p-3">
+      <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 py-3">
         <div class="container">
           <div class="row">
             <div class="col-sm-12 col-12 pb-3" v-if="widthSize <= 991">
@@ -27,6 +27,7 @@
                 </div>
                 <div class="pt-4 border-top">
                   <p>{{ product.description }}</p>
+                  <p>{{ cartIn }}</p>
                 </div>
               </div>
             </div>
@@ -130,7 +131,8 @@ export default {
       copySuccess: false,
       copied: false,
       cart: false,
-      heart: false
+      heart: false,
+      cartIn: false
     }
   },
   components: {
@@ -215,6 +217,9 @@ export default {
     const { copy, copied } = useClipboard()
     this._copy = copy
     this._copiedRef = copied
+    emitter.on('updateId', idList => {
+      this.cartIn = idList.find(this.product.id)
+    })
   }
 }
 </script>
