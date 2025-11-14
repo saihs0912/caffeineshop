@@ -65,13 +65,13 @@ export default {
       status: {
         loadingItem: ''
       },
-      err: false
+      err: false,
+      productIds: []
     }
   },
   mixins: [modalMixin],
   methods: {
     getCart () {
-      let productId = []
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(url)
         .then(res => {
@@ -81,10 +81,11 @@ export default {
             num += item.qty
           })
           this.num = num
-          productId = this.cart.carts.map(item => {
+          this.productIds = this.cart.carts.map(item => {
             return item.product_id
           })
-          this.$emit('updateNum', num, productId)
+          this.$emit('updateNum', num)
+          emitter.emit('updateId', this.productIds)
         })
         .catch(err => {
           this.$InformMessage(err, '取得購物車資訊')
@@ -129,6 +130,9 @@ export default {
   },
   mounted () {
     emitter.on('updateCart', () => {
+      this.getCart()
+    })
+    emitter.on('sendRequire', () => {
       this.getCart()
     })
   }

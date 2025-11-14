@@ -28,7 +28,6 @@
                 <div class="pt-4 border-top">
                   <p>{{ product.description }}</p>
                   <p>{{ cartIn }}</p>
-                  <p>{{ ids }}</p>
                 </div>
               </div>
             </div>
@@ -133,14 +132,12 @@ export default {
       copied: false,
       cart: false,
       heart: false,
-      cartIn: false,
-      ids: []
+      cartIn: false
     }
   },
   components: {
     RelatedProducts
   },
-  inject: ['idInCart'],
   methods: {
     getProduct () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`
@@ -202,16 +199,12 @@ export default {
       }
     }
   },
-  props: ['sendId'],
   watch: {
     '$route.params.productId': {
       handler (newId, oldId) {
         this.id = newId
         this.getProduct()
       }
-    },
-    sendId (newList, oldList) {
-      this.ids = [...newList]
     }
   },
   created () {
@@ -219,12 +212,17 @@ export default {
     this.getProduct()
     const { width } = useWindowSize()
     this.widthSize = width
+    emitter.emit('sendRequire')
   },
   mounted () {
-    console.log('mounted')
     const { copy, copied } = useClipboard()
     this._copy = copy
     this._copiedRef = copied
+    emitter.on('updateId', idList => {
+      this.cartIn = idList.some(item => {
+        return this.id === item
+      })
+    })
   }
 }
 </script>
