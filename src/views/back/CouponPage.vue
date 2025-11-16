@@ -68,19 +68,18 @@ export default {
     }
   },
   methods: {
-    getCoupons (page = 1) {
-      this.isLoading = true
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}`
-      this.$http.get(url)
-        .then(res => {
-          this.coupons = res.data.coupons
-          this.pagination = res.data.pagination
-          this.isLoading = false
-        })
-        .catch(err => {
-          this.isLoading = false
-          this.$InformMessage(err, '取得優惠券列表')
-        })
+    async getCoupons (page = 1) {
+      try {
+        this.isLoading = true
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}`
+        const res = await this.$http.get(url)
+        this.coupons = res.data.coupons
+        this.pagination = res.data.pagination
+        this.isLoading = false
+      } catch (err) {
+        this.isLoading = false
+        this.$InformMessage(err, '取得優惠券列表')
+      }
     },
     openCouponModal (isNew, item) {
       this.isNew = isNew
@@ -94,42 +93,40 @@ export default {
       }
       this.$refs.couponModal.showModal()
     },
-    updateCoupon (tempCoupon) {
-      this.tempCoupon = tempCoupon
-      let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon`
-      let httpMethod = 'post'
-      if (!this.isNew) {
-        api = `${api}/${tempCoupon.id}`
-        httpMethod = 'put'
+    async updateCoupon (tempCoupon) {
+      try {
+        this.tempCoupon = tempCoupon
+        let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon`
+        let httpMethod = 'post'
+        if (!this.isNew) {
+          api = `${api}/${tempCoupon.id}`
+          httpMethod = 'put'
+        }
+        const res = await this.$http[httpMethod](api, { data: this.tempCoupon })
+        httpMethod === 'post' ? this.$InformMessage(res, '優惠券新增') : this.$InformMessage(res, '優惠券更新')
+        this.$refs.couponModal.hideModal()
+        this.getCoupons(this.pagination.current_page)
+      } catch (err) {
+        this.$refs.couponModal.hideModal()
+        this.$InformMessage(err, '更新優惠券')
       }
-      this.$http[httpMethod](api, { data: this.tempCoupon })
-        .then(res => {
-          httpMethod === 'post' ? this.$InformMessage(res, '優惠券新增') : this.$InformMessage(res, '優惠券更新')
-          this.$refs.couponModal.hideModal()
-          this.getCoupons(this.pagination.current_page)
-        })
-        .catch(err => {
-          this.$refs.couponModal.hideModal()
-          this.$InformMessage(err, '更新優惠券')
-        })
     },
     openDelModal (item) {
       this.tempCoupon = { ...item }
       this.$refs.delModal.showModal()
     },
-    delCoupon (tempCoupon) {
-      this.tempCoupon = tempCoupon
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
-      this.$http.delete(api, { data: this.tempCoupon })
-        .then(res => {
-          this.$InformMessage(res, `優惠券${tempCoupon.title}刪除`)
-          this.$refs.delModal.hideModal()
-          this.getCoupons()
-        })
-        .catch(err => {
-          this.$refs.delModal.hideModal()
-          this.$InformMessage(err, '優惠券刪除')
-        })
+    async delCoupon (tempCoupon) {
+      try {
+        this.tempCoupon = tempCoupon
+        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
+        const res = await this.$http.delete(api, { data: this.tempCoupon })
+        this.$InformMessage(res, `優惠券${tempCoupon.title}刪除`)
+        this.$refs.delModal.hideModal()
+        this.getCoupons()
+      } catch (err) {
+        this.$refs.delModal.hideModal()
+        this.$InformMessage(err, '優惠券刪除')
+      }
     }
   },
   created () {

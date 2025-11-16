@@ -115,18 +115,19 @@ export default {
     }
   },
   methods: {
-    uploadFile (upImg) {
-      const uploadFile = this.$refs[upImg].files[0]
-      const formData = new FormData()
-      formData.append('file-to-upload', uploadFile)
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
-      this.$http.post(url, formData)
-        .then(res => {
-          if (res.data.success) {
-            upImg === 'fileInput' ? this.tempProduct.imageUrl = res.data.imageUrl : this.tempProduct.imagesUrl.push(res.data.imageUrl)
-            this.$refs[upImg].value = ''
-          }
-        })
+    async uploadFile (upImg) {
+      try {
+        const uploadFile = this.$refs[upImg].files[0]
+        const formData = new FormData()
+        formData.append('file-to-upload', uploadFile)
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
+        const res = await this.$http.post(url, formData)
+        if (res.data.success) {
+          upImg === 'fileInput' ? this.tempProduct.imageUrl = res.data.imageUrl : this.tempProduct.imagesUrl.push(res.data.imageUrl)
+        }
+      } catch (err) {
+        this.$InformMessage(err, '圖片上傳')
+      }
     },
     inputFile (putImg) {
       putImg === 'imageUrl' ? this.tempProduct[putImg] = this[putImg] : this.tempProduct[putImg].push(this[putImg])

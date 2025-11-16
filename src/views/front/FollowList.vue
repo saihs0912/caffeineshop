@@ -66,15 +66,14 @@ export default {
     }
   },
   methods: {
-    getAllProducts () {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
-      this.$http.get(api)
-        .then(res => {
-          this.productList = res.data.products
-        })
-        .catch(err => {
-          this.$InformMessage(err, '取得商品')
-        })
+    async getAllProducts () {
+      try {
+        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+        const res = await this.$http.get(api)
+        this.productList = res.data.products
+      } catch (err) {
+        this.$InformMessage(err, '取得商品')
+      }
     },
     deleteFavorite (id, i) {
       const favoriteId = this.favorite.indexOf(id)

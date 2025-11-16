@@ -88,44 +88,42 @@ export default {
     }
   },
   methods: {
-    getOrder (id) {
-      this.isLoading = true
-      this.pageShow = false
-      this.searchResult = []
-      this.notFound = false
-      this.connectError = false
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`
-      this.$http.get(url)
-        .then(res => {
-          this.isLoading = false
-          if (res.data.order !== null) {
-            this.searchResult.push(res.data.order)
-          } else {
-            this.notFound = true
-          }
-        })
-        .catch(() => {
-          this.isLoading = false
+    async getOrder (id) {
+      try {
+        this.isLoading = true
+        this.pageShow = false
+        this.searchResult = []
+        this.notFound = false
+        this.connectError = false
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`
+        const res = await this.$http.get(url)
+        this.isLoading = false
+        if (res.data.order !== null) {
+          this.searchResult.push(res.data.order)
+        } else {
           this.notFound = true
-        })
+        }
+      } catch (err) {
+        this.isLoading = false
+        this.notFound = true
+      }
     },
-    getOrderAll (page = 1) {
-      this.pageShow = true
-      this.isLoading = true
-      if (this.notFound === true) this.notFound = false
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/orders?page=${page}`
-      this.$http.get(url)
-        .then(res => {
-          this.isLoading = false
-          if (res.data.success) {
-            this.searchResult = res.data.orders
-            this.pagination = res.data.pagination
-          }
-        })
-        .catch(err => {
-          this.isLoading = false
-          this.$InformMessage(err, '取得訂單列表')
-        })
+    async getOrderAll (page = 1) {
+      try {
+        this.pageShow = true
+        this.isLoading = true
+        if (this.notFound === true) this.notFound = false
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/orders?page=${page}`
+        const res = await this.$http.get(url)
+        this.isLoading = false
+        if (res.data.success) {
+          this.searchResult = res.data.orders
+          this.pagination = res.data.pagination
+        }
+      } catch (err) {
+        this.isLoading = false
+        this.$InformMessage(err, '取得訂單列表')
+      }
     },
     goToDetail (id) {
       this.$router.push({ name: 'orderDetail', params: { orderId: id } })

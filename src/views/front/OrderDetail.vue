@@ -153,59 +153,55 @@ export default {
   },
   props: ['sendOrder'],
   methods: {
-    getOrder (id) {
-      this.isLoading = true
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`
-      this.$http.get(url)
-        .then(res => {
-          this.isLoading = false
-          this.order = res.data.order
-          this.user = res.data.order.user
-          Object.values(this.order.products).forEach((item, i) => {
-            this.total += item.total
-          })
+    async getOrder (id) {
+      try {
+        this.isLoading = true
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`
+        const res = await this.$http.get(url)
+        this.isLoading = false
+        this.order = res.data.order
+        this.user = res.data.order.user
+        Object.values(this.order.products).forEach((item, i) => {
+          this.total += item.total
         })
-        .catch(() => {
-          this.isLoading = false
-          this.notFound = true
-        })
+      } catch (err) {
+        this.isLoading = false
+        this.notFound = true
+      }
     },
     openPaidModal (id) {
       this.tempId = id
       this.$refs.paidModal.showModal()
     },
-    alreadyPaid (id) {
-      this.$refs.paidModal.hideModal()
-      this.isLoading = true
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${id}`
-      this.$http.post(url)
-        .then(res => {
-          this.isLoading = false
-          this.getOrder(id)
-        })
-        .catch(err => {
-          this.isLoading = false
-          this.$InformMessage(err, '付款')
-        })
-    },
-    addToCart (id) {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.status.loadingItem = id
-      const cart = {
-        product_id: id,
-        qty: 1
+    async alreadyPaid (id) {
+      try {
+        this.$refs.paidModal.hideModal()
+        this.isLoading = true
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${id}`
+        await this.$http.post(url)
+        this.isLoading = false
+        this.getOrder(id)
+      } catch (err) {
+        this.isLoading = false
+        this.$InformMessage(err, '付款')
       }
-      console.log(cart)
-      this.$http.post(api, { data: cart })
-        .then(res => {
-          this.status.loadingItem = ''
-          this.$InformMessage(res, '商品放入購物車')
-          emitter.emit('updateCart')
-        })
-        .catch(err => {
-          this.status.loadingItem = ''
-          this.$InformMessage(err, '商品放入購物車')
-        })
+    },
+    async addToCart (id) {
+      try {
+        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+        this.status.loadingItem = id
+        const cart = {
+          product_id: id,
+          qty: 1
+        }
+        const res = await this.$http.post(api, { data: cart })
+        this.status.loadingItem = ''
+        this.$InformMessage(res, '商品放入購物車')
+        emitter.emit('updateCart')
+      } catch (err) {
+        this.status.loadingItem = ''
+        this.$InformMessage(err, '商品放入購物車')
+      }
     }
   },
   created () {

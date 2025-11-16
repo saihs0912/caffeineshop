@@ -46,34 +46,36 @@ export default {
   },
   props: ['sendProduct'],
   methods: {
-    getNewProducts () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
-      this.$http.get(url)
-        .then(res => {
-          this.ProductList = res.data.products
-          this.ProductList = this.ProductList.filter(item => {
-            return (item.category === this.sendProduct.category) && (item.id !== this.sendProduct.id)
-          }).reverse()
-          let boxWidth = ''
-          let boxInsideWidth = ''
-          this.num = this.ProductList.length
-          boxInsideWidth = this.step * this.num
-          if (this.widthSize >= 1200) {
-            this.showNum = 6
-            this.num > this.showNum ? boxWidth = (boxInsideWidth / this.num) * 6 : boxWidth = this.step * this.num
-          } else if (this.widthSize <= 1199 && this.widthSize >= 992) {
-            this.showNum = 5
-            this.num > this.showNum ? boxWidth = (boxInsideWidth / this.num) * 5 : boxWidth = this.step * this.num
-          } else if (this.widthSize <= 991 && this.widthSize >= 768) {
-            this.showNum = 3
-            this.num > this.showNum ? boxWidth = (boxInsideWidth / this.num) * 3 : boxWidth = this.step * this.num
-          } else if (this.widthSize <= 767) {
-            this.showNum = 1
-            this.num > this.showNum ? boxWidth = boxInsideWidth / this.num : boxWidth = this.step * this.num
-          }
-          this.boxInsideWidth.width = `${boxInsideWidth}px`
-          this.boxWidth.width = `${boxWidth}px`
-        })
+    async getNewProducts () {
+      try {
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+        const res = await this.$http.get(url)
+        this.ProductList = res.data.products
+        this.ProductList = this.ProductList.filter(item => {
+          return (item.category === this.sendProduct.category) && (item.id !== this.sendProduct.id)
+        }).reverse()
+        let boxWidth = ''
+        let boxInsideWidth = ''
+        this.num = this.ProductList.length
+        boxInsideWidth = this.step * this.num
+        if (this.widthSize >= 1200) {
+          this.showNum = 6
+          this.num > this.showNum ? boxWidth = (boxInsideWidth / this.num) * 6 : boxWidth = this.step * this.num
+        } else if (this.widthSize <= 1199 && this.widthSize >= 992) {
+          this.showNum = 5
+          this.num > this.showNum ? boxWidth = (boxInsideWidth / this.num) * 5 : boxWidth = this.step * this.num
+        } else if (this.widthSize <= 991 && this.widthSize >= 768) {
+          this.showNum = 3
+          this.num > this.showNum ? boxWidth = (boxInsideWidth / this.num) * 3 : boxWidth = this.step * this.num
+        } else if (this.widthSize <= 767) {
+          this.showNum = 1
+          this.num > this.showNum ? boxWidth = boxInsideWidth / this.num : boxWidth = this.step * this.num
+        }
+        this.boxInsideWidth.width = `${boxInsideWidth}px`
+        this.boxWidth.width = `${boxWidth}px`
+      } catch (err) {
+        this.$InformMessage(err, '取得商品')
+      }
     },
     moveList (arrow) {
       if (arrow === true) {

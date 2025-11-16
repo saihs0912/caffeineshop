@@ -100,16 +100,15 @@ export default {
     getForm (item) {
       this.form = item
     },
-    createOrder () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
-      const order = this.form
-      this.$http.post(url, { data: order })
-        .then(res => {
-          this.orderId = res.data.orderId
-        })
-        .catch(err => {
-          this.$InformMessage(err, '送出訂單')
-        })
+    async createOrder () {
+      try {
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
+        const order = this.form
+        const res = await this.$http.post(url, { data: order })
+        this.orderId = res.data.orderId
+      } catch (err) {
+        this.$InformMessage(err, '送出訂單')
+      }
     }
   },
   computed: {

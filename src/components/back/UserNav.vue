@@ -21,12 +21,14 @@
 export default {
   name: 'UserNav',
   methods: {
-    logOut () {
-      const api = `${process.env.VUE_APP_API}logout`
-      this.$http.post(api, this.user)
-        .then(res => {
-          if (res.data.success) this.$router.push('/login')
-        })
+    async logOut () {
+      try {
+        const api = `${process.env.VUE_APP_API}logout`
+        const res = await this.$http.post(api, this.user)
+        if (res.data.success) this.$router.push('/login')
+      } catch (err) {
+        this.$InformMessage(err, '登入')
+      }
     }
   }
 }

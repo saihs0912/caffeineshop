@@ -155,25 +155,24 @@ export default {
           this.$InformMessage(err, '取得商品資訊')
         })
     },
-    addToCart (id, num) {
-      if (this.cart) this.cart = !this.cart
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.status.loadingItem = id
-      const cart = {
-        product_id: id,
-        qty: num
+    async addToCart (id, num) {
+      try {
+        if (this.cart) this.cart = !this.cart
+        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+        this.status.loadingItem = id
+        const cart = {
+          product_id: id,
+          qty: num
+        }
+        const res = await this.$http.post(api, { data: cart })
+        this.cart = true
+        this.status.loadingItem = ''
+        this.$InformMessage(res, '商品放入購物車')
+        emitter.emit('updateCart')
+      } catch (err) {
+        this.status.loadingItem = ''
+        this.$InformMessage(err, '商品放入購物車')
       }
-      this.$http.post(api, { data: cart })
-        .then(res => {
-          this.cart = true
-          this.status.loadingItem = ''
-          this.$InformMessage(res, '商品放入購物車')
-          emitter.emit('updateCart')
-        })
-        .catch(err => {
-          this.status.loadingItem = ''
-          this.$InformMessage(err, '商品放入購物車')
-        })
     },
     editFavorite (id) {
       const favoriteId = this.favorite.indexOf(id)

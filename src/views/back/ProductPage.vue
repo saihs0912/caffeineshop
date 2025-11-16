@@ -68,20 +68,19 @@ export default {
   },
   inject: ['emitter'],
   methods: {
-    getProducts (page = 1) {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
-      this.isLoading = true
-      this.$http.get(api)
-        .then(res => {
-          this.isLoading = false
-          if (res.data.success) {
-            this.products = res.data.products
-            this.pagination = res.data.pagination
-          }
-        })
-        .catch(err => {
-          this.$InformMessage(err, '取得頁面資訊')
-        })
+    async getProducts (page = 1) {
+      try {
+        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
+        this.isLoading = true
+        const res = await this.$http.get(api)
+        this.isLoading = false
+        if (res.data.success) {
+          this.products = res.data.products
+          this.pagination = res.data.pagination
+        }
+      } catch (err) {
+        this.$InformMessage(err, '取得頁面資訊')
+      }
     },
     openModal (isNew, item) {
       if (isNew) {
@@ -95,41 +94,39 @@ export default {
       this.isNew = isNew
       this.$refs.productModal.showModal()
     },
-    updateProduct (item) {
-      this.tempProduct = item
-      let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
-      let httpMethod = 'post'
-      if (!this.isNew) {
-        api = `${api}/${item.id}`
-        httpMethod = 'put'
+    async updateProduct (item) {
+      try {
+        this.tempProduct = item
+        let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
+        let httpMethod = 'post'
+        if (!this.isNew) {
+          api = `${api}/${item.id}`
+          httpMethod = 'put'
+        }
+        const res = await this.$http[httpMethod](api, { data: this.tempProduct })
+        if (res.data.success) {
+          httpMethod === 'post' ? this.$InformMessage(res, '商品新增') : this.$InformMessage(res, '商品更新')
+          this.getProducts(this.pagination.current_page)
+        }
+        this.$refs.productModal.hideModal()
+      } catch (err) {
+        this.$InformMessage(err, '商品更新')
       }
-      this.$http[httpMethod](api, { data: this.tempProduct })
-        .then(res => {
-          if (res.data.success) {
-            httpMethod === 'post' ? this.$InformMessage(res, '商品新增') : this.$InformMessage(res, '商品更新')
-            this.getProducts(this.pagination.current_page)
-          }
-          this.$refs.productModal.hideModal()
-        })
-        .catch(err => {
-          this.$InformMessage(err, '商品更新')
-        })
     },
     openDelMdodal (item) {
       this.tempProduct = { ...item }
       this.$refs.delModal.showModal()
     },
-    delProduct (item) {
-      this.tempProduct = item
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`
-      this.$http.delete(api, { data: this.tempProduct })
-        .then(res => {
-          this.$InformMessage(res, `商品${item.title}刪除`)
-          this.getProducts()
-        })
-        .catch(err => {
-          this.$InformMessage(err, '商品刪除')
-        })
+    async delProduct (item) {
+      try {
+        this.tempProduct = item
+        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`
+        const res = await this.$http.delete(api, { data: this.tempProduct })
+        this.$InformMessage(res, `商品${item.title}刪除`)
+        this.getProducts()
+      } catch (err) {
+        this.$InformMessage(err, '商品刪除')
+      }
       this.$refs.delModal.hideModal()
     }
   },

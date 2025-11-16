@@ -71,62 +71,58 @@ export default {
     }
   },
   methods: {
-    getCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.$http.get(url)
-        .then(res => {
-          this.cart = res.data.data
-          const cart = this.cart
-          this.$emit('sendCart', cart)
-        })
-        .catch(err => {
-          this.$InformMessage(err, '取得購物車內容')
-        })
-    },
-    updateCart (item) {
-      this.status.loadingItem = item.id
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
-      const cart = {
-        product_id: item.product_id,
-        qty: item.qty
+    async getCart () {
+      try {
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+        const res = await this.$http.get(url)
+        this.cart = res.data.data
+        const cart = this.cart
+        this.$emit('sendCart', cart)
+      } catch (err) {
+        this.$InformMessage(err, '取得購物車內容')
       }
-      this.$http.put(url, { data: cart })
-        .then(res => {
-          this.status.loadingItem = ''
-          this.getCart()
-        })
-        .catch(err => {
-          this.status.loadingItem = ''
-          this.$InformMessage(err, '更新購物車內容')
-        })
     },
-    deleteCartItem (id) {
-      this.status.loadingItem = id
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`
-      this.$http.delete(url, { data: id })
-        .then(res => {
-          this.status.loadingItem = ''
-          this.getCart()
-        })
-        .catch(err => {
-          this.status.loadingItem = ''
-          this.$InformMessage(err, '刪除購物車內容')
-        })
-    },
-    addCouponCode () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`
-      this.usedCoupon_code = this.coupon_code
-      this.coupon_code = ''
-      const coupon = {
-        code: this.usedCoupon_code
+    async updateCart (item) {
+      try {
+        this.status.loadingItem = item.id
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
+        const cart = {
+          product_id: item.product_id,
+          qty: item.qty
+        }
+        await this.$http.put(url, { data: cart })
+        this.status.loadingItem = ''
+        this.getCart()
+      } catch (err) {
+        this.status.loadingItem = ''
+        this.$InformMessage(err, '更新購物車內容')
       }
-      this.$http.post(url, { data: coupon })
-        .then(res => {
-          this.getCart()
-        })
-        .catch(err => {
-          this.$InformMessage(err, '添加優惠券')
-        })
+    },
+    async deleteCartItem (id) {
+      try {
+        this.status.loadingItem = id
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`
+        await this.$http.delete(url, { data: id })
+        this.status.loadingItem = ''
+        this.getCart()
+      } catch (err) {
+        this.status.loadingItem = ''
+        this.$InformMessage(err, '刪除購物車內容')
+      }
+    },
+    async addCouponCode () {
+      try {
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`
+        this.usedCoupon_code = this.coupon_code
+        this.coupon_code = ''
+        const coupon = {
+          code: this.usedCoupon_code
+        }
+        await this.$http.post(url, { data: coupon })
+        this.getCart()
+      } catch (err) {
+        this.$InformMessage(err, '添加優惠券')
+      }
     },
     validateForm () {}
   },

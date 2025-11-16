@@ -71,54 +71,46 @@ export default {
   },
   mixins: [modalMixin],
   methods: {
-    getCart () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.$http.get(url)
-        .then(res => {
-          let num = 0
-          this.cart = res.data.data
-          this.cart.carts.forEach((item, i) => {
-            num += item.qty
-          })
-          this.num = num
-          this.productIds = this.cart.carts.map(item => {
-            return item.product_id
-          })
-          this.$emit('updateNum', num)
-          emitter.emit('updateId', this.productIds)
-        })
-        .catch(err => {
-          this.$InformMessage(err, '取得購物車資訊')
-          this.err = true
-        })
-    },
-    updateCart (item) {
-      this.status.loadingItem = item.id
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
-      const cart = {
-        product_id: item.product_id,
-        qty: item.qty
+    async getCart () {
+      try {
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+        const res = await this.$http.get(url)
+        const cart = res.data.data
+        this.cart = cart
+        this.num = cart.carts.reduce((sum, item) => sum + item.qty, 0)
+        this.productIds = this.cart.carts.map(item => item.product_id)
+        this.$emit('updateNum', this.num)
+        emitter.emit('updateId', this.productIds)
+      } catch (err) {
+        this.$InformMessage(err, '取得購物車資訊')
+        this.err = true
       }
-      this.$http.put(url, { data: cart })
-        .then(res => {
-          this.status.loadingItem = ''
-          this.getCart()
-        })
-        .catch(err => {
-          this.$InformMessage(err, '購物車更新')
-        })
     },
-    deleteCartItem (id) {
-      this.status.loadingItem = id
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`
-      this.$http.delete(url, { data: id })
-        .then(res => {
-          this.status.loadingItem = ''
-          this.getCart()
-        })
-        .catch(err => {
-          this.$InformMessage(err, '商品刪除')
-        })
+    async updateCart (item) {
+      try {
+        this.status.loadingItem = item.id
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
+        const cart = {
+          product_id: item.product_id,
+          qty: item.qty
+        }
+        await this.$http.put(url, { data: cart })
+        this.status.loadingItem = ''
+        this.getCart()
+      } catch (err) {
+        this.$InformMessage(err, '購物車更新')
+      }
+    },
+    async deleteCartItem (id) {
+      try {
+        this.status.loadingItem = id
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`
+        await this.$http.delete(url, { data: id })
+        this.status.loadingItem = ''
+        this.getCart()
+      } catch (err) {
+        this.$InformMessage(err, '商品刪除')
+      }
     },
     goToCheck () {
       this.hideModal()
@@ -126,15 +118,15 @@ export default {
     }
   },
   created () {
-    this.getCart()
-  },
-  mounted () {
     emitter.on('updateCart', () => {
       this.getCart()
     })
     emitter.on('sendRequire', () => {
       this.getCart()
     })
+  },
+  mounted () {
+    this.getCart()
   }
 }
 </script>

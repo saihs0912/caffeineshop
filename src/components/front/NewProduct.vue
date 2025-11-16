@@ -50,12 +50,14 @@ export default {
     }
   },
   methods: {
-    getNewProducts () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
-      this.$http.get(url)
-        .then(res => {
-          this.newProductList = res.data.products
-        })
+    async getNewProducts () {
+      try {
+        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+        const res = await this.$http.get(url)
+        this.newProductList = res.data.products
+      } catch (err) {
+        this.$InformMessage(err, '取得商品')
+      }
     },
     moveList (arrow) {
       if (arrow === true) {
