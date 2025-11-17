@@ -67,7 +67,7 @@
           </div>
           <div class="text-center">
             <div class="btn-group w-100 mb-3">
-              <button type="button" class="btn btn-flex border" v-if="favorite.indexOf(product.id) === -1" @click="editFavorite(product.id)">
+              <button type="button" class="btn btn-flex border" v-if="favorite.indexOf(product.id) === -1" @click="editFavorite(product.id)" :disabled="cartIn === true">
                 <div style="width: 16px;"><i class="bi bi-heart text-warning"></i></div>
                 <div style="width: 68px;">加入追蹤</div>
               </button>
@@ -139,31 +139,30 @@ export default {
     RelatedProducts
   },
   methods: {
-    getProduct () {
+    async getProduct () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`
-      this.$http.get(api)
-        .then(res => {
-          this.product = res.data.product
-          if (this.product.imagesUrl) {
-            this.imgArray = [].concat(this.product.imageUrl, this.product.imagesUrl)
-          } else if (!this.product.imagesUrl) {
-            this.imgArray = [].concat(this.product.imageUrl)
-          }
+      try {
+        const res = await this.$http.get(api)
+        this.product = res.data.product
+        if (this.product.imagesUrl) {
+          this.imgArray = [].concat(this.product.imageUrl, this.product.imagesUrl)
+        } else if (!this.product.imagesUrl) {
+          this.imgArray = [].concat(this.product.imageUrl)
           this.num = 0
-        })
-        .catch(err => {
-          this.$InformMessage(err, '取得商品資訊')
-        })
+        }
+      } catch (err) {
+        this.$InformMessage(err, '取得商品資訊')
+      }
     },
     async addToCart (id, num) {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      if (this.cart) this.cart = !this.cart
+      this.status.loadingItem = id
+      const cart = {
+        product_id: id,
+        qty: num
+      }
       try {
-        if (this.cart) this.cart = !this.cart
-        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-        this.status.loadingItem = id
-        const cart = {
-          product_id: id,
-          qty: num
-        }
         const res = await this.$http.post(api, { data: cart })
         this.cart = true
         this.status.loadingItem = ''
@@ -204,6 +203,14 @@ export default {
         this.id = newId
         this.getProduct()
       }
+    },
+    cartIn (inNew, inOld) {
+      const favoriteId = this.favorite.indexOf(this.id)
+      if (inNew === true) {
+        this.heart = false
+        this.favorite.splice(favoriteId, 1)
+      }
+      localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
     }
   },
   created () {

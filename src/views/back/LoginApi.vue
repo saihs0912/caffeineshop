@@ -53,8 +53,8 @@ export default {
   },
   methods: {
     async signIn () {
+      const url = `${process.env.VUE_APP_API}admin/signin`
       try {
-        const url = `${process.env.VUE_APP_API}admin/signin`
         const res = await this.$http.post(url, this.user)
         if (res.data.success) {
           const { token, expired } = res.data

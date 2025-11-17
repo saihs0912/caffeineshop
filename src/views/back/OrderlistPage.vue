@@ -65,9 +65,9 @@ export default {
   },
   methods: {
     async getOrderList (page = 1) {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders?page=${page}`
+      this.isLoading = true
       try {
-        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders?page=${page}`
-        this.isLoading = true
         const res = await this.$http.get(api)
         this.isLoading = false
         this.orderList = res.data.orders
@@ -85,9 +85,9 @@ export default {
       this.$refs.delModal.showModal()
     },
     async updateOrder (item) {
+      this.tempOrder = item
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
       try {
-        this.tempOrder = item
-        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
         await this.$http.put(api, { data: this.tempOrder })
         this.$refs.orderModal.hideModal()
         this.num = 0
@@ -97,9 +97,9 @@ export default {
       }
     },
     async delOrder (item) {
+      this.tempOrder = item
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
       try {
-        this.tempOrder = item
-        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
         const res = await this.$http.delete(api, { data: this.tempOrder })
         this.$InformMessage(res, '訂單刪除')
         this.$refs.delModal.hideModal()

@@ -47,8 +47,8 @@ export default {
   props: ['sendProduct'],
   methods: {
     async getNewProducts () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
       try {
-        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
         const res = await this.$http.get(url)
         this.ProductList = res.data.products
         this.ProductList = this.ProductList.filter(item => {
@@ -138,7 +138,6 @@ export default {
   mounted () {
     const { width } = useWindowSize()
     this.widthSize = width
-    // this.getNewProducts()
   }
 }
 </script>

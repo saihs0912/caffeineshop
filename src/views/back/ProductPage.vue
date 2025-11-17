@@ -69,9 +69,9 @@ export default {
   inject: ['emitter'],
   methods: {
     async getProducts (page = 1) {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
+      this.isLoading = true
       try {
-        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
-        this.isLoading = true
         const res = await this.$http.get(api)
         this.isLoading = false
         if (res.data.success) {
@@ -95,14 +95,14 @@ export default {
       this.$refs.productModal.showModal()
     },
     async updateProduct (item) {
+      this.tempProduct = item
+      let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
+      let httpMethod = 'post'
+      if (!this.isNew) {
+        api = `${api}/${item.id}`
+        httpMethod = 'put'
+      }
       try {
-        this.tempProduct = item
-        let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
-        let httpMethod = 'post'
-        if (!this.isNew) {
-          api = `${api}/${item.id}`
-          httpMethod = 'put'
-        }
         const res = await this.$http[httpMethod](api, { data: this.tempProduct })
         if (res.data.success) {
           httpMethod === 'post' ? this.$InformMessage(res, '商品新增') : this.$InformMessage(res, '商品更新')
@@ -118,9 +118,9 @@ export default {
       this.$refs.delModal.showModal()
     },
     async delProduct (item) {
+      this.tempProduct = item
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`
       try {
-        this.tempProduct = item
-        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`
         const res = await this.$http.delete(api, { data: this.tempProduct })
         this.$InformMessage(res, `商品${item.title}刪除`)
         this.getProducts()

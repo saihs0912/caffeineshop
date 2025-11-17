@@ -154,9 +154,9 @@ export default {
   props: ['sendOrder'],
   methods: {
     async getOrder (id) {
+      this.isLoading = true
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`
       try {
-        this.isLoading = true
-        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`
         const res = await this.$http.get(url)
         this.isLoading = false
         this.order = res.data.order
@@ -174,10 +174,10 @@ export default {
       this.$refs.paidModal.showModal()
     },
     async alreadyPaid (id) {
+      this.$refs.paidModal.hideModal()
+      this.isLoading = true
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${id}`
       try {
-        this.$refs.paidModal.hideModal()
-        this.isLoading = true
-        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${id}`
         await this.$http.post(url)
         this.isLoading = false
         this.getOrder(id)
@@ -187,13 +187,13 @@ export default {
       }
     },
     async addToCart (id) {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      this.status.loadingItem = id
+      const cart = {
+        product_id: id,
+        qty: 1
+      }
       try {
-        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-        this.status.loadingItem = id
-        const cart = {
-          product_id: id,
-          qty: 1
-        }
         const res = await this.$http.post(api, { data: cart })
         this.status.loadingItem = ''
         this.$InformMessage(res, '商品放入購物車')

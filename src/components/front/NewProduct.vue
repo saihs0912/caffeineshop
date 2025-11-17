@@ -51,8 +51,8 @@ export default {
   },
   methods: {
     async getNewProducts () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
       try {
-        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
         const res = await this.$http.get(url)
         this.newProductList = res.data.products
       } catch (err) {

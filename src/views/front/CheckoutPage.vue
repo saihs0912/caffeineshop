@@ -101,9 +101,9 @@ export default {
       this.form = item
     },
     async createOrder () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
+      const order = this.form
       try {
-        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
-        const order = this.form
         const res = await this.$http.post(url, { data: order })
         this.orderId = res.data.orderId
       } catch (err) {
