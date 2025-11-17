@@ -33,7 +33,7 @@
                                 <div class="card-body">
                                     <div class="container">
                                         <div class="row">
-                                            <div class="col-lg-7 col-md-7 col-sm-12 col-12">
+                                            <div class="col-lg-7 col-md-7 col-sm-12 col-12 px-0">
                                                 <div class="border rounded overflow-hidden mb-3">
                                                     <table class="table mb-0 product-table">
                                                         <thead>
@@ -79,7 +79,7 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-5 col-md-5 col-sm-12 col-12">
+                                            <div class="col-lg-5 col-md-5 col-sm-12 col-12 px-0">
                                                 <div class="border rounded overflow-hidden">
                                                     <table class="table mb-0">
                                                         <thead>

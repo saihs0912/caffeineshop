@@ -1,15 +1,15 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light position-fixed mw-100 w-100" style="z-index: 1000;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light position-fixed mw-100 w-100" style="z-index: 1000;" ref="navOut">
     <div class="container">
       <div class="row" style="width: 100%;">
-        <div class="col-lg-12 col-md-10 col-sm-10 col-8">
+        <div class="col-lg-12 col-md-10 col-sm-9 col-8">
           <h1>
             <a class="navbar-brand fs-1" href="#" style="margin: 10px;" @click="navbarHide('home')">
               <img class="img-fluid align-top" src="../../assets/logo/logo-1.png" width="40" alt=""> 咖啡因商店
             </a>
           </h1>
         </div>
-        <div class="col-lg-12 col-md-2 col-sm-2 col-4 text-end">
+        <div class="col-lg-12 col-md-2 col-sm-3 col-4 text-end">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav01" aria-controls="navbarNav01" aria-expanded="false" aria-label="Toggle navigation" ref="navbar" @click="navOpen = !navOpen">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -98,6 +98,13 @@ export default {
     },
     setActive (i) {
       this.activeIndex = i
+    },
+    clickOut (e) {
+      if ((this.widthSwitch === true) && (this.navOpen === true)) {
+        if (this.$refs.navOut && !this.$refs.navOut.contains(e.target)) {
+          this.$refs.navbar.click()
+        }
+      }
     }
   },
   watch: {
@@ -125,6 +132,7 @@ export default {
         underline.style.transform = `translateX(${activeEl.offsetLeft + 6}px)`
       }
     })
+    document.addEventListener('click', this.clickOut)
   }
 }
 </script>

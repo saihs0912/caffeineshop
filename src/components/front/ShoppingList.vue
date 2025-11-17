@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <div class="row">
-      {{ cartInList }}
       <template v-for="(item, i) in filterData" :key="item.id">
         <div v-if="!item.id" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 py-5">
           <p class="text-center fw-bold fs-3 my-5">{{ item.title }} <i class="bi bi-search"></i></p>
@@ -61,8 +60,7 @@ export default {
       widthSize: '',
       favorite: JSON.parse(localStorage.getItem('favoriteList')) || [],
       heart: '',
-      cart: '',
-      cartInList: []
+      cart: ''
     }
   },
   computed: {
@@ -156,7 +154,6 @@ export default {
       this.page.pageNow = num
       emitter.emit('updatePage', this.page.pageNow)
     })
-    emitter.emit('sendRequire')
   },
   unmounted () {
     this.productList = []
@@ -171,9 +168,6 @@ export default {
       })
     const { width } = useWindowSize()
     this.widthSize = width
-    emitter.on('updateId', idList => {
-      this.cartInList = idList
-    })
   }
 }
 </script>

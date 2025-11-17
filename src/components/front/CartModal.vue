@@ -65,8 +65,7 @@ export default {
       status: {
         loadingItem: ''
       },
-      err: false,
-      productIds: []
+      err: false
     }
   },
   mixins: [modalMixin],
@@ -77,10 +76,8 @@ export default {
         const res = await this.$http.get(url)
         const cart = res.data.data
         this.cart = cart
-        this.num = cart.carts.reduce((sum, item) => sum + item.qty, 0)
-        this.productIds = this.cart.carts.map(item => item.product_id)
+        this.num = cart.carts.length
         this.$emit('updateNum', this.num)
-        emitter.emit('updateId', this.productIds)
       } catch (err) {
         this.$InformMessage(err, '取得購物車資訊')
         this.err = true
@@ -119,9 +116,6 @@ export default {
   },
   created () {
     emitter.on('updateCart', () => {
-      this.getCart()
-    })
-    emitter.on('sendRequire', () => {
       this.getCart()
     })
   },

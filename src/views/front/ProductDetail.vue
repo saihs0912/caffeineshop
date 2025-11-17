@@ -27,7 +27,6 @@
                 </div>
                 <div class="pt-4 border-top">
                   <p>{{ product.description }}</p>
-                  <p>{{ cartIn }}</p>
                 </div>
               </div>
             </div>
@@ -67,7 +66,7 @@
           </div>
           <div class="text-center">
             <div class="btn-group w-100 mb-3">
-              <button type="button" class="btn btn-flex border" v-if="favorite.indexOf(product.id) === -1" @click="editFavorite(product.id)" :disabled="cartIn === true">
+              <button type="button" class="btn btn-flex border" v-if="favorite.indexOf(product.id) === -1" @click="editFavorite(product.id)">
                 <div style="width: 16px;"><i class="bi bi-heart text-warning"></i></div>
                 <div style="width: 68px;">加入追蹤</div>
               </button>
@@ -131,8 +130,7 @@ export default {
       copySuccess: false,
       copied: false,
       cart: false,
-      heart: false,
-      cartIn: false
+      heart: false
     }
   },
   components: {
@@ -203,14 +201,6 @@ export default {
         this.id = newId
         this.getProduct()
       }
-    },
-    cartIn (inNew, inOld) {
-      const favoriteId = this.favorite.indexOf(this.id)
-      if (inNew === true) {
-        this.heart = false
-        this.favorite.splice(favoriteId, 1)
-      }
-      localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
     }
   },
   created () {
@@ -218,17 +208,11 @@ export default {
     this.getProduct()
     const { width } = useWindowSize()
     this.widthSize = width
-    emitter.emit('sendRequire')
   },
   mounted () {
     const { copy, copied } = useClipboard()
     this._copy = copy
     this._copiedRef = copied
-    emitter.on('updateId', idList => {
-      this.cartIn = idList.some(item => {
-        return this.id === item
-      })
-    })
   }
 }
 </script>

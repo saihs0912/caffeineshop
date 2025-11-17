@@ -1,9 +1,9 @@
 <template>
   <div ref="body">
-    <nav-bar></nav-bar>
+    <nav-bar ref="navBar"></nav-bar>
     <div class="container pt-4 content-height" style="max-width: 1140px!;">
       <div class="row justify-content-center pt-lg-md">
-        <div class="col pt-4">
+        <div class="col pt-lg-4 pt-0">
           <router-view></router-view>
         </div>
       </div>
@@ -70,8 +70,7 @@ export default {
   },
   mounted () {
     window.addEventListener('scroll', _.throttle(this.handleScroll, 200))
-  },
-  watch: {}
+  }
 }
 </script>
 

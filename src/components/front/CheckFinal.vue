@@ -40,7 +40,7 @@
               <tr v-for="(item, i) in sendCartFinal.carts" :key="i">
                 <td>{{ item.product.title }}</td>
                 <td>{{ item.qty }}</td>
-                <td>{{ item.final_total }}</td>
+                <td>{{ $num.currency(item.final_total) }}</td>
               </tr>
             </tbody>
           </table>
