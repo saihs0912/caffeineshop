@@ -1,19 +1,19 @@
 <template>
   <div ref="body">
-    <nav-bar ref="navBar"></nav-bar>
+    <nav-bar ref="navBar"/>
     <div class="container pt-4 content-height" style="max-width: 1140px!;">
       <div class="row justify-content-center pt-lg-md">
         <div class="col pt-lg-4 pt-0">
-          <router-view></router-view>
+          <router-view/>
         </div>
       </div>
     </div>
-    <footer-area></footer-area>
+    <footer-area/>
     <a class="cartOpen" href="#" @click.prevent="openCart" @mousedown="cartMove" :style="moveDelay"><span class="cartOpenNum" v-show="num > 0">{{ num }}</span></a>
     <a class="backToTop" href="#" v-if="showScrollTop" @click.prevent="scrollToTop"><i class="bi bi-arrow-up-circle-fill"></i></a>
-    <cart-modal ref="cartModal" @updateNum="cartNum"></cart-modal>
+    <cart-modal ref="cartModal" @updateNum="cartNum"/>
   </div>
-  <toast-messages></toast-messages>
+  <toast-messages/>
 </template>
 
 <script>

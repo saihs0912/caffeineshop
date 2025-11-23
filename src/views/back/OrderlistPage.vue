@@ -33,9 +33,9 @@
         </tbody>
     </table>
   </div>
-  <order-modal ref="orderModal" :order="tempOrder" :resetNum="num" @send-order="updateOrder"></order-modal>
-  <del-modal ref="delModal" :item="tempOrder" @del-item="delOrder"></del-modal>
-  <pagination-modal :pages="pagination" @emit-page="getOrderList"></pagination-modal>
+  <order-modal ref="orderModal" :order="tempOrder" :resetNum="num" @send-order="updateOrder"/>
+  <del-modal ref="delModal" :item="tempOrder" @del-item="delOrder"/>
+  <pagination-modal :pages="pagination" @emit-page="getOrderList"/>
 </template>
 
 <script>

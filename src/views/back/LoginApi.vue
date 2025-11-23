@@ -22,7 +22,7 @@
             </form>
         </div>
     </div>
-    <toast-messages></toast-messages>
+    <toast-messages/>
 </template>
 
 <script>

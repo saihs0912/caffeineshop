@@ -43,7 +43,7 @@
       </div>
     </div>
   </nav>
-  <cart-modal ref="cartModal"></cart-modal>
+  <cart-modal ref="cartModal"/>
 </template>
 
 <script>

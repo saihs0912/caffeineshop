@@ -1,6 +1,6 @@
 <template>
     <div class="toast-container position-fixed bottom-0 start-0 p-3" style="z-index: 1050">
-        <toast-modal v-for="(msg, key) in messages" :key="key" :msg="msg"></toast-modal>
+        <toast-modal v-for="(msg, key) in messages" :key="key" :msg="msg"/>
     </div>
 </template>
 

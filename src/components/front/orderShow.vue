@@ -56,7 +56,7 @@
         </div>
     </div>
   </template>
-  <pagination-modal v-if="pageShow" :pages="pagination" @emit-page="getOrderAll"></pagination-modal>
+  <pagination-modal v-if="pageShow" :pages="pagination" @emit-page="getOrderAll"/>
 </template>
 
 <script>

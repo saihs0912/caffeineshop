@@ -1,8 +1,8 @@
 <template>
-  <slide-show></slide-show>
-  <shop-intro></shop-intro>
-  <new-product></new-product>
-  <follow-us></follow-us>
+  <slide-show/>
+  <shop-intro/>
+  <new-product/>
+  <follow-us/>
 </template>
 
 <script>

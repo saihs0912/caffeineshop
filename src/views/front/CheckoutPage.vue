@@ -11,7 +11,7 @@
   <div class="container mb-5" style="max-width: 991px;">
     <div class="row justify-content-center">
       <div class="col-lg-8 col-md-10 col-sm-12 col-12">
-        <checkout-process :step="currentStep"></checkout-process>
+        <checkout-process :step="currentStep"/>
         <keep-alive>
           <component :is="currentStepComponent" ref="infoForm"
           :send-form-final="form"

@@ -15,7 +15,7 @@
               </div>
             </div>
             <div class="col-lg-9 col-md-10 col-sm-12 col-12 pt-3 pb-5">
-              <order-show :sendOrder="searchResult"></order-show>
+              <order-show :sendOrder="searchResult"/>
             </div>
           </div>
         </div>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import orderShow from '@/components/front/orderShow.vue'
+import orderShow from '@/components/front/OrderShow.vue'
 
 export default {
   name: 'OrderRecord',

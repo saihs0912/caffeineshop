@@ -88,7 +88,7 @@
       </div>
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12 p-3 pb-5">
         <span class="fs-4 fw-bold">相關商品：</span>
-        <related-products :sendProduct="product"></related-products>
+        <related-products :sendProduct="product"/>
       </div>
     </div>
   </div>

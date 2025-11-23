@@ -122,7 +122,7 @@
             </div>
         </div>
     </div>
-    <already-paid ref="paidModal" :sendPayInfo="tempId" @emit-pay="alreadyPaid"></already-paid>
+    <already-paid ref="paidModal" :sendPayInfo="tempId" @emit-pay="alreadyPaid"/>
 </template>
 
 <script>

@@ -32,9 +32,9 @@
             </tr>
         </tbody>
     </table>
-    <pagination-modal :pages="pagination" @emit-pages="getCoupons"></pagination-modal>
-    <coupon-modal ref="couponModal" :coupon="tempCoupon" @update-coupon="updateCoupon"></coupon-modal>
-    <del-modal ref="delModal" :item="tempCoupon" @del-item="delCoupon"></del-modal>
+    <pagination-modal :pages="pagination" @emit-pages="getCoupons"/>
+    <coupon-modal ref="couponModal" :coupon="tempCoupon" @update-coupon="updateCoupon"/>
+    <del-modal ref="delModal" :item="tempCoupon" @del-item="delCoupon"/>
 </template>
 
 <script>

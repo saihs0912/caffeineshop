@@ -4,14 +4,14 @@
       <div class="row">
         <div class="col">
           <div class="optionArea">
-            <user-nav></user-nav>
-            <router-view></router-view>
+            <user-nav/>
+            <router-view/>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <toast-messages></toast-messages>
+  <toast-messages/>
 </template>
 
 <script>
