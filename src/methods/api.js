@@ -60,3 +60,21 @@ export async function deleteCartItem(id) {
     this.$InformMessage(err, '商品刪除')
   }
 }
+
+// 後台登入
+export async function signIn() {
+  const url = `${process.env.VUE_APP_API}admin/signin`
+  try {
+    const res = await this.$http.post(url, this.user)
+    if (res.data.success) {
+      const { token, expired } = res.data
+      this.$InformMessage(res, '登入')
+      document.cookie = `makotoToken=${token}; expires=${expired}`
+      setTimeout(() => {
+        this.$router.push('/dashboard/productlist')
+      }, 3000)
+    }
+  } catch (err) {
+    this.$InformMessage(err, '登入')
+  }
+}

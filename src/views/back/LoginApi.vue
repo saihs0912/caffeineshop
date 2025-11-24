@@ -44,6 +44,7 @@
 
 <script>
 import emitter from '@/methods/emitter'
+import { signIn } from '@/methods/api'
 import ToastMessages from '@/components/back/ToastMessages.vue'
 
 export default {
@@ -69,22 +70,7 @@ export default {
     }
   },
   methods: {
-    async signIn() {
-      const url = `${process.env.VUE_APP_API}admin/signin`
-      try {
-        const res = await this.$http.post(url, this.user)
-        if (res.data.success) {
-          const { token, expired } = res.data
-          this.$InformMessage(res, '登入')
-          document.cookie = `makotoToken=${token}; expires=${expired}`
-          setTimeout(() => {
-            this.$router.push('/dashboard/productlist')
-          }, 3000)
-        }
-      } catch (err) {
-        this.$InformMessage(err, '登入')
-      }
-    }
+    signIn
   }
 }
 </script>
