@@ -1,19 +1,23 @@
 <template>
   <div ref="body">
-    <nav-bar ref="navBar"/>
-    <div class="container pt-4 content-height" style="max-width: 1140px!;">
+    <nav-bar ref="navBar" />
+    <div class="container pt-4 content-height" style="max-width: 1140px!">
       <div class="row justify-content-center pt-lg-md">
         <div class="col pt-lg-4 pt-0">
-          <router-view/>
+          <router-view />
         </div>
       </div>
     </div>
-    <footer-area/>
-    <a class="cartOpen" href="#" @click.prevent="openCart" @mousedown="cartMove" :style="moveDelay"><span class="cartOpenNum" v-show="num > 0">{{ num }}</span></a>
-    <a class="backToTop" href="#" v-if="showScrollTop" @click.prevent="scrollToTop"><i class="bi bi-arrow-up-circle-fill"></i></a>
-    <cart-modal ref="cartModal" @updateNum="cartNum"/>
+    <footer-area />
+    <a class="cartOpen" href="#" @click.prevent="openCart" @mousedown="cartMove" :style="moveDelay"
+      ><span class="cartOpenNum" v-show="num > 0">{{ num }}</span></a
+    >
+    <a class="backToTop" href="#" v-if="showScrollTop" @click.prevent="scrollToTop"
+      ><i class="bi bi-arrow-up-circle-fill"></i
+    ></a>
+    <cart-modal ref="cartModal" @updateNum="cartNum" />
   </div>
-  <toast-messages/>
+  <toast-messages />
 </template>
 
 <script>
@@ -31,7 +35,7 @@ export default {
     CartModal,
     ToastMessages
   },
-  data () {
+  data() {
     return {
       num: '',
       moveDelay: {
@@ -40,59 +44,59 @@ export default {
       showScrollTop: false
     }
   },
-  provide () {
+  provide() {
     return {
       emitter
     }
   },
   methods: {
-    openCart () {
+    openCart() {
       this.$refs.cartModal.showModal()
     },
-    cartNum (num) {
+    cartNum(num) {
       this.num = num
     },
-    cartMove () {
+    cartMove() {
       this.moveDelay.transitionDelay = '1s'
       setTimeout(() => {
         this.moveDelay.transitionDelay = '0s'
       }, 1000)
     },
-    handleScroll () {
+    handleScroll() {
       this.showScrollTop = window.scrollY > window.innerHeight / 2
     },
-    scrollToTop () {
+    scrollToTop() {
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
       })
     }
   },
-  mounted () {
+  mounted() {
     window.addEventListener('scroll', _.throttle(this.handleScroll, 200))
   }
 }
 </script>
 
 <style>
-.pt-lg-md{
-  padding-top: 3rem!important;
+.pt-lg-md {
+  padding-top: 3rem !important;
 }
-.content-height{
-  min-height: calc(100vh - 110px)
+.content-height {
+  min-height: calc(100vh - 110px);
 }
-@media (min-width: 1400px){
-  .container{
-    max-width: 1170px!important;
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1170px !important;
   }
 }
 @media (max-width: 991px) {
-  .pt-4-5{
-    padding-top: 1.5rem!important;
+  .pt-4-5 {
+    padding-top: 1.5rem !important;
   }
 }
-@media (max-width: 767px){
-  .content-height{
+@media (max-width: 767px) {
+  .content-height {
     min-height: calc(100vh - 166px);
   }
 }

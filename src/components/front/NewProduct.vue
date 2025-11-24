@@ -2,18 +2,28 @@
   <div class="areaBottom mb-4">
     <h2 class="text-center"><span>新商品</span></h2>
     <div class="box-container">
-      <i v-if="x < 0" class="bi bi-arrow-left-circle-fill icons-lg i-lg-l text-brown" @click="moveList(true)"></i>
+      <i
+        v-if="x < 0"
+        class="bi bi-arrow-left-circle-fill icons-lg i-lg-l text-brown"
+        @click="moveList(true)"
+      ></i>
       <div class="box mx-auto my-3" :style="boxWidth">
         <div class="boxInside" ref="ProductBox" :style="boxInsideMove">
           <div class="card shadow-sm newTag m-2" v-for="item in latestProducts" :key="item.id">
-            <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
-              <img :src="item.imageUrl" alt="" class="card-img-top">
+            <router-link
+              class="no-underline"
+              :to="{ name: 'product', params: { productId: item.id } }"
+            >
+              <img :src="item.imageUrl" alt="" class="card-img-top" />
             </router-link>
             <div class="card-body d-flex flex-column p-0">
-              <router-link class="no-underline d-block p-2 h-100" :to="{ name: 'product', params: { productId: item.id } }">
+              <router-link
+                class="no-underline d-block p-2 h-100"
+                :to="{ name: 'product', params: { productId: item.id } }"
+              >
                 <p class="card-title">{{ item.title }}</p>
                 <div>
-                  <span class="fw-bold text-danger">{{ item.price }} 元</span><br>
+                  <span class="fw-bold text-danger">{{ item.price }} 元</span><br />
                   <span class="text-dark">{{ item.description }}</span>
                 </div>
               </router-link>
@@ -21,9 +31,13 @@
           </div>
         </div>
       </div>
-      <i v-if="x > step*-4" class="bi bi-arrow-right-circle-fill icons-lg i-lg-r text-brown" @click="moveList(false)"></i>
+      <i
+        v-if="x > step * -4"
+        class="bi bi-arrow-right-circle-fill icons-lg i-lg-r text-brown"
+        @click="moveList(false)"
+      ></i>
     </div>
-    <div class="d-grid gap-2 col-md-4 col-sm-4 col-6 mx-auto" style="padding: 20px 0;">
+    <div class="d-grid gap-2 col-md-4 col-sm-4 col-6 mx-auto" style="padding: 20px 0">
       <router-link class="btn btn-brown" to="/shopping">查看全部商品</router-link>
     </div>
   </div>
@@ -34,7 +48,7 @@ import { useWindowSize } from '@vueuse/core'
 
 export default {
   name: 'NewProduct',
-  data () {
+  data() {
     return {
       newProductList: [],
       boxWidth: {
@@ -50,7 +64,7 @@ export default {
     }
   },
   methods: {
-    async getNewProducts () {
+    async getNewProducts() {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
       try {
         const res = await this.$http.get(url)
@@ -59,7 +73,7 @@ export default {
         this.$InformMessage(err, '取得商品')
       }
     },
-    moveList (arrow) {
+    moveList(arrow) {
       if (arrow === true) {
         if (this.x === 0) {
           return false
@@ -68,7 +82,7 @@ export default {
           this.boxInsideMove.transform = `translate3d(${this.x}px, 0, 0)`
         }
       } else if (arrow === false) {
-        if (this.x <= (this.step * -4)) {
+        if (this.x <= this.step * -4) {
           return false
         } else {
           this.x -= this.step
@@ -78,12 +92,12 @@ export default {
     }
   },
   computed: {
-    latestProducts () {
+    latestProducts() {
       return this.newProductList.slice(-8).reverse()
     }
   },
   watch: {
-    widthSize (newWidth, oldWidth) {
+    widthSize(newWidth, oldWidth) {
       const box = this.$refs.ProductBox
       let boxWidth = ''
       if (newWidth >= 1200) {
@@ -98,7 +112,7 @@ export default {
       this.boxWidth.width = `${boxWidth}px`
     }
   },
-  mounted () {
+  mounted() {
     const { width } = useWindowSize()
     this.widthSize = width
     this.getNewProducts()
@@ -124,15 +138,16 @@ export default {
   transform: rotate(315deg);
   top: 10px;
   left: -30px;
-  background-color: rgba(255, 255, 0, 1)
+  background-color: rgba(255, 255, 0, 1);
 }
-@media (max-width: 1199px) {}
-@media (max-width: 991px){
-  .blockOut{
+@media (max-width: 1199px) {
+}
+@media (max-width: 991px) {
+  .blockOut {
     overflow: hidden;
   }
-  .blockIn{
-    width: calc(100% + (100%/3));
+  .blockIn {
+    width: calc(100% + (100% / 3));
     overflow-x: scroll;
   }
 }

@@ -2,43 +2,53 @@
   <loading-modal :active="isLoading"></loading-modal>
   <h1>商品管理</h1>
   <div class="text-end">
-    <button class="btn btn-brown" type="button" @click.prevent="openModal(true)"><i class="bi bi-plus-square"></i> 新增商品</button>
+    <button class="btn btn-brown" type="button" @click.prevent="openModal(true)">
+      <i class="bi bi-plus-square"></i> 新增商品
+    </button>
   </div>
   <div>
     <table class="table mt-4">
       <thead>
         <tr>
-            <th>產品名稱</th>
-            <th>分類</th>
-            <th>原價</th>
-            <th>售價</th>
-            <th>上架狀態</th>
-            <th>編輯</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in products" :key="item.id">
-            <td data-item="產品名稱">{{ item.title }}</td>
-            <td data-item="分類">{{ item.category }}</td>
-            <td data-item="原價">{{ item.origin_price }}</td>
-            <td data-item="售價">{{ item.price }}</td>
-            <td data-item="上架狀態">
-              <span class="text-success" v-if="item.is_enabled">已上架</span>
-              <span class="text-muted" v-else>未上架</span>
-            </td>
-            <td data-item="編輯">
-              <div class="btn-group">
-                <button type="button" class="btn btn-outline-primary btn-sm edit" @click="openModal(false, item)"></button>
-                <button type="button" class="btn btn-outline-danger btn-sm del" @click="openDelMdodal(item)"></button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <product-modal ref="productModal" :product="tempProduct" @update-product="updateProduct"/>
-    <del-modal ref="delModal" :item="tempProduct" @del-item="delProduct"/>
-    <pagination-modal :pages="pagination" @emit-page="getProducts"/>
+          <th>產品名稱</th>
+          <th>分類</th>
+          <th>原價</th>
+          <th>售價</th>
+          <th>上架狀態</th>
+          <th>編輯</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in products" :key="item.id">
+          <td data-item="產品名稱">{{ item.title }}</td>
+          <td data-item="分類">{{ item.category }}</td>
+          <td data-item="原價">{{ item.origin_price }}</td>
+          <td data-item="售價">{{ item.price }}</td>
+          <td data-item="上架狀態">
+            <span class="text-success" v-if="item.is_enabled">已上架</span>
+            <span class="text-muted" v-else>未上架</span>
+          </td>
+          <td data-item="編輯">
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-outline-primary btn-sm edit"
+                @click="openModal(false, item)"
+              ></button>
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm del"
+                @click="openDelMdodal(item)"
+              ></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <product-modal ref="productModal" :product="tempProduct" @update-product="updateProduct" />
+  <del-modal ref="delModal" :item="tempProduct" @del-item="delProduct" />
+  <pagination-modal :pages="pagination" @emit-page="getProducts" />
 </template>
 
 <script>
@@ -47,12 +57,12 @@ import DelModal from '@/components/back/DelModal.vue'
 import PaginationModal from '@/components/back/PaginationModal.vue'
 
 export default {
-  head () {
+  head() {
     return {
       title: '商品管理'
     }
   },
-  data () {
+  data() {
     return {
       products: [],
       pagination: {},
@@ -68,7 +78,7 @@ export default {
   },
   inject: ['emitter'],
   methods: {
-    async getProducts (page = 1) {
+    async getProducts(page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
       this.isLoading = true
       try {
@@ -82,7 +92,7 @@ export default {
         this.$InformMessage(err, '取得頁面資訊')
       }
     },
-    openModal (isNew, item) {
+    openModal(isNew, item) {
       if (isNew) {
         this.tempProduct = {}
         this.tempProduct.category = ''
@@ -94,7 +104,7 @@ export default {
       this.isNew = isNew
       this.$refs.productModal.showModal()
     },
-    async updateProduct (item) {
+    async updateProduct(item) {
       this.tempProduct = item
       let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
       let httpMethod = 'post'
@@ -105,7 +115,9 @@ export default {
       try {
         const res = await this.$http[httpMethod](api, { data: this.tempProduct })
         if (res.data.success) {
-          httpMethod === 'post' ? this.$InformMessage(res, '商品新增') : this.$InformMessage(res, '商品更新')
+          httpMethod === 'post'
+            ? this.$InformMessage(res, '商品新增')
+            : this.$InformMessage(res, '商品更新')
           this.getProducts(this.pagination.current_page)
         }
         this.$refs.productModal.hideModal()
@@ -113,11 +125,11 @@ export default {
         this.$InformMessage(err, '商品更新')
       }
     },
-    openDelMdodal (item) {
+    openDelMdodal(item) {
       this.tempProduct = { ...item }
       this.$refs.delModal.showModal()
     },
-    async delProduct (item) {
+    async delProduct(item) {
       this.tempProduct = item
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`
       try {
@@ -130,7 +142,7 @@ export default {
       this.$refs.delModal.hideModal()
     }
   },
-  created () {
+  created() {
     this.getProducts()
   }
 }

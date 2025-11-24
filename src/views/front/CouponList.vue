@@ -1,40 +1,44 @@
 <template>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="mt-4 mb-4">
-            <router-link to="/" style="text-decoration: none;">首頁</router-link> > <span>優惠碼</span>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="mt-4 mb-4">
+          <router-link to="/" style="text-decoration: none">首頁</router-link> > <span>優惠碼</span>
+        </div>
+        <h1>優惠碼</h1>
+        <div class="container">
+          <div class="col-12 text-center" v-if="noCoupon">
+            <span class="fs-3 fw-bold">目前沒有可用的優惠碼呢...</span>
           </div>
-          <h1>優惠碼</h1>
-          <div class="container">
-            <div class="col-12 text-center" v-if="noCoupon">
-              <span class="fs-3 fw-bold">目前沒有可用的優惠碼呢...</span>
-            </div>
-            <div class="row pt-5">
-              <template v-for="(item, i) in coupons" :key="i">
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3" v-if="today <= item.due_date">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ item.title }}</h5>
-                      <p class="card-text">{{ removeZero(item.percent) }}折優惠券！</p>
-                      <p class="card-text">優惠碼：{{ item.code }}<br>
-                        到期日：{{ $num.date(item.due_date) }}</p>
-                      <a href="#" class="btn btn-outline-brown" @click.prevent="copyCode(item.code)">複製優惠碼</a>
-                    </div>
+          <div class="row pt-5">
+            <template v-for="(item, i) in coupons" :key="i">
+              <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3" v-if="today <= item.due_date">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">{{ removeZero(item.percent) }}折優惠券！</p>
+                    <p class="card-text">
+                      優惠碼：{{ item.code }}<br />
+                      到期日：{{ $num.date(item.due_date) }}
+                    </p>
+                    <a href="#" class="btn btn-outline-brown" @click.prevent="copyCode(item.code)"
+                      >複製優惠碼</a
+                    >
                   </div>
                 </div>
-              </template>
-            </div>
+              </div>
+            </template>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'CouponList',
-  head () {
+  head() {
     return {
       title: '優惠碼 - 咖啡因商店',
       meta: [
@@ -46,7 +50,7 @@ export default {
       ]
     }
   },
-  data () {
+  data() {
     return {
       coupons: [
         {
@@ -69,11 +73,11 @@ export default {
     }
   },
   methods: {
-    copyCode (code) {
+    copyCode(code) {
       navigator.clipboard.writeText(code)
       alert(`優惠碼 ${code} 複製成功！`)
     },
-    removeZero (num) {
+    removeZero(num) {
       if (num % 10 === 0) {
         return num / 10
       } else if (num % 10 !== 0) {
@@ -81,7 +85,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     const now = new Date()
     this.today = Math.floor(now / 1000)
     let num = 0

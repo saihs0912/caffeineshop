@@ -3,39 +3,45 @@
   <h1>訂單管理</h1>
   <div>
     <table class="table mt-4">
-        <thead>
-          <tr>
-            <th>結單日期</th>
-            <th>訂購者</th>
-            <th>訂單編號</th>
-            <th>是否已付款</th>
-            <th>總金額</th>
-            <th>編輯</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in orderList" :key="item.id">
-            <td>{{ $num.date(item.create_at) }}</td>
-            <td>{{ item.user.name }}</td>
-            <td>{{ item.id }}</td>
-            <td>
-              <span v-if="item.is_paid == false" class="text-danger">尚未付款</span>
-              <span v-else class="text-success">{{ $num.date(item.paid_date) }}付款</span>
-            </td>
-            <td>{{ $num.currency(item.total) }}</td>
-            <td>
-              <div class="btn-group">
-                <button class="btn btn-outline-primary btn-sm edit" @click="openOrderModal(item)"></button>
-                <button class="btn btn-outline-danger btn-sm del" @click="openDelModal(item)"></button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
+      <thead>
+        <tr>
+          <th>結單日期</th>
+          <th>訂購者</th>
+          <th>訂單編號</th>
+          <th>是否已付款</th>
+          <th>總金額</th>
+          <th>編輯</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in orderList" :key="item.id">
+          <td>{{ $num.date(item.create_at) }}</td>
+          <td>{{ item.user.name }}</td>
+          <td>{{ item.id }}</td>
+          <td>
+            <span v-if="item.is_paid == false" class="text-danger">尚未付款</span>
+            <span v-else class="text-success">{{ $num.date(item.paid_date) }}付款</span>
+          </td>
+          <td>{{ $num.currency(item.total) }}</td>
+          <td>
+            <div class="btn-group">
+              <button
+                class="btn btn-outline-primary btn-sm edit"
+                @click="openOrderModal(item)"
+              ></button>
+              <button
+                class="btn btn-outline-danger btn-sm del"
+                @click="openDelModal(item)"
+              ></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
-  <order-modal ref="orderModal" :order="tempOrder" :resetNum="num" @send-order="updateOrder"/>
-  <del-modal ref="delModal" :item="tempOrder" @del-item="delOrder"/>
-  <pagination-modal :pages="pagination" @emit-page="getOrderList"/>
+  <order-modal ref="orderModal" :order="tempOrder" :resetNum="num" @send-order="updateOrder" />
+  <del-modal ref="delModal" :item="tempOrder" @del-item="delOrder" />
+  <pagination-modal :pages="pagination" @emit-page="getOrderList" />
 </template>
 
 <script>
@@ -44,12 +50,12 @@ import DelModal from '@/components/back/DelModal.vue'
 import PaginationModal from '@/components/back/PaginationModal.vue'
 
 export default {
-  head () {
+  head() {
     return {
       title: '訂單管理'
     }
   },
-  data () {
+  data() {
     return {
       orderList: [],
       pagination: {},
@@ -64,7 +70,7 @@ export default {
     PaginationModal
   },
   methods: {
-    async getOrderList (page = 1) {
+    async getOrderList(page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders?page=${page}`
       this.isLoading = true
       try {
@@ -76,15 +82,15 @@ export default {
         this.$InformMessage(err, '取得訂單列表')
       }
     },
-    openOrderModal (item) {
+    openOrderModal(item) {
       this.tempOrder = { ...item }
       this.$refs.orderModal.showModal()
     },
-    openDelModal (item) {
+    openDelModal(item) {
       this.tempOrder = { ...item }
       this.$refs.delModal.showModal()
     },
-    async updateOrder (item) {
+    async updateOrder(item) {
       this.tempOrder = item
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
       try {
@@ -96,7 +102,7 @@ export default {
         this.$InformMessage(err, '訂單更新')
       }
     },
-    async delOrder (item) {
+    async delOrder(item) {
       this.tempOrder = item
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
       try {
@@ -109,7 +115,7 @@ export default {
       }
     }
   },
-  created () {
+  created() {
     this.getOrderList()
   }
 }

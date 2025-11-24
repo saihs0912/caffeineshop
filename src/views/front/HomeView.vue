@@ -1,8 +1,8 @@
 <template>
-  <slide-show/>
-  <shop-intro/>
-  <new-product/>
-  <follow-us/>
+  <slide-show />
+  <shop-intro />
+  <new-product />
+  <follow-us />
 </template>
 
 <script>
@@ -13,7 +13,7 @@ import FollowUs from '@/components/front/FollowUs.vue'
 
 export default {
   name: 'HomeView',
-  head () {
+  head() {
     return {
       title: '咖啡因商店',
       meta: [

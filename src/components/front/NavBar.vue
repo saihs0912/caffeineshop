@@ -1,16 +1,36 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light position-fixed mw-100 w-100" style="z-index: 1000;" ref="navOut">
+  <nav
+    class="navbar navbar-expand-lg navbar-light bg-light position-fixed mw-100 w-100"
+    style="z-index: 1000"
+    ref="navOut"
+  >
     <div class="container">
-      <div class="row" style="width: 100%;">
+      <div class="row" style="width: 100%">
         <div class="col-lg-12 col-md-10 col-sm-9 col-8">
           <h1>
-            <a class="navbar-brand fs-1" href="#" style="margin: 10px;" @click="navbarHide('home')">
-              <img class="img-fluid align-top" src="../../assets/logo/logo-1.png" width="40" alt=""> 咖啡因商店
+            <a class="navbar-brand fs-1" href="#" style="margin: 10px" @click="navbarHide('home')">
+              <img
+                class="img-fluid align-top"
+                src="../../assets/logo/logo-1.png"
+                width="40"
+                alt=""
+              />
+              咖啡因商店
             </a>
           </h1>
         </div>
         <div class="col-lg-12 col-md-2 col-sm-3 col-4 text-end">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav01" aria-controls="navbarNav01" aria-expanded="false" aria-label="Toggle navigation" ref="navbar" @click="navOpen = !navOpen">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav01"
+            aria-controls="navbarNav01"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            ref="navbar"
+            @click="navOpen = !navOpen"
+          >
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav01">
@@ -20,16 +40,22 @@
                 <router-link class="nav-link" @click="navbarHide" to="/about">關於我們</router-link>
               </li>
               <li class="nav-item" @mouseenter="mouseEnter(1)" @click="setActive(1)">
-                <router-link class="nav-link" @click="navbarHide" to="/caffeine">咖啡與茶</router-link>
+                <router-link class="nav-link" @click="navbarHide" to="/caffeine"
+                  >咖啡與茶</router-link
+                >
               </li>
               <li class="nav-item" @mouseenter="mouseEnter(2)" @click="setActive(2)">
-                <router-link class="nav-link" @click="navbarHide" to="/shopping">線上商店</router-link>
+                <router-link class="nav-link" @click="navbarHide" to="/shopping"
+                  >線上商店</router-link
+                >
               </li>
               <li class="nav-item" @mouseenter="mouseEnter(3)" @click="setActive(3)">
                 <router-link class="nav-link" @click="navbarHide" to="/order">訂單查詢</router-link>
               </li>
               <li class="nav-item" @mouseenter="mouseEnter(4)" @click="setActive(4)">
-                <router-link class="nav-link" @click="navbarHide" to="/follow">追蹤清單</router-link>
+                <router-link class="nav-link" @click="navbarHide" to="/follow"
+                  >追蹤清單</router-link
+                >
               </li>
               <li class="nav-item" @mouseenter="mouseEnter(5)" @click="setActive(5)">
                 <router-link class="nav-link" @click="navbarHide" to="/coupon">優惠碼</router-link>
@@ -43,7 +69,7 @@
       </div>
     </div>
   </nav>
-  <cart-modal ref="cartModal"/>
+  <cart-modal ref="cartModal" />
 </template>
 
 <script>
@@ -52,7 +78,7 @@ import { useWindowSize } from '@vueuse/core'
 
 export default {
   name: 'NavBar',
-  data () {
+  data() {
     return {
       widthSize: '',
       widthSwitch: false,
@@ -65,9 +91,9 @@ export default {
     CartModal
   },
   methods: {
-    navbarHide (go) {
+    navbarHide(go) {
       const underline = this.$refs.underline
-      if ((this.widthSwitch === true) && (this.navOpen === true)) {
+      if (this.widthSwitch === true && this.navOpen === true) {
         this.$refs.navbar.click()
         this.navOpen = false
       }
@@ -78,13 +104,13 @@ export default {
         underline.style.width = 0
       }
     },
-    mouseEnter (i) {
+    mouseEnter(i) {
       const el = event.target
       const underline = this.$refs.underline
       underline.style.width = `${el.offsetWidth - 12}px`
       underline.style.transform = `translateX(${el.offsetLeft + 6}px)`
     },
-    mouseLeave () {
+    mouseLeave() {
       const underline = this.$refs.underline
       const navbarEl = this.$refs.navbarList
       const items = navbarEl.querySelectorAll('.nav-item')
@@ -96,11 +122,11 @@ export default {
         underline.style.width = 0
       }
     },
-    setActive (i) {
+    setActive(i) {
       this.activeIndex = i
     },
-    clickOut (e) {
-      if ((this.widthSwitch === true) && (this.navOpen === true)) {
+    clickOut(e) {
+      if (this.widthSwitch === true && this.navOpen === true) {
         if (this.$refs.navOut && !this.$refs.navOut.contains(e.target)) {
           this.$refs.navbar.click()
         }
@@ -108,7 +134,7 @@ export default {
     }
   },
   watch: {
-    widthSize (newWidth, oldWidth) {
+    widthSize(newWidth, oldWidth) {
       if (newWidth <= 992) {
         this.widthSwitch = true
       } else {
@@ -116,11 +142,11 @@ export default {
       }
     }
   },
-  created () {
+  created() {
     const { width } = useWindowSize()
     this.widthSize = width
   },
-  mounted () {
+  mounted() {
     const underline = this.$refs.underline
     const navbarEl = this.$refs.navbarList
     const items = navbarEl.querySelectorAll('.nav-item')
@@ -138,7 +164,7 @@ export default {
 </script>
 
 <style>
-.navbar-nav{
+.navbar-nav {
   position: relative;
 }
 </style>

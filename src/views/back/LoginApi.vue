@@ -1,28 +1,45 @@
 <template>
-    <div class="bg">
-        <div class="container">
-            <form class="row justify-content-center" @submit.prevent="signIn">
-                <div class="col-md-4 loginBox">
-                    <div style="width: 60px; margin: 0 auto;"><img src="../../assets/logo/logo-1.png" width="80" alt=""></div>
-                    <h3 style="text-align: center;">後台管理系統</h3>
-                    <div class="form-group">
-                        <div class="mb-2">
-                            <label for="inputEmail" class="sr-only">請輸入Email</label>
-                            <input type="email" id="inputEmail" name="userEmail" placeholder="請輸入Email" class="form-control" v-model="user.username">
-                        </div>
-                        <div class="mb-2">
-                            <label for="inputPassword" class="sr-only">請輸入密碼</label>
-                            <input type="password" id="inputPassword" name="userPass" placeholder="請輸入密碼" class="form-control" v-model="user.password" autocomplete="new-password">
-                        </div>
-                        <div class="text-end mt-4">
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
+  <div class="bg">
+    <div class="container">
+      <form class="row justify-content-center" @submit.prevent="signIn">
+        <div class="col-md-4 loginBox">
+          <div style="width: 60px; margin: 0 auto">
+            <img src="../../assets/logo/logo-1.png" width="80" alt="" />
+          </div>
+          <h3 style="text-align: center">後台管理系統</h3>
+          <div class="form-group">
+            <div class="mb-2">
+              <label for="inputEmail" class="sr-only">請輸入Email</label>
+              <input
+                type="email"
+                id="inputEmail"
+                name="userEmail"
+                placeholder="請輸入Email"
+                class="form-control"
+                v-model="user.username"
+              />
+            </div>
+            <div class="mb-2">
+              <label for="inputPassword" class="sr-only">請輸入密碼</label>
+              <input
+                type="password"
+                id="inputPassword"
+                name="userPass"
+                placeholder="請輸入密碼"
+                class="form-control"
+                v-model="user.password"
+                autocomplete="new-password"
+              />
+            </div>
+            <div class="text-end mt-4">
+              <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
+            </div>
+          </div>
         </div>
+      </form>
     </div>
-    <toast-messages/>
+  </div>
+  <toast-messages />
 </template>
 
 <script>
@@ -30,12 +47,12 @@ import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/back/ToastMessages.vue'
 
 export default {
-  head () {
+  head() {
     return {
       title: '登入'
     }
   },
-  data () {
+  data() {
     return {
       user: {
         username: '',
@@ -46,13 +63,13 @@ export default {
   components: {
     ToastMessages
   },
-  provide () {
+  provide() {
     return {
       emitter
     }
   },
   methods: {
-    async signIn () {
+    async signIn() {
       const url = `${process.env.VUE_APP_API}admin/signin`
       try {
         const res = await this.$http.post(url, this.user)
@@ -73,16 +90,16 @@ export default {
 </script>
 
 <style>
-.bg{
-    min-height: 100vh;
-    background: url(../../assets/banners/wallpaper.png) no-repeat center/cover;
+.bg {
+  min-height: 100vh;
+  background: url(../../assets/banners/wallpaper.png) no-repeat center/cover;
 }
-.loginBox{
-    background: #fff;
-    border-radius: 10px;
-    margin-top: 40px;
-    padding: 20px;
-    box-sizing: border-box;
-    box-shadow: 0 0 20px #c0c0c0;
+.loginBox {
+  background: #fff;
+  border-radius: 10px;
+  margin-top: 40px;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 0 20px #c0c0c0;
 }
 </style>

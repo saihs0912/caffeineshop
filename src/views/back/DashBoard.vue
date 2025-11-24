@@ -1,17 +1,17 @@
 <template>
   <div class="bg">
-    <div class="container" style="max-width: 1140px!important;">
+    <div class="container" style="max-width: 1140px !important">
       <div class="row">
         <div class="col">
           <div class="optionArea">
-            <user-nav/>
-            <router-view/>
+            <user-nav />
+            <router-view />
           </div>
         </div>
       </div>
     </div>
   </div>
-  <toast-messages/>
+  <toast-messages />
 </template>
 
 <script>
@@ -20,7 +20,7 @@ import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/back/ToastMessages.vue'
 
 export default {
-  head () {
+  head() {
     return {
       title: '咖啡因商店網站管理系統'
     }
@@ -29,19 +29,18 @@ export default {
     UserNav,
     ToastMessages
   },
-  provide () {
+  provide() {
     return {
       emitter
     }
   },
-  created () {
+  created() {
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)makotoToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
     this.$http.defaults.headers.common.Authorization = token
     const api = `${process.env.VUE_APP_API}api/user/check`
-    this.$http.post(api, this.user)
-      .then(res => {
-        if (!res.data.success) this.$router.push('login')
-      })
+    this.$http.post(api, this.user).then((res) => {
+      if (!res.data.success) this.$router.push('login')
+    })
   }
 }
 </script>

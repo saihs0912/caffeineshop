@@ -1,28 +1,45 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light p-4" style="max-width: 991px;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light p-4" style="max-width: 991px">
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <router-link to="/" class="navbar-brand"><i class="bi bi-box-arrow-left"></i> 返回</router-link>
+          <router-link to="/" class="navbar-brand"
+            ><i class="bi bi-box-arrow-left"></i> 返回</router-link
+          >
         </div>
       </div>
     </div>
   </nav>
-  <div class="container mb-5" style="max-width: 991px;">
+  <div class="container mb-5" style="max-width: 991px">
     <div class="row justify-content-center">
       <div class="col-lg-8 col-md-10 col-sm-12 col-12">
-        <checkout-process :step="currentStep"/>
+        <checkout-process :step="currentStep" />
         <keep-alive>
-          <component :is="currentStepComponent" ref="infoForm"
-          :send-form-final="form"
-          :send-cart-final="cart"
-          :send-order="orderId"
-          @send-cart="getCart"
-          @send-data="getForm"></component>
+          <component
+            :is="currentStepComponent"
+            ref="infoForm"
+            :send-form-final="form"
+            :send-cart-final="cart"
+            :send-order="orderId"
+            @send-cart="getCart"
+            @send-data="getForm"
+          ></component>
         </keep-alive>
-        <div class="d-flex mx-auto justify-content-center" style="max-width: 300px;">
-          <button type="button" class="btn btn-outline-brown m-1 py-2 px-4 fs-4" @click="preStep" v-if="pre">上一步</button>
-          <button type="button" class="btn btn-outline-brown m-1 py-2 px-4 fs-4" @click="nextStep" v-if="currentStep !== totalSteps">
+        <div class="d-flex mx-auto justify-content-center" style="max-width: 300px">
+          <button
+            type="button"
+            class="btn btn-outline-brown m-1 py-2 px-4 fs-4"
+            @click="preStep"
+            v-if="pre"
+          >
+            上一步
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-brown m-1 py-2 px-4 fs-4"
+            @click="nextStep"
+            v-if="currentStep !== totalSteps"
+          >
             <span v-if="currentStep == 3">結帳</span>
             <span v-else>下一步</span>
           </button>
@@ -41,12 +58,12 @@ import CheckOver from '@/components/front/CheckOver.vue'
 
 export default {
   name: 'CheckPage',
-  head () {
+  head() {
     return {
       title: `${this.step[this.currentStep - 1]} - 顧客結帳`
     }
   },
-  data () {
+  data() {
     return {
       currentStep: 1,
       totalSteps: 4,
@@ -69,7 +86,7 @@ export default {
   },
   props: ['sendForm'],
   methods: {
-    async nextStep () {
+    async nextStep() {
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -86,7 +103,7 @@ export default {
         this.pre = true
       }
     },
-    preStep () {
+    preStep() {
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -94,13 +111,13 @@ export default {
       if (this.currentStep > 1) this.currentStep--
       if (this.currentStep === 1) this.pre = false
     },
-    getCart (item) {
+    getCart(item) {
       this.cart = item
     },
-    getForm (item) {
+    getForm(item) {
       this.form = item
     },
-    async createOrder () {
+    async createOrder() {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
       const order = this.form
       try {
@@ -112,7 +129,7 @@ export default {
     }
   },
   computed: {
-    currentStepComponent () {
+    currentStepComponent() {
       return ['CheckTotal', 'CheckCustomer', 'CheckFinal', 'CheckOver'][this.currentStep - 1]
     }
   }

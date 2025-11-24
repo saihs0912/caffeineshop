@@ -5,8 +5,10 @@
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6 p-4">
           <div class="d-flex flex-nowrap align-items-center h-100">
             <div class="px-1">
-              本網站僅供學習使用<br>
-              <a class="no-underline" @click.prevent="goLogin" href="#"><i class="bi bi-pc-display-horizontal"></i> 管理員登入</a>
+              本網站僅供學習使用<br />
+              <a class="no-underline" @click.prevent="goLogin" href="#"
+                ><i class="bi bi-pc-display-horizontal"></i> 管理員登入</a
+              >
             </div>
           </div>
         </div>
@@ -26,7 +28,7 @@
 <script>
 export default {
   name: 'FooterArea',
-  data () {
+  data() {
     return {
       fixed: false,
       footerHeight: ''
@@ -35,16 +37,16 @@ export default {
   props: ['heightChange'],
   emits: ['sendHeight'],
   watch: {
-    heightChange (newHeight, oldHeight) {
+    heightChange(newHeight, oldHeight) {
       this.fixed = newHeight
     }
   },
   methods: {
-    goLogin () {
+    goLogin() {
       this.$router.push('/login')
     }
   },
-  mounted () {
+  mounted() {
     const footerArea = this.$refs.footerArea
     this.footerHeight = footerArea.offsetHeight
     this.$emit('sendHeight', this.footerHeight)
@@ -53,7 +55,7 @@ export default {
 </script>
 
 <style>
-.footerFixed{
+.footerFixed {
   position: fixed;
   left: 0;
   bottom: 0;

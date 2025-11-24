@@ -5,13 +5,22 @@
         <div v-if="!item.id" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 py-5">
           <p class="text-center fw-bold fs-3 my-5">{{ item.title }} <i class="bi bi-search"></i></p>
         </div>
-        <div v-else-if="(i+1 <= (page.pageNow*10)) && (i+1 > ((page.pageNow*10)-10))" class="col-6 col-sm-6 col-md-6 col-lg-4 p-2 overflow-hidden">
+        <div
+          v-else-if="i + 1 <= page.pageNow * 10 && i + 1 > page.pageNow * 10 - 10"
+          class="col-6 col-sm-6 col-md-6 col-lg-4 p-2 overflow-hidden"
+        >
           <div class="card h-100 shadow-sm border-0">
-            <router-link class="no-underline xs-img" :to="{ name: 'product', params: { productId: item.id } }">
+            <router-link
+              class="no-underline xs-img"
+              :to="{ name: 'product', params: { productId: item.id } }"
+            >
               <img :src="item.imageUrl" class="card-img-top" alt="商品圖片" />
             </router-link>
             <div class="card-body d-flex flex-column pb-0 justify-content-between">
-              <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
+              <router-link
+                class="no-underline"
+                :to="{ name: 'product', params: { productId: item.id } }"
+              >
                 <h6 class="card-title">{{ item.title }}</h6>
               </router-link>
               <div class="d-flex justify-content-between align-items-center">
@@ -22,9 +31,26 @@
               <div class="row justify-content-end h-100">
                 <div class="pb-2 col-12 text-end">
                   <div class="btn-group">
-                    <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center cart btn-danger" @click="addToCart(item.id, 1, i)" :disabled="item.id === status.loadingItem" :class="{ 'addToCartAnimation' : cart === i }"></button>
-                    <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center heart" @click="editFavorite(item.id, i)" v-if="favorite.indexOf(item.id) === -1"></button>
-                    <button type="button" class="d-block btn m-1 rounded-circle shadow border-0 text-center heart-fill" :class="{ 'heartAnimation' : heart === i }" @click="editFavorite(item.id)" v-else></button>
+                    <button
+                      type="button"
+                      class="d-block btn m-1 rounded-circle shadow border-0 text-center cart btn-danger"
+                      @click="addToCart(item.id, 1, i)"
+                      :disabled="item.id === status.loadingItem"
+                      :class="{ addToCartAnimation: cart === i }"
+                    ></button>
+                    <button
+                      type="button"
+                      class="d-block btn m-1 rounded-circle shadow border-0 text-center heart"
+                      @click="editFavorite(item.id, i)"
+                      v-if="favorite.indexOf(item.id) === -1"
+                    ></button>
+                    <button
+                      type="button"
+                      class="d-block btn m-1 rounded-circle shadow border-0 text-center heart-fill"
+                      :class="{ heartAnimation: heart === i }"
+                      @click="editFavorite(item.id)"
+                      v-else
+                    ></button>
                   </div>
                 </div>
               </div>
@@ -42,7 +68,7 @@ import { useWindowSize } from '@vueuse/core'
 
 export default {
   name: 'ShoppingList',
-  data () {
+  data() {
     return {
       productList: [],
       copyList: [],
@@ -64,14 +90,14 @@ export default {
     }
   },
   computed: {
-    filterData () {
+    filterData() {
       let result = [...this.copyList]
       if (this.cateGory) {
-        result = result.filter(item => item.category === this.cateGory)
+        result = result.filter((item) => item.category === this.cateGory)
       }
       if (this.cacheSearch) {
         const keyword = this.cacheSearch.toLowerCase()
-        result = result.filter(item => item.title.toLowerCase().includes(keyword))
+        result = result.filter((item) => item.title.toLowerCase().includes(keyword))
       }
       if (this.order) {
         if (this.order.type === 'price' && result.length !== 0) {
@@ -85,20 +111,22 @@ export default {
       }
       if (result.length === 0) {
         const item = {}
-        this.productList.length === 0 ? item.title = '商品載入中...' : item.title = '唉呀...商品不存在'
+        this.productList.length === 0
+          ? (item.title = '商品載入中...')
+          : (item.title = '唉呀...商品不存在')
         result.push(item)
       }
       return result
     }
   },
   watch: {
-    filterData () {
+    filterData() {
       this.page.pageTotal = Math.ceil(this.filterData.length / 10)
       if (this.page.pageNow > this.page.pageTotal) this.page.pageNow = this.page.pageTotal
       if (this.page.pageTotal === 0) this.page.pageNow = 1
       emitter.emit('sendPage', this.page)
       let result = ''
-      if ((this.filterData.length === 1) && (!this.filterData[0].id)) {
+      if (this.filterData.length === 1 && !this.filterData[0].id) {
         result = false
       } else {
         result = true
@@ -107,7 +135,7 @@ export default {
     }
   },
   methods: {
-    async addToCart (id, num, i) {
+    async addToCart(id, num, i) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.status.loadingItem = id
       const cart = {
@@ -125,7 +153,7 @@ export default {
         this.$InformMessage(err, '商品放入購物車')
       }
     },
-    editFavorite (id, i) {
+    editFavorite(id, i) {
       const favoriteId = this.favorite.indexOf(id)
       if (favoriteId === -1) {
         this.favorite.push(id)
@@ -136,36 +164,35 @@ export default {
       localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
     }
   },
-  mounted () {
-    emitter.on('sendTo', keyword => {
+  mounted() {
+    emitter.on('sendTo', (keyword) => {
       this.cateGory = keyword
     })
-    emitter.on('sendWord', word => {
+    emitter.on('sendWord', (word) => {
       this.cacheSearch = word
     })
     emitter.on('resetAll', () => {
       this.cateGory = ''
       this.order = {}
     })
-    emitter.on('sort', sort => {
+    emitter.on('sort', (sort) => {
       this.order = { ...sort }
     })
-    emitter.on('newPage', num => {
+    emitter.on('newPage', (num) => {
       this.page.pageNow = num
       emitter.emit('updatePage', this.page.pageNow)
     })
   },
-  unmounted () {
+  unmounted() {
     this.productList = []
   },
-  created () {
+  created() {
     const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
-    this.$http.get(api)
-      .then(res => {
-        this.productList = res.data.products
-        this.copyList = [...this.productList]
-        this.copyList.reverse()
-      })
+    this.$http.get(api).then((res) => {
+      this.productList = res.data.products
+      this.copyList = [...this.productList]
+      this.copyList.reverse()
+    })
     const { width } = useWindowSize()
     this.widthSize = width
   }
