@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import { getNewProducts } from '@/methods/api'
 import { useWindowSize } from '@vueuse/core'
 
 export default {
@@ -64,15 +65,7 @@ export default {
     }
   },
   methods: {
-    async getNewProducts() {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
-      try {
-        const res = await this.$http.get(url)
-        this.newProductList = res.data.products
-      } catch (err) {
-        this.$InformMessage(err, '取得商品')
-      }
-    },
+    getNewProducts,
     moveList(arrow) {
       if (arrow === true) {
         if (this.x === 0) {

@@ -34,7 +34,7 @@
                     <button
                       type="button"
                       class="d-block btn m-1 rounded-circle shadow border-0 text-center cart btn-danger"
-                      @click="addToCart(item.id, 1, i)"
+                      @click="addToCart(item.id, 1, 'list', i)"
                       :disabled="item.id === status.loadingItem"
                       :class="{ addToCartAnimation: cart === i }"
                     ></button>
@@ -64,6 +64,7 @@
 
 <script>
 import emitter from '@/methods/emitter'
+import { addToCart, getAllProducts } from '@/methods/api'
 import { useWindowSize } from '@vueuse/core'
 
 export default {
@@ -135,24 +136,7 @@ export default {
     }
   },
   methods: {
-    async addToCart(id, num, i) {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.status.loadingItem = id
-      const cart = {
-        product_id: id,
-        qty: num
-      }
-      try {
-        const res = await this.$http.post(api, { data: cart })
-        this.cart = i
-        this.status.loadingItem = ''
-        this.$InformMessage(res, '商品放入購物車')
-        emitter.emit('updateCart')
-      } catch (err) {
-        this.status.loadingItem = ''
-        this.$InformMessage(err, '商品放入購物車')
-      }
-    },
+    addToCart,
     editFavorite(id, i) {
       const favoriteId = this.favorite.indexOf(id)
       if (favoriteId === -1) {
@@ -186,13 +170,20 @@ export default {
   unmounted() {
     this.productList = []
   },
-  created() {
-    const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
-    this.$http.get(api).then((res) => {
-      this.productList = res.data.products
-      this.copyList = [...this.productList]
-      this.copyList.reverse()
-    })
+  async created() {
+    // const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+    // this.$http.get(api).then((res) => {
+    //   this.productList = res.data.products
+    //   this.copyList = [...this.productList]
+    //   this.copyList.reverse()
+    // })
+    try {
+      const products = await getAllProducts(this.$http)
+      this.productList = products
+      this.copyList = [...products].reverse()
+    } catch (err) {
+      this.$InformMessage(err.message)
+    }
     const { width } = useWindowSize()
     this.widthSize = width
   }

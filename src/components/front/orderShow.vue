@@ -88,6 +88,7 @@
 </template>
 
 <script>
+import { getOrder, getOrderAll } from '@/methods/api'
 import PaginationModal from '../back/PaginationModal.vue'
 
 export default {
@@ -116,43 +117,8 @@ export default {
     }
   },
   methods: {
-    async getOrder(id) {
-      this.isLoading = true
-      this.pageShow = false
-      this.searchResult = []
-      this.notFound = false
-      this.connectError = false
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`
-      try {
-        const res = await this.$http.get(url)
-        this.isLoading = false
-        if (res.data.order !== null) {
-          this.searchResult.push(res.data.order)
-        } else {
-          this.notFound = true
-        }
-      } catch (err) {
-        this.isLoading = false
-        this.notFound = true
-      }
-    },
-    async getOrderAll(page = 1) {
-      this.pageShow = true
-      this.isLoading = true
-      if (this.notFound === true) this.notFound = false
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/orders?page=${page}`
-      try {
-        const res = await this.$http.get(url)
-        this.isLoading = false
-        if (res.data.success) {
-          this.searchResult = res.data.orders
-          this.pagination = res.data.pagination
-        }
-      } catch (err) {
-        this.isLoading = false
-        this.$InformMessage(err, '取得訂單列表')
-      }
-    },
+    getOrder,
+    getOrderAll,
     goToDetail(id) {
       this.$router.push({ name: 'orderDetail', params: { orderId: id } })
     }

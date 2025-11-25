@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { adminGetProducts, adminUpdateProduct, adminDelProduct } from '@/methods/api'
 import ProductModal from '@/components/back/ProductModal.vue'
 import DelModal from '@/components/back/DelModal.vue'
 import PaginationModal from '@/components/back/PaginationModal.vue'
@@ -78,20 +79,7 @@ export default {
   },
   inject: ['emitter'],
   methods: {
-    async getProducts(page = 1) {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
-      this.isLoading = true
-      try {
-        const res = await this.$http.get(api)
-        this.isLoading = false
-        if (res.data.success) {
-          this.products = res.data.products
-          this.pagination = res.data.pagination
-        }
-      } catch (err) {
-        this.$InformMessage(err, '取得頁面資訊')
-      }
-    },
+    adminGetProducts,
     openModal(isNew, item) {
       if (isNew) {
         this.tempProduct = {}
@@ -104,43 +92,12 @@ export default {
       this.isNew = isNew
       this.$refs.productModal.showModal()
     },
-    async updateProduct(item) {
-      this.tempProduct = item
-      let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
-      let httpMethod = 'post'
-      if (!this.isNew) {
-        api = `${api}/${item.id}`
-        httpMethod = 'put'
-      }
-      try {
-        const res = await this.$http[httpMethod](api, { data: this.tempProduct })
-        if (res.data.success) {
-          httpMethod === 'post'
-            ? this.$InformMessage(res, '商品新增')
-            : this.$InformMessage(res, '商品更新')
-          this.getProducts(this.pagination.current_page)
-        }
-        this.$refs.productModal.hideModal()
-      } catch (err) {
-        this.$InformMessage(err, '商品更新')
-      }
-    },
+    adminUpdateProduct,
     openDelMdodal(item) {
       this.tempProduct = { ...item }
       this.$refs.delModal.showModal()
     },
-    async delProduct(item) {
-      this.tempProduct = item
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`
-      try {
-        const res = await this.$http.delete(api, { data: this.tempProduct })
-        this.$InformMessage(res, `商品${item.title}刪除`)
-        this.getProducts()
-      } catch (err) {
-        this.$InformMessage(err, '商品刪除')
-      }
-      this.$refs.delModal.hideModal()
-    }
+    adminDelProduct
   },
   created() {
     this.getProducts()

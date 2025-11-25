@@ -49,7 +49,7 @@
                         v-model.number="item.qty"
                         min="1"
                         max="20"
-                        @change="updateCart(item)"
+                        @change="updateCart(item, 'cart')"
                         :disabled="item.id === status.loadingItem"
                       />
                     </li>
@@ -59,7 +59,7 @@
                   <button
                     type="button"
                     class="btn btn-outline-danger btn"
-                    @click="deleteCartItem(item.id)"
+                    @click="deleteCartItem(item.id, 'cart')"
                     :disabled="item.id === status.loadingItem"
                   >
                     <i class="bi bi-trash3"></i>
@@ -116,11 +116,11 @@ export default {
   },
   created() {
     emitter.on('updateCart', () => {
-      this.getCart()
+      this.getCart('cart')
     })
   },
   mounted() {
-    this.getCart()
+    this.getCart('cart')
   }
 }
 </script>

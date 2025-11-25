@@ -73,10 +73,10 @@
             <button
               type="button"
               class="btn btn-brown btn-flex fs-4"
-              @click="addToCart(product.id, qty)"
+              @click="addToCart(product.id, qty, 'detail')"
               :disabled="product.id === status.loadingItem"
             >
-              <div style="width: 23px" v-if="!cart">
+              <div style="width: 23px" v-if="!cartPutIn">
                 <i class="bi bi-cart"></i>
               </div>
               <div class="addToCartAnimation" style="width: 23px" v-else>
@@ -143,7 +143,7 @@
 
 <script>
 import RelatedProducts from '@/components/front/RelatedProducts.vue'
-import emitter from '@/methods/emitter'
+import { getProduct, addToCart } from '@/methods/api'
 import { useWindowSize, useClipboard } from '@vueuse/core'
 
 export default {
@@ -179,7 +179,7 @@ export default {
       copy: '',
       copySuccess: false,
       copied: false,
-      cart: false,
+      cartPutIn: false,
       heart: false
     }
   },
@@ -187,40 +187,8 @@ export default {
     RelatedProducts
   },
   methods: {
-    async getProduct() {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`
-      try {
-        const res = await this.$http.get(api)
-        this.product = res.data.product
-        if (this.product.imagesUrl) {
-          this.imgArray = [].concat(this.product.imageUrl, this.product.imagesUrl)
-        } else if (!this.product.imagesUrl) {
-          this.imgArray = [].concat(this.product.imageUrl)
-          this.num = 0
-        }
-      } catch (err) {
-        this.$InformMessage(err, '取得商品資訊')
-      }
-    },
-    async addToCart(id, num) {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      if (this.cart) this.cart = !this.cart
-      this.status.loadingItem = id
-      const cart = {
-        product_id: id,
-        qty: num
-      }
-      try {
-        const res = await this.$http.post(api, { data: cart })
-        this.cart = true
-        this.status.loadingItem = ''
-        this.$InformMessage(res, '商品放入購物車')
-        emitter.emit('updateCart')
-      } catch (err) {
-        this.status.loadingItem = ''
-        this.$InformMessage(err, '商品放入購物車')
-      }
-    },
+    getProduct,
+    addToCart,
     editFavorite(id) {
       const favoriteId = this.favorite.indexOf(id)
       if (favoriteId === -1) {
