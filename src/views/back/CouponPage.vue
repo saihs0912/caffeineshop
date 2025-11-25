@@ -46,6 +46,7 @@
 import CouponModal from '@/components/back/CouponModal.vue'
 import DelModal from '@/components/back/DelModal.vue'
 import PaginationModal from '@/components/back/PaginationModal.vue'
+import { getCoupons, updateCoupon, delCoupon } from '@/methods/api'
 
 export default {
   head() {
@@ -73,19 +74,7 @@ export default {
     }
   },
   methods: {
-    async getCoupons(page = 1) {
-      try {
-        this.isLoading = true
-        const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}`
-        const res = await this.$http.get(url)
-        this.coupons = res.data.coupons
-        this.pagination = res.data.pagination
-        this.isLoading = false
-      } catch (err) {
-        this.isLoading = false
-        this.$InformMessage(err, '取得優惠券列表')
-      }
-    },
+    getCoupons,
     openCouponModal(isNew, item) {
       this.isNew = isNew
       if (this.isNew) {
@@ -98,43 +87,12 @@ export default {
       }
       this.$refs.couponModal.showModal()
     },
-    async updateCoupon(tempCoupon) {
-      try {
-        this.tempCoupon = tempCoupon
-        let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon`
-        let httpMethod = 'post'
-        if (!this.isNew) {
-          api = `${api}/${tempCoupon.id}`
-          httpMethod = 'put'
-        }
-        const res = await this.$http[httpMethod](api, { data: this.tempCoupon })
-        httpMethod === 'post'
-          ? this.$InformMessage(res, '優惠券新增')
-          : this.$InformMessage(res, '優惠券更新')
-        this.$refs.couponModal.hideModal()
-        this.getCoupons(this.pagination.current_page)
-      } catch (err) {
-        this.$refs.couponModal.hideModal()
-        this.$InformMessage(err, '更新優惠券')
-      }
-    },
+    updateCoupon,
     openDelModal(item) {
       this.tempCoupon = { ...item }
       this.$refs.delModal.showModal()
     },
-    async delCoupon(tempCoupon) {
-      try {
-        this.tempCoupon = tempCoupon
-        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
-        const res = await this.$http.delete(api, { data: this.tempCoupon })
-        this.$InformMessage(res, `優惠券${tempCoupon.title}刪除`)
-        this.$refs.delModal.hideModal()
-        this.getCoupons()
-      } catch (err) {
-        this.$refs.delModal.hideModal()
-        this.$InformMessage(err, '優惠券刪除')
-      }
-    }
+    delCoupon
   },
   created() {
     this.getCoupons()

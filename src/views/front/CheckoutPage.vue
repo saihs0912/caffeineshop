@@ -55,6 +55,7 @@ import CheckTotal from '@/components/front/CheckTotal.vue'
 import CheckCustomer from '@/components/front/CheckCustomer.vue'
 import CheckFinal from '@/components/front/CheckFinal.vue'
 import CheckOver from '@/components/front/CheckOver.vue'
+import { createOrder } from '@/methods/api'
 
 export default {
   name: 'CheckPage',
@@ -117,16 +118,7 @@ export default {
     getForm(item) {
       this.form = item
     },
-    async createOrder() {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
-      const order = this.form
-      try {
-        const res = await this.$http.post(url, { data: order })
-        this.orderId = res.data.orderId
-      } catch (err) {
-        this.$InformMessage(err, '送出訂單')
-      }
-    }
+    createOrder
   },
   computed: {
     currentStepComponent() {

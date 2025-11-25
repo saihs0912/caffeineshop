@@ -48,6 +48,7 @@
 import OrderModal from '@/components/back/OrderModal.vue'
 import DelModal from '@/components/back/DelModal.vue'
 import PaginationModal from '@/components/back/PaginationModal.vue'
+import { getOrderList, updateOrder, delOrder } from '@/methods/api'
 
 export default {
   head() {
@@ -70,18 +71,7 @@ export default {
     PaginationModal
   },
   methods: {
-    async getOrderList(page = 1) {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders?page=${page}`
-      this.isLoading = true
-      try {
-        const res = await this.$http.get(api)
-        this.isLoading = false
-        this.orderList = res.data.orders
-        this.pagination = res.data.pagination
-      } catch (err) {
-        this.$InformMessage(err, '取得訂單列表')
-      }
-    },
+    getOrderList,
     openOrderModal(item) {
       this.tempOrder = { ...item }
       this.$refs.orderModal.showModal()
@@ -90,30 +80,8 @@ export default {
       this.tempOrder = { ...item }
       this.$refs.delModal.showModal()
     },
-    async updateOrder(item) {
-      this.tempOrder = item
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
-      try {
-        await this.$http.put(api, { data: this.tempOrder })
-        this.$refs.orderModal.hideModal()
-        this.num = 0
-        this.getOrderList(this.pagination.current_page)
-      } catch (err) {
-        this.$InformMessage(err, '訂單更新')
-      }
-    },
-    async delOrder(item) {
-      this.tempOrder = item
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
-      try {
-        const res = await this.$http.delete(api, { data: this.tempOrder })
-        this.$InformMessage(res, '訂單刪除')
-        this.$refs.delModal.hideModal()
-        this.getOrderList()
-      } catch (err) {
-        this.$InformMessage(err, '訂單刪除')
-      }
-    }
+    updateOrder,
+    delOrder
   },
   created() {
     this.getOrderList()

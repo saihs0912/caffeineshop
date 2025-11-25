@@ -133,21 +133,43 @@ export async function addCouponCode() {
   }
 }
 
+// 成立訂單
+export async function createOrder() {
+  const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
+  const order = this.form
+  try {
+    const res = await this.$http.post(url, { data: order })
+    this.orderId = res.data.orderId
+  } catch (err) {
+    this.$InformMessage(err, '送出訂單')
+  }
+}
+
 // 取得單筆訂單
-export async function getOrder(id) {
+export async function getOrder(id, from) {
   this.isLoading = true
-  this.pageShow = false
-  this.searchResult = []
-  this.notFound = false
-  this.connectError = false
+  if (from === 'orderlist') {
+    this.pageShow = false
+    this.searchResult = []
+    this.notFound = false
+    this.connectError = false
+  }
   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`
   try {
     const res = await this.$http.get(url)
     this.isLoading = false
-    if (res.data.order !== null) {
-      this.searchResult.push(res.data.order)
-    } else {
-      this.notFound = true
+    if (from === 'orderlist') {
+      if (res.data.order !== null) {
+        this.searchResult.push(res.data.order)
+      } else {
+        this.notFound = true
+      }
+    } else if (from === 'orderdetail') {
+      this.order = res.data.order
+      this.user = res.data.order.user
+      Object.values(this.order.products).forEach((item, i) => {
+        this.total += item.total
+      })
     }
   } catch (err) {
     this.isLoading = false
@@ -261,4 +283,98 @@ export async function adminDelProduct(item) {
     this.$InformMessage(err, '商品刪除')
   }
   this.$refs.delModal.hideModal()
+}
+
+// 後台取得優惠券列表
+export async function getCoupons(page = 1) {
+  try {
+    this.isLoading = true
+    const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}`
+    const res = await this.$http.get(url)
+    this.coupons = res.data.coupons
+    this.pagination = res.data.pagination
+    this.isLoading = false
+  } catch (err) {
+    this.isLoading = false
+    this.$InformMessage(err, '取得優惠券列表')
+  }
+}
+
+// 後台更新優惠券
+export async function updateCoupon(tempCoupon) {
+  try {
+    this.tempCoupon = tempCoupon
+    let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon`
+    let httpMethod = 'post'
+    if (!this.isNew) {
+      api = `${api}/${tempCoupon.id}`
+      httpMethod = 'put'
+    }
+    const res = await this.$http[httpMethod](api, { data: this.tempCoupon })
+    httpMethod === 'post'
+      ? this.$InformMessage(res, '優惠券新增')
+      : this.$InformMessage(res, '優惠券更新')
+    this.$refs.couponModal.hideModal()
+    this.getCoupons(this.pagination.current_page)
+  } catch (err) {
+    this.$refs.couponModal.hideModal()
+    this.$InformMessage(err, '更新優惠券')
+  }
+}
+
+// 後台刪除優惠券
+export async function delCoupon(tempCoupon) {
+  try {
+    this.tempCoupon = tempCoupon
+    const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
+    const res = await this.$http.delete(api, { data: this.tempCoupon })
+    this.$InformMessage(res, `優惠券${tempCoupon.title}刪除`)
+    this.$refs.delModal.hideModal()
+    this.getCoupons()
+  } catch (err) {
+    this.$refs.delModal.hideModal()
+    this.$InformMessage(err, '優惠券刪除')
+  }
+}
+
+// 後台取得訂單列表
+export async function getOrderList(page = 1) {
+  const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders?page=${page}`
+  this.isLoading = true
+  try {
+    const res = await this.$http.get(api)
+    this.isLoading = false
+    this.orderList = res.data.orders
+    this.pagination = res.data.pagination
+  } catch (err) {
+    this.$InformMessage(err, '取得訂單列表')
+  }
+}
+
+// 後台更新訂單
+export async function updateOrder(item) {
+  this.tempOrder = item
+  const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
+  try {
+    await this.$http.put(api, { data: this.tempOrder })
+    this.$refs.orderModal.hideModal()
+    this.num = 0
+    this.getOrderList(this.pagination.current_page)
+  } catch (err) {
+    this.$InformMessage(err, '訂單更新')
+  }
+}
+
+// 後台刪除訂單
+export async function delOrder(item) {
+  this.tempOrder = item
+  const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
+  try {
+    const res = await this.$http.delete(api, { data: this.tempOrder })
+    this.$InformMessage(res, '訂單刪除')
+    this.$refs.delModal.hideModal()
+    this.getOrderList()
+  } catch (err) {
+    this.$InformMessage(err, '訂單刪除')
+  }
 }

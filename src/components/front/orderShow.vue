@@ -113,7 +113,7 @@ export default {
   watch: {
     sendOrder(newOrder, oldOrder) {
       if (this.afterSearch === true) this.afterSearch = false
-      newOrder === '' ? this.getOrderAll() : this.getOrder(newOrder)
+      newOrder === '' ? this.getOrderAll() : this.getOrder(newOrder, 'orderlist')
     }
   },
   methods: {

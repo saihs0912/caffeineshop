@@ -173,6 +173,7 @@
 <script>
 import AlreadyPaid from '@/components/front/AlreadyPaid.vue'
 import emitter from '@/methods/emitter'
+import { getOrder } from '@/methods/api'
 
 export default {
   name: 'OrderDetail',
@@ -198,22 +199,7 @@ export default {
   },
   props: ['sendOrder'],
   methods: {
-    async getOrder(id) {
-      this.isLoading = true
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`
-      try {
-        const res = await this.$http.get(url)
-        this.isLoading = false
-        this.order = res.data.order
-        this.user = res.data.order.user
-        Object.values(this.order.products).forEach((item, i) => {
-          this.total += item.total
-        })
-      } catch (err) {
-        this.isLoading = false
-        this.notFound = true
-      }
-    },
+    getOrder,
     openPaidModal(id) {
       this.tempId = id
       this.$refs.paidModal.showModal()
@@ -250,7 +236,7 @@ export default {
     }
   },
   created() {
-    this.getOrder(this.$route.params.orderId)
+    this.getOrder(this.$route.params.orderId, 'orderdetail')
   }
 }
 </script>
