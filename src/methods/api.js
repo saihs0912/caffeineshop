@@ -186,6 +186,21 @@ export async function getOrderAll(page = 1) {
   }
 }
 
+// 付款
+export async function alreadyPaid(id) {
+  this.$refs.paidModal.hideModal()
+  this.isLoading = true
+  const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${id}`
+  try {
+    await this.$http.post(url)
+    this.isLoading = false
+    this.getOrder(id)
+  } catch (err) {
+    this.isLoading = false
+    this.$InformMessage(err, '付款')
+  }
+}
+
 // 後台登入
 export async function signIn() {
   const url = `${process.env.VUE_APP_API}admin/signin`
