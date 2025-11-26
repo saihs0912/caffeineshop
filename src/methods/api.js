@@ -1,16 +1,6 @@
 import emitter from '@/methods/emitter'
 
 // 取得全部商品
-export async function getNewProducts() {
-  const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
-  try {
-    const res = await this.$http.get(url)
-    this.newProductList = res.data.products
-  } catch (err) {
-    this.$InformMessage(err, '取得商品')
-  }
-}
-
 export async function getAllProducts(http) {
   const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
   try {

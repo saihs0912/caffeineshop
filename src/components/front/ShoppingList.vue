@@ -171,12 +171,6 @@ export default {
     this.productList = []
   },
   async created() {
-    // const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
-    // this.$http.get(api).then((res) => {
-    //   this.productList = res.data.products
-    //   this.copyList = [...this.productList]
-    //   this.copyList.reverse()
-    // })
     try {
       const products = await getAllProducts(this.$http)
       this.productList = products

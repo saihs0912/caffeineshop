@@ -44,14 +44,14 @@
 </template>
 
 <script>
-import { getNewProducts } from '@/methods/api'
+import { getAllProducts } from '@/methods/api'
 import { useWindowSize } from '@vueuse/core'
 
 export default {
   name: 'NewProduct',
   data() {
     return {
-      newProductList: [],
+      productList: [],
       boxWidth: {
         width: ''
       },
@@ -65,7 +65,7 @@ export default {
     }
   },
   methods: {
-    getNewProducts,
+    getAllProducts,
     moveList(arrow) {
       if (arrow === true) {
         if (this.x === 0) {
@@ -86,7 +86,7 @@ export default {
   },
   computed: {
     latestProducts() {
-      return this.newProductList.slice(-8).reverse()
+      return this.productList.slice(-8).reverse()
     }
   },
   watch: {
@@ -105,10 +105,11 @@ export default {
       this.boxWidth.width = `${boxWidth}px`
     }
   },
-  mounted() {
+  async mounted() {
     const { width } = useWindowSize()
+    const products = await this.getAllProducts(this.$http)
+    this.productList = products
     this.widthSize = width
-    this.getNewProducts()
     const box = this.$refs.ProductBox
     this.step = box.clientWidth / 8
   }

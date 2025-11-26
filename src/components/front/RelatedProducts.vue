@@ -36,6 +36,7 @@
 
 <script>
 import { useWindowSize } from '@vueuse/core'
+import { getAllProducts } from '@/methods/api'
 
 export default {
   name: 'RelatedProducts',
@@ -59,10 +60,9 @@ export default {
   props: ['sendProduct'],
   methods: {
     async getNewProducts() {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
       try {
-        const res = await this.$http.get(url)
-        this.ProductList = res.data.products
+        const products = await getAllProducts(this.$http)
+        this.ProductList = products
         this.ProductList = this.ProductList.filter((item) => {
           return item.category === this.sendProduct.category && item.id !== this.sendProduct.id
         }).reverse()
