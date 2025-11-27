@@ -65,7 +65,7 @@
                                   <img
                                     class="img-fluid"
                                     :src="productItem.product.imageUrl"
-                                    alt=""
+                                    :alt="productItem.product.title"
                                   />
                                 </td>
                                 <td class="border-0">
@@ -215,7 +215,7 @@ export default {
       } catch (err) {
         console.log(err)
         this.isLoading = false
-        this.$InformMessage('付款')
+        this.$InformMessage(err)
       }
     },
     addToCart

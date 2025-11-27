@@ -6,7 +6,7 @@
         <tbody>
           <tr v-for="(item, i) in cart.carts" :key="i">
             <td style="width: 80px">
-              <img :src="cart.carts[i].product.imageUrl" alt="" class="img-fluid" />
+              <img :src="cart.carts[i].product.imageUrl" :alt="item.product.title" class="img-fluid" />
             </td>
             <td>
               <ul class="list-group-horizontal d-flex flex-wrap checkTotal-list ps-0 mb-0">

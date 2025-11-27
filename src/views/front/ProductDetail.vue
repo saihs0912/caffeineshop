@@ -18,7 +18,7 @@
             </div>
             <div class="col-lg-5 col-md-12">
               <div class="p-2 sqLarge">
-                <div><img class="img-fluid" :src="imgArray[num]" alt="" /></div>
+                <div><img class="img-fluid" :src="imgArray[num]" :alt="product.title + 0 +(num+1)" /></div>
               </div>
               <div class="d-flex p-2">
                 <div
@@ -28,7 +28,7 @@
                   @mouseover="num = i"
                   :class="{ 'hover-focus': num === i }"
                 >
-                  <div><img class="img-fluid" :src="imgArray[i]" alt="" /></div>
+                  <div><img class="img-fluid" :src="imgArray[i]" :alt="product.title + '縮圖' + 0 +(num+1)" /></div>
                 </div>
               </div>
             </div>

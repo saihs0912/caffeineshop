@@ -147,7 +147,6 @@ export async function createOrder() {
 
 // 取得單筆訂單
 export async function getOrder(id, from) {
-  console.log(id)
   this.isLoading = true
   if (from === 'orderlist') {
     this.pageShow = false
@@ -199,13 +198,11 @@ export async function getOrderAll(page = 1) {
 
 // 付款
 export async function checkOut(id, http) {
-  const url = `${process.env.VUE_APP_API}ap/${process.env.VUE_APP_PATH}/pay/${id}`
+  const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${id}`
   try {
     await http.post(url)
   } catch (err) {
-    const error = new Error('付款')
-    error.original = error
-    throw error
+    throw new Error(err, '付款')
   }
 }
 

@@ -45,7 +45,7 @@
                   class="float-lg-none float-md-none float-sm-none float-start td-img"
                   style="width: 50px"
                 >
-                  <img class="img-fluid" :src="productItem.product.imageUrl" alt="" />
+                  <img class="img-fluid" :src="productItem.product.imageUrl" :alt="productItem.product.title" />
                 </td>
                 <td class="td-block">
                   <router-link

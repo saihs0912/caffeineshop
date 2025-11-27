@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row no-gutters my-5" style="background-color: #090907">
         <div class="col-lg-6 col-md-6 col-sm-12 col-12 p-0 order-lg-last order-md-last">
-          <img src="../../assets/img/aboutshop03.jpg" alt="" class="img-fluid" />
+          <img src="../../assets/img/aboutshop03.jpg" alt="咖啡因商店是？" class="img-fluid" />
         </div>
         <div
           class="col-lg-6 col-md-6 col-sm-12 col-12 text-white text-center d-flex align-items-center justify-content-center flex-wrap py-5"

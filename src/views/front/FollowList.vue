@@ -32,7 +32,7 @@
                   </button>
                 </div>
                 <div class="p-2">
-                  <img :src="filterData[i].imageUrl" class="img-fluid" alt="" />
+                  <img :src="filterData[i].imageUrl" class="img-fluid" :alt="item.title" />
                 </div>
                 <div class="p-2 card-body d-flex flex-wrap flex-column justify-content-between">
                   <p class="card-text fw-bold">{{ item.title }}</p>

@@ -14,7 +14,7 @@
               class="no-underline"
               :to="{ name: 'product', params: { productId: item.id } }"
             >
-              <img :src="item.imageUrl" alt="" class="card-img-top" />
+              <img :src="item.imageUrl" :alt="item.title" class="card-img-top" />
             </router-link>
             <router-link
               :to="{ name: 'product', params: { productId: item.id } }"

@@ -44,7 +44,7 @@ const routes = [
       {
         path: 'follow',
         component: () => import('../views/front/FollowList.vue')
-      }
+      },
     ]
   },
   {
@@ -72,6 +72,10 @@ const routes = [
         component: () => import('../views/back/OrderlistPage.vue')
       }
     ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('../views/front/NotFound.vue')
   }
 ]
 

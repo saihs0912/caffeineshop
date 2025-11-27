@@ -34,7 +34,7 @@
             <div class="col-lg-8 col-md-12 col-sm-12 col-12 pt-5 pb-2">
               <div v-if="coffee" class="pb-5">
                 <div class="float-lg-end float-md-end floatImg ps-2 pb-4">
-                  <img src="../../assets/img/coffetea01.jpg" alt="" class="img-fluid" />
+                  <img src="../../assets/img/coffetea01.jpg" alt="衣索比亞" class="img-fluid" />
                 </div>
                 <p>
                   咖啡的確切起源無從得知，但最廣為人知的故事是，西元九世紀，傳說中的東非衣索比亞牧羊人卡爾迪（Kaldi）發現羊群們吃了一種紅色果實後會異常地興奮。他將果實帶到修道院，將果實以火烘烤後，他與修道院長聞到咖啡豆烤後的芳香，將豆子磨碎沖入熱水後，有提神的效果，可助於僧侶們長時間夜間祈禱保持清醒。
@@ -53,7 +53,7 @@
                 </p>
                 <p class="text-center fw-bold mb-4 fs-4">這些名稱代表咖啡豆的產區。</p>
                 <div class="float-lg-start float-md-start floatImg pe-2 pb-4">
-                  <img src="../../assets/img/coffetea02.jpg" alt="" class="img-fluid" />
+                  <img src="../../assets/img/coffetea02.jpg" alt="咖啡果實" class="img-fluid" />
                 </div>
                 <p>
                   <span class="fw-bold fs-4">藍山：</span
@@ -71,7 +71,7 @@
                   第二次世界大戰，日軍佔領印尼期間，日本軍人在蘇門答臘的咖啡店喝到美味的咖啡，便想詢問店家這是什麼咖啡，但由於語言不通，店員以為日軍在問自己是哪一族人，便回答「曼代寧族人（Mandailing）」，因此所謂的曼特寧，非指地名，而是民族名稱。
                 </p>
                 <div class="float-lg-end float-md-end floatImg ps-2 pb-4">
-                  <img src="../../assets/img/coffetea03.jpg" alt="" class="img-fluid" />
+                  <img src="../../assets/img/coffetea03.jpg" alt="衣索比亞" class="img-fluid" />
                 </div>
                 <p>
                   <span class="fw-bold fs-4">耶加雪菲：</span
@@ -106,7 +106,7 @@
               </div>
               <div v-else class="pb-5">
                 <div class="float-lg-end float-md-end floatImg ps-2 pb-4">
-                  <img src="../../assets/img/coffetea04.jpg" alt="" class="img-fluid" />
+                  <img src="../../assets/img/coffetea04.jpg" alt="茶葉園" class="img-fluid" />
                 </div>
                 <p>
                   中國古代傳說認為，茶是由神農氏在嘗百草時所發現，食用後神清氣爽，因此發現了茶葉的功效。早期為藥用，但從唐朝開始，茶飲文化開始盛行於日常生活中。
@@ -129,7 +129,7 @@
                   Tea」，並大力推廣，對抗來自英國的立頓紅茶，也就是孰知的「日東紅茶」。
                 </p>
                 <div class="float-lg-start float-md-start floatImg pe-2 pb-4">
-                  <img src="../../assets/img/coffetea05.jpg" alt="" class="img-fluid" />
+                  <img src="../../assets/img/coffetea05.jpg" alt="紅茶" class="img-fluid" />
                 </div>
                 <p>
                   國民政府來台後，伴隨著經濟起飛時代，重新燃起對綠茶的生產及改良。因為氣候、地理、人文等，在台灣各地孕育出不同的茶品種及文化。
@@ -148,7 +148,7 @@
                   唐代時流行「煮茶法」，把茶葉煮成湯，加薑、蔥、鹽調味。至宋代時開始流行「點茶法」，將茶葉弄成類似茶磚的外貌後，飲用時將茶磚弄碎磨成粉，泡入熱水飲用。而這就是日本抹茶的祖先。
                 </p>
                 <div class="float-lg-end float-md-end floatImg ps-2 pb-4">
-                  <img src="../../assets/img/coffetea06.jpg" alt="" class="img-fluid" />
+                  <img src="../../assets/img/coffetea06.jpg" alt="抹茶粉" class="img-fluid" />
                 </div>
                 <p>
                   當時僧侶榮西從宋返回日本，帶回茶籽與點茶文化，並寫下《喫茶養生記》，在書中強調茶能「養心、益壽、醒神」，並將飲茶與禪修結合。因此，抹茶在日本最初是禪寺僧侶的修行飲品，用來幫助禪坐時提神、清心。
@@ -182,7 +182,7 @@
                   葡萄牙也是早期接觸中國茶葉的國家之一，傳教士與商人將茶葉傳入葡萄牙後，將飲茶文化帶入宮廷。1662年，葡萄牙凱薩琳公主與英國國王查理二世成婚，並將其飲茶習慣帶至英國皇室，至此茶飲文化正式打入英國的貴族圈內。
                 </p>
                 <div class="float-lg-start float-md-start floatImg pe-2 pb-4">
-                  <img src="../../assets/img/coffetea07.jpg" alt="" class="img-fluid" />
+                  <img src="../../assets/img/coffetea07.jpg" alt="英式下午茶" class="img-fluid" />
                 </div>
                 <p>在英國最初為上流階層的飲品，後來逐漸擴散到中產階級及勞工階級。</p>
                 <p>

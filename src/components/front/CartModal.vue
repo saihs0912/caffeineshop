@@ -27,7 +27,7 @@
             <tbody>
               <tr v-for="(item, i) in cart.carts" :key="i">
                 <td style="width: 80px">
-                  <div><img :src="cart.carts[i].product.imageUrl" alt="" class="img-fluid" /></div>
+                  <div><img :src="cart.carts[i].product.imageUrl" :alt="item.product.title" class="img-fluid" /></div>
                 </td>
                 <td>
                   <ul class="list-group-horizontal d-flex flex-wrap cart-list ps-0">

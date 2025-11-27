@@ -14,7 +14,7 @@
               class="no-underline xs-img"
               :to="{ name: 'product', params: { productId: item.id } }"
             >
-              <img :src="item.imageUrl" class="card-img-top" alt="商品圖片" />
+              <img :src="item.imageUrl" class="card-img-top" :alt="item.title" />
             </router-link>
             <div class="card-body d-flex flex-column pb-0 justify-content-between">
               <router-link

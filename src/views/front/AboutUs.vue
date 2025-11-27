@@ -16,7 +16,7 @@
                 經過長時間的磋商與討論，最終開成了這間咖啡因專屬的網路商店
               </p>
               <div class="mx-auto mb-5" style="max-width: 400px">
-                <img class="img-fluid" src="../../assets/img/aboutus03.jpg" alt="" />
+                <img class="img-fluid" src="../../assets/img/aboutus03.jpg" alt="關於我們01" />
               </div>
               <h3 class="mb-3">一間存在於網路的商店</h3>
               <p>
@@ -25,7 +25,7 @@
                 接著只要滿懷期待等待商品的送達
               </p>
               <div class="mx-auto mb-5" style="max-width: 400px">
-                <img class="img-fluid" src="../../assets/img/aboutus01.jpg" alt="" />
+                <img class="img-fluid" src="../../assets/img/aboutus01.jpg" alt="關於我們02" />
               </div>
               <h3 class="mb-3">因為咖啡因，所以我們存在</h3>
               <p>
@@ -34,7 +34,7 @@
                 無論是早上起床後、或是工作喘口氣時、甚至是假日放鬆時
               </p>
               <div class="mx-auto mb-5" style="max-width: 400px">
-                <img class="img-fluid" src="../../assets/img/aboutus02.jpg" alt="" />
+                <img class="img-fluid" src="../../assets/img/aboutus02.jpg" alt="關於我們03" />
               </div>
               <h3 class="mb-3">咖啡</h3>
               <p>
@@ -49,7 +49,7 @@
                 便於您沖泡美味的咖啡
               </p>
               <div class="mx-auto mb-5" style="max-width: 400px">
-                <img class="img-fluid" src="../../assets/img/aboutus04.jpg" alt="" />
+                <img class="img-fluid" src="../../assets/img/aboutus04.jpg" alt="關於我們04" />
               </div>
               <h3 class="mb-3">茶</h3>
               <p>
@@ -67,7 +67,7 @@
               </p>
               <p>我們也提供相關的器具，方便您沖飲</p>
               <div class="mx-auto mb-5" style="max-width: 400px">
-                <img class="img-fluid" src="../../assets/img/aboutus05.jpg" alt="" />
+                <img class="img-fluid" src="../../assets/img/aboutus05.jpg" alt="關於我們05" />
               </div>
             </div>
           </div>

@@ -11,25 +11,25 @@
         <span class="position-absolute vertical-word text-white fw-bold text-shadow">
           一份工作，靠咖啡因再加油
         </span>
-        <img src="../../assets/banners/show-banner01.jpg" class="d-block w-100" alt="..." />
+        <img src="../../assets/banners/show-banner01.jpg" class="d-block w-100" alt="一份工作，靠咖啡因再加油" />
       </div>
       <div class="carousel-item position-relative">
         <span class="position-absolute vertical-word text-white fw-bold text-shadow">
           一日生活，從一杯咖啡開始
         </span>
-        <img src="../../assets/banners/show-banner02.jpg" class="d-block w-100" alt="..." />
+        <img src="../../assets/banners/show-banner02.jpg" class="d-block w-100" alt="一日生活，從一杯咖啡開始" />
       </div>
       <div class="carousel-item position-relative">
         <span class="position-absolute vertical-word text-white fw-bold text-shadow">
           一杯好茶，讓您放鬆身心靈
         </span>
-        <img src="../../assets/banners/show-banner03.jpg" class="d-block w-100" alt="..." />
+        <img src="../../assets/banners/show-banner03.jpg" class="d-block w-100" alt="一杯好茶，讓您放鬆身心靈" />
       </div>
       <div class="carousel-item position-relative">
         <span class="position-absolute vertical-word text-white fw-bold text-shadow">
           一包茶包，也可以喝出樂趣
         </span>
-        <img src="../../assets/banners/show-banner04.jpg" class="d-block w-100" alt="..." />
+        <img src="../../assets/banners/show-banner04.jpg" class="d-block w-100" alt="一包茶包，也可以喝出樂趣" />
       </div>
     </div>
   </div>
