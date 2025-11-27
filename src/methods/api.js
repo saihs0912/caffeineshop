@@ -49,29 +49,39 @@ export async function getCart(from) {
 }
 
 // 將商品放入購物車
-export async function addToCart(id, num, from, i) {
+export async function addToCart(http, id, num, from, i) {
   const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
   if (from === 'detail') {
     if (this.cartPutIn) this.cartPutIn = !this.cartPutIn
   }
-  this.status.loadingItem = id
+  if (from !== 'follow') this.status.loadingItem = id
   const cart = {
     product_id: id,
     qty: num
   }
   try {
-    const res = await this.$http.post(api, { data: cart })
+    const res = await http.post(api, { data: cart })
     if (from === 'list') {
       this.cart = i
     } else if (from === 'detail') {
       this.cartPutIn = true
     }
-    this.status.loadingItem = ''
-    this.$InformMessage(res, '商品放入購物車')
+    if (from !== 'follow') {
+      this.status.loadingItem = ''
+      this.$InformMessage(res, '商品放入購物車')
+    } else if (from === 'follow') {
+      return res
+    }
     emitter.emit('updateCart')
   } catch (err) {
-    this.status.loadingItem = ''
-    this.$InformMessage(err, '商品放入購物車')
+    if (from !== 'follow') {
+      this.status.loadingItem = ''
+      this.$InformMessage(err, '商品放入購物車')
+    } else if (from === 'follow') {
+      const error = new Error('商品放入購物車')
+      error.original = error
+      throw error
+    }
   }
 }
 
@@ -137,6 +147,7 @@ export async function createOrder() {
 
 // 取得單筆訂單
 export async function getOrder(id, from) {
+  console.log(id)
   this.isLoading = true
   if (from === 'orderlist') {
     this.pageShow = false
@@ -187,17 +198,14 @@ export async function getOrderAll(page = 1) {
 }
 
 // 付款
-export async function alreadyPaid(id) {
-  this.$refs.paidModal.hideModal()
-  this.isLoading = true
-  const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${id}`
+export async function checkOut(id, http) {
+  const url = `${process.env.VUE_APP_API}ap/${process.env.VUE_APP_PATH}/pay/${id}`
   try {
-    await this.$http.post(url)
-    this.isLoading = false
-    this.getOrder(id)
+    await http.post(url)
   } catch (err) {
-    this.isLoading = false
-    this.$InformMessage(err, '付款')
+    const error = new Error('付款')
+    error.original = error
+    throw error
   }
 }
 

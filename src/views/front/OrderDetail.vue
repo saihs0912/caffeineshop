@@ -95,7 +95,9 @@
                                       <button
                                         type="button"
                                         class="btn btn-outline-brown btn-sm rounded-3"
-                                        @click="addToCart(productItem.product_id)"
+                                        @click="
+                                          addToCart($http, productItem.product_id, 1, 'order')
+                                        "
                                         :disabled="productItem.product_id === status.loadingItem"
                                       >
                                         <i class="bi bi-cart"></i> 再次購買
@@ -172,8 +174,7 @@
 
 <script>
 import AlreadyPaid from '@/components/front/AlreadyPaid.vue'
-import emitter from '@/methods/emitter'
-import { getOrder } from '@/methods/api'
+import { getOrder, addToCart, checkOut } from '@/methods/api'
 
 export default {
   name: 'OrderDetail',
@@ -206,34 +207,18 @@ export default {
     },
     async alreadyPaid(id) {
       this.$refs.paidModal.hideModal()
-      this.isLoading = true
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${id}`
       try {
-        await this.$http.post(url)
+        this.isLoading = true
+        await checkOut(id, this.$http)
         this.isLoading = false
-        this.getOrder(id)
+        this.getOrder(id, 'orderdetail')
       } catch (err) {
+        console.log(err)
         this.isLoading = false
-        this.$InformMessage(err, '付款')
+        this.$InformMessage('付款')
       }
     },
-    async addToCart(id) {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.status.loadingItem = id
-      const cart = {
-        product_id: id,
-        qty: 1
-      }
-      try {
-        const res = await this.$http.post(api, { data: cart })
-        this.status.loadingItem = ''
-        this.$InformMessage(res, '商品放入購物車')
-        emitter.emit('updateCart')
-      } catch (err) {
-        this.status.loadingItem = ''
-        this.$InformMessage(err, '商品放入購物車')
-      }
-    }
+    addToCart
   },
   created() {
     this.getOrder(this.$route.params.orderId, 'orderdetail')

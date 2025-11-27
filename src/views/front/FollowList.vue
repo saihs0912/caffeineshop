@@ -40,7 +40,7 @@
                     <button
                       class="d-block btn btn-outline-brown w-100"
                       type="button"
-                      @click="addToCart(item.id, i)"
+                      @click="addProduct(item.id, i, 'follow')"
                       :disabled="num !== i && num !== ''"
                     >
                       <i class="bi bi-cart3"></i> 加入購物車
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import emitter from '@/methods/emitter'
+import { getAllProducts, addToCart } from '@/methods/api'
 
 export default {
   name: 'FollowList',
@@ -86,11 +86,10 @@ export default {
     }
   },
   methods: {
-    async getAllProducts() {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+    async allProducts() {
       try {
-        const res = await this.$http.get(api)
-        this.productList = res.data.products
+        const products = await getAllProducts(this.$http)
+        this.productList = products
       } catch (err) {
         this.$InformMessage(err, '取得商品')
       }
@@ -104,31 +103,19 @@ export default {
         localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
       }, 500)
     },
-    addToCart(id, i) {
+    async addProduct(id, i, from) {
       const favoriteId = this.favorite.indexOf(id)
       this.num = i
-      setTimeout(() => {
-        this.num = ''
-        this.favorite.splice(favoriteId, 1)
-        localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
-        const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-        this.status.loadingItem = id
-        const cart = {
-          product_id: id,
-          qty: 1
-        }
-        this.$http
-          .post(api, { data: cart })
-          .then((res) => {
-            this.status.loadingItem = ''
-            this.$InformMessage(res, '商品放入購物車')
-            emitter.emit('updateCart')
-          })
-          .catch((err) => {
-            this.status.loadingItem = ''
-            this.$InformMessage(err, '商品放入購物車')
-          })
-      }, 1000)
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      this.num = ''
+      this.favorite.splice(favoriteId, 1)
+      localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
+      try {
+        const res = await addToCart(this.$http, id, 1, from)
+        this.$InformMessage(res, '商品放入購物車')
+      } catch (err) {
+        this.$InformMessage(err.message)
+      }
     }
   },
   computed: {
@@ -150,7 +137,7 @@ export default {
     }
   },
   created() {
-    this.getAllProducts()
+    this.allProducts()
   }
 }
 </script>

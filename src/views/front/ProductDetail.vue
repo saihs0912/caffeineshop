@@ -73,7 +73,7 @@
             <button
               type="button"
               class="btn btn-brown btn-flex fs-4"
-              @click="addToCart(product.id, qty, 'detail')"
+              @click="addToCart($http, product.id, qty, 'detail')"
               :disabled="product.id === status.loadingItem"
             >
               <div style="width: 23px" v-if="!cartPutIn">

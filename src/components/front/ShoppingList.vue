@@ -34,7 +34,7 @@
                     <button
                       type="button"
                       class="d-block btn m-1 rounded-circle shadow border-0 text-center cart btn-danger"
-                      @click="addToCart(item.id, 1, 'list', i)"
+                      @click="addToCart($http, item.id, 1, 'list', i)"
                       :disabled="item.id === status.loadingItem"
                       :class="{ addToCartAnimation: cart === i }"
                     ></button>
@@ -176,7 +176,7 @@ export default {
       this.productList = products
       this.copyList = [...products].reverse()
     } catch (err) {
-      this.$InformMessage(err.message)
+      this.$InformMessage(err, err.message)
     }
     const { width } = useWindowSize()
     this.widthSize = width
