@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkcaffeineshop"]=self["webpackChunkcaffeineshop"]||[]).push([[647],{4647:function(n,e,t){t.r(e),t.d(e,{default:function(){return f}});var c=t(6768);const s={class:"d-flex justify-content-center align-content-center",style:{height:"100vh"}};function u(n,e,t,u,l,r){return(0,c.uX)(),(0,c.CE)("div",s,[...e[0]||(e[0]=[(0,c.Lk)("div",{class:"align-self-center"},[(0,c.Lk)("h1",null,"頁面不存在"),(0,c.Lk)("p",null,"將於 10 秒後跳回首頁")],-1)])])}var l={name:"NotFound"},r=t(1241);const a=(0,r.A)(l,[["render",u]]);var f=a}}]);
+//# sourceMappingURL=647.f0422265.js.map
