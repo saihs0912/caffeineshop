@@ -13,19 +13,13 @@ export async function getAllProducts(http) {
 }
 
 // 取得商品資訊
-export async function getProduct() {
-  const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`
+export async function getProduct(http, id) {
   try {
-    const res = await this.$http.get(api)
-    this.product = res.data.product
-    if (this.product.imagesUrl) {
-      this.imgArray = [].concat(this.product.imageUrl, this.product.imagesUrl)
-    } else if (!this.product.imagesUrl) {
-      this.imgArray = [].concat(this.product.imageUrl)
-      this.num = 0
-    }
+    const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${id}`
+    const res = await http.get(api)
+    return res
   } catch (err) {
-    this.$InformMessage(err, '取得商品資訊')
+    throw new Error('無法取得商品')
   }
 }
 
