@@ -6,7 +6,7 @@
   >
     <div class="container">
       <div class="row" style="width: 100%">
-        <div class="col-lg-12 col-md-10 col-sm-9 col-8">
+        <div class="col-lg-4 col-md-6 col-sm-9 col-8">
           <h1>
             <a class="navbar-brand fs-1" href="#" style="margin: 10px" @click="navbarHide('home')">
               <img
@@ -19,7 +19,7 @@
             </a>
           </h1>
         </div>
-        <div class="col-lg-12 col-md-2 col-sm-3 col-4 text-end">
+        <div class="col-lg-8 col-md-6 col-sm-3 col-4 text-end">
           <button
             class="navbar-toggler"
             type="button"

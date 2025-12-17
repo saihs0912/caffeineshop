@@ -1,6 +1,9 @@
 <template>
-  <div class="container" style="max-width: 600px;">
-    <div class="row align-items-center align-content-center mt-4 mb-4" style="min-height: calc(100vh - 332px);">
+  <div class="container" style="max-width: 600px">
+    <div
+      class="row align-items-center align-content-center mt-4 mb-4"
+      style="min-height: calc(100vh - 332px)"
+    >
       <div class="col-12 text-center">
         <h1>Oops...頁面不存在</h1>
         <p class="fs-5">將於 {{ num }} 秒後跳回首頁</p>
@@ -15,21 +18,21 @@
 <script>
 export default {
   name: 'NotFound',
-  data () {
+  data() {
     return {
       num: 10
     }
   },
   methods: {
-    countDown () {
+    countDown() {
       const count = setInterval(() => {
-        this.num --
+        this.num--
         if (this.num === 0) clearInterval(count)
       }, 1000)
     }
   },
   watch: {
-    num (newNum, oldNum) {
+    num(newNum, oldNum) {
       if (newNum === 0) {
         setTimeout(() => {
           this.$router.push('/')
@@ -37,7 +40,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.countDown()
   }
 }
