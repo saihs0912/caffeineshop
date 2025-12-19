@@ -6,6 +6,7 @@
     >
       <div class="col-12 text-center">
         <h1>Oops...頁面不存在</h1>
+        <p>就像一杯打翻的咖啡不復存在</p>
         <p class="fs-5">將於 {{ num }} 秒後跳回首頁</p>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-6 col-9 mx-auto" style="filter: grayscale(100%)">

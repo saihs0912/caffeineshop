@@ -4,11 +4,11 @@
     style="z-index: 1000"
     ref="navOut"
   >
-    <div class="container">
-      <div class="row" style="width: 100%">
-        <div class="col-lg-4 col-md-6 col-sm-9 col-8">
+    <div class="container" style="width: 100%">
+      <div class="row mx-auto" style="width: 100%; box-sizing: border-box">
+        <div class="col-lg-4 col-md-6 col-sm-9 col-8 m-0 p-0">
           <h1>
-            <a class="navbar-brand fs-1" href="#" style="margin: 10px" @click="navbarHide('home')">
+            <a class="navbar-brand fs-1" href="#" @click="navbarHide('home')">
               <img
                 class="img-fluid align-top"
                 src="../../assets/logo/logo-1.png"
@@ -19,7 +19,7 @@
             </a>
           </h1>
         </div>
-        <div class="col-lg-8 col-md-6 col-sm-3 col-4 text-end">
+        <div class="col-lg-8 col-md-6 col-sm-3 col-4 m-0 p-0 text-end">
           <button
             class="navbar-toggler"
             type="button"
@@ -33,7 +33,7 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNav01">
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav01">
             <ul class="navbar-nav" @mouseleave="mouseLeave" ref="navbarList">
               <span class="target-underline" ref="underline"></span>
               <li class="nav-item" @mouseenter="mouseEnter(0)" @click="setActive(0)">
