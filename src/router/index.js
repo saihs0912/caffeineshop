@@ -42,6 +42,10 @@ const routes = [
         component: () => import('../views/front/FollowList.vue')
       },
       {
+        path: 'cart',
+        component: () => import('../views/front/CartPage.vue')
+      },
+      {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
         component: () => import('../views/front/NotFound.vue')
