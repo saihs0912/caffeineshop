@@ -46,9 +46,9 @@
       </tbody>
     </table>
   </div>
-  <product-modal ref="productModal" :product="tempProduct" @update-product="updateProduct" />
-  <del-modal ref="delModal" :item="tempProduct" @del-item="delProduct" />
-  <pagination-modal :pages="pagination" @emit-page="getProducts" />
+  <product-modal ref="productModal" :product="tempProduct" @update-product="adminUpdateProduct" />
+  <del-modal ref="delModal" :item="tempProduct" @del-item="adminDelProduct" />
+  <pagination-modal :pages="pagination" @emit-page="adminGetProducts" />
 </template>
 
 <script>
@@ -100,7 +100,7 @@ export default {
     adminDelProduct
   },
   created() {
-    this.getProducts()
+    this.adminGetProducts()
   }
 }
 </script>

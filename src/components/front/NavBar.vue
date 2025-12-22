@@ -11,10 +11,10 @@
             <div>
               <a class="navbar-brand fs-1 pb-0" href="#" @click="navbarHide('home')">
                 <img
-                class="img-fluid align-top"
-                src="../../assets/logo/logo-1.png"
-                width="40"
-                alt=""
+                  class="img-fluid align-top"
+                  src="../../assets/logo/logo-1.png"
+                  width="40"
+                  alt=""
                 />
               </a>
             </div>
@@ -28,20 +28,29 @@
           </div>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-4 col-4 order-lg-last">
-          <div class="collapse navbar-collapse justify-content-end" style="display: inline;">
-            <ul class="navbar-nav flex-row justify-content-end" @mouseleave="mouseLeave" ref="navbarList" style="font-size: 1.5rem; flex-wrap: nowrap!important;">
-              <li class="nav-item" style="padding: 0 1rem;">
+          <div class="collapse navbar-collapse justify-content-end" style="display: inline">
+            <ul
+              class="navbar-nav flex-row justify-content-end"
+              @mouseleave="mouseLeave"
+              ref="navbarList"
+              style="font-size: 1.4rem; flex-wrap: nowrap !important"
+            >
+              <li class="nav-item" style="padding: 0 0.9rem">
                 <router-link class="nav-link" @click="navbarHide" to="/follow"
-                  ><i class="bi bi-heart-fill"></i></router-link
-                >
+                  ><i class="bi bi-heart-fill"></i
+                ></router-link>
               </li>
-              <li class="nav-item" style="padding: 0 1rem;">
-                <a class="nav-link" @click.prevent="navbarHide('cart')" href="#"><i class="bi bi-cart-fill"></i></a>
+              <li class="nav-item" style="padding: 0 0.9rem">
+                <a class="nav-link" @click.prevent="navbarHide('cart')" href="#"
+                  ><i class="bi bi-cart-fill"></i
+                ></a>
               </li>
             </ul>
           </div>
         </div>
-        <div class="col-lg-6 col-md-2 col-sm-2 col-2 m-0 p-0 text-end order-lg-2 order-md-2 order-sm-2 order-last d-flex align-items-center">
+        <div
+          class="col-lg-6 col-md-2 col-sm-2 col-2 m-0 p-0 text-end order-lg-2 order-md-2 order-sm-2 order-last d-flex align-items-center justify-content-end"
+        >
           <button
             class="navbar-toggler"
             type="button"
@@ -51,12 +60,18 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
             ref="navbar"
+            style="z-index: 999"
             @click="navOpen = !navOpen"
           >
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav01">
-            <ul class="navbar-nav" @mouseleave="mouseLeave" ref="navbarList" style="font-size: 1.2rem;">
+            <ul
+              class="navbar-nav"
+              @mouseleave="mouseLeave"
+              ref="navbarList"
+              style="font-size: 1.2rem"
+            >
               <span class="target-underline" ref="underline"></span>
               <li class="nav-item" @mouseenter="mouseEnter(0)" @click="setActive(0)">
                 <router-link class="nav-link" @click="navbarHide" to="/about">關於我們</router-link>
@@ -179,34 +194,27 @@ export default {
   position: relative;
 }
 @media (max-width: 991px) {
-  #navbarNav01{
+  #navbarNav01 {
     position: fixed;
     width: 696px;
-    top: 59px;
+    top: 54px;
     right: calc(50% - 348px);
     background-color: rgb(248, 249, 250);
     box-sizing: border-box;
-    padding-right: 12px;
-    padding-bottom: 12px;
+    padding: 0 12px 12px 0;
   }
 }
 @media (max-width: 767px) {
-  #navbarNav01{
-    position: fixed;
+  #navbarNav01 {
     width: 100%;
-    top: 59px;
     right: calc(50% - 258px);
-    background-color: rgb(248, 249, 250);
-    box-sizing: border-box;
-    padding-right: 12px;
-    padding-bottom: 12px;
   }
 }
 @media (max-width: 575px) {
   .shop-title {
     display: none;
   }
-  #navbarNav01{
+  #navbarNav01 {
     right: 0;
   }
 }
