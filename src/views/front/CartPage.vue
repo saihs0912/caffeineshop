@@ -59,8 +59,11 @@
         </table>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-12 col-12">
-        <div class="btn-group">
-          <button type="button" class="btn btn-danger">前往結帳</button>
+        <div>
+          查看優惠券
+        </div>
+        <div class="btn-group w-100">
+          <button type="button" class="btn btn-danger fs-3">前往結帳</button>
         </div>
       </div>
     </div>
