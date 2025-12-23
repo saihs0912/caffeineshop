@@ -41,9 +41,9 @@
                 ></router-link>
               </li>
               <li class="nav-item" style="padding: 0 0.9rem">
-                <a class="nav-link" @click.prevent="navbarHide('cart')" href="#"
+                <router-link class="nav-link" @click="navbarHide" to="/cart"
                   ><i class="bi bi-cart-fill"></i
-                ></a>
+                ></router-link>
               </li>
             </ul>
           </div>
