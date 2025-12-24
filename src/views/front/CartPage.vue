@@ -8,64 +8,96 @@
         </div>
         <h1>購物車</h1>
       </div>
-      <div class="col-lg-8 col-md-8 col-sm-12 col-12">
-        <table class="table align-middle mb-0">
-          <thead>
-            <tr>
-              <th></th>
-              <th>商品名稱</th>
-              <th>單價</th>
-              <th>數量</th>
-              <th>總額</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(item, i) in cart.carts" :key="i">
-              <td class="py-3" style="width: 80px">
-                <div>
-                  <img
-                    :src="cart.carts[i].product.imageUrl"
-                    :alt="item.product.title"
-                    class="img-fluid"
+      <div v-if="num === 0">
+        <p>購物車內是空的</p>
+      </div>
+      <template v-else>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-12">
+          <table class="table align-middle mb-0">
+            <thead>
+              <tr>
+                <th></th>
+                <th>商品名稱</th>
+                <th>單價</th>
+                <th>數量</th>
+                <th>總額</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item, i) in cart.carts" :key="i">
+                <td class="py-3" style="width: 80px">
+                  <div>
+                    <img
+                      :src="cart.carts[i].product.imageUrl"
+                      :alt="item.product.title"
+                      class="img-fluid"
+                    />
+                  </div>
+                </td>
+                <td class="py-3">
+                  <router-link
+                    class="no-underline d-block h-100"
+                    :to="{ name: 'product', params: { productId: item.product.id } }"
+                    >{{ item.product.title }}</router-link
+                  >
+                </td>
+                <td>
+                  {{ item.product.price }}
+                </td>
+                <td class="py-3" style="width: 80px">
+                  <input
+                    type="number"
+                    class="form-control"
+                    v-model.number="item.qty"
+                    min="1"
+                    max="20"
+                    @change="updateCart(item, 'cart')"
+                    :disabled="item.id === status.loadingItem"
                   />
-                </div>
-              </td>
-              <td class="py-3">
-                <router-link
-                  class="no-underline d-block h-100"
-                  :to="{ name: 'product', params: { productId: item.product.id } }"
-                  >{{ item.product.title }}</router-link
-                >
-              </td>
-              <td>
-                {{ item.product.price }}
-              </td>
-              <td class="py-3" style="width: 80px">
-                <input
-                  type="number"
-                  class="form-control"
-                  v-model.number="item.qty"
-                  min="1"
-                  max="20"
-                  @change="updateCart(item, 'cart')"
-                  :disabled="item.id === status.loadingItem"
-                />
-              </td>
-              <td class="py-3">
-                {{ item.final_total }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-12 col-12">
-        <div>
-          查看優惠券
+                </td>
+                <td class="py-3">
+                  {{ item.final_total }}
+                </td>
+                <td class="text-end" style="width: 50px">
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger btn"
+                    @click="deleteCartItem(item.id, 'cart')"
+                    :disabled="item.id === status.loadingItem"
+                  >
+                    <i class="bi bi-trash3"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="btn-group w-100">
-          <button type="button" class="btn btn-danger fs-3">前往結帳</button>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center">
+          <div class="border py-4">
+            <div class="pb-4 fs-3 text-success">總金額：{{ cart.total }}</div>
+            <div class="pb-4">
+              <button type="button" class="btn btn-outline-warning">
+                查看優惠券 <i class="bi bi-tag-fill"></i>
+              </button>
+            </div>
+            <div class="pb-4 btn-group w-75">
+              <button type="button" class="btn btn-secondary fs-5" v-if="num === 0">
+                購物車內沒有商品
+              </button>
+              <button type="button" class="btn btn-danger fs-5" @click="goToCheck" v-else>
+                前往結帳
+              </button>
+            </div>
+            <div>
+              或是...<br />
+              <router-link to="/shopping" class="no-underline fw-bold"
+                >回到商店繼續購物</router-link
+              >
+            </div>
+          </div>
         </div>
-      </div>
+      </template>
     </div>
   </div>
 </template>
@@ -92,7 +124,6 @@ export default {
     updateCart,
     deleteCartItem,
     goToCheck() {
-      this.hideModal()
       this.$router.push('/checkout')
     }
   },
