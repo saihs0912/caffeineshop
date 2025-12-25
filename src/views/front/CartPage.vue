@@ -57,7 +57,7 @@
                   />
                 </td>
                 <td class="py-3">
-                  {{ item.final_total }}
+                  <span class="fs-5 fw-bold">{{ item.final_total }}</span>
                 </td>
                 <td class="text-end" style="width: 50px">
                   <button
@@ -92,8 +92,36 @@
             <div>
               或是...<br />
               <router-link to="/shopping" class="no-underline fw-bold"
-                >回到商店繼續購物</router-link
+                >回到商店繼續逛逛</router-link
               >
+            </div>
+          </div>
+        </div>
+        <div class="col-12 mt-4" v-if="length !== 0">
+          <p class="fw-bold fs-4">追蹤清單內尚有商品</p>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-12 mb-2" v-for="(item, i) in filterData" :key="i">
+                <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
+                <div class="border d-flex p-2">
+                  <div class="w-25">
+                    <img :src="filterData[i].imageUrl" class="img-fluid" :alt="item.title" />
+                  </div>
+                  <div class="w-75 ps-2 position-relative d-flex">
+                    <button class="btn btn-outline-danger btn-sm position-absolute top-0 end-0" type="button"><i class="bi bi-x-lg"></i></button>
+                    <div class="d-flex flex-column justify-content-center" style="width: 60%;">
+                      <span>
+                        {{ item.title }}<br/>
+                        {{ item.price }}
+                      </span>
+                    </div>
+                    <div class="d-flex flex-column justify-content-center" style="width: 60%;">
+                      <button type="button" class="btn btn-brown w-75">加入購物車 <i class="bi bi-cart-fill"></i></button>
+                    </div>
+                  </div>
+                </div>
+                </router-link>
+              </div>
             </div>
           </div>
         </div>
@@ -104,7 +132,7 @@
 
 <script>
 import emitter from '@/methods/emitter'
-import { getCart, updateCart, deleteCartItem } from '@/methods/api'
+import { getCart, updateCart, deleteCartItem, getAllProducts } from '@/methods/api'
 
 export default {
   name: 'CartPage',
@@ -116,7 +144,10 @@ export default {
       status: {
         loadingItem: ''
       },
-      err: false
+      err: false,
+      productList: [],
+      length: 0,
+      favorite: JSON.parse(localStorage.getItem('favoriteList')) || []
     }
   },
   methods: {
@@ -125,9 +156,35 @@ export default {
     deleteCartItem,
     goToCheck() {
       this.$router.push('/checkout')
+    },
+    async allProducts() {
+      try {
+        const products = await getAllProducts(this.$http)
+        this.productList = products
+      } catch (err) {
+        this.$InformMessage(err, '取得商品')
+      }
+    }
+  },
+  computed: {
+    filterData() {
+      const result = []
+      const num = this.favorite.length
+      this.productList.forEach((item) => {
+        for (let i = 0; i < num; i++) {
+          if (item.id === this.favorite[i]) result.push(item)
+        }
+      })
+      return result
+    }
+  },
+  watch: {
+    filterData(newNum, oldNum) {
+      this.length = newNum.length
     }
   },
   created() {
+    this.allProducts()
     emitter.on('updateCart', () => {
       this.getCart('cart')
     })
