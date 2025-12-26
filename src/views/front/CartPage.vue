@@ -9,7 +9,14 @@
         <h1>購物車</h1>
       </div>
       <div v-if="num === 0">
-        <p>購物車內是空的</p>
+        <p class="text-center">
+          購物車內是空的<br /><br />就像你的咖啡杯一樣<br /><br /><router-link
+            to="/shopping"
+            class="no-underline fw-bold btn btn-outline-brown"
+            >回商店繼續逛逛</router-link
+          ><br /><br />
+          <span v-if="length !== 0">或是直接從下面追蹤清單放入購物車吧！</span>
+        </p>
       </div>
       <template v-else>
         <div class="col-lg-8 col-md-8 col-sm-12 col-12">
@@ -91,48 +98,71 @@
             </div>
             <div>
               或是...<br />
-              <router-link to="/shopping" class="no-underline fw-bold"
-                >回到商店繼續逛逛</router-link
-              >
-            </div>
-          </div>
-        </div>
-        <div class="col-12 mt-4" v-if="length !== 0">
-          <p class="fw-bold fs-4">追蹤清單內尚有商品</p>
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-12 col-12 mb-2" v-for="(item, i) in filterData" :key="i">
-                <router-link class="no-underline" :to="{ name: 'product', params: { productId: item.id } }">
-                <div class="border d-flex p-2">
-                  <div class="w-25">
-                    <img :src="filterData[i].imageUrl" class="img-fluid" :alt="item.title" />
-                  </div>
-                  <div class="w-75 ps-2 position-relative d-flex">
-                    <button class="btn btn-outline-danger btn-sm position-absolute top-0 end-0" type="button"><i class="bi bi-x-lg"></i></button>
-                    <div class="d-flex flex-column justify-content-center" style="width: 60%;">
-                      <span>
-                        {{ item.title }}<br/>
-                        {{ item.price }}
-                      </span>
-                    </div>
-                    <div class="d-flex flex-column justify-content-center" style="width: 60%;">
-                      <button type="button" class="btn btn-brown w-75">加入購物車 <i class="bi bi-cart-fill"></i></button>
-                    </div>
-                  </div>
-                </div>
-                </router-link>
-              </div>
+              <router-link to="/shopping" class="no-underline fw-bold">回商店繼續逛逛</router-link>
             </div>
           </div>
         </div>
       </template>
+      <div class="col-12 mt-4" v-if="length !== 0">
+        <p class="fw-bold fs-4">追蹤清單內尚有商品</p>
+        <div class="container">
+          <div class="row">
+            <div
+              class="col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+              v-for="(item, i) in filterData"
+              :key="i"
+              :class="{ fadeOut: this.favorNum === i }"
+            >
+              <div class="border d-flex p-2">
+                <div class="w-25">
+                  <router-link
+                    class="no-underline text-dark"
+                    :to="{ name: 'product', params: { productId: item.id } }"
+                    ><img :src="filterData[i].imageUrl" class="img-fluid" :alt="item.title"
+                  /></router-link>
+                </div>
+                <div class="w-75 ps-2 position-relative d-flex">
+                  <button
+                    class="btn btn-outline-danger btn-sm position-absolute top-0 end-0"
+                    type="button"
+                    @click.prevent="deleteFavorite(item.id, i)"
+                    :disabled="favorNum !== i && favorNum !== ''"
+                  >
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                  <div class="d-flex flex-column justify-content-center" style="width: 60%">
+                    <router-link
+                      class="no-underline text-dark"
+                      :to="{ name: 'product', params: { productId: item.id } }"
+                    >
+                      <span class="fw-bold">
+                        {{ item.title }}<br />
+                        <span class="fs-5">{{ item.price }} 元</span>
+                      </span></router-link
+                    >
+                  </div>
+                  <div class="d-flex flex-column justify-content-center" style="width: 60%">
+                    <button
+                      type="button"
+                      class="btn btn-brown w-75"
+                      @click="addProduct(item.id, i, 'follow')"
+                    >
+                      加入購物車 <i class="bi bi-cart-fill"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import emitter from '@/methods/emitter'
-import { getCart, updateCart, deleteCartItem, getAllProducts } from '@/methods/api'
+import { getCart, updateCart, deleteCartItem, getAllProducts, addToCart } from '@/methods/api'
 
 export default {
   name: 'CartPage',
@@ -147,7 +177,8 @@ export default {
       err: false,
       productList: [],
       length: 0,
-      favorite: JSON.parse(localStorage.getItem('favoriteList')) || []
+      favorite: JSON.parse(localStorage.getItem('favoriteList')) || [],
+      favorNum: ''
     }
   },
   methods: {
@@ -163,6 +194,30 @@ export default {
         this.productList = products
       } catch (err) {
         this.$InformMessage(err, '取得商品')
+      }
+    },
+    deleteFavorite(id, i) {
+      const favoriteId = this.favorite.indexOf(id)
+      this.favorNum = i
+      setTimeout(() => {
+        this.favorNum = ''
+        this.favorite.splice(favoriteId, 1)
+        localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
+      }, 500)
+    },
+    async addProduct(id, i, from) {
+      const favoriteId = this.favorite.indexOf(id)
+      this.favorNum = i
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      this.favorNum = ''
+      this.favorite.splice(favoriteId, 1)
+      localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
+      try {
+        const res = await addToCart(this.$http, id, 1, from)
+        this.$InformMessage(res, '商品放入購物車')
+        this.getCart('cart')
+      } catch (err) {
+        this.$InformMessage(err.message)
       }
     }
   },
@@ -194,3 +249,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.fadeOut {
+  transition: opacity 0.5s ease;
+  opacity: 0;
+}
+</style>
