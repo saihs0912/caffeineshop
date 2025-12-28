@@ -84,8 +84,8 @@
           <div class="border py-4">
             <div class="pb-4 fs-3 text-success">總金額：{{ cart.total }}</div>
             <div class="pb-4">
-              <button type="button" class="btn btn-outline-warning">
-                查看優惠券 <i class="bi bi-tag-fill"></i>
+              <button type="button" class="btn btn-outline-warning" @click.prevent="openCouponModal">
+                查看優惠券 <i class="bi bi-ticket-perforated-fill"></i>
               </button>
             </div>
             <div class="pb-4 btn-group w-75">
@@ -125,12 +125,13 @@
                   <button
                     class="btn btn-outline-danger btn-sm position-absolute top-0 end-0"
                     type="button"
+                    style="font-size: 0.6rem;"
                     @click.prevent="deleteFavorite(item.id, i)"
                     :disabled="favorNum !== i && favorNum !== ''"
                   >
                     <i class="bi bi-x-lg"></i>
                   </button>
-                  <div class="d-flex flex-column justify-content-center" style="width: 60%">
+                  <div class="d-flex flex-column justify-content-center" style="width: 40%">
                     <router-link
                       class="no-underline text-dark"
                       :to="{ name: 'product', params: { productId: item.id } }"
@@ -158,11 +159,13 @@
       </div>
     </div>
   </div>
+  <coupon-select ref="couponModal" @send-coupon="couponUse" />
 </template>
 
 <script>
 import emitter from '@/methods/emitter'
-import { getCart, updateCart, deleteCartItem, getAllProducts, addToCart } from '@/methods/api'
+import CouponSelect from '@/components/front/CouponSelect.vue'
+import { getCart, updateCart, deleteCartItem, getAllProducts, addToCart, addCouponCode } from '@/methods/api'
 
 export default {
   name: 'CartPage',
@@ -180,6 +183,9 @@ export default {
       favorite: JSON.parse(localStorage.getItem('favoriteList')) || [],
       favorNum: ''
     }
+  },
+  components: {
+    CouponSelect
   },
   methods: {
     getCart,
@@ -218,6 +224,21 @@ export default {
         this.getCart('cart')
       } catch (err) {
         this.$InformMessage(err.message)
+      }
+    },
+    openCouponModal() {
+      this.$refs.couponModal.showModal()
+    },
+    async couponUse (couponCode) {
+      this.$refs.couponModal.hideModal()
+      try {
+        const couponResult = await addCouponCode(couponCode)
+        console.log(couponResult)
+        if (couponResult.data.success) {
+          this.getCart('cart')
+        } else if (!couponResult.data.success) console.log('添加失敗')
+      } catch (err) {
+        this.$InformMessage(err, '添加優惠券')
       }
     }
   },

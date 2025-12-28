@@ -112,18 +112,18 @@ export async function deleteCartItem(id, from) {
 }
 
 // 加入優惠券
-export async function addCouponCode() {
+export async function addCouponCode(couponCode) {
   try {
     const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`
-    this.usedCoupon_code = this.coupon_code
-    this.coupon_code = ''
     const coupon = {
-      code: this.usedCoupon_code
+      code: couponCode
     }
-    await this.$http.post(url, { data: coupon })
-    this.getCart('check')
+    const res = await this.$http.post(url, { data: coupon })
+    console.log(res.data)
+    return res.data
   } catch (err) {
-    this.$InformMessage(err, '添加優惠券')
+    // this.$InformMessage(err, '添加優惠券')
+    throw new Error(err)
   }
 }
 
