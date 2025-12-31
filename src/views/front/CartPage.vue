@@ -84,7 +84,11 @@
           <div class="border py-4">
             <div class="pb-4 fs-3 text-success">總金額：{{ cart.total }}</div>
             <div class="pb-4">
-              <button type="button" class="btn btn-outline-warning" @click.prevent="openCouponModal">
+              <button
+                type="button"
+                class="btn btn-outline-warning"
+                @click.prevent="openCouponModal"
+              >
                 查看優惠券 <i class="bi bi-ticket-perforated-fill"></i>
               </button>
             </div>
@@ -103,7 +107,7 @@
           </div>
         </div>
       </template>
-      <div class="col-12 mt-4" v-if="length !== 0">
+      <div class="col-12 mt-5" v-if="length !== 0">
         <p class="fw-bold fs-4">追蹤清單內尚有商品</p>
         <div class="container">
           <div class="row">
@@ -125,7 +129,7 @@
                   <button
                     class="btn btn-outline-danger btn-sm position-absolute top-0 end-0"
                     type="button"
-                    style="font-size: 0.6rem;"
+                    style="font-size: 0.6rem"
                     @click.prevent="deleteFavorite(item.id, i)"
                     :disabled="favorNum !== i && favorNum !== ''"
                   >
@@ -165,7 +169,14 @@
 <script>
 import emitter from '@/methods/emitter'
 import CouponSelect from '@/components/front/CouponSelect.vue'
-import { getCart, updateCart, deleteCartItem, getAllProducts, addToCart, addCouponCode } from '@/methods/api'
+import {
+  getCart,
+  updateCart,
+  deleteCartItem,
+  getAllProducts,
+  addToCart,
+  addCouponCode
+} from '@/methods/api'
 
 export default {
   name: 'CartPage',
@@ -229,10 +240,10 @@ export default {
     openCouponModal() {
       this.$refs.couponModal.showModal()
     },
-    async couponUse (couponCode) {
+    async couponUse(couponCode) {
       this.$refs.couponModal.hideModal()
       try {
-        const couponResult = await addCouponCode(couponCode)
+        const couponResult = await addCouponCode(couponCode, this.$http)
         console.log(couponResult)
         if (couponResult.data.success) {
           this.getCart('cart')
