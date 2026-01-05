@@ -245,11 +245,10 @@ export default {
       try {
         const couponResult = await addCouponCode(couponCode, this.$http)
         console.log(couponResult, '3')
-        if (couponResult.data.success) {
+        if (couponResult.success) {
           this.getCart('cart')
-        } else if (!couponResult.data.success) console.log('添加失敗')
+        } else if (!couponResult.success) alert(couponResult.message)
       } catch (err) {
-        console.log('2')
         this.$InformMessage(err, '添加優惠券')
       }
     }

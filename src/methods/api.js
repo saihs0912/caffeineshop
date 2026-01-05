@@ -118,13 +118,9 @@ export async function addCouponCode(couponCode, http) {
     const coupon = {
       code: couponCode
     }
-    console.log('1')
     const res = await http.post(url, { data: coupon })
-    console.log(res.data)
-    return res.data.success
+    return res.data
   } catch (err) {
-    console.log(err)
-    // this.$InformMessage(err, '添加優惠券')
     throw new Error(err)
   }
 }
