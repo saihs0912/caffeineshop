@@ -82,7 +82,10 @@
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center">
           <div class="border py-4">
-            <div class="pb-4 fs-3 text-success">總金額：{{ cart.total }}</div>
+            <div class="pb-4 fs-3 text-success">總金額：
+              <span v-if="cart.total === cart.final_total">{{ cart.total }}</span>
+              <span v-else>{{ cart.final_total }}<br><span class="text-danger" style="font-size: 1rem;">※已套用優惠券</span></span>
+            </div>
             <div class="pb-4">
               <button
                 type="button"
@@ -192,7 +195,8 @@ export default {
       productList: [],
       length: 0,
       favorite: JSON.parse(localStorage.getItem('favoriteList')) || [],
-      favorNum: ''
+      favorNum: '',
+      fixedBox: false
     }
   },
   components: {
@@ -249,6 +253,15 @@ export default {
       } catch (err) {
         this.$InformMessage(err, '添加優惠券')
       }
+    },
+    handleScroll() {
+      if (window.scrollY > 72 && this.fixedBox === false) {
+        this.fixedBox = true
+        console.log(this.fixedBox)
+      } else if (window.scrollY <= 72 && this.fixedBox === true) {
+        this.fixedBox = false
+        console.log(this.fixedBox)
+      }
     }
   },
   computed: {
@@ -276,6 +289,7 @@ export default {
   },
   mounted() {
     this.getCart('cart')
+    window.addEventListener('scroll', this.handleScroll)
   }
 }
 </script>
