@@ -244,10 +244,8 @@ export default {
       this.$refs.couponModal.hideModal()
       try {
         const couponResult = await addCouponCode(couponCode, this.$http)
-        console.log(couponResult, '3')
-        if (couponResult.success) {
-          this.getCart('cart')
-        } else if (!couponResult.success) alert(couponResult.message)
+        if (couponResult.data.success) this.getCart('cart')
+        else if (!couponResult.data.success) throw couponResult
       } catch (err) {
         this.$InformMessage(err, '添加優惠券')
       }

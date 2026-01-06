@@ -119,7 +119,7 @@ export async function addCouponCode(couponCode, http) {
       code: couponCode
     }
     const res = await http.post(url, { data: coupon })
-    return res.data
+    return res
   } catch (err) {
     throw new Error(err)
   }
@@ -293,6 +293,7 @@ export async function getCoupons(page = 1) {
     this.isLoading = true
     const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}`
     const res = await this.$http.get(url)
+    console.log(res)
     this.coupons = res.data.coupons
     this.pagination = res.data.pagination
     this.isLoading = false
