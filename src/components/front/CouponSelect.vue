@@ -11,7 +11,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-brown text-white">
-          <h5 class="modal-title" id="exampleModalLabel">優惠券一覽</h5>
+          <h5 class="modal-title" id="exampleModalLabel">優惠券</h5>
           <button
             type="button"
             class="btn-close"
@@ -21,16 +21,22 @@
         </div>
         <div class="modal-body">
           <div class="mb-3" v-if="couponList.length !== 0">
-            <span class="d-block pb-2">直接點選優惠券即可帶入購物車</span>
+            <span class="d-block px-3">直接點選優惠券即可帶入購物車</span>
             <div class="p-3">
               <div class="card mb-3" v-for="(item, i) in couponList" :key="i">
-                <div class="card-body d-flex">
-                  <div class="w-75">
+                <div
+                  class="card-body d-flex flex-lg-nowrap flex-md-nowrap flex-sm-wrap flex-wrap flex-lg-row flex-md-row flex-sm-column flex-column position-relative"
+                >
+                  <div class="couponTitle">
                     <h5 class="card-title">{{ item.name }}</h5>
-                    <p class="card-text">全項商品 {{ item.percent }} 折優惠</p>
+                    <p class="card-text">全品項 {{ unitsDigit(item.percent) }} 折</p>
+                  </div>
+                  <div class="couponDate">
                     <p class="card-text text-sm">到期日 {{ $num.date(item.due_date) }}</p>
                   </div>
-                  <div class="w-25 btn-group">
+                  <div
+                    class="couponBtn btn-group float-lg-none float-md-none float-sm-end float-end"
+                  >
                     <button type="button" class="btn btn-warning" @click="couponUse(item.code)">
                       套用 <i class="bi bi-ticket-perforated-fill"></i>
                     </button>
@@ -38,10 +44,9 @@
                 </div>
               </div>
             </div>
-            <span class="d-block">或是由下方輸入優惠碼</span>
+            <span class="d-block px-3">或是由下方輸入優惠碼</span>
           </div>
-          <div class="mb-3">
-            <label for="coupon_code">優惠碼</label>
+          <div class="mb-3 px-3">
             <input
               type="text"
               class="form-control"
@@ -51,7 +56,7 @@
             />
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer px-3">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" @click="couponUse">套用優惠碼</button>
         </div>
@@ -91,7 +96,36 @@ export default {
       this.$emit('send-coupon', this.coupon_code)
       this.coupon_code = ''
       this.hideModal()
+    },
+    unitsDigit(num) {
+      if (num % 10 === 0) return num / 10
+      else return num
     }
   }
 }
 </script>
+
+<style>
+.couponTitle {
+  width: 50%;
+}
+.couponDate,
+.couponBtn {
+  width: 25%;
+}
+@media (max-width: 767px) {
+  .couponTitle {
+    width: 50%;
+  }
+  .couponDate {
+    width: 50%;
+  }
+  .couponBtn {
+    position: absolute;
+    width: 45%;
+    top: 17px;
+    right: 17px;
+    height: calc(100% - 34px);
+  }
+}
+</style>

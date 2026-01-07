@@ -82,9 +82,14 @@
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center">
           <div class="border py-4">
-            <div class="pb-4 fs-3 text-success">總金額：
-              <span v-if="cart.total === cart.final_total">{{ cart.total }}</span>
-              <span v-else>{{ cart.final_total }}<br><span class="text-danger" style="font-size: 1rem;">※已套用優惠券</span></span>
+            <div class="pb-4 fs-3 text-success">
+              總金額：
+              <span>{{ cart.total }}<br /></span>
+              <span v-if="cart.total !== cart.final_total"
+                >{{ cart.final_total }}<br /><span class="text-danger" style="font-size: 1rem"
+                  >※已套用優惠券</span
+                ></span
+              >
             </div>
             <div class="pb-4">
               <button

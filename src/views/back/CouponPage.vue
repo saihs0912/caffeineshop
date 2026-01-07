@@ -19,7 +19,7 @@
     <tbody>
       <tr v-for="(item, key) in coupons" :key="key">
         <td data-item="名稱">{{ item.title }}</td>
-        <td data-item="折扣百分比">{{ item.percent }}</td>
+        <td data-item="折扣百分比">{{ unitsDigit(item.percent) }}折</td>
         <td data-item="到期日">{{ $num.date(item.due_date) }}</td>
         <td data-item="是否啟用">
           <span v-if="item.is_enabled === 1" class="text-success">啟用</span>
@@ -92,7 +92,11 @@ export default {
       this.tempCoupon = { ...item }
       this.$refs.delModal.showModal()
     },
-    delCoupon
+    delCoupon,
+    unitsDigit(num) {
+      if (num % 10 === 0) return num / 10
+      else return num
+    }
   },
   created() {
     this.getCoupons()
