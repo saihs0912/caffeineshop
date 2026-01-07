@@ -37,8 +37,9 @@
                   <div
                     class="couponBtn btn-group float-lg-none float-md-none float-sm-end float-end"
                   >
-                    <button type="button" class="btn btn-warning" @click="couponUse(item.code)">
-                      套用 <i class="bi bi-ticket-perforated-fill"></i>
+                    <button type="button" :disabled="item.code === usedCoupon" class="btn btn-warning" @click="couponUse(item.code)">
+                      <span v-if="item.code === usedCoupon">已使用</span>
+                      <span v-else>使用</span>
                     </button>
                   </div>
                 </div>
@@ -57,8 +58,9 @@
           </div>
         </div>
         <div class="modal-footer px-3">
+          {{ coupon_code }}
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" @click="couponUse">套用優惠碼</button>
+          <button type="button" class="btn btn-primary" @click="couponUse('')">套用優惠碼</button>
         </div>
       </div>
     </div>
@@ -90,9 +92,23 @@ export default {
     }
   },
   mixins: [modalMixin],
+  props: {
+    usedCoupon: {
+      default() {
+        return {}
+      }
+    }
+  },
   methods: {
     couponUse(code) {
       if (code) this.coupon_code = code
+      if (this.usedCoupon === this.coupon_code) {
+        alert('此優惠券已經使用！')
+        return
+      } else if (this.coupon_code === '') {
+        alert('請輸入優惠碼！')
+        return
+      }
       this.$emit('send-coupon', this.coupon_code)
       this.coupon_code = ''
       this.hideModal()
@@ -122,7 +138,7 @@ export default {
   }
   .couponBtn {
     position: absolute;
-    width: 45%;
+    width: 40%;
     top: 17px;
     right: 17px;
     height: calc(100% - 34px);

@@ -1,4 +1,5 @@
 <template>
+  <loading-modal :active="isLoading"></loading-modal>
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -82,12 +83,12 @@
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center">
           <div class="border py-4">
-            <div class="pb-4 fs-3 text-success">
-              總金額：
-              <span>{{ cart.total }}<br /></span>
+            <div class="pb-3 fs-3 text-success">
+              
+              <span :class="[{ 'fs-4': cart.total !== cart.final_total, 'text-decoration-line-through': cart.total !== cart.final_total }]">{{ $num.currency(cart.total) }} 元<br /></span>
               <span v-if="cart.total !== cart.final_total"
-                >{{ cart.final_total }}<br /><span class="text-danger" style="font-size: 1rem"
-                  >※已套用優惠券</span
+                >合計 {{ $num.currency(cart.final_total) }} 元<br /><span class="text-danger" style="font-size: 1rem"
+                  >已套用 {{ unitsDigit(cart.carts[0].coupon.percent) }}折 優惠券</span
                 ></span
               >
             </div>
@@ -171,7 +172,7 @@
       </div>
     </div>
   </div>
-  <coupon-select ref="couponModal" @send-coupon="couponUse" />
+  <coupon-select ref="couponModal" :usedCoupon="usedCoupon" @send-coupon="couponUse" />
 </template>
 
 <script>
@@ -201,7 +202,9 @@ export default {
       length: 0,
       favorite: JSON.parse(localStorage.getItem('favoriteList')) || [],
       favorNum: '',
-      fixedBox: false
+      fixedBox: false,
+      usedCoupon: '',
+      isLoading: false
     }
   },
   components: {
@@ -251,11 +254,14 @@ export default {
     },
     async couponUse(couponCode) {
       this.$refs.couponModal.hideModal()
+      this.isLoading = true
       try {
         const couponResult = await addCouponCode(couponCode, this.$http)
         if (couponResult.data.success) this.getCart('cart')
         else if (!couponResult.data.success) throw couponResult
+      this.isLoading = false
       } catch (err) {
+        this.isLoading = false
         this.$InformMessage(err, '添加優惠券')
       }
     },
@@ -267,6 +273,10 @@ export default {
         this.fixedBox = false
         console.log(this.fixedBox)
       }
+    },
+    unitsDigit(num) {
+      if (num % 10 === 0) return num / 10
+      else return num
     }
   },
   computed: {
@@ -303,5 +313,8 @@ export default {
 .fadeOut {
   transition: opacity 0.5s ease;
   opacity: 0;
+}
+.fixedBox {
+  position: fixed;
 }
 </style>

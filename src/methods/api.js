@@ -30,6 +30,8 @@ export async function getCart(from) {
     const res = await this.$http.get(url)
     const cart = res.data.data
     this.cart = cart
+    console.log(this.cart)
+    if (this.cart.carts[0].coupon.code) this.usedCoupon = this.cart.carts[0].coupon.code
     this.num = cart.carts.length
     if (from === 'check') {
       this.$emit('sendCart', this.cart)
