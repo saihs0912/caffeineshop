@@ -84,10 +84,19 @@
         <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center">
           <div class="border py-4">
             <div class="pb-3 fs-3 text-success">
-              
-              <span :class="[{ 'fs-4': cart.total !== cart.final_total, 'text-decoration-line-through': cart.total !== cart.final_total }]">{{ $num.currency(cart.total) }} 元<br /></span>
+              <span
+                :class="[
+                  {
+                    'fs-4': cart.total !== cart.final_total,
+                    'text-decoration-line-through': cart.total !== cart.final_total
+                  }
+                ]"
+                >{{ $num.currency(cart.total) }} 元<br
+              /></span>
               <span v-if="cart.total !== cart.final_total"
-                >合計 {{ $num.currency(cart.final_total) }} 元<br /><span class="text-danger" style="font-size: 1rem"
+                >合計 {{ $num.currency(cart.final_total) }} 元<br /><span
+                  class="text-danger"
+                  style="font-size: 1rem"
                   >已套用 {{ unitsDigit(cart.carts[0].coupon.percent) }}折 優惠券</span
                 ></span
               >
@@ -144,7 +153,7 @@
                   >
                     <i class="bi bi-x-lg"></i>
                   </button>
-                  <div class="d-flex flex-column justify-content-center" style="width: 40%">
+                  <div class="d-flex flex-column justify-content-center" style="width: 50%">
                     <router-link
                       class="no-underline text-dark"
                       :to="{ name: 'product', params: { productId: item.id } }"
@@ -155,13 +164,13 @@
                       </span></router-link
                     >
                   </div>
-                  <div class="d-flex flex-column justify-content-center" style="width: 60%">
+                  <div class="d-flex flex-column justify-content-center" style="width: 50%">
                     <button
                       type="button"
                       class="btn btn-brown w-75"
                       @click="addProduct(item.id, i, 'follow')"
                     >
-                      加入購物車 <i class="bi bi-cart-fill"></i>
+                      <i class="bi bi-cart-fill"></i>
                     </button>
                   </div>
                 </div>
@@ -259,7 +268,7 @@ export default {
         const couponResult = await addCouponCode(couponCode, this.$http)
         if (couponResult.data.success) this.getCart('cart')
         else if (!couponResult.data.success) throw couponResult
-      this.isLoading = false
+        this.isLoading = false
       } catch (err) {
         this.isLoading = false
         this.$InformMessage(err, '添加優惠券')

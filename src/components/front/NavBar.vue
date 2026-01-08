@@ -41,9 +41,10 @@
                 ></router-link>
               </li>
               <li class="nav-item" style="padding: 0 0.9rem">
-                <router-link class="nav-link" @click="navbarHide" to="/cart"
-                  ><i class="bi bi-cart-fill"></i
-                ></router-link>
+                <router-link class="nav-link position-relative" @click="navbarHide" to="/cart"
+                  ><i class="bi bi-cart-fill"></i>
+                  <i class="position-absolute top-0 end-0 cartItem p-2 rounded-circle"></i>
+                </router-link>
               </li>
             </ul>
           </div>
@@ -192,6 +193,9 @@ export default {
 <style>
 .navbar-nav {
   position: relative;
+}
+.cartItem {
+  background-color: #f00;
 }
 @media (max-width: 991px) {
   #navbarNav01 {
