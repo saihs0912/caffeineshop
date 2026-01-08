@@ -10,7 +10,7 @@
     </div>
     <footer-area />
     <a class="cartOpen" href="#" @click.prevent="openCart" @mousedown="cartMove" :style="moveDelay"
-      ><span class="cartOpenNum" v-show="num > 0">{{ num }}</span></a
+      ><span class="cartOpenNum" v-show="num > 0" :class="itemNum">{{ num }}</span></a
     >
     <a class="backToTop" href="#" v-if="showScrollTop" @click.prevent="scrollToTop"
       ><i class="bi bi-arrow-up-circle-fill"></i

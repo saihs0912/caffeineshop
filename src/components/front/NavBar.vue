@@ -43,7 +43,9 @@
               <li class="nav-item" style="padding: 0 0.9rem">
                 <router-link class="nav-link position-relative" @click="navbarHide" to="/cart"
                   ><i class="bi bi-cart-fill"></i>
-                  <i class="position-absolute top-0 end-0 cartItem p-2 rounded-circle"></i>
+                  <i class="position-absolute cartItem p-2 rounded-circle">
+                    <span v-show="num > 0">{{ num }}</span>
+                  </i>
                 </router-link>
               </li>
             </ul>
@@ -102,6 +104,8 @@
 <script>
 import CartModal from './CartModal.vue'
 import { useWindowSize } from '@vueuse/core'
+import { getCart } from '@/methods/api'
+import emitter from '@/methods/emitter'
 
 export default {
   name: 'NavBar',
@@ -111,13 +115,15 @@ export default {
       widthSwitch: false,
       navOpen: false,
       activeIndex: null,
-      nowPath: ['/about', '/caffeine', '/shopping', '/order', '/follow', '/coupon']
+      nowPath: ['/about', '/caffeine', '/shopping', '/order', '/follow', '/coupon'],
+      num: 0
     }
   },
   components: {
     CartModal
   },
   methods: {
+    getCart,
     navbarHide(go) {
       const underline = this.$refs.underline
       if (this.widthSwitch === true && this.navOpen === true) {
@@ -172,8 +178,12 @@ export default {
   created() {
     const { width } = useWindowSize()
     this.widthSize = width
+    emitter.on('updateCart', () => {
+      this.getCart('cart')
+    })
   },
   mounted() {
+    this.getCart('cart')
     const underline = this.$refs.underline
     const navbarEl = this.$refs.navbarList
     const items = navbarEl.querySelectorAll('.nav-item')
@@ -194,8 +204,27 @@ export default {
 .navbar-nav {
   position: relative;
 }
-.cartItem {
+.cartItem span {
+  display: block;
+  top: 0;
+  left: 4px;
+  position: absolute;
+  text-align: center;
+  color: #fff;
+  font-family: 'Arial';
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.cartItem span::before {
+  content: '';
+  top: 1px;
+  left: -4px;
+  width: 15px;
+  height: 15px;
+  position: absolute;
   background-color: #f00;
+  z-index: -1;
+  border-radius: 50%;
 }
 @media (max-width: 991px) {
   #navbarNav01 {
