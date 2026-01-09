@@ -168,7 +168,7 @@
                     <button
                       type="button"
                       class="btn btn-brown w-75"
-                      @click="addProduct(item.id, i, 'follow')"
+                      @click="addProduct(item.id, i, 'cart')"
                     >
                       <i class="bi bi-cart-fill"></i>
                     </button>
@@ -251,7 +251,7 @@ export default {
       this.favorite.splice(favoriteId, 1)
       localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
       try {
-        const res = await addToCart(this.$http, id, 1, from)
+        const res = await addToCart(this.$http, id, from, 1)
         this.$InformMessage(res, '商品放入購物車')
         this.getCart('cart')
       } catch (err) {

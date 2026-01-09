@@ -66,7 +66,7 @@ export async function addToCart(http, id, num, from, i) {
       this.$InformMessage(res, '商品放入購物車')
     } else if (from === 'follow') {
       return res
-    }
+    } else if (from === 'cart') this.$InformMessage(res, '商品放入購物車')
     emitter.emit('updateCart')
   } catch (err) {
     if (from !== 'follow') {
