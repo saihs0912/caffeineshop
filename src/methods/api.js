@@ -49,24 +49,25 @@ export async function addToCart(http, id, num, from, i) {
   if (from === 'detail') {
     if (this.cartPutIn) this.cartPutIn = !this.cartPutIn
   }
-  if (from !== 'follow') this.status.loadingItem = id
+  if (from === 'list') this.status.loadingItem = id
   const cart = {
     product_id: id,
     qty: num
   }
   try {
     const res = await http.post(api, { data: cart })
+    console.log(res)
     if (from === 'list') {
       this.cart = i
     } else if (from === 'detail') {
       this.cartPutIn = true
     }
-    if (from !== 'follow') {
+    if (from !== 'follow' && from !== 'cart') {
       this.status.loadingItem = ''
       this.$InformMessage(res, '商品放入購物車')
-    } else if (from === 'follow') {
+    } else if (from === 'follow' || from === 'cart') {
       return res
-    } else if (from === 'cart') this.$InformMessage(res, '商品放入購物車')
+    }
     emitter.emit('updateCart')
   } catch (err) {
     if (from !== 'follow') {

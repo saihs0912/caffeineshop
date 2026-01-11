@@ -251,7 +251,8 @@ export default {
       this.favorite.splice(favoriteId, 1)
       localStorage.setItem('favoriteList', JSON.stringify(this.favorite))
       try {
-        const res = await addToCart(this.$http, id, from, 1)
+        const res = await addToCart(this.$http, id, 1, from)
+        console.log(res)
         this.$InformMessage(res, '商品放入購物車')
         this.getCart('cart')
       } catch (err) {
