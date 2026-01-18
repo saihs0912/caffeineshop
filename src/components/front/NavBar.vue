@@ -205,6 +205,7 @@ export default {
   position: relative;
 }
 .cartItem span {
+  width: 16px;
   display: block;
   top: 0;
   left: 4px;
@@ -218,10 +219,11 @@ export default {
 .cartItem span::before {
   content: '';
   top: 1px;
-  left: -4px;
+  left: 0;
   width: 15px;
   height: 15px;
   position: absolute;
+  text-align: center;
   background-color: #f00;
   z-index: -1;
   border-radius: 50%;
