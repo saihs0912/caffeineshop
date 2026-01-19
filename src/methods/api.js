@@ -38,6 +38,7 @@ export async function getCart(from) {
       this.$emit('updateNum', this.num)
     }
   } catch (err) {
+    console.log(err)
     this.$InformMessage(err, '取得購物車資訊')
     if (from === 'cart') this.err = true
   }
