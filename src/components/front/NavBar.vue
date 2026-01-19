@@ -213,7 +213,7 @@ export default {
   text-align: center;
   color: #fff;
   font-family: 'Arial';
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: bold;
 }
 .cartItem span::before {
