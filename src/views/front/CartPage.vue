@@ -65,7 +65,7 @@
                   />
                 </td>
                 <td class="py-3">
-                  <span class="fs-5 fw-bold">{{ item.final_total }}</span>
+                  <span class="fs-5 fw-bold">{{ $num.currency(item.final_total) }}</span>
                 </td>
                 <td class="text-end" style="width: 50px">
                   <button
