@@ -81,7 +81,7 @@
             </tbody>
           </table>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center" :class="{ fixedBox: fixedBox, noFixedBox: !fixedBox }">
           <div class="border py-4">
             <div class="pb-3 fs-3 text-success">
               <span
@@ -324,7 +324,12 @@ export default {
   transition: opacity 0.5s ease;
   opacity: 0;
 }
+.noFixedBox {
+  position: static;
+}
 .fixedBox {
   position: fixed;
+  top: 74px;
+  right: 0;
 }
 </style>
