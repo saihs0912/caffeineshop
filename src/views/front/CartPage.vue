@@ -81,8 +81,12 @@
             </tbody>
           </table>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center" :class="{ fixedBox: fixedBox, noFixedBox: !fixedBox }">
-          <div class="border py-4">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center" ref="checkBox">
+          <div
+            class="border py-4"
+            ref="checkBoxIn"
+            :class="{ fixedBox: fixedBox, noFixedBox: !fixedBox }"
+          >
             <div class="pb-3 fs-3 text-success">
               <span
                 :class="[
@@ -276,11 +280,18 @@ export default {
       }
     },
     handleScroll() {
+      const box = this.$refs.checkBox
+      const boxIn = this.$refs.checkBoxIn
+      const boxX = box.getBoundingClientRect().x
+      const boxWidth = box.getBoundingClientRect().width
+      console.log(boxX, boxWidth)
       if (window.scrollY > 72 && this.fixedBox === false) {
         this.fixedBox = true
         console.log(this.fixedBox)
       } else if (window.scrollY <= 72 && this.fixedBox === true) {
         this.fixedBox = false
+        boxIn.style.left = `${boxX}px`
+        boxIn.style.width = `${boxWidth}px`
         console.log(this.fixedBox)
       }
     },
@@ -330,6 +341,5 @@ export default {
 .fixedBox {
   position: fixed;
   top: 74px;
-  right: 0;
 }
 </style>
