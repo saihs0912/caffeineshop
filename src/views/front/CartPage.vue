@@ -19,116 +19,110 @@
           <span v-if="length !== 0">或是直接從下面追蹤清單放入購物車吧！</span>
         </p>
       </div>
-      <template v-else>
-        <div class="col-lg-8 col-md-8 col-sm-12 col-12">
-          <table class="table align-middle mb-0">
-            <thead>
-              <tr>
-                <th></th>
-                <th>商品名稱</th>
-                <th>單價</th>
-                <th>數量</th>
-                <th>總額</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(item, i) in cart.carts" :key="i">
-                <td class="py-3" style="width: 80px">
-                  <div>
-                    <img
-                      :src="cart.carts[i].product.imageUrl"
-                      :alt="item.product.title"
-                      class="img-fluid"
-                    />
-                  </div>
-                </td>
-                <td class="py-3">
-                  <router-link
-                    class="no-underline d-block h-100"
-                    :to="{ name: 'product', params: { productId: item.product.id } }"
-                    >{{ item.product.title }}</router-link
-                  >
-                </td>
-                <td>
-                  {{ item.product.price }}
-                </td>
-                <td class="py-3" style="width: 80px">
-                  <input
-                    type="number"
-                    class="form-control"
-                    v-model.number="item.qty"
-                    min="1"
-                    max="20"
-                    @change="updateCart(item, 'cart')"
-                    :disabled="item.id === status.loadingItem"
+      <div class="col-lg-8 col-md-8 col-sm-12 col-12" v-show="num !== 0">
+        <table class="table align-middle mb-0">
+          <thead>
+            <tr>
+              <th></th>
+              <th>商品名稱</th>
+              <th>單價</th>
+              <th>數量</th>
+              <th>總額</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, i) in cart.carts" :key="i">
+              <td class="py-3" style="width: 80px">
+                <div>
+                  <img
+                    :src="cart.carts[i].product.imageUrl"
+                    :alt="item.product.title"
+                    class="img-fluid"
                   />
-                </td>
-                <td class="py-3">
-                  <span class="fs-5 fw-bold">{{ $num.currency(item.final_total) }}</span>
-                </td>
-                <td class="text-end" style="width: 50px">
-                  <button
-                    type="button"
-                    class="btn btn-outline-danger btn"
-                    @click="deleteCartItem(item.id, 'cart')"
-                    :disabled="item.id === status.loadingItem"
-                  >
-                    <i class="bi bi-trash3"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center" ref="checkBox">
-          <div
-            class="border py-4"
-            ref="checkBoxIn"
-            :class="{ fixedBox: fixedBox, noFixedBox: !fixedBox }"
-          >
-            <div class="pb-3 fs-3 text-success">
-              <span
-                :class="[
-                  {
-                    'fs-4': cart.total !== cart.final_total,
-                    'text-decoration-line-through': cart.total !== cart.final_total
-                  }
-                ]"
-                >{{ $num.currency(cart.total) }} 元<br
-              /></span>
-              <span v-if="cart.total !== cart.final_total"
-                >合計 {{ $num.currency(cart.final_total) }} 元<br /><span
-                  class="text-danger"
-                  style="font-size: 1rem"
-                  >已套用 {{ unitsDigit(cart.carts[0].coupon.percent) }}折 優惠券</span
-                ></span
-              >
-            </div>
-            <div class="pb-4">
-              <button
-                type="button"
-                class="btn btn-outline-warning"
-                @click.prevent="openCouponModal"
-              >
-                查看優惠券 <i class="bi bi-ticket-perforated-fill"></i>
-              </button>
-            </div>
-            <div class="pb-4 btn-group w-75">
-              <button type="button" class="btn btn-secondary fs-5" v-if="num === 0">
-                購物車內沒有商品
-              </button>
-              <button type="button" class="btn btn-danger fs-5" @click="goToCheck" v-else>
-                前往結帳
-              </button>
-            </div>
-            <div>
-              或是...<br />
-              <router-link to="/shopping" class="no-underline fw-bold">回商店繼續逛逛</router-link>
-            </div>
+                </div>
+              </td>
+              <td class="py-3">
+                <router-link
+                  class="no-underline d-block h-100"
+                  :to="{ name: 'product', params: { productId: item.product.id } }"
+                  >{{ item.product.title }}</router-link
+                >
+              </td>
+              <td>
+                {{ item.product.price }}
+              </td>
+              <td class="py-3" style="width: 80px">
+                <input
+                  type="number"
+                  class="form-control"
+                  v-model.number="item.qty"
+                  min="1"
+                  max="20"
+                  @change="updateCart(item, 'cart')"
+                  :disabled="item.id === status.loadingItem"
+                />
+              </td>
+              <td class="py-3">
+                <span class="fs-5 fw-bold">{{ $num.currency(item.final_total) }}</span>
+              </td>
+              <td class="text-end" style="width: 50px">
+                <button
+                  type="button"
+                  class="btn btn-outline-danger btn"
+                  @click="deleteCartItem(item.id, 'cart')"
+                  :disabled="item.id === status.loadingItem"
+                >
+                  <i class="bi bi-trash3"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center" ref="checkBox">
+        <div
+          class="border py-4"
+          ref="checkBoxIn"
+          :class="{ fixedBox: fixedBox, noFixedBox: !fixedBox }"
+        >
+          <div class="pb-3 fs-3 text-success">
+            <span
+              :class="[
+                {
+                  'fs-4': cart.total !== cart.final_total,
+                  'text-decoration-line-through': cart.total !== cart.final_total
+                }
+              ]"
+              >{{ $num.currency(cart.total) }} 元<br
+            /></span>
+            <span v-if="cart.total !== cart.final_total"
+              >合計 {{ $num.currency(cart.final_total) }} 元<br /><span
+                class="text-danger"
+                style="font-size: 1rem"
+                >已套用 {{ unitsDigit(cart.carts[0].coupon.percent) }}折 優惠券</span
+              ></span
+            >
+          </div>
+          <div class="pb-4">
+            <button type="button" class="btn btn-outline-warning" @click.prevent="openCouponModal">
+              查看優惠券 <i class="bi bi-ticket-perforated-fill"></i>
+            </button>
+          </div>
+          <div class="pb-4 btn-group w-75">
+            <button type="button" class="btn btn-secondary fs-5" v-if="num === 0">
+              購物車內沒有商品
+            </button>
+            <button type="button" class="btn btn-danger fs-5" @click="goToCheck" v-else>
+              前往結帳
+            </button>
+          </div>
+          <div>
+            或是...<br />
+            <router-link to="/shopping" class="no-underline fw-bold">回商店繼續逛逛</router-link>
           </div>
         </div>
-      </template>
+      </div>
       <div class="col-12 mt-5" v-if="length !== 0">
         <p class="fw-bold fs-4">追蹤清單內尚有商品</p>
         <div class="container">
@@ -217,7 +211,11 @@ export default {
       favorNum: '',
       fixedBox: false,
       usedCoupon: '',
-      isLoading: false
+      isLoading: false,
+      checkBox: {
+        wt: 0,
+        lf: 0
+      }
     }
   },
   components: {
@@ -282,16 +280,16 @@ export default {
     handleScroll() {
       const box = this.$refs.checkBox
       const boxIn = this.$refs.checkBoxIn
-      const boxX = box.getBoundingClientRect().x
-      const boxWidth = box.getBoundingClientRect().width
-      console.log(boxX, boxWidth)
+      this.checkBox.lf = box.getBoundingClientRect().x
+      this.checkBox.wt = box.getBoundingClientRect().width
+      console.log(this.checkBox.lf, this.checkBox.wt)
       if (window.scrollY > 72 && this.fixedBox === false) {
         this.fixedBox = true
         console.log(this.fixedBox)
       } else if (window.scrollY <= 72 && this.fixedBox === true) {
         this.fixedBox = false
-        boxIn.style.left = `${boxX}px`
-        boxIn.style.width = `${boxWidth}px`
+        boxIn.style.left = `${this.checkBox.lf}px`
+        boxIn.style.width = `${this.checkBox.wt}px`
         console.log(this.fixedBox)
       }
     },
@@ -323,9 +321,18 @@ export default {
       this.getCart('cart')
     })
   },
-  mounted() {
-    this.getCart('cart')
-    window.addEventListener('scroll', this.handleScroll)
+  async mounted() {
+    this.$nextTick(() => {
+      this.getCart('cart')
+      window.addEventListener('scroll', this.handleScroll)
+      const box = this.$refs.checkBox
+      this.checkBox.lf = box.getBoundingClientRect().x
+      this.checkBox.wt = box.getBoundingClientRect().width
+      console.log(this.checkBox)
+      const boxIn = this.$refs.checkBoxIn
+      boxIn.style.left = `${this.checkBox.lf}px`
+      boxIn.style.width = `${this.checkBox.wt}px`
+    })
   }
 }
 </script>
