@@ -80,7 +80,7 @@
           </tbody>
         </table>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center" ref="checkBox">
+      <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center" ref="checkBox" v-show="num !== 0">
         <div
           class="border py-4"
           ref="checkBoxIn"
@@ -286,10 +286,12 @@ export default {
       if (window.scrollY > 72 && this.fixedBox === false) {
         this.fixedBox = true
         console.log(this.fixedBox)
-      } else if (window.scrollY <= 72 && this.fixedBox === true) {
-        this.fixedBox = false
         boxIn.style.left = `${this.checkBox.lf}px`
         boxIn.style.width = `${this.checkBox.wt}px`
+        console.log('2')
+      } else if (window.scrollY <= 72 && this.fixedBox === true) {
+        console.log('1')
+        this.fixedBox = false
         console.log(this.fixedBox)
       }
     },
@@ -321,17 +323,19 @@ export default {
       this.getCart('cart')
     })
   },
-  async mounted() {
-    this.$nextTick(() => {
-      this.getCart('cart')
+  mounted() {
+    this.$nextTick(async () => {
+      const num = await this.getCart('cart')
       window.addEventListener('scroll', this.handleScroll)
-      const box = this.$refs.checkBox
+      if (num !== 0) {
+        const box = this.$refs.checkBox
       this.checkBox.lf = box.getBoundingClientRect().x
       this.checkBox.wt = box.getBoundingClientRect().width
-      console.log(this.checkBox)
-      const boxIn = this.$refs.checkBoxIn
-      boxIn.style.left = `${this.checkBox.lf}px`
-      boxIn.style.width = `${this.checkBox.wt}px`
+      // console.log(this.checkBox)
+      // const boxIn = this.$refs.checkBoxIn
+      // boxIn.style.left = `${this.checkBox.lf}px`
+      // boxIn.style.width = `${this.checkBox.wt}px`
+      }
     })
   }
 }
