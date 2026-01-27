@@ -118,6 +118,9 @@
             </button>
           </div>
           <div>
+            {{ checkBox.wt }}
+          </div>
+          <div>
             或是...<br />
             <router-link to="/shopping" class="no-underline fw-bold">回商店繼續逛逛</router-link>
           </div>
@@ -329,14 +332,17 @@ export default {
       window.addEventListener('scroll', this.handleScroll)
       if (num !== 0) {
         const box = this.$refs.checkBox
-      this.checkBox.lf = box.getBoundingClientRect().x
-      this.checkBox.wt = box.getBoundingClientRect().width
-      // console.log(this.checkBox)
-      // const boxIn = this.$refs.checkBoxIn
-      // boxIn.style.left = `${this.checkBox.lf}px`
-      // boxIn.style.width = `${this.checkBox.wt}px`
+        this.checkBox.lf = box.getBoundingClientRect().x
+        this.checkBox.wt = box.getBoundingClientRect().width
+        // console.log(this.checkBox)
+        // const boxIn = this.$refs.checkBoxIn
+        // boxIn.style.left = `${this.checkBox.lf}px`
+        // boxIn.style.width = `${this.checkBox.wt}px`
       }
     })
+  },
+  unmounted() {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
