@@ -218,7 +218,8 @@ export default {
       checkBox: {
         wt: 0,
         lf: 0
-      }
+      },
+      observer: null
     }
   },
   components: {
@@ -333,7 +334,15 @@ export default {
       if (num !== 0) {
         const box = this.$refs.checkBox
         this.checkBox.lf = box.getBoundingClientRect().x
-        this.checkBox.wt = box.getBoundingClientRect().width
+        this.observer = new ResizeObserver(enties => {
+          for(const entry of enties) {
+            const width = entry.borderBoxSize ? entry.borderBoxSize[0].inlineSize : entry.contentRect.width
+            this.checkBox.wt = width
+          }
+        })
+        if (this.$refs.checkBox) {
+          this.observer.observe(this.$refs.checkBox);
+        }
         // console.log(this.checkBox)
         // const boxIn = this.$refs.checkBoxIn
         // boxIn.style.left = `${this.checkBox.lf}px`
