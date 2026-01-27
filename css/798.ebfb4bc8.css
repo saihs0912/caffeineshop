@@ -1,0 +1,1 @@
+.couponTitle{width:50%}.couponBtn,.couponDate{width:25%}@media (max-width:767px){.couponDate,.couponTitle{width:50%}.couponBtn{position:absolute;width:40%;top:17px;right:17px;height:calc(100% - 34px)}}.fadeOut{transition:opacity .5s ease;opacity:0}.noFixedBox{position:static}.fixedBox{position:fixed;top:74px}
