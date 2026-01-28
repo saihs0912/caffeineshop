@@ -286,17 +286,16 @@ export default {
       const boxIn = this.$refs.checkBoxIn
       this.checkBox.lf = box.getBoundingClientRect().x
       this.checkBox.wt = box.getBoundingClientRect().width
-      console.log(this.checkBox.lf, this.checkBox.wt)
       if (window.scrollY > 72 && this.fixedBox === false) {
         this.fixedBox = true
-        console.log(this.fixedBox)
         boxIn.style.left = `${this.checkBox.lf}px`
         boxIn.style.width = `${this.checkBox.wt}px`
         console.log('2')
       } else if (window.scrollY <= 72 && this.fixedBox === true) {
         console.log('1')
         this.fixedBox = false
-        console.log(this.fixedBox)
+        boxIn.style.left = 'auto'
+        boxIn.style.width = 'auto'
       }
     },
     unitsDigit(num) {
@@ -333,15 +332,22 @@ export default {
       window.addEventListener('scroll', this.handleScroll)
       if (num !== 0) {
         const box = this.$refs.checkBox
+        const boxIn = this.$refs.checkBoxIn
         this.checkBox.lf = box.getBoundingClientRect().x
-        this.observer = new ResizeObserver(enties => {
-          for(const entry of enties) {
-            const width = entry.borderBoxSize ? entry.borderBoxSize[0].inlineSize : entry.contentRect.width
+        this.observer = new ResizeObserver((enties) => {
+          for (const entry of enties) {
+            const width = entry.borderBoxSize
+              ? entry.borderBoxSize[0].inlineSize
+              : entry.contentRect.width
             this.checkBox.wt = width
+            this.checkBox.lf = box.getBoundingClientRect().x
+            console.log(this.checkBox.wt, this.checkBox.lf)
+            boxIn.style.left = `${this.checkBox.lf}px`
+            boxIn.style.width = `${this.checkBox.wt}px`
           }
         })
         if (this.$refs.checkBox) {
-          this.observer.observe(this.$refs.checkBox);
+          this.observer.observe(this.$refs.checkBox)
         }
         // console.log(this.checkBox)
         // const boxIn = this.$refs.checkBoxIn
