@@ -82,7 +82,7 @@
       </div>
       <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center" ref="checkBox" v-show="num !== 0">
         <div
-          class="border py-4"
+          class="border py-4 bg-white"
           ref="checkBoxIn"
           :class="{ fixedBox: fixedBox, noFixedBox: !fixedBox }"
         >
@@ -117,9 +117,7 @@
               前往結帳
             </button>
           </div>
-          <div>
-            {{ checkBox.wt }}
-          </div>
+          <div>{{ checkBoxWidth }},{{ checkBoxLeft }}</div>
           <div>
             或是...<br />
             <router-link to="/shopping" class="no-underline fw-bold">回商店繼續逛逛</router-link>
@@ -215,10 +213,9 @@ export default {
       fixedBox: false,
       usedCoupon: '',
       isLoading: false,
-      checkBox: {
-        wt: 0,
-        lf: 0
-      },
+      checkBoxWidth: 0,
+      checkBoxLeft: 0,
+      checkBoxBottom: 0,
       observer: null
     }
   },
@@ -284,12 +281,12 @@ export default {
     handleScroll() {
       const box = this.$refs.checkBox
       const boxIn = this.$refs.checkBoxIn
-      this.checkBox.lf = box.getBoundingClientRect().x
-      this.checkBox.wt = box.getBoundingClientRect().width
+      this.checkBoxLeft = box.getBoundingClientRect().x
+      this.checkBoxWidth = box.getBoundingClientRect().width
       if (window.scrollY > 72 && this.fixedBox === false) {
         this.fixedBox = true
-        boxIn.style.left = `${this.checkBox.lf}px`
-        boxIn.style.width = `${this.checkBox.wt}px`
+        boxIn.style.left = `${this.checkBoxLeft + 12}px`
+        boxIn.style.width = `${this.checkBoxWidth - 24}px`
         console.log('2')
       } else if (window.scrollY <= 72 && this.fixedBox === true) {
         console.log('1')
@@ -318,6 +315,13 @@ export default {
   watch: {
     filterData(newNum, oldNum) {
       this.length = newNum.length
+    },
+    checkBoxLeft(newX, oldX) {
+      const boxIn = this.$refs.checkBoxIn
+      if (newX !== oldX) {
+        console.log(newX, oldX)
+        boxIn.style.left = `${newX + 12}px`
+      }
     }
   },
   created() {
@@ -333,17 +337,16 @@ export default {
       if (num !== 0) {
         const box = this.$refs.checkBox
         const boxIn = this.$refs.checkBoxIn
-        this.checkBox.lf = box.getBoundingClientRect().x
+        this.checkBoxLeft = box.getBoundingClientRect().x
+        this.checkBoxBottom = box.getBoundingClientRect().bottom
         this.observer = new ResizeObserver((enties) => {
           for (const entry of enties) {
             const width = entry.borderBoxSize
               ? entry.borderBoxSize[0].inlineSize
               : entry.contentRect.width
-            this.checkBox.wt = width
-            this.checkBox.lf = box.getBoundingClientRect().x
-            console.log(this.checkBox.wt, this.checkBox.lf)
-            boxIn.style.left = `${this.checkBox.lf}px`
-            boxIn.style.width = `${this.checkBox.wt}px`
+            this.checkBoxWidth = width
+            this.checkBoxLeft = box.getBoundingClientRect().x
+            boxIn.style.width = `${this.checkBoxWidth - 24}px`
           }
         })
         if (this.$refs.checkBox) {
