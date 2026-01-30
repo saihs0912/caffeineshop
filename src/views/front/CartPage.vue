@@ -19,7 +19,7 @@
           <span v-if="length !== 0">或是直接從下面追蹤清單放入購物車吧！</span>
         </p>
       </div>
-      <div class="col-lg-8 col-md-8 col-sm-12 col-12" v-show="num !== 0">
+      <div class="col-lg-8 col-md-8 col-sm-12 col-12" v-show="num !== 0" ref="myCart">
         <table class="table align-middle mb-0">
           <thead>
             <tr>
@@ -80,11 +80,15 @@
           </tbody>
         </table>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center" ref="checkBox" v-show="num !== 0">
+      <div
+        class="col-lg-4 col-md-4 col-sm-12 col-12 text-center position-relative"
+        ref="checkBox"
+        v-show="num !== 0"
+      >
         <div
           class="border py-4 bg-white"
           ref="checkBoxIn"
-          :class="{ fixedBox: fixedBox, noFixedBox: !fixedBox }"
+          :class="{ staticBox: boxType === 0, fixedBox: boxType === 1, absoluteBox: boxType === 2 }"
         >
           <div class="pb-3 fs-3 text-success">
             <span
@@ -117,7 +121,6 @@
               前往結帳
             </button>
           </div>
-          <div>{{ checkBoxWidth }},{{ checkBoxLeft }}</div>
           <div>
             或是...<br />
             <router-link to="/shopping" class="no-underline fw-bold">回商店繼續逛逛</router-link>
@@ -210,12 +213,13 @@ export default {
       length: 0,
       favorite: JSON.parse(localStorage.getItem('favoriteList')) || [],
       favorNum: '',
-      fixedBox: false,
+      boxType: 0,
       usedCoupon: '',
       isLoading: false,
       checkBoxWidth: 0,
+      checkBoxInHeight: 0,
       checkBoxLeft: 0,
-      checkBoxBottom: 0,
+      myCartBottom: 0,
       observer: null
     }
   },
@@ -283,16 +287,22 @@ export default {
       const boxIn = this.$refs.checkBoxIn
       this.checkBoxLeft = box.getBoundingClientRect().x
       this.checkBoxWidth = box.getBoundingClientRect().width
-      if (window.scrollY > 72 && this.fixedBox === false) {
-        this.fixedBox = true
+      if (window.scrollY <= 72 && this.boxType === 1) {
+        this.boxType = 0
+      } else if (
+        window.scrollY > 72 &&
+        window.scrollY < this.myCartBottom - this.checkBoxInHeight + 50 &&
+        (this.boxType === 0 || this.boxType === 2)
+      ) {
+        this.boxType = 1
         boxIn.style.left = `${this.checkBoxLeft + 12}px`
         boxIn.style.width = `${this.checkBoxWidth - 24}px`
-        console.log('2')
-      } else if (window.scrollY <= 72 && this.fixedBox === true) {
-        console.log('1')
-        this.fixedBox = false
-        boxIn.style.left = 'auto'
-        boxIn.style.width = 'auto'
+      } else if (
+        window.scrollY > this.myCartBottom - this.checkBoxInHeight + 50 &&
+        this.boxType === 1
+      ) {
+        this.boxType = 2
+        boxIn.style.width = `${this.checkBoxWidth - 24}px`
       }
     },
     unitsDigit(num) {
@@ -337,8 +347,11 @@ export default {
       if (num !== 0) {
         const box = this.$refs.checkBox
         const boxIn = this.$refs.checkBoxIn
+        const myCart = this.$refs.myCart
         this.checkBoxLeft = box.getBoundingClientRect().x
-        this.checkBoxBottom = box.getBoundingClientRect().bottom
+        this.checkBoxInHeight = boxIn.getBoundingClientRect().height
+        this.myCartBottom = myCart.getBoundingClientRect().bottom
+        console.log(this.myCartBottom)
         this.observer = new ResizeObserver((enties) => {
           for (const entry of enties) {
             const width = entry.borderBoxSize
@@ -370,11 +383,19 @@ export default {
   transition: opacity 0.5s ease;
   opacity: 0;
 }
-.noFixedBox {
+.staitcdBox {
   position: static;
+  left: auto;
+  width: auto;
 }
 .fixedBox {
   position: fixed;
-  top: 74px;
+  top: 80px;
+  bottom: auto;
+}
+.absoluteBox {
+  position: absolute;
+  left: 12px !important;
+  bottom: 0 !important;
 }
 </style>
