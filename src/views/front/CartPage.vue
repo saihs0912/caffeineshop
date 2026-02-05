@@ -88,7 +88,7 @@
         <div
           class="border py-4 bg-white"
           ref="checkBoxIn"
-          :class="{ staticBox: boxType === 0, fixedBox: boxType === 1, absoluteBox: boxType === 2 }"
+          :class="{ staticBox: boxType === 0, fixedBox: boxType === 1, absoluteBox: boxType === 2, fixedBottomBox: boxType === 3 }"
         >
           <div class="pb-3 fs-3 text-success">
             <span
@@ -287,22 +287,25 @@ export default {
       const boxIn = this.$refs.checkBoxIn
       this.checkBoxLeft = box.getBoundingClientRect().x
       this.checkBoxWidth = box.getBoundingClientRect().width
-      if (window.scrollY <= 72 && this.boxType === 1) {
-        this.boxType = 0
-      } else if (
-        window.scrollY > 72 &&
-        window.scrollY < this.myCartBottom - this.checkBoxInHeight + 50 &&
-        (this.boxType === 0 || this.boxType === 2)
-      ) {
-        this.boxType = 1
-        boxIn.style.left = `${this.checkBoxLeft + 12}px`
-        boxIn.style.width = `${this.checkBoxWidth - 24}px`
-      } else if (
-        window.scrollY > this.myCartBottom - this.checkBoxInHeight + 50 &&
-        this.boxType === 1
-      ) {
-        this.boxType = 2
-        boxIn.style.width = `${this.checkBoxWidth - 24}px`
+      if (window.innerWidth > 768) {
+        console.log('大')
+        if (window.scrollY <= 72 && this.boxType === 1) {
+          this.boxType = 0
+        } else if (
+          window.scrollY > 72 &&
+          window.scrollY < this.myCartBottom - this.checkBoxInHeight + 50 &&
+          (this.boxType === 0 || this.boxType === 2)
+        ) {
+          this.boxType = 1
+          boxIn.style.left = `${this.checkBoxLeft + 12}px`
+          boxIn.style.width = `${this.checkBoxWidth - 24}px`
+        } else if (
+          window.scrollY > this.myCartBottom - this.checkBoxInHeight + 50 &&
+          this.boxType === 1
+        ) {
+          this.boxType = 2
+          boxIn.style.width = `${this.checkBoxWidth - 24}px`
+        }
       }
     },
     unitsDigit(num) {
@@ -343,15 +346,24 @@ export default {
   mounted() {
     this.$nextTick(async () => {
       const num = await this.getCart('cart')
+      window.addEventListener('resize', () => {
+        if (window.innerWidth <= 768 && this.boxType !== 3) {
+          this.boxType = 3
+          console.log(this.boxType)
+        }
+      })
       window.addEventListener('scroll', this.handleScroll)
       if (num !== 0) {
         const box = this.$refs.checkBox
         const boxIn = this.$refs.checkBoxIn
         const myCart = this.$refs.myCart
-        this.checkBoxLeft = box.getBoundingClientRect().x
-        this.checkBoxInHeight = boxIn.getBoundingClientRect().height
-        this.myCartBottom = myCart.getBoundingClientRect().bottom
+          this.checkBoxLeft = box.getBoundingClientRect().x
+          this.checkBoxInHeight = boxIn.getBoundingClientRect().height
+          this.myCartBottom = myCart.getBoundingClientRect().bottom
         console.log(this.myCartBottom)
+        window.addEventListener('resize', () => {
+          if (window.innerWidth <= 768) console.log('true')
+        })
         this.observer = new ResizeObserver((enties) => {
           for (const entry of enties) {
             const width = entry.borderBoxSize
@@ -398,5 +410,11 @@ export default {
   position: absolute;
   left: 12px !important;
   bottom: 0 !important;
+}
+.fixedBottomBox {
+  position: fixed;
+  left: 0!important;
+  bottom: 0;
+  width: 100%!important;
 }
 </style>
