@@ -9,13 +9,9 @@
       </div>
     </div>
     <footer-area />
-    <a class="cartOpen" href="#" @click.prevent="openCart" @mousedown="cartMove" :style="moveDelay"
-      ><span class="cartOpenNum" v-show="num > 0">{{ num }}</span></a
-    >
     <a class="backToTop" href="#" v-if="showScrollTop" @click.prevent="scrollToTop"
       ><i class="bi bi-arrow-up-circle-fill"></i
     ></a>
-    <cart-modal ref="cartModal" @updateNum="cartNum" />
   </div>
   <toast-messages />
 </template>
@@ -23,7 +19,6 @@
 <script>
 import NavBar from '@/components/front/NavBar.vue'
 import FooterArea from '@/components/front/FooterArea.vue'
-import CartModal from '@/components/front/CartModal.vue'
 import ToastMessages from '@/components/back/ToastMessages.vue'
 import emitter from '@/methods/emitter'
 import _ from 'lodash'
@@ -32,7 +27,6 @@ export default {
   components: {
     NavBar,
     FooterArea,
-    CartModal,
     ToastMessages
   },
   data() {

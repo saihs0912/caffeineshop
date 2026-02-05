@@ -357,6 +357,7 @@ export default {
             const width = entry.borderBoxSize
               ? entry.borderBoxSize[0].inlineSize
               : entry.contentRect.width
+            console.log(width, 'width')
             this.checkBoxWidth = width
             this.checkBoxLeft = box.getBoundingClientRect().x
             boxIn.style.width = `${this.checkBoxWidth - 24}px`

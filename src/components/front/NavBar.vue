@@ -98,11 +98,9 @@
       </div>
     </div>
   </nav>
-  <cart-modal ref="cartModal" />
 </template>
 
 <script>
-import CartModal from './CartModal.vue'
 import { useWindowSize } from '@vueuse/core'
 import { getCart } from '@/methods/api'
 import emitter from '@/methods/emitter'
@@ -118,9 +116,6 @@ export default {
       nowPath: ['/about', '/caffeine', '/shopping', '/order', '/follow', '/coupon'],
       num: 0
     }
-  },
-  components: {
-    CartModal
   },
   methods: {
     getCart,
