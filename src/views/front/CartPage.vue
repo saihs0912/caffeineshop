@@ -86,49 +86,58 @@
         v-show="num !== 0"
       >
         <div
-          class="border py-4 bg-white"
+          class="border py-4 bg-white fixedBottomBox"
           ref="checkBoxIn"
           :class="{
             staticBox: boxType === 0,
             fixedBox: boxType === 1,
-            absoluteBox: boxType === 2,
-            fixedBottomBox: lessThan768 === true
+            absoluteBox: boxType === 2
           }"
         >
-          <div class="pb-3 fs-3 text-success">
-            <span
-              :class="[
-                {
-                  'fs-4': cart.total !== cart.final_total,
-                  'text-decoration-line-through': cart.total !== cart.final_total
-                }
-              ]"
-              >{{ $num.currency(cart.total) }} 元<br
-            /></span>
-            <span v-if="cart.total !== cart.final_total"
-              >合計 {{ $num.currency(cart.final_total) }} 元<br /><span
-                class="text-danger"
-                style="font-size: 1rem"
-                >已套用 {{ unitsDigit(cart.carts[0].coupon.percent) }}折 優惠券</span
-              ></span
-            >
-          </div>
-          <div class="pb-4">
-            <button type="button" class="btn btn-outline-warning" @click.prevent="openCouponModal">
-              查看優惠券 <i class="bi bi-ticket-perforated-fill"></i>
-            </button>
-          </div>
-          <div class="pb-4 btn-group w-75">
-            <button type="button" class="btn btn-secondary fs-5" v-if="num === 0">
-              購物車內沒有商品
-            </button>
-            <button type="button" class="btn btn-danger fs-5" @click="goToCheck" v-else>
-              前往結帳
-            </button>
-          </div>
-          <div>
-            或是...<br />
-            <router-link to="/shopping" class="no-underline fw-bold">回商店繼續逛逛</router-link>
+          <div class="container">
+            <div class="row">
+              <div class="pb-3 fs-3 text-success">
+                <span
+                  :class="[
+                    {
+                      'fs-4': cart.total !== cart.final_total,
+                      'text-decoration-line-through': cart.total !== cart.final_total
+                    }
+                  ]"
+                  >{{ $num.currency(cart.total) }} 元<br
+                /></span>
+                <span v-if="cart.total !== cart.final_total"
+                  >合計 {{ $num.currency(cart.final_total) }} 元<br /><span
+                    class="text-danger"
+                    style="font-size: 1rem"
+                    >已套用 {{ unitsDigit(cart.carts[0].coupon.percent) }}折 優惠券</span
+                  ></span
+                >
+              </div>
+              <div class="pb-4">
+                <button
+                  type="button"
+                  class="btn btn-outline-warning"
+                  @click.prevent="openCouponModal"
+                >
+                  查看優惠券 <i class="bi bi-ticket-perforated-fill"></i>
+                </button>
+              </div>
+              <div class="pb-4 btn-group w-75">
+                <button type="button" class="btn btn-secondary fs-5" v-if="num === 0">
+                  購物車內沒有商品
+                </button>
+                <button type="button" class="btn btn-danger fs-5" @click="goToCheck" v-else>
+                  前往結帳
+                </button>
+              </div>
+              <div>
+                或是...<br />
+                <router-link to="/shopping" class="no-underline fw-bold"
+                  >回商店繼續逛逛</router-link
+                >
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -225,8 +234,7 @@ export default {
       checkBoxInHeight: 0,
       checkBoxLeft: 0,
       myCartBottom: 0,
-      observer: null,
-      lessThan768: false
+      observer: null
     }
   },
   components: {
@@ -356,11 +364,6 @@ export default {
   mounted() {
     this.$nextTick(async () => {
       const num = await this.getCart('cart')
-      window.addEventListener('resize', () => {
-        if (window.innerWidth <= 768) {
-          this.lessThan768 = true
-        }
-      })
       window.addEventListener('scroll', this.handleScroll)
       if (num !== 0) {
         const box = this.$refs.checkBox
@@ -401,6 +404,7 @@ export default {
   },
   unmounted() {
     window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('resize', this.windowSize)
   }
 }
 </script>
@@ -425,10 +429,15 @@ export default {
   left: 12px !important;
   bottom: 0 !important;
 }
-.fixedBottomBox {
-  position: fixed;
-  left: 0 !important;
-  bottom: 0;
-  width: 100% !important;
+
+@media (max-width: 768px) {
+  .fixedBottomBox {
+    position: fixed;
+    left: 0 !important;
+    top: auto !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    z-index: 999;
+  }
 }
 </style>
