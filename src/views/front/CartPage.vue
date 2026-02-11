@@ -86,7 +86,7 @@
         v-show="num !== 0"
       >
         <div
-          class="border py-4 bg-white fixedBottomBox"
+          class="border py-2 bg-white fixedBottomBox"
           ref="checkBoxIn"
           :class="{
             staticBox: boxType === 0,
@@ -96,38 +96,54 @@
         >
           <div class="container">
             <div class="row">
-              <div class="col-lg-12 col-md-12 col-sm-6 col-6">
-                <div class="pb-3 fs-3 text-success">
+              <div class="col-12">
+                <div
+                  class="pb-3 fs-3 text-success"
+                  :class="{ 'text-start': cart.total !== cart.final_total }"
+                >
                   <span
                     :class="[
                       {
-                        'fs-4': cart.total !== cart.final_total,
+                        'fs-3': cart.total == cart.final_total,
+                        'fs-6': cart.total !== cart.final_total,
                         'text-decoration-line-through': cart.total !== cart.final_total
                       }
                     ]"
-                    >{{ $num.currency(cart.total) }} 元<br
+                    >合計 {{ $num.currency(cart.total) }} 元<br
                   /></span>
-                  <span v-if="cart.total !== cart.final_total"
-                    >合計 {{ $num.currency(cart.final_total) }} 元<br /><span
-                      class="text-danger"
-                      style="font-size: 1rem"
-                      >已套用 {{ unitsDigit(cart.carts[0].coupon.percent) }}折 優惠券</span
-                    ></span
-                  >
                 </div>
               </div>
-              <div class="col-lg-12 col-md-12 col-sm-6 col-6">
-                <div class="pb-2">
-                  <button
-                    type="button"
-                    class="btn btn-outline-warning"
-                    @click.prevent="openCouponModal"
+              <div class="col-12 my-1">
+                <div class="border border-warning d-flex p-2">
+                  <div v-if="cart.total !== cart.final_total" class="w-50 text-start">
+                    <span v-if="cart.total !== cart.final_total" class="text-success fs-3 fw-bold"
+                      >合計 {{ $num.currency(cart.final_total) }} 元<br /><span
+                        class="text-danger"
+                        style="font-size: 1rem"
+                        >已套用 {{ unitsDigit(cart.carts[0].coupon.percent) }}折 優惠券</span
+                      ></span
+                    >
+                  </div>
+                  <div
+                    class="pb-2"
+                    :class="{
+                      'w-100': cart.total == cart.final_total,
+                      'w-50': cart.total !== cart.final_total
+                    }"
                   >
-                    查看優惠券 <i class="bi bi-ticket-perforated-fill"></i>
-                  </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-warning"
+                      @click.prevent="openCouponModal"
+                    >
+                      <span v-if="cart.total == cart.final_total">查看優惠券</span>
+                      <span v-else>其他優惠券</span>
+                      <i class="bi bi-ticket-perforated-fill"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div class="col-12">
+              <div class="col-12 mt-1">
                 <div class="pb-lg-4 pb-md-4 pd-sm-1 pb-1 btn-group w-100">
                   <button type="button" class="btn btn-secondary fs-5" v-if="num === 0">
                     購物車內沒有商品
