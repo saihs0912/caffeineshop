@@ -96,46 +96,52 @@
         >
           <div class="container">
             <div class="row">
-              <div class="pb-3 fs-3 text-success">
-                <span
-                  :class="[
-                    {
-                      'fs-4': cart.total !== cart.final_total,
-                      'text-decoration-line-through': cart.total !== cart.final_total
-                    }
-                  ]"
-                  >{{ $num.currency(cart.total) }} 元<br
-                /></span>
-                <span v-if="cart.total !== cart.final_total"
-                  >合計 {{ $num.currency(cart.final_total) }} 元<br /><span
-                    class="text-danger"
-                    style="font-size: 1rem"
-                    >已套用 {{ unitsDigit(cart.carts[0].coupon.percent) }}折 優惠券</span
-                  ></span
-                >
+              <div class="col-lg-12 col-md-12 col-sm-6 col-6">
+                <div class="pb-3 fs-3 text-success">
+                  <span
+                    :class="[
+                      {
+                        'fs-4': cart.total !== cart.final_total,
+                        'text-decoration-line-through': cart.total !== cart.final_total
+                      }
+                    ]"
+                    >{{ $num.currency(cart.total) }} 元<br
+                  /></span>
+                  <span v-if="cart.total !== cart.final_total"
+                    >合計 {{ $num.currency(cart.final_total) }} 元<br /><span
+                      class="text-danger"
+                      style="font-size: 1rem"
+                      >已套用 {{ unitsDigit(cart.carts[0].coupon.percent) }}折 優惠券</span
+                    ></span
+                  >
+                </div>
               </div>
-              <div class="pb-4">
-                <button
-                  type="button"
-                  class="btn btn-outline-warning"
-                  @click.prevent="openCouponModal"
-                >
-                  查看優惠券 <i class="bi bi-ticket-perforated-fill"></i>
-                </button>
+              <div class="col-lg-12 col-md-12 col-sm-6 col-6">
+                <div class="pb-2">
+                  <button
+                    type="button"
+                    class="btn btn-outline-warning"
+                    @click.prevent="openCouponModal"
+                  >
+                    查看優惠券 <i class="bi bi-ticket-perforated-fill"></i>
+                  </button>
+                </div>
               </div>
-              <div class="pb-4 btn-group w-75">
-                <button type="button" class="btn btn-secondary fs-5" v-if="num === 0">
-                  購物車內沒有商品
-                </button>
-                <button type="button" class="btn btn-danger fs-5" @click="goToCheck" v-else>
-                  前往結帳
-                </button>
-              </div>
-              <div>
-                或是...<br />
-                <router-link to="/shopping" class="no-underline fw-bold"
-                  >回商店繼續逛逛</router-link
-                >
+              <div class="col-12">
+                <div class="pb-lg-4 pb-md-4 pd-sm-1 pb-1 btn-group w-100">
+                  <button type="button" class="btn btn-secondary fs-5" v-if="num === 0">
+                    購物車內沒有商品
+                  </button>
+                  <button type="button" class="btn btn-danger fs-5" @click="goToCheck" v-else>
+                    前往結帳
+                  </button>
+                </div>
+                <div class="d-lg-block d-md-block d-sm-none d-none">
+                  或是...<br />
+                  <router-link to="/shopping" class="no-underline fw-bold"
+                    >回商店繼續逛逛</router-link
+                  >
+                </div>
               </div>
             </div>
           </div>
@@ -297,22 +303,18 @@ export default {
       }
     },
     handleScroll() {
-      console.log('scroll')
       const box = this.$refs.checkBox
       const boxIn = this.$refs.checkBoxIn
       this.checkBoxLeft = box.getBoundingClientRect().x
       this.checkBoxWidth = box.getBoundingClientRect().width
       if (window.innerWidth > 768) {
-        console.log('大')
         if (window.scrollY <= 72 && this.boxType === 1) {
-          console.log('0')
           this.boxType = 0
         } else if (
           window.scrollY > 72 &&
           window.scrollY < this.myCartBottom - this.checkBoxInHeight + 50 &&
           (this.boxType === 0 || this.boxType === 2)
         ) {
-          console.log('1')
           this.boxType = 1
           boxIn.style.left = `${this.checkBoxLeft + 12}px`
           boxIn.style.width = `${this.checkBoxWidth - 24}px`
@@ -320,7 +322,6 @@ export default {
           window.scrollY > this.myCartBottom - this.checkBoxInHeight + 50 &&
           this.boxType === 1
         ) {
-          console.log('2')
           this.boxType = 2
           boxIn.style.width = `${this.checkBoxWidth - 24}px`
         }
@@ -350,7 +351,6 @@ export default {
     checkBoxLeft(newX, oldX) {
       const boxIn = this.$refs.checkBoxIn
       if (newX !== oldX) {
-        console.log(newX, oldX)
         boxIn.style.left = `${newX + 12}px`
       }
     }
@@ -372,10 +372,8 @@ export default {
         this.checkBoxLeft = box.getBoundingClientRect().x
         this.checkBoxInHeight = boxIn.getBoundingClientRect().height
         this.myCartBottom = myCart.getBoundingClientRect().bottom
-        console.log(this.myCartBottom)
         window.addEventListener('resize', () => {
           if (window.innerWidth <= 768) {
-            console.log('小於768')
             this.lessThan768 = true
           } else {
             this.lessThan768 = false
@@ -386,7 +384,6 @@ export default {
             const width = entry.borderBoxSize
               ? entry.borderBoxSize[0].inlineSize
               : entry.contentRect.width
-            console.log(width, 'width')
             this.checkBoxWidth = width
             this.checkBoxLeft = box.getBoundingClientRect().x
             boxIn.style.width = `${this.checkBoxWidth - 24}px`
