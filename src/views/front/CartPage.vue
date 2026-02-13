@@ -114,32 +114,43 @@
                 </div>
               </div>
               <div class="col-12 my-1">
-                <div class="border border-warning d-flex p-2">
-                  <div v-if="cart.total !== cart.final_total" class="w-50 text-start">
-                    <span v-if="cart.total !== cart.final_total" class="text-success fs-3 fw-bold"
-                      >合計 {{ $num.currency(cart.final_total) }} 元<br /><span
-                        class="text-danger"
-                        style="font-size: 1rem"
-                        >已套用 {{ unitsDigit(cart.carts[0].coupon.percent) }}折 優惠券</span
-                      ></span
-                    >
-                  </div>
-                  <div
-                    class="pb-2"
-                    :class="{
-                      'w-100': cart.total == cart.final_total,
-                      'w-50': cart.total !== cart.final_total
-                    }"
-                  >
-                    <button
-                      type="button"
-                      class="btn btn-outline-warning"
-                      @click.prevent="openCouponModal"
-                    >
-                      <span v-if="cart.total == cart.final_total">查看優惠券</span>
-                      <span v-else>其他優惠券</span>
-                      <i class="bi bi-ticket-perforated-fill"></i>
-                    </button>
+                <div class="container">
+                  <div class="row border border-warning">
+                    <div class="col-lg-12 col-md-12 col-sm-6 col-6">
+                      <div
+                        v-if="cart.total !== cart.final_total"
+                        class="text-lg-center text-md-center text-start"
+                      >
+                        <span
+                          v-if="cart.total !== cart.final_total"
+                          class="text-success fs-3 fw-bold"
+                          >合計 {{ $num.currency(cart.final_total) }} 元<br /><span
+                            class="text-danger"
+                            style="font-size: 1rem"
+                            >已套用 {{ unitsDigit(cart.carts[0].coupon.percent) }}折 優惠券</span
+                          ></span
+                        >
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-6 col-6">
+                      <div
+                        class="pb-2"
+                        :class="{
+                          'w-100': cart.total == cart.final_total,
+                          'w-50': cart.total !== cart.final_total
+                        }"
+                      >
+                        <button
+                          type="button"
+                          class="btn btn-outline-warning"
+                          @click.prevent="openCouponModal"
+                        >
+                          <span v-if="cart.total == cart.final_total">查看優惠券</span>
+                          <span v-else>其他優惠券</span>
+                          <i class="bi bi-ticket-perforated-fill"></i>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
