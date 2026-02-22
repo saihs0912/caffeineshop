@@ -132,17 +132,13 @@
                         >
                       </div>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-6 col-6">
-                      <div
-                        class="pb-2"
-                        :class="{
-                          'w-100': cart.total == cart.final_total,
-                          'w-50': cart.total !== cart.final_total
-                        }"
-                      >
+                    <div
+                      class="col-lg-12 col-md-12 col-sm-6 col-6 d-flex justify-content-center align-items-center"
+                    >
+                      <div class="py-2 w-100">
                         <button
                           type="button"
-                          class="btn btn-outline-warning"
+                          class="btn btn-outline-warning w-100"
                           @click.prevent="openCouponModal"
                         >
                           <span v-if="cart.total == cart.final_total">查看優惠券</span>
