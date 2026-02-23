@@ -180,15 +180,15 @@
               :key="i"
               :class="{ fadeOut: this.favorNum === i }"
             >
-              <div class="border d-flex p-2">
-                <div class="w-25">
+              <div class="border p-2 position-relative">
+                <div class="w-100">
                   <router-link
                     class="no-underline text-dark"
                     :to="{ name: 'product', params: { productId: item.id } }"
                     ><img :src="filterData[i].imageUrl" class="img-fluid" :alt="item.title"
                   /></router-link>
                 </div>
-                <div class="w-75 ps-2 position-relative d-flex">
+                <div class="w-100 ps-2 d-flex">
                   <button
                     class="btn btn-outline-danger btn-sm position-absolute top-0 end-0"
                     type="button"
