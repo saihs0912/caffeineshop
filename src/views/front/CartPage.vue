@@ -175,13 +175,23 @@
         <div class="container">
           <div class="row">
             <div
-              class="col-lg-6 col-md-6 col-sm-12 col-12 mb-2"
+              class="col-lg-3 col-md-4 col-sm-6 col-12 px-1 py-2"
               v-for="(item, i) in filterData"
               :key="i"
               :class="{ fadeOut: this.favorNum === i }"
             >
-              <div class="border p-2 position-relative">
-                <div class="w-100">
+              <div class="card w-100 h-100 border">
+                <div class="pt-2 px-2 text-end">
+                  <button
+                    class="btn btn-outline-danger btn-sm"
+                    type="button"
+                    @click.prevent="deleteFavorite(item.id, i)"
+                    :disabled="favorNum !== i && favorNum !== ''"
+                  >
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+                <div class="p-2">
                   <router-link
                     class="no-underline text-dark"
                     :to="{ name: 'product', params: { productId: item.id } }"
@@ -189,15 +199,6 @@
                   /></router-link>
                 </div>
                 <div class="w-100 ps-2 d-flex">
-                  <button
-                    class="btn btn-outline-danger btn-sm position-absolute top-0 end-0"
-                    type="button"
-                    style="font-size: 0.6rem"
-                    @click.prevent="deleteFavorite(item.id, i)"
-                    :disabled="favorNum !== i && favorNum !== ''"
-                  >
-                    <i class="bi bi-x-lg"></i>
-                  </button>
                   <div class="d-flex flex-column justify-content-center" style="width: 50%">
                     <router-link
                       class="no-underline text-dark"
