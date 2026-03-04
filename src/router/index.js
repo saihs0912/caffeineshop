@@ -49,32 +49,32 @@ const routes = [
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
         component: () => import('../views/front/NotFound.vue')
-      }
-    ]
-  },
-  {
-    path: '/checkout',
-    component: () => import('../views/front/CheckoutPage.vue')
-  },
-  {
-    path: '/login',
-    component: () => import('../views/back/LoginApi.vue')
-  },
-  {
-    path: '/dashboard',
-    component: () => import('../views/back/DashBoard.vue'),
-    children: [
-      {
-        path: 'productlist',
-        component: () => import('../views/back/ProductPage.vue')
       },
       {
-        path: 'couponlist',
-        component: () => import('../views/back/CouponPage.vue')
+        path: '/checkout',
+        component: () => import('../views/front/CheckoutPage.vue')
       },
       {
-        path: 'orderlist',
-        component: () => import('../views/back/OrderlistPage.vue')
+        path: '/login',
+        component: () => import('../views/back/LoginApi.vue')
+      },
+      {
+        path: '/dashboard',
+        component: () => import('../views/back/DashBoard.vue'),
+        children: [
+          {
+            path: 'productlist',
+            component: () => import('../views/back/ProductPage.vue')
+          },
+          {
+            path: 'couponlist',
+            component: () => import('../views/back/CouponPage.vue')
+          },
+          {
+            path: 'orderlist',
+            component: () => import('../views/back/OrderlistPage.vue')
+          }
+        ]
       }
     ]
   }
