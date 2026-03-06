@@ -50,7 +50,7 @@
                 >
               </td>
               <td>
-                {{ item.product.price }}
+                {{ $num.currency(item.product.price) }}
               </td>
               <td class="py-3" style="width: 80px">
                 <input
@@ -306,6 +306,7 @@ export default {
         console.log(res)
         this.$InformMessage(res, '商品放入購物車')
         this.getCart('cart')
+        emitter.emit('updateCart')
       } catch (err) {
         this.$InformMessage(err.message)
       }

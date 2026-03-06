@@ -24,7 +24,7 @@
                 <h6 class="card-title">{{ item.title }}</h6>
               </router-link>
               <div class="d-flex justify-content-between align-items-center">
-                <span class="fw-bold text-danger">{{ item.price }} 元</span>
+                <span class="fw-bold text-danger">{{ $num.currency(item.price) }} 元</span>
               </div>
             </div>
             <div class="container pt-4 pb-3 overflow-hidden">

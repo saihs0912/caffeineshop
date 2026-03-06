@@ -61,13 +61,13 @@
         <div class="border p-3">
           <p class="fs-3">每{{ product.unit }}</p>
           <p class="fs-3 fw-bold text-success" v-if="product.price !== product.origin_price">
-            {{ product.price }} 元 <i class="bi bi-tag"></i>
+            {{ $num.currency(product.price) }} 元 <i class="bi bi-tag"></i>
           </p>
           <p class="fs-3">
             <del v-if="product.price !== product.origin_price" class="text-secondary fs-6"
-              >售價：{{ product.origin_price }} 元</del
+              >售價：{{ $num.currency(product.origin_price) }} 元</del
             >
-            <span v-else class="fw-bold">{{ product.origin_price }}</span>
+            <span v-else class="fw-bold">{{ $num.currency(product.origin_price) }}</span>
           </p>
           <div class="d-grid gap-2 col-12 mx-auto" style="padding: 20px 0">
             <div class="form-floating">
