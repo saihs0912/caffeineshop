@@ -23,7 +23,7 @@
               >
                 <p class="card-title">{{ item.title }}</p>
                 <div>
-                  <span class="fw-bold text-danger">{{ item.price }} 元</span><br />
+                  <span class="fw-bold text-danger">{{ $num.currency(item.price) }} 元</span><br />
                   <span class="text-dark">{{ item.description }}</span>
                 </div>
               </router-link>
