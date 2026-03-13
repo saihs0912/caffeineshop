@@ -38,7 +38,7 @@
       ></i>
     </div>
     <div class="d-grid gap-2 col-md-4 col-sm-4 col-6 mx-auto" style="padding: 20px 0">
-      <router-link class="btn btn-brown" to="/shopping">查看全部商品</router-link>
+      <router-link class="btn btn-brown bg-tea" to="/shopping">查看全部商品</router-link>
     </div>
   </div>
 </template>

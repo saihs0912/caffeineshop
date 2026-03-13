@@ -93,6 +93,15 @@
   visibility: visible;
 }
 /*------------前台------------*/
+.color-tea {
+  color: #6b8e23;
+}
+.bg-tea {
+  background-color: #6b8e23;
+}
+.bg-rice {
+  background-color: #faf9f6;
+}
 /*Navbar*/
 nav {
   margin: 0 auto;

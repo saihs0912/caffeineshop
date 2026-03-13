@@ -1,5 +1,5 @@
 <template>
-  <div ref="body">
+  <div ref="body" class="bg-rice">
     <nav-bar ref="navBar" />
     <div class="container content-height" style="max-width: 1140px!">
       <div class="row justify-content-center pt-lg-md">

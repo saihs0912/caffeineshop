@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar navbar-expand-lg navbar-light bg-light position-fixed mw-100 w-100"
+    class="navbar navbar-expand-lg navbar-light bg-brown-coffee color-oat position-fixed mw-100 w-100"
     style="z-index: 1000"
     ref="navOut"
   >
@@ -20,7 +20,7 @@
             </div>
             <div class="shop-title">
               <h1 class="mb-0">
-                <a class="navbar-brand fs-1 pb-0" href="#" @click="navbarHide('home')">
+                <a class="navbar-brand fs-1 pb-0 color-ota" href="#" @click="navbarHide('home')">
                   咖啡因商店
                 </a>
               </h1>
@@ -37,12 +37,12 @@
             >
               <li class="nav-item" style="padding: 0 0.9rem">
                 <router-link class="nav-link" @click="navbarHide" to="/follow"
-                  ><i class="bi bi-heart-fill"></i
+                  ><i class="bi bi-heart-fill color-ota"></i
                 ></router-link>
               </li>
               <li class="nav-item" style="padding: 0 0.9rem">
                 <router-link class="nav-link position-relative" @click="navbarHide" to="/cart"
-                  ><i class="bi bi-cart-fill"></i>
+                  ><i class="bi bi-cart-fill color-ota"></i>
                   <i class="position-absolute cartItem p-2 rounded-circle">
                     <span v-show="num > 0">{{ num }}</span>
                   </i>
@@ -66,9 +66,9 @@
             style="z-index: 999"
             @click="navOpen = !navOpen"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon color-ota"></span>
           </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNav01">
+          <div class="collapse navbar-collapse justify-content-end color-ota" id="navbarNav01">
             <ul
               class="navbar-nav"
               @mouseleave="mouseLeave"
@@ -77,20 +77,24 @@
             >
               <span class="target-underline" ref="underline"></span>
               <li class="nav-item" @mouseenter="mouseEnter(0)" @click="setActive(0)">
-                <router-link class="nav-link" @click="navbarHide" to="/about">關於我們</router-link>
+                <router-link class="nav-link color-ota" @click="navbarHide" to="/about"
+                  >關於我們</router-link
+                >
               </li>
               <li class="nav-item" @mouseenter="mouseEnter(1)" @click="setActive(1)">
-                <router-link class="nav-link" @click="navbarHide" to="/caffeine"
+                <router-link class="nav-link color-ota" @click="navbarHide" to="/caffeine"
                   >咖啡與茶</router-link
                 >
               </li>
               <li class="nav-item" @mouseenter="mouseEnter(2)" @click="setActive(2)">
-                <router-link class="nav-link" @click="navbarHide" to="/shopping"
+                <router-link class="nav-link color-ota" @click="navbarHide" to="/shopping"
                   >線上商店</router-link
                 >
               </li>
               <li class="nav-item" @mouseenter="mouseEnter(3)" @click="setActive(3)">
-                <router-link class="nav-link" @click="navbarHide" to="/order">訂單查詢</router-link>
+                <router-link class="nav-link color-ota" @click="navbarHide" to="/order"
+                  >訂單查詢</router-link
+                >
               </li>
             </ul>
           </div>
@@ -222,6 +226,12 @@ export default {
   background-color: #f00;
   z-index: -1;
   border-radius: 50%;
+}
+.bg-brown-coffee {
+  background-color: #3e2723;
+}
+.color-ota {
+  color: #f5f5dc;
 }
 @media (max-width: 991px) {
   #navbarNav01 {
