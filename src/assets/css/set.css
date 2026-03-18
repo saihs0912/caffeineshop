@@ -93,15 +93,6 @@
   visibility: visible;
 }
 /*------------前台------------*/
-.color-tea {
-  color: #6b8e23;
-}
-.bg-tea {
-  background-color: #6b8e23;
-}
-.bg-rice {
-  background-color: #faf9f6;
-}
 /*Navbar*/
 nav {
   margin: 0 auto;
@@ -113,7 +104,7 @@ nav {
   left: 0;
   height: 2px;
   width: 0;
-  background: #000000;
+  background: #f5f5dc;
   transition: all 0.3s ease;
 }
 @media (max-width: 991px) {

@@ -47,6 +47,10 @@ $green: #198754 !default;
 $teal: #20c997 !default;
 $cyan: #0dcaf0 !default;
 $brown: #4d3900 !default;
+$tea-green: #6b8e23 !default;
+$rice-white: #faf9f6 !default;
+$ota-white: #f5f5dc !default;
+$bake-brown: #3e2723 !default;
 // scss-docs-end color-variables
 
 // scss-docs-start colors-map
@@ -62,6 +66,10 @@ $colors: (
   'teal': $teal,
   'cyan': $cyan,
   'brown': $brown,
+  'tea-green': $tea-green,
+  'rice-white': $rice-white,
+  'ota-white': $ota-white,
+  'bake-brown': $bake-brown,
   'black': $black,
   'white': $white,
   'gray': $gray-600,
@@ -177,6 +185,56 @@ $cyan-600: shade-color($cyan, 20%) !default;
 $cyan-700: shade-color($cyan, 40%) !default;
 $cyan-800: shade-color($cyan, 60%) !default;
 $cyan-900: shade-color($cyan, 80%) !default;
+
+$brown-100: tint-color($brown, 80%) !default;
+$brown-200: tint-color($brown, 60%) !default;
+$brown-300: tint-color($brown, 40%) !default;
+$brown-400: tint-color($brown, 20%) !default;
+$brown-500: $brown !default;
+$brown-600: shade-color($brown, 20%) !default;
+$brown-700: shade-color($brown, 40%) !default;
+$brown-800: shade-color($brown, 60%) !default;
+$brown-900: shade-color($brown, 80%) !default;
+
+$tea-green-100: tint-color($tea-green, 80%) !default;
+$tea-green-200: tint-color($tea-green, 60%) !default;
+$tea-green-300: tint-color($tea-green, 40%) !default;
+$tea-green-400: tint-color($tea-green, 20%) !default;
+$tea-green-500: $tea-green !default;
+$tea-green-600: shade-color($tea-green, 20%) !default;
+$tea-green-700: shade-color($tea-green, 40%) !default;
+$tea-green-800: shade-color($tea-green, 60%) !default;
+$tea-green-900: shade-color($tea-green, 80%) !default;
+
+$rice-white-100: tint-color($rice-white, 80%) !default;
+$rice-white-200: tint-color($rice-white, 60%) !default;
+$rice-white-300: tint-color($rice-white, 40%) !default;
+$rice-white-400: tint-color($rice-white, 20%) !default;
+$rice-white-500: $rice-white !default;
+$rice-white-600: shade-color($rice-white, 20%) !default;
+$rice-white-700: shade-color($rice-white, 40%) !default;
+$rice-white-800: shade-color($rice-white, 60%) !default;
+$rice-white-900: shade-color($rice-white, 80%) !default;
+
+$ota-white-100: tint-color($ota-white, 80%) !default;
+$ota-white-200: tint-color($ota-white, 60%) !default;
+$ota-white-300: tint-color($ota-white, 40%) !default;
+$ota-white-400: tint-color($ota-white, 20%) !default;
+$ota-white-500: $ota-white !default;
+$ota-white-600: shade-color($ota-white, 20%) !default;
+$ota-white-700: shade-color($ota-white, 40%) !default;
+$ota-white-800: shade-color($ota-white, 60%) !default;
+$ota-white-900: shade-color($ota-white, 80%) !default;
+
+$bake-brown-100: tint-color($bake-brown, 80%) !default;
+$bake-brown-200: tint-color($bake-brown, 60%) !default;
+$bake-brown-300: tint-color($bake-brown, 40%) !default;
+$bake-brown-400: tint-color($bake-brown, 20%) !default;
+$bake-brown-500: $bake-brown !default;
+$bake-brown-600: shade-color($bake-brown, 20%) !default;
+$bake-brown-700: shade-color($bake-brown, 40%) !default;
+$bake-brown-800: shade-color($bake-brown, 60%) !default;
+$bake-brown-900: shade-color($bake-brown, 80%) !default;
 
 $blues: (
   'blue-100': $blue-100,
@@ -309,6 +367,54 @@ $brown: (
   'brown-800': $brown-800,
   'brown-900': $brown-900
 ) !default;
+
+$tea-green: (
+  'tea-green-100': $tea-green-100,
+  'tea-green-200': $tea-green-200,
+  'tea-green-300': $tea-green-300,
+  'tea-green-400': $tea-green-400,
+  'tea-green-500': $tea-green-500,
+  'tea-green-600': $tea-green-600,
+  'tea-green-700': $tea-green-700,
+  'tea-green-800': $tea-green-800,
+  'tea-green-900': $tea-green-900
+) !default;
+
+$rice-white: (
+  'rice-white-100': $rice-white-100,
+  'rice-white-200': $rice-white-200,
+  'rice-white-300': $rice-white-300,
+  'rice-white-400': $rice-white-400,
+  'rice-white-500': $rice-white-500,
+  'rice-white-600': $rice-white-600,
+  'rice-white-700': $rice-white-700,
+  'rice-white-800': $rice-white-800,
+  'rice-white-900': $rice-white-900
+) !default;
+
+$ota-white: (
+  'ota-white-100': $ota-white-100,
+  'ota-white-200': $ota-white-200,
+  'ota-white-300': $ota-white-300,
+  'ota-white-400': $ota-white-400,
+  'ota-white-500': $ota-white-500,
+  'ota-white-600': $ota-white-600,
+  'ota-white-700': $ota-white-700,
+  'ota-white-800': $ota-white-800,
+  'ota-white-900': $ota-white-900
+) !default;
+
+$bake-brown: (
+  'bake-brown-100': $bake-brown-100,
+  'bake-brown-200': $bake-brown-200,
+  'bake-brown-300': $bake-brown-300,
+  'bake-brown-400': $bake-brown-400,
+  'bake-brown-500': $bake-brown-500,
+  'bake-brown-600': $bake-brown-600,
+  'bake-brown-700': $bake-brown-700,
+  'bake-brown-800': $bake-brown-800,
+  'bake-brown-900': $bake-brown-900
+) !default;
 // fusv-enable
 
 // scss-docs-start theme-color-variables
@@ -319,9 +425,13 @@ $info: $cyan !default;
 $coffee: $brown !default;
 $warning: $yellow !default;
 $danger: $red !default;
+$brown: $brown !default;
+$tea-green: $tea-green !default;
+$rice-white: $rice-white !default;
+$ota-white: $ota-white !default;
+$bake-brown: $bake-brown !default;
 $light: $gray-100 !default;
 $dark: $gray-900 !default;
-$brown: $brown-900 !default;
 // scss-docs-end theme-color-variables
 
 // scss-docs-start theme-colors-map
@@ -333,6 +443,10 @@ $theme-colors: (
   'warning': $warning,
   'danger': $danger,
   'brown': $brown,
+  'tea-green': $tea-green,
+  'rice-white': $rice-white,
+  'ota-white': $ota-white,
+  'bake-brown': $bake-brown,
   'light': $light,
   'dark': $dark
 ) !default;
@@ -345,6 +459,10 @@ $success-text-emphasis: shade-color($success, 60%) !default;
 $info-text-emphasis: shade-color($info, 60%) !default;
 $warning-text-emphasis: shade-color($warning, 60%) !default;
 $danger-text-emphasis: shade-color($danger, 60%) !default;
+$tea-green-emphasis: shade-color($tea-green, 60%) !default;
+$rice-white-emphasis: shade-color($rice-white, 60%) !default;
+$ota-white-emphasis: shade-color($ota-white, 60%) !default;
+$bake-brown-emphasis: shade-color($bake-brown, 60%) !default;
 $light-text-emphasis: $gray-700 !default;
 $dark-text-emphasis: $gray-700 !default;
 // scss-docs-end theme-text-variables
@@ -356,6 +474,10 @@ $success-bg-subtle: tint-color($success, 80%) !default;
 $info-bg-subtle: tint-color($info, 80%) !default;
 $warning-bg-subtle: tint-color($warning, 80%) !default;
 $danger-bg-subtle: tint-color($danger, 80%) !default;
+$tea-green-subtle: tint-color($tea-green, 80%) !default;
+$rice-white-subtle: tint-color($rice-white, 80%) !default;
+$ota-white-subtle: tint-color($ota-white, 80%) !default;
+$bake-brown-subtle: tint-color($bake-brown, 80%) !default;
 $light-bg-subtle: mix($gray-100, $white) !default;
 $dark-bg-subtle: $gray-400 !default;
 // scss-docs-end theme-bg-subtle-variables
@@ -367,6 +489,10 @@ $success-border-subtle: tint-color($success, 60%) !default;
 $info-border-subtle: tint-color($info, 60%) !default;
 $warning-border-subtle: tint-color($warning, 60%) !default;
 $danger-border-subtle: tint-color($danger, 60%) !default;
+$tea-green-subtle: tint-color($tea-green, 60%) !default;
+$rice-white-subtle: tint-color($rice-white, 60%) !default;
+$ota-white-subtle: tint-color($ota-white, 60%) !default;
+$bake-brown-subtle: tint-color($bake-brown, 60%) !default;
 $light-border-subtle: $gray-200 !default;
 $dark-border-subtle: $gray-500 !default;
 // scss-docs-end theme-border-subtle-variables

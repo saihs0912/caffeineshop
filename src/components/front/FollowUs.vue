@@ -12,7 +12,7 @@
               <div class="d-flex">
                 <input type="email" id="follow" placeholder="輸入Email" /><button
                   type="button"
-                  class="btn btn-brown"
+                  class="btn btn-tea-green text-ota-white"
                 >
                   <i class="bi bi-send"></i>
                 </button>
