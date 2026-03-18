@@ -33,7 +33,7 @@
                   <div class="btn-group">
                     <button
                       type="button"
-                      class="d-block btn m-1 rounded-circle shadow border-0 text-center cart btn-danger"
+                      class="d-block btn m-1 rounded-circle shadow border-0 text-center cart btn-tea-green"
                       @click="addToCart($http, item.id, 1, 'list', i)"
                       :disabled="item.id === status.loadingItem"
                       :class="{ addToCartAnimation: cart === i }"

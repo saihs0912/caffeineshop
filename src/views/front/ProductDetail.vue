@@ -84,7 +84,7 @@
             </div>
             <button
               type="button"
-              class="btn btn-brown btn-flex fs-4"
+              class="btn btn-tea-green text-rice-white btn-flex fs-4"
               @click="addToCart($http, product.id, qty, 'detail')"
               :disabled="product.id === status.loadingItem"
             >

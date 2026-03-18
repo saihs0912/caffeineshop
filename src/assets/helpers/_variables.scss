@@ -51,6 +51,7 @@ $tea-green: #6b8e23 !default;
 $rice-white: #faf9f6 !default;
 $ota-white: #f5f5dc !default;
 $bake-brown: #3e2723 !default;
+$amber: #d4a017 !default;
 // scss-docs-end color-variables
 
 // scss-docs-start colors-map
@@ -236,6 +237,16 @@ $bake-brown-700: shade-color($bake-brown, 40%) !default;
 $bake-brown-800: shade-color($bake-brown, 60%) !default;
 $bake-brown-900: shade-color($bake-brown, 80%) !default;
 
+$amber-100: tint-color($amber, 80%) !default;
+$amber-200: tint-color($amber, 60%) !default;
+$amber-300: tint-color($amber, 40%) !default;
+$amber-400: tint-color($amber, 20%) !default;
+$amber-500: $amber !default;
+$amber-600: shade-color($amber, 20%) !default;
+$amber-700: shade-color($amber, 40%) !default;
+$amber-800: shade-color($amber, 60%) !default;
+$amber-900: shade-color($amber, 80%) !default;
+
 $blues: (
   'blue-100': $blue-100,
   'blue-200': $blue-200,
@@ -415,6 +426,18 @@ $bake-brown: (
   'bake-brown-800': $bake-brown-800,
   'bake-brown-900': $bake-brown-900
 ) !default;
+
+$amber: (
+  'amber-100': $amber-100,
+  'amber-200': $amber-200,
+  'amber-300': $amber-300,
+  'amber-400': $amber-400,
+  'amber-500': $amber-500,
+  'amber-600': $amber-600,
+  'amber-700': $amber-700,
+  'amber-800': $amber-800,
+  'amber-900': $amber-900
+) !default;
 // fusv-enable
 
 // scss-docs-start theme-color-variables
@@ -430,6 +453,7 @@ $tea-green: $tea-green !default;
 $rice-white: $rice-white !default;
 $ota-white: $ota-white !default;
 $bake-brown: $bake-brown !default;
+$amber: $amber !default;
 $light: $gray-100 !default;
 $dark: $gray-900 !default;
 // scss-docs-end theme-color-variables
@@ -447,6 +471,7 @@ $theme-colors: (
   'rice-white': $rice-white,
   'ota-white': $ota-white,
   'bake-brown': $bake-brown,
+  'amber': $amber,
   'light': $light,
   'dark': $dark
 ) !default;
@@ -463,6 +488,7 @@ $tea-green-emphasis: shade-color($tea-green, 60%) !default;
 $rice-white-emphasis: shade-color($rice-white, 60%) !default;
 $ota-white-emphasis: shade-color($ota-white, 60%) !default;
 $bake-brown-emphasis: shade-color($bake-brown, 60%) !default;
+$amber-emphasis: shade-color($amber, 60%) !default;
 $light-text-emphasis: $gray-700 !default;
 $dark-text-emphasis: $gray-700 !default;
 // scss-docs-end theme-text-variables
@@ -493,6 +519,7 @@ $tea-green-subtle: tint-color($tea-green, 60%) !default;
 $rice-white-subtle: tint-color($rice-white, 60%) !default;
 $ota-white-subtle: tint-color($ota-white, 60%) !default;
 $bake-brown-subtle: tint-color($bake-brown, 60%) !default;
+$amber-subtle: tint-color($amber, 60%) !default;
 $light-border-subtle: $gray-200 !default;
 $dark-border-subtle: $gray-500 !default;
 // scss-docs-end theme-border-subtle-variables

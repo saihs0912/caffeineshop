@@ -115,7 +115,7 @@
               </div>
               <div class="col-12 my-1">
                 <div class="container">
-                  <div class="row border border-warning">
+                  <div class="row border-0 mx-4">
                     <div class="col-lg-12 col-md-12 col-sm-6 col-6">
                       <div
                         v-if="cart.total !== cart.final_total"
@@ -138,7 +138,7 @@
                       <div class="py-2 w-100">
                         <button
                           type="button"
-                          class="btn btn-outline-warning w-100"
+                          class="btn btn-amber text-rice-white w-100"
                           @click.prevent="openCouponModal"
                         >
                           <span v-if="cart.total == cart.final_total">查看優惠券</span>
@@ -155,7 +155,12 @@
                   <button type="button" class="btn btn-secondary fs-5" v-if="num === 0">
                     購物車內沒有商品
                   </button>
-                  <button type="button" class="btn btn-danger fs-5" @click="goToCheck" v-else>
+                  <button
+                    type="button"
+                    class="btn btn-tea-green text-rice-white fs-5"
+                    @click="goToCheck"
+                    v-else
+                  >
                     前往結帳
                   </button>
                 </div>
@@ -213,7 +218,7 @@
                   <div class="d-flex flex-column justify-content-center" style="width: 50%">
                     <button
                       type="button"
-                      class="btn btn-brown w-75"
+                      class="btn btn-tea-green text-rice-white w-75"
                       @click="addProduct(item.id, i, 'cart')"
                     >
                       <i class="bi bi-cart-fill"></i>
