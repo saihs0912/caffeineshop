@@ -138,12 +138,11 @@
                       <div class="py-2 w-100">
                         <button
                           type="button"
-                          class="btn btn-amber text-rice-white w-100"
+                          class="ticket position-relative rounded-0 btn btn-outline-amber border-2 w-100 align-middle text-start ps-4"
                           @click.prevent="openCouponModal"
                         >
                           <span v-if="cart.total == cart.final_total">查看優惠券</span>
                           <span v-else>其他優惠券</span>
-                          <i class="bi bi-ticket-perforated-fill"></i>
                         </button>
                       </div>
                     </div>
@@ -157,7 +156,7 @@
                   </button>
                   <button
                     type="button"
-                    class="btn btn-tea-green text-rice-white fs-5"
+                    class="btn btn-tea-green text-rice-white fs-5 py-3"
                     @click="goToCheck"
                     v-else
                   >
@@ -456,7 +455,57 @@ export default {
   left: 12px !important;
   bottom: 0 !important;
 }
-
+.ticket {
+  background: repeating-linear-gradient(
+    0deg,
+    #d4a017,
+    #d4a017 7px,
+    transparent 7px,
+    transparent 10px
+  );
+  background-position: calc(100% - 20px) 0;
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  font-weight: bold;
+  z-index: 0;
+}
+.ticket:hover {
+  background: repeating-linear-gradient(0deg, #ffffff, #ffffff 7px, #ffffff 7px, transparent 10px);
+  background-position: calc(100% - 20px) 0;
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-color: #d4a017;
+}
+.ticket::before {
+  position: absolute;
+  content: '';
+  background: #ffffff;
+  top: 8px;
+  left: -2px;
+  border-radius: 0 10px 10px 0;
+  border-left: none;
+  border-top: 2px solid #d4a017;
+  border-bottom: 2px solid #d4a017;
+  border-right: 2px solid #d4a017;
+  width: 10px;
+  height: 20px;
+  z-index: 1;
+}
+.ticket::after {
+  position: absolute;
+  content: '';
+  background: #ffffff;
+  top: 8px;
+  right: -2px;
+  border-radius: 10px 0 0 10px;
+  border-left: none;
+  border-top: 2px solid #d4a017;
+  border-bottom: 2px solid #d4a017;
+  border-left: 2px solid #d4a017;
+  width: 10px;
+  height: 20px;
+  z-index: 1;
+}
 @media (max-width: 768px) {
   .fixedBottomBox {
     position: fixed;
