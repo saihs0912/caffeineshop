@@ -21,7 +21,7 @@
                 class="no-underline"
                 :to="{ name: 'product', params: { productId: item.id } }"
               >
-                <h6 class="card-title">{{ item.title }}</h6>
+                <h6 class="card-title text-body">{{ item.title }}</h6>
               </router-link>
               <div class="d-flex justify-content-between align-items-center">
                 <span class="fw-bold text-danger">{{ $num.currency(item.price) }} 元</span>
