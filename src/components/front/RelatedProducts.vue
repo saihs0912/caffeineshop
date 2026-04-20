@@ -18,7 +18,8 @@
             </router-link>
             <router-link
               :to="{ name: 'product', params: { productId: item.id } }"
-              class="no-underline"
+              class="no-underline text-body px-1 pt-1 pb-2"
+              style="font-size: 0.9rem"
             >
               {{ item.title }}
             </router-link>

@@ -17,7 +17,7 @@
               <h2>{{ product.title }}</h2>
             </div>
             <div class="col-lg-5 col-md-12">
-              <div class="p-2 sqLarge">
+              <div class="p-2 sqLarge bg-white">
                 <div>
                   <img
                     class="img-fluid"
@@ -28,7 +28,7 @@
               </div>
               <div class="d-flex p-2">
                 <div
-                  class="w-25 sqSmall m-1"
+                  class="w-25 sqSmall m-1 bg-white"
                   v-for="(item, i) in imgArray"
                   :key="i"
                   @mouseover="num = i"
@@ -58,9 +58,9 @@
         </div>
       </div>
       <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-        <div class="border p-3">
+        <div class="border p-3 bg-white">
           <p class="fs-3">每{{ product.unit }}</p>
-          <p class="fs-3 fw-bold text-success" v-if="product.price !== product.origin_price">
+          <p class="fs-3 fw-bold text-danger" v-if="product.price !== product.origin_price">
             {{ $num.currency(product.price) }} 元 <i class="bi bi-tag"></i>
           </p>
           <p class="fs-3">
@@ -96,8 +96,8 @@
               </div>
               <div style="width: 122px">加入購物車</div>
             </button>
-            <p class="fs-6">購買且付款後最快３天出貨</p>
-            <p class="fs-6">購買後將會寄確認信至您的信箱，可選擇信用卡結帳或是銀行轉帳</p>
+            <p class="fs-6">下單且付款後最快３天出貨</p>
+            <p class="fs-6">下單後將會寄確認信至您的信箱，可選擇信用卡結帳或是銀行轉帳</p>
           </div>
           <div class="text-center">
             <div class="btn-group w-100 mb-3">

@@ -45,11 +45,15 @@
                   class="float-lg-none float-md-none float-sm-none float-start td-img"
                   style="width: 50px"
                 >
-                  <img class="img-fluid" :src="productItem.product.imageUrl" :alt="productItem.product.title" />
+                  <img
+                    class="img-fluid"
+                    :src="productItem.product.imageUrl"
+                    :alt="productItem.product.title"
+                  />
                 </td>
                 <td class="td-block">
                   <router-link
-                    class="no-underline d-block h-100"
+                    class="no-underline d-block h-100 text-body"
                     :to="{ name: 'product', params: { productId: productItem.product.id } }"
                     >{{ productItem.product.title }}</router-link
                   >

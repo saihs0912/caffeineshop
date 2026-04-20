@@ -21,10 +21,10 @@
                 class="no-underline d-block p-2 h-100"
                 :to="{ name: 'product', params: { productId: item.id } }"
               >
-                <p class="card-title">{{ item.title }}</p>
+                <p class="card-title text-body">{{ item.title }}</p>
                 <div>
                   <span class="fw-bold text-danger">{{ $num.currency(item.price) }} 元</span><br />
-                  <span class="text-dark">{{ item.description }}</span>
+                  <span class="text-body" style="font-size: 0.8rem">{{ item.description }}</span>
                 </div>
               </router-link>
             </div>
