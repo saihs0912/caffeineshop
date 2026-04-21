@@ -6,18 +6,28 @@
         <div class="col-12 p-0">
           <div class="followUs p-5-0">
             <div class="followBox px-3 py-5 mx-auto">
-              <label for="follow" id="followLabel" class="mb-4 d-block w-100"
-                >留下您的Email，以獲得最新資訊及最新優惠！</label
-              >
-              <div class="d-flex">
-                <input type="email" id="follow" placeholder="輸入Email" /><button
-                  type="button"
-                  class="btn btn-tea-green text-ota-white"
+              <v-form v-slot="{ errors }">
+                <label for="email" id="followLabel" class="mb-4 d-block w-100 form-label"
+                  >留下您的Email，以獲得最新資訊及最新優惠！</label
                 >
-                  <i class="bi bi-send"></i>
-                </button>
-              </div>
-              <div class="text_underline"></div>
+                <div class="d-flex">
+                  <v-field
+                    type="email"
+                    class="form-control"
+                    :class="{ 'is-invalid': errors['email'] }"
+                    id="email"
+                    name="email"
+                    placeholder="輸入Email"
+                    rules="email|required"
+                    @v-model="email"
+                  ></v-field
+                  ><error-message name="email" class="invalid-feedback"></error-message>
+                  <button type="button" class="btn btn-tea-green text-ota-white">
+                    <i class="bi bi-send"></i>
+                  </button>
+                </div>
+                <div class="text_underline"></div
+              ></v-form>
             </div>
           </div>
         </div>
@@ -28,7 +38,13 @@
 
 <script>
 export default {
-  name: 'FollowUs'
+  name: 'FollowUs',
+  data() {
+    return {
+      email: ''
+    }
+  },
+  methods: {}
 }
 </script>
 
