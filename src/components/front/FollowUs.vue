@@ -10,7 +10,7 @@
                 <label for="email" id="followLabel" class="mb-4 d-block w-100 form-label"
                   >留下您的Email，以獲得最新資訊及最新優惠！</label
                 >
-                <div class="d-flex">
+                <div>
                   <v-field
                     type="email"
                     class="form-control"
@@ -21,13 +21,12 @@
                     rules="email|required"
                     @v-model="email"
                   ></v-field
-                  ><error-message name="email" class="invalid-feedback"></error-message>
+                  ><error-message name="email" class="invalid-feedback w-100"></error-message>
                   <button type="button" class="btn btn-tea-green text-ota-white">
                     <i class="bi bi-send"></i>
                   </button>
                 </div>
-                <div class="text_underline"></div
-              ></v-form>
+              </v-form>
             </div>
           </div>
         </div>
