@@ -6,25 +6,33 @@
         <div class="col-12 p-0">
           <div class="followUs p-5-0">
             <div class="followBox px-3 py-5 mx-auto">
-              <v-form v-slot="{ errors }">
+              <v-form v-slot="{ errors }" @submit="emailSend">
                 <label for="email" id="followLabel" class="mb-4 d-block w-100 form-label"
                   >留下您的Email，以獲得最新資訊及最新優惠！</label
                 >
                 <div>
-                  <v-field
-                    type="email"
-                    class="form-control"
-                    :class="{ 'is-invalid': errors['email'] }"
-                    id="email"
-                    name="email"
-                    placeholder="輸入Email"
-                    rules="email|required"
-                    @v-model="email"
-                  ></v-field
-                  ><error-message name="email" class="invalid-feedback w-100"></error-message>
-                  <button type="button" class="btn btn-tea-green text-ota-white">
-                    <i class="bi bi-send"></i>
-                  </button>
+                  <div class="input-group mb-3">
+                    <v-field
+                      type="email"
+                      class="form-control"
+                      :class="{ 'is-invalid': errors['email'] }"
+                      id="email"
+                      placeholder="請輸入您的Email"
+                      name="email"
+                      rules="email|required"
+                      v-model="user.email"
+                      aria-label="Recipient's username"
+                      aria-describedby="basic-addon2"
+                    />
+                    <button
+                      type="submit"
+                      class="input-group-text btn btn-tea-green text-ota-white"
+                      id="basic-addon2"
+                    >
+                      <i class="bi bi-send"></i>
+                    </button>
+                    <error-message name="email" class="invalid-feedback w-100"></error-message>
+                  </div>
                 </div>
               </v-form>
             </div>
@@ -40,10 +48,17 @@ export default {
   name: 'FollowUs',
   data() {
     return {
-      email: ''
+      user: {
+        email: ''
+      }
     }
   },
-  methods: {}
+  methods: {
+    emailSend() {
+      alert(`感謝您的訂閱！\n您的Email ${this.user.email} 將會收到我們的最新訊息！`)
+      this.user.email = ''
+    }
+  }
 }
 </script>
 
