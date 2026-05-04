@@ -11,10 +11,10 @@
       </div>
       <div v-if="num === 0">
         <p class="text-center">
-          購物車內是空的<br /><br />就像你的咖啡杯一樣<br /><br /><router-link
+          購物車內是空的，就像你的咖啡杯一樣<br /><br /><router-link
             to="/shopping"
-            class="no-underline fw-bold btn btn-outline-brown"
-            >回商店繼續逛逛</router-link
+            class="no-underline fw-bold btn btn-tea-green text-rice-white px-5 py-3"
+            >去商店逛逛</router-link
           ><br /><br />
           <span v-if="length !== 0">或是直接從下面追蹤清單放入購物車吧！</span>
         </p>

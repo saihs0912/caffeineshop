@@ -6,7 +6,7 @@
         <div class="col-12 p-0">
           <div class="followUs p-5-0">
             <div class="followBox px-3 py-5 mx-auto">
-              <v-form v-slot="{ errors }" @submit="emailSend">
+              <v-form v-slot="{ errors }" @submit="emailSend" ref="formEmail">
                 <label for="email" id="followLabel" class="mb-4 d-block w-100 form-label"
                   >留下您的Email，以獲得最新資訊及最新優惠！</label
                 >
@@ -56,7 +56,7 @@ export default {
   methods: {
     emailSend() {
       alert(`感謝您的訂閱！\n您的Email ${this.user.email} 將會收到我們的最新訊息！`)
-      this.user.email = ''
+      this.$refs.formEmail.resetForm()
     }
   }
 }
