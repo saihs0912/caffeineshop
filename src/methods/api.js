@@ -58,7 +58,6 @@ export async function addToCart(http, id, num, from, i) {
   }
   try {
     const res = await http.post(api, { data: cart })
-    console.log(res)
     if (from === 'list') {
       this.cart = i
     } else if (from === 'detail') {
@@ -109,6 +108,7 @@ export async function deleteCartItem(id, from) {
     await this.$http.delete(url, { data: id })
     this.status.loadingItem = ''
     this.getCart(from)
+    emitter.emit('updateCart')
   } catch (err) {
     this.status.loadingItem = ''
     this.$InformMessage(err, '商品刪除')

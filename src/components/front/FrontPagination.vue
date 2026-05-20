@@ -6,7 +6,7 @@
           <ul class="pagination justify-content-center">
             <li class="page-item" v-if="pages.pageNow !== 1">
               <a
-                class="page-link text-brown"
+                class="page-link text-tea-green"
                 href="#"
                 aria-label="Previous"
                 @click.prevent="updatePage(pages.pageNow - 1)"
@@ -15,7 +15,7 @@
               </a>
             </li>
             <li class="page-item disabled" v-else>
-              <span class="page-link text-brown" aria-hidden="true">&laquo;</span>
+              <span class="page-link text-tea-green" aria-hidden="true">&laquo;</span>
             </li>
             <li
               class="page-item"
@@ -36,7 +36,7 @@
               </a>
             </li>
             <li class="page-item disabled" v-else>
-              <span class="page-link text-brown" aria-hidden="true">&raquo;</span>
+              <span class="page-link text-tea-green" aria-hidden="true">&raquo;</span>
             </li>
           </ul>
         </nav>
