@@ -90,6 +90,11 @@
                   >咖啡與茶</router-link
                 >
               </li>
+              <li class="nav-item" @mouseenter="mouseEnter(4)" @click="setActive(1)">
+                <router-link class="nav-link text-ota-white" @click="navbarHide" to="/articles"
+                  >最新消息</router-link
+                >
+              </li>
               <li class="nav-item" @mouseenter="mouseEnter(2)" @click="setActive(2)">
                 <router-link class="nav-link text-ota-white" @click="navbarHide" to="/shopping"
                   >線上商店</router-link
