@@ -68,7 +68,9 @@
           <error-message name="address" class="invalid-feedback"></error-message>
         </div>
         <div class="md-3 mb-3">
-          <label for="message" class="form-label">留言</label>
+          <label for="message" class="form-label"
+            >留言 <span style="font-size: 0.8rem">（※選填）</span></label
+          >
           <textarea
             name=""
             id="message"

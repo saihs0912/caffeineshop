@@ -215,6 +215,13 @@ h2 span {
 .sideBar .list-group .list-group-item a:hover {
   opacity: 0.4;
 }
+/*商品列表頁的hover效果*/
+.itemBox {
+  transition: 0.5s ease;
+}
+.itemBox:hover {
+  transform: translateY(-7px);
+}
 /*商品列表頁的加入購物車、加入關注按鈕*/
 .cart,
 .heart,

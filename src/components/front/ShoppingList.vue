@@ -7,7 +7,7 @@
         </div>
         <div
           v-else-if="i + 1 <= page.pageNow * 10 && i + 1 > page.pageNow * 10 - 10"
-          class="col-6 col-sm-6 col-md-6 col-lg-4 p-2 overflow-hidden"
+          class="col-6 col-sm-6 col-md-6 col-lg-4 p-2 overflow-hidden itemBox"
         >
           <div class="card h-100 shadow-sm border-0">
             <router-link

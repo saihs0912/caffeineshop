@@ -138,7 +138,7 @@
                       <div class="py-2 w-100">
                         <button
                           type="button"
-                          class="ticket position-relative btn btn-outline-amber border-2 w-100 align-middle text-start ps-4"
+                          class="ticket position-relative btn btn-outline-amber border-4 w-100 align-middle text-center ps-4"
                           @click.prevent="openCouponModal"
                         >
                           <span v-if="cart.total == cart.final_total">查看優惠券</span>
@@ -476,6 +476,12 @@ export default {
   background-size: 2px 100%;
   background-repeat: no-repeat;
   background-color: #d4a017;
+  color: #ffffff;
+}
+.ticket span {
+  margin-right: 20px;
+}
+.ticket:hover span {
   color: #ffffff;
 }
 @media (max-width: 768px) {
