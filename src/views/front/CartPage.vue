@@ -20,7 +20,7 @@
         </p>
       </div>
       <div class="col-lg-8 col-md-8 col-sm-12 col-12" v-show="num !== 0" ref="myCart">
-        <table class="table align-middle mb-0">
+        <table class="table align-middle mb-0" ref="cartList">
           <thead>
             <tr>
               <th></th>
@@ -337,6 +337,7 @@ export default {
       this.checkBoxLeft = box.getBoundingClientRect().x
       this.checkBoxWidth = box.getBoundingClientRect().width
       if (window.innerWidth > 768) {
+        console.log('test')
         if (window.scrollY <= 72 && this.boxType === 1) {
           this.boxType = 0
         } else if (
