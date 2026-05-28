@@ -337,21 +337,28 @@ export default {
       this.checkBoxLeft = box.getBoundingClientRect().x
       this.checkBoxWidth = box.getBoundingClientRect().width
       if (window.innerWidth > 768) {
-        console.log('test')
+        // 網頁寬度超過768px
         if (window.scrollY <= 72 && this.boxType === 1) {
-          this.boxType = 0
+          // 狀態一，網頁往下卷不超過72px，取boxType為1
+          this.boxType = 0 // boxType變為0
+          console.log('1')
         } else if (
+          // 狀態二、網頁往下捲超過72px，而且捲的不超過購物車的底部高度 減去 結帳方框高度+50px，而且boxType要為0、或是為2
           window.scrollY > 72 &&
           window.scrollY < this.myCartBottom - this.checkBoxInHeight + 50 &&
           (this.boxType === 0 || this.boxType === 2)
         ) {
+          // boxType變為1，結帳方塊x軸座標為原本x軸座標+12px、寬度為原本寬度-24px
+          console.log('2', this.myCartBottom)
           this.boxType = 1
           boxIn.style.left = `${this.checkBoxLeft + 12}px`
           boxIn.style.width = `${this.checkBoxWidth - 24}px`
         } else if (
+          // 狀態三、網頁往下捲超過減去購物車高度的底部y軸座標，而且boxType為1
           window.scrollY > this.myCartBottom - this.checkBoxInHeight + 50 &&
           this.boxType === 1
         ) {
+          // boxType變為2，結帳方塊的寬度為外框寬度減去24px
           this.boxType = 2
           boxIn.style.width = `${this.checkBoxWidth - 24}px`
         }
