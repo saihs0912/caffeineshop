@@ -9,53 +9,52 @@
           v-else-if="i + 1 <= page.pageNow * 10 && i + 1 > page.pageNow * 10 - 10"
           class="col-6 col-sm-6 col-md-6 col-lg-4 p-2 overflow-hidden itemBox"
         >
-          <div class="card h-100 shadow-sm border-0">
-            <router-link
-              class="no-underline xs-img"
-              :to="{ name: 'product', params: { productId: item.id } }"
-            >
+          <router-link
+            class="no-underline xs-img"
+            :to="{ name: 'product', params: { productId: item.id } }"
+          >
+            <div class="card h-100 shadow-sm border-0">
               <img :src="item.imageUrl" class="card-img-top" :alt="item.title" />
-            </router-link>
-            <div class="card-body d-flex flex-column pb-0 justify-content-between">
-              <router-link
-                class="no-underline"
-                :to="{ name: 'product', params: { productId: item.id } }"
-              >
+
+              <div class="card-body d-flex flex-column pb-0 justify-content-between">
                 <h6 class="card-title text-body">{{ item.title }}</h6>
-              </router-link>
-              <div class="d-flex justify-content-between align-items-center">
-                <span class="fw-bold text-danger">{{ $num.currency(item.price) }} 元</span>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="fw-bold text-danger">{{ $num.currency(item.price) }} 元</span>
+                </div>
               </div>
-            </div>
-            <div class="container pt-4 pb-3 overflow-hidden">
-              <div class="row justify-content-end h-100">
-                <div class="pb-2 col-12 text-end">
-                  <div class="btn-group">
-                    <button
-                      type="button"
-                      class="d-block btn m-1 rounded-circle shadow border-0 text-center cart btn-tea-green"
-                      @click="addToCart($http, item.id, 1, 'list', i)"
-                      :disabled="item.id === status.loadingItem"
-                      :class="{ addToCartAnimation: cart === i }"
-                    ></button>
-                    <button
-                      type="button"
-                      class="d-block btn m-1 rounded-circle shadow border-0 text-center heart"
-                      @click="editFavorite(item.id, i)"
-                      v-if="favorite.indexOf(item.id) === -1"
-                    ></button>
-                    <button
-                      type="button"
-                      class="d-block btn m-1 rounded-circle shadow border-0 text-center heart-fill"
-                      :class="{ heartAnimation: heart === i }"
-                      @click="editFavorite(item.id)"
-                      v-else
-                    ></button>
+              <div class="container pt-4 pb-3 overflow-hidden">
+                <div class="row justify-content-end h-100">
+                  <div class="pb-2 col-12 text-end">
+                    <div class="btn-group">
+                      <button
+                        type="button"
+                        class="d-block btn m-1 rounded-circle shadow border-0 text-center cart btn-tea-green"
+                        style="z-index: 999"
+                        @click="addToCart($http, item.id, 1, 'list', i)"
+                        :disabled="item.id === status.loadingItem"
+                        :class="{ addToCartAnimation: cart === i }"
+                      ></button>
+                      <button
+                        type="button"
+                        class="d-block btn m-1 rounded-circle shadow border-0 text-center heart"
+                        style="z-index: 999"
+                        @click="editFavorite(item.id, i)"
+                        v-if="favorite.indexOf(item.id) === -1"
+                      ></button>
+                      <button
+                        type="button"
+                        class="d-block btn m-1 rounded-circle shadow border-0 text-center heart-fill"
+                        style="z-index: 999"
+                        :class="{ heartAnimation: heart === i }"
+                        @click="editFavorite(item.id)"
+                        v-else
+                      ></button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </router-link>
         </div>
       </template>
     </div>
@@ -138,6 +137,7 @@ export default {
   methods: {
     addToCart,
     editFavorite(id, i) {
+      event.preventDefault()
       const favoriteId = this.favorite.indexOf(id)
       if (favoriteId === -1) {
         this.favorite.push(id)

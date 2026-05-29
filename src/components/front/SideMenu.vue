@@ -1,6 +1,6 @@
 <template>
   <div class="sideBar mt-4 mb-5">
-    <h5 class="text-center p-2">找尋商品</h5>
+    <h5 class="text-center p-2">商品分類</h5>
     <div class="ps-4 pe-4">
       <div v-for="(itemOut, keyOut) in Object.keys(typecategoryList)" :key="keyOut" class="p-2">
         <span class="fw-bold border-bottom d-block">{{ itemOut }}</span>

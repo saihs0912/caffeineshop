@@ -19,7 +19,12 @@
           <span v-if="length !== 0">或是直接從下面追蹤清單放入購物車吧！</span>
         </p>
       </div>
-      <div class="col-lg-8 col-md-8 col-sm-12 col-12" v-show="num !== 0" ref="myCart">
+      <div
+        class="col-lg-8 col-md-8 col-sm-12 col-12"
+        v-show="num !== 0"
+        ref="myCart"
+        :style="{ minHeight: checkBoxInHeight + 'px' }"
+      >
         <table class="table align-middle mb-0" ref="cartList">
           <thead>
             <tr>
@@ -174,10 +179,10 @@
           </div>
         </div>
       </div>
-      <div class="col-12 mt-5" v-if="length !== 0">
-        <p class="fw-bold fs-4">追蹤清單內尚有商品</p>
+      <div class="col-12 mt-5">
+        <p class="fw-bold fs-4">追蹤清單</p>
         <div class="container">
-          <div class="row">
+          <div class="row" v-if="length !== 0">
             <div
               class="col-lg-3 col-md-4 col-sm-6 col-12 px-1 py-2"
               v-for="(item, i) in filterData"
@@ -227,6 +232,7 @@
               </div>
             </div>
           </div>
+          <div class="row" v-else>沒有追蹤中的商品</div>
         </div>
       </div>
     </div>
@@ -340,8 +346,9 @@ export default {
         // 網頁寬度超過768px
         if (window.scrollY <= 72 && this.boxType === 1) {
           // 狀態一，網頁往下卷不超過72px，取boxType為1
+          console.log('1-1', window.scrollY)
           this.boxType = 0 // boxType變為0
-          console.log('1')
+          console.log('1', window.scrollY)
         } else if (
           // 狀態二、網頁往下捲超過72px，而且捲的不超過購物車的底部高度 減去 結帳方框高度+50px，而且boxType要為0、或是為2
           window.scrollY > 72 &&
@@ -349,16 +356,20 @@ export default {
           (this.boxType === 0 || this.boxType === 2)
         ) {
           // boxType變為1，結帳方塊x軸座標為原本x軸座標+12px、寬度為原本寬度-24px
-          console.log('2', this.myCartBottom)
+          console.log('2', this.myCartBottom, window.scrollY)
           this.boxType = 1
+          console.log('2-1', window.scrollY)
           boxIn.style.left = `${this.checkBoxLeft + 12}px`
+          console.log('2-2', boxIn.style.left, window.scrollY)
           boxIn.style.width = `${this.checkBoxWidth - 24}px`
+          console.log('2-3', boxIn.style.width, window.scrollY)
         } else if (
           // 狀態三、網頁往下捲超過減去購物車高度的底部y軸座標，而且boxType為1
           window.scrollY > this.myCartBottom - this.checkBoxInHeight + 50 &&
           this.boxType === 1
         ) {
           // boxType變為2，結帳方塊的寬度為外框寬度減去24px
+          console.log('3')
           this.boxType = 2
           boxIn.style.width = `${this.checkBoxWidth - 24}px`
         }

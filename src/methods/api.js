@@ -47,6 +47,7 @@ export async function getCart(from) {
 
 // 將商品放入購物車
 export async function addToCart(http, id, num, from, i) {
+  if (from === 'list') event.preventDefault()
   const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
   if (from === 'detail') {
     if (this.cartPutIn) this.cartPutIn = !this.cartPutIn
