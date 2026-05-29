@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkcaffeineshop"]=self["webpackChunkcaffeineshop"]||[]).push([[906],{1906:function(n,e,s){s.r(e),s.d(e,{default:function(){return f}});var c=s(6768);const r={class:"container"};function t(n,e,s,t,a,i){return(0,c.uX)(),(0,c.CE)("div",r,[...e[0]||(e[0]=[(0,c.Lk)("div",{class:"row"},[(0,c.Lk)("div",{class:"col-12"},"文章列表")],-1)])])}var a={name:"ArticlesList",data(){return{list:[]}}},i=s(1241);const u=(0,i.A)(a,[["render",t]]);var f=u}}]);
+//# sourceMappingURL=906.176c81d3.js.map
