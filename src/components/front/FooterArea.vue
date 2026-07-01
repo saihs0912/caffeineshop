@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     goLogin() {
-      this.$router.push('/login')
+      this.$router.push('login')
     }
   },
   mounted() {

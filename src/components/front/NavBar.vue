@@ -90,17 +90,17 @@
                   >咖啡與茶</router-link
                 >
               </li>
-              <li class="nav-item" @mouseenter="mouseEnter(4)" @click="setActive(1)">
+              <li class="nav-item" @mouseenter="mouseEnter(2)" @click="setActive(2)">
                 <router-link class="nav-link text-ota-white" @click="navbarHide" to="/articles"
                   >最新消息</router-link
                 >
               </li>
-              <li class="nav-item" @mouseenter="mouseEnter(2)" @click="setActive(2)">
+              <li class="nav-item" @mouseenter="mouseEnter(3)" @click="setActive(3)">
                 <router-link class="nav-link text-ota-white" @click="navbarHide" to="/shopping"
                   >線上商店</router-link
                 >
               </li>
-              <li class="nav-item" @mouseenter="mouseEnter(3)" @click="setActive(3)">
+              <li class="nav-item" @mouseenter="mouseEnter(4)" @click="setActive(4)">
                 <router-link class="nav-link text-ota-white" @click="navbarHide" to="/order"
                   >訂單查詢</router-link
                 >

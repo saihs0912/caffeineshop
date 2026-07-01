@@ -57,28 +57,28 @@ const routes = [
       {
         path: '/articles',
         component: () => import('../views/front/ArticlesList.vue')
+      }
+    ]
+  },
+  {
+    path: '/login',
+    component: () => import('../views/back/LoginApi.vue')
+  },
+  {
+    path: '/dashboard',
+    component: () => import('../views/back/DashBoard.vue'),
+    children: [
+      {
+        path: 'productlist',
+        component: () => import('../views/back/ProductPage.vue')
       },
       {
-        path: '/login',
-        component: () => import('../views/back/LoginApi.vue')
+        path: 'couponlist',
+        component: () => import('../views/back/CouponPage.vue')
       },
       {
-        path: '/dashboard',
-        component: () => import('../views/back/DashBoard.vue'),
-        children: [
-          {
-            path: 'productlist',
-            component: () => import('../views/back/ProductPage.vue')
-          },
-          {
-            path: 'couponlist',
-            component: () => import('../views/back/CouponPage.vue')
-          },
-          {
-            path: 'orderlist',
-            component: () => import('../views/back/OrderlistPage.vue')
-          }
-        ]
+        path: 'orderlist',
+        component: () => import('../views/back/OrderlistPage.vue')
       }
     ]
   }
