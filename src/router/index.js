@@ -12,7 +12,8 @@ const routes = [
       },
       {
         path: 'about',
-        component: () => import('../views/front/AboutUs.vue')
+        component: () => import('../views/front/AboutUs.vue'),
+        meta: { title: '關於我們' }
       },
       {
         path: 'caffeine',

@@ -2,6 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
+        <bread-crumb />
         <div class="mt-4 mb-4">
           <router-link to="/" style="text-decoration: none">首頁</router-link> >
           <span>關於我們</span>
@@ -78,6 +79,8 @@
 </template>
 
 <script>
+import BreadCrumb from '@/components/front/BreadCrumb.vue'
+
 export default {
   name: 'AboutUs',
   head() {
@@ -91,6 +94,9 @@ export default {
         { property: 'og:description', content: '一間販賣咖啡因商品的網路店鋪' }
       ]
     }
+  },
+  components: {
+    BreadCrumb
   }
 }
 </script>
