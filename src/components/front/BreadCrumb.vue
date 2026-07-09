@@ -18,8 +18,12 @@ export default {
   name: 'BreadCrumbs',
   computed: {
     breadCrumbs() {
-      console.log(this.$route)
       return this.$route.matched.filter((item) => item.meta && item.meta.title)
+    }
+  },
+  head() {
+    return {
+      title: `${this.$route.meta.title} - 咖啡因商店`
     }
   }
 }
