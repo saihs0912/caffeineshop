@@ -80,6 +80,10 @@ const routes = [
       {
         path: 'orderlist',
         component: () => import('../views/back/OrderlistPage.vue')
+      },
+      {
+        path: 'articlelist',
+        component: () => import('../views/back/ArticlePage.vue')
       }
     ]
   }
