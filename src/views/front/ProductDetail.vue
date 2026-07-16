@@ -2,6 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
+        <bread-crumb :title="this.product.title" />
         <div class="mt-4 mb-4">
           <router-link to="/" style="text-decoration: none">首頁</router-link> >
           <router-link to="/shopping" style="text-decoration: none">線上商店</router-link> >
@@ -155,6 +156,7 @@
 
 <script>
 import RelatedProducts from '@/components/front/RelatedProducts.vue'
+import BreadCrumb from '@/components/front/BreadCrumb.vue'
 import { getProduct, addToCart } from '@/methods/api'
 import { useWindowSize, useClipboard } from '@vueuse/core'
 
@@ -196,7 +198,8 @@ export default {
     }
   },
   components: {
-    RelatedProducts
+    RelatedProducts,
+    BreadCrumb
   },
   methods: {
     async productInfo() {
