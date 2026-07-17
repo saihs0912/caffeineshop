@@ -7,10 +7,11 @@
         class="breadcrumb-item active"
         aria-current="page"
       >
-        {{ item.meta.title }}
+        {{ item.meta.title || this.title }}
       </li>
     </ol>
   </nav>
+  <p>{{ this.title }}</p>
 </template>
 
 <script>
@@ -27,6 +28,12 @@ export default {
       title: `${this.$route.meta.title || this.title} - 咖啡因商店`
     }
   },
-  props: ['title']
+  props: ['title', 'category'],
+  data() {
+    return {
+      productTitle: '',
+      productCategory: ''
+    }
+  }
 }
 </script>

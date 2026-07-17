@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <bread-crumb :title="this.product.title" />
+        <bread-crumb :title="this.product.title" :category="this.product.category" />
         <div class="mt-4 mb-4">
           <router-link to="/" style="text-decoration: none">首頁</router-link> >
           <router-link to="/shopping" style="text-decoration: none">線上商店</router-link> >
