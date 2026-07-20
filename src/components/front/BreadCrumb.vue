@@ -31,6 +31,7 @@ export default {
   props: ['title', 'category'],
   data() {
     return {
+      crumbsItem: [],
       productTitle: '',
       productCategory: ''
     }

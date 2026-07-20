@@ -138,9 +138,7 @@ export default {
         this.$refs.navbar.click()
         this.navOpen = false
       }
-      if (go === 'cart') {
-        this.$refs.cartModal.showModal()
-      } else if (go === 'home') {
+      if (go === 'home') {
         this.activeIndex = null
         underline.style.width = 0
       }
