@@ -19,7 +19,14 @@ export default {
   name: 'BreadCrumbs',
   computed: {
     breadCrumbs() {
-      console.log(this.$route.matched)
+      const crumbsItem = [{ name: '首頁', link: '#' }]
+      let item
+      if (this.$route.matched) {
+        item = this.$route.matched.filter((item) => item.meta && item.meta.title)
+      } else {
+        item = this.title
+      }
+      console.log(crumbsItem, item)
       return this.$route.matched.filter((item) => item.meta && item.meta.title)
     }
   },

@@ -9,7 +9,7 @@
         <div class="col-lg-4 col-md-6 col-sm-6 col-6 m-0 p-0">
           <div class="d-flex">
             <div>
-              <a class="navbar-brand fs-1 pb-0" href="#" @click="navbarHide('home')">
+              <a class="navbar-brand fs-1 pb-0" href="#" @click="navbarHide(true)">
                 <img
                   class="img-fluid align-top"
                   src="../../assets/logo/logo-1.png"
@@ -20,11 +20,7 @@
             </div>
             <div class="shop-title">
               <h1 class="mb-0">
-                <a
-                  class="navbar-brand fs-1 pb-0 text-ota-white"
-                  href="#"
-                  @click="navbarHide('home')"
-                >
+                <a class="navbar-brand fs-1 pb-0 text-ota-white" href="#" @click="navbarHide(true)">
                   咖啡因商店
                 </a>
               </h1>
@@ -138,7 +134,7 @@ export default {
         this.$refs.navbar.click()
         this.navOpen = false
       }
-      if (go === 'home') {
+      if (go === true) {
         this.activeIndex = null
         underline.style.width = 0
       }

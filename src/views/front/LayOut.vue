@@ -44,17 +44,8 @@ export default {
     }
   },
   methods: {
-    openCart() {
-      this.$refs.cartModal.showModal()
-    },
     cartNum(num) {
       this.num = num
-    },
-    cartMove() {
-      this.moveDelay.transitionDelay = '1s'
-      setTimeout(() => {
-        this.moveDelay.transitionDelay = '0s'
-      }, 1000)
     },
     handleScroll() {
       this.showScrollTop = window.scrollY > window.innerHeight / 2
