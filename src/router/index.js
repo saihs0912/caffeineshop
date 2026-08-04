@@ -12,15 +12,20 @@ const routes = [
       },
       {
         path: 'about',
-        component: () => import('../views/front/AboutUs.vue'),
-        meta: { title: '關於我們' }
+        name: 'about',
+        meta: { title: '關於我們' },
+        component: () => import('../views/front/AboutUs.vue')
       },
       {
         path: 'caffeine',
+        name: 'caffeine',
+        meta: { title: '咖啡與茶' },
         component: () => import('../views/front/CoffeeAndTea.vue')
       },
       {
         path: 'shopping',
+        name: 'shopping',
+        meta: { title: '線上商城' },
         component: () => import('../views/front/ShoppingPage.vue')
       },
       {
@@ -31,6 +36,7 @@ const routes = [
       {
         path: 'order',
         name: 'order',
+        meta: { title: '訂單查詢' },
         component: () => import('../views/front/OrderRecord.vue')
       },
       {
@@ -40,10 +46,12 @@ const routes = [
       },
       {
         path: 'follow',
+        name: 'follow',
         component: () => import('../views/front/FollowList.vue')
       },
       {
         path: 'cart',
+        name: 'cart',
         component: () => import('../views/front/CartPage.vue')
       },
       {
