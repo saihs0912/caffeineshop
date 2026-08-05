@@ -2,7 +2,7 @@
   <div class="container pt-4">
     <div class="row">
       <div class="col-12">
-        <bread-crumb></bread-crumb>
+        <bread-crumb />
       </div>
       <div class="col-lg-3 col-md-3 col-sm-12 col-12 order-md-first order-lg-first">
         <side-menu />

@@ -3,18 +3,11 @@
     <div class="row">
       <div class="col-12">
         <bread-crumb :title="this.product.title" :category="this.product.category" />
-        <div class="mt-4 mb-4">
-          <router-link to="/" style="text-decoration: none">首頁</router-link> >
-          <router-link to="/shopping" style="text-decoration: none">線上商店</router-link> >
-          <span v-if="product.category === ('咖啡豆' || '掛耳咖啡包' || '咖啡生活用品')">咖啡</span>
-          <span v-else-if="product.category === ('罐裝茶' || '茶包' || '茶生活用品')">茶</span>
-          <span v-else>其他</span> > <span>{{ product.category }}</span>
-        </div>
       </div>
       <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 py-3">
-        <div class="container">
+        <div class="container ps-0">
           <div class="row">
-            <div class="col-sm-12 col-12 pb-3" v-if="widthSize <= 991">
+            <div class="col-12 pb-3">
               <h2>{{ product.title }}</h2>
             </div>
             <div class="col-lg-5 col-md-12">
@@ -47,9 +40,6 @@
             </div>
             <div class="col-lg-7 col-md-12">
               <div class="d-flex flex-column">
-                <div class="pb-4" v-if="widthSize >= 992">
-                  <h2>{{ product.title }}</h2>
-                </div>
                 <div class="pt-4 border-top">
                   <p>{{ product.description }}</p>
                 </div>

@@ -2,10 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <div class="mt-4 mb-4">
-          <router-link to="/" style="text-decoration: none">首頁</router-link> >
-          <span>訂單查詢</span>
-        </div>
+        <bread-crumb />
+      </div>
+      <div class="col-12">
         <h1>訂單查詢</h1>
         <div class="container">
           <div class="row justify-content-center">
@@ -41,6 +40,7 @@
 
 <script>
 import OrderShow from '@/components/front/OrderShow.vue'
+import BreadCrumb from '@/components/front/BreadCrumb.vue'
 
 export default {
   name: 'OrderRecord',
@@ -63,7 +63,8 @@ export default {
     }
   },
   components: {
-    OrderShow
+    OrderShow,
+    BreadCrumb
   },
   methods: {
     searchOrder() {

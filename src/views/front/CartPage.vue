@@ -3,10 +3,9 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <div class="mt-4 mb-4">
-          <router-link to="/" style="text-decoration: none">首頁</router-link> >
-          <span>購物車</span>
-        </div>
+        <bread-crumb />
+      </div>
+      <div class="col-12">
         <h1>購物車</h1>
       </div>
       <div v-if="num === 0">
@@ -243,6 +242,7 @@
 <script>
 import emitter from '@/methods/emitter'
 import CouponSelect from '@/components/front/CouponSelect.vue'
+import BreadCrumb from '@/components/front/BreadCrumb.vue'
 import {
   getCart,
   updateCart,
@@ -278,7 +278,8 @@ export default {
     }
   },
   components: {
-    CouponSelect
+    CouponSelect,
+    BreadCrumb
   },
   methods: {
     getCart,

@@ -2,10 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <div class="mt-4 mb-4">
-          <router-link to="/" style="text-decoration: none">首頁</router-link> >
-          <span>追蹤清單</span>
-        </div>
+        <bread-crumb />
+      </div>
+      <div class="col-12">
         <h1>追蹤清單</h1>
         <div class="container">
           <div class="row" v-if="length === 0">
@@ -58,6 +57,7 @@
 
 <script>
 import { getAllProducts, addToCart } from '@/methods/api'
+import BreadCrumb from '@/components/front/BreadCrumb.vue'
 
 export default {
   name: 'FollowList',
@@ -84,6 +84,9 @@ export default {
       word: '追蹤清單載入中...',
       num: ''
     }
+  },
+  components: {
+    BreadCrumb
   },
   methods: {
     async allProducts() {

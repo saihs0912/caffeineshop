@@ -122,7 +122,7 @@ export default {
       widthSwitch: false,
       navOpen: false,
       activeIndex: null,
-      nowPath: ['/about', '/caffeine', '/shopping', '/order', '/follow', '/coupon'],
+      nowPath: ['/about', '/caffeine', '/articles', '/shopping', '/order', '/follow', 'cart'],
       num: 0
     }
   },

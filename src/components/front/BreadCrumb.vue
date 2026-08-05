@@ -1,11 +1,11 @@
 <template>
-  <nav aria-label="breadcrumb" class="mt-4 mb-4">
+  <nav aria-label="breadcrumb" class="mt-5 mb-5">
     <ol class="breadcrumb" style="font-size: 0.8rem">
       <template v-for="item in breadCrumbs" :key="item.title">
         <li v-if="item.link" class="breadcrumb-item active" aria-current="page">
-          <router-link :to="item.link">{{ item.title }}</router-link>
+          <router-link :to="item.link" class="no-underline text-body">{{ item.title }}</router-link>
         </li>
-        <li v-else class="breadcrumb-item active" aria-current="page">
+        <li v-else class="breadcrumb-item active text-body" aria-current="page">
           {{ item.title }}
         </li>
       </template>
@@ -18,7 +18,7 @@ export default {
   name: 'BreadCrumbs',
   computed: {
     breadCrumbs() {
-      const crumbsItem = [{ title: '首頁', link: '#' }]
+      const crumbsItem = [{ title: '首頁', link: '/' }]
       let item
       console.log(this.$route.matched[1])
       // if (this.$route.matched) {

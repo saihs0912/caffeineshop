@@ -42,16 +42,19 @@ const routes = [
       {
         path: 'orderDetail/:orderId',
         name: 'orderDetail',
+        meta: { title: '訂單明細' },
         component: () => import('../views/front/OrderDetail.vue')
       },
       {
         path: 'follow',
         name: 'follow',
+        meta: { title: '追蹤清單' },
         component: () => import('../views/front/FollowList.vue')
       },
       {
         path: 'cart',
         name: 'cart',
+        meta: { title: '購物車' },
         component: () => import('../views/front/CartPage.vue')
       },
       {
@@ -65,6 +68,8 @@ const routes = [
       },
       {
         path: '/articles',
+        name: 'articles',
+        meta: { title: '最新消息' },
         component: () => import('../views/front/ArticlesList.vue')
       }
     ]
