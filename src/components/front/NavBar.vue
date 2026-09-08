@@ -36,12 +36,18 @@
               style="font-size: 1.4rem; flex-wrap: nowrap !important"
             >
               <li class="nav-item" style="padding: 0 0.9rem">
-                <router-link class="nav-link" @click="navbarHide" to="/follow"
+                <router-link
+                  class="nav-link"
+                  @click="(navbarHide, (activeIndex = null))"
+                  to="/follow"
                   ><i class="bi bi-heart-fill text-ota-white"></i
                 ></router-link>
               </li>
               <li class="nav-item" style="padding: 0 0.9rem">
-                <router-link class="nav-link position-relative" @click="navbarHide" to="/cart"
+                <router-link
+                  class="nav-link position-relative"
+                  @click="(navbarHide, (activeIndex = null))"
+                  to="/cart"
                   ><i class="bi bi-cart-fill text-ota-white"></i>
                   <i class="position-absolute cartItem p-2 rounded-circle">
                     <span v-show="num > 0">{{ num }}</span>
@@ -185,11 +191,14 @@ export default {
     })
   },
   mounted() {
+    console.log('0')
     this.getCart('cart')
+    console.log('1')
     const underline = this.$refs.underline
     const navbarEl = this.$refs.navbarList
     const items = navbarEl.querySelectorAll('.nav-item')
     this.nowPath.forEach((item, i) => {
+      console.log(item)
       if (this.$route.fullPath === item) {
         this.activeIndex = i
         const activeEl = items[this.activeIndex]
