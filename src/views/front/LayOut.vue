@@ -58,6 +58,7 @@ export default {
     }
   },
   mounted() {
+    console.log('mounted')
     window.addEventListener('scroll', _.throttle(this.handleScroll, 200))
   }
 }
