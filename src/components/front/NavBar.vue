@@ -128,7 +128,7 @@ export default {
       widthSwitch: false,
       navOpen: false,
       activeIndex: null,
-      nowPath: ['/about', '/caffeine', '/articles', '/shopping', '/order', '/follow', 'cart'],
+      nowPath: ['/about', '/caffeine', '/articles', '/shopping', '/order'],
       num: 0
     }
   },
@@ -191,14 +191,11 @@ export default {
     })
   },
   mounted() {
-    console.log('0')
     this.getCart('cart')
-    console.log('1')
     const underline = this.$refs.underline
     const navbarEl = this.$refs.navbarList
     const items = navbarEl.querySelectorAll('.nav-item')
     this.nowPath.forEach((item, i) => {
-      console.log(item)
       if (this.$route.fullPath === item) {
         this.activeIndex = i
         const activeEl = items[this.activeIndex]
