@@ -11,6 +11,13 @@
             <div class="col-12 text-center">
               <span class="fs-3 fw-bold">{{ this.word }}</span>
             </div>
+            <p class="text-center" v-if="shopBtn">
+              <br /><router-link
+                to="/shopping"
+                class="no-underline fw-bold btn btn-tea-green text-rice-white px-5 py-3"
+                >去商店逛逛</router-link
+              >
+            </p>
           </div>
           <div class="row pb-5" v-else>
             <div
@@ -82,7 +89,8 @@ export default {
       },
       favorite: JSON.parse(localStorage.getItem('favoriteList')) || [],
       word: '追蹤清單載入中...',
-      num: ''
+      num: '',
+      shopBtn: false
     }
   },
   components: {
@@ -136,7 +144,10 @@ export default {
   watch: {
     filterData(newNum, oldNum) {
       this.length = newNum.length
-      if (newNum.length === 0) this.word = '沒有追蹤商品哦...要不要加一點進來呢'
+      if (newNum.length === 0) {
+        this.word = '沒有追蹤商品哦...要不要加一點進來呢'
+        this.shopBtn = true
+      }
     }
   },
   created() {
