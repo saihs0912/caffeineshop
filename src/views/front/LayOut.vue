@@ -1,9 +1,9 @@
 <template>
   <div ref="body" class="bg-rice-white">
     <nav-bar ref="navBar" />
-    <div class="container content-height" style="max-width: 1140px!">
+    <div class="container content-height">
       <div class="row justify-content-center pt-lg-md">
-        <div class="col pt-lg-4 pt-0">
+        <div class="col pt-lg-3 pt-0">
           <router-view />
         </div>
       </div>

@@ -9,7 +9,12 @@
         <div class="col-lg-4 col-md-6 col-sm-6 col-6 m-0 p-0">
           <div class="d-flex">
             <div>
-              <a class="navbar-brand fs-1 pb-0" href="#" @click="navbarHide(true)">
+              <a
+                class="navbar-brand fs-1 d-block"
+                href="#"
+                @click="navbarHide(true)"
+                style="height: 40px"
+              >
                 <img
                   class="img-fluid align-top"
                   src="../../assets/logo/logo-1.png"
