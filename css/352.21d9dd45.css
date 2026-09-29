@@ -1,0 +1,1 @@
+.order-list li:first-child{width:100%}.order-list li:last-child,.order-list li:nth-child(2),.order-list li:nth-child(3){width:33.33333%}@media (max-width:991px){.order-list li:last-child,.order-list li:nth-child(2),.order-list li:nth-child(3){width:50%}}@media (max-width:575px){.order-list li:last-child,.order-list li:nth-child(2),.order-list li:nth-child(3){width:100%}}
