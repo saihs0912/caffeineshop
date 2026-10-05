@@ -137,23 +137,23 @@
                             <tbody>
                               <tr>
                                 <td class="border-0 text-end">訂購人</td>
-                                <td class="border-0">{{ user.name }}</td>
+                                <td class="border-0 text-break">{{ user.name }}</td>
                               </tr>
                               <tr>
                                 <td class="border-0 text-end">地址</td>
-                                <td class="border-0">{{ user.address }}</td>
+                                <td class="border-0 text-break">{{ user.address }}</td>
                               </tr>
                               <tr>
                                 <td class="border-0 text-end">電話</td>
-                                <td class="border-0">{{ user.tel }}</td>
+                                <td class="border-0 text-break">{{ user.tel }}</td>
                               </tr>
                               <tr>
                                 <td class="border-0 text-end">Email</td>
-                                <td class="border-0">{{ user.email }}</td>
+                                <td class="border-0 text-break">{{ user.email }}</td>
                               </tr>
                               <tr>
                                 <td class="border-0 text-end">留言</td>
-                                <td class="border-0">{{ order.message }}</td>
+                                <td class="border-0 text-break">{{ order.message }}</td>
                               </tr>
                             </tbody>
                           </table>
