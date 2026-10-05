@@ -1,7 +1,8 @@
 <template>
   <div
+    v-if="this.$route.path === '/'"
     id="myCarousel"
-    class="carousel slide carousel-fade fadeIn position-absolute top-0 start-0"
+    class="carousel slide carousel-fade fadeIn"
     data-bs-ride="carousel"
     ref="carouselEl"
     style="overflow: hidden"
@@ -51,6 +52,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.$route, 'test')
     const el = this.$refs.carouselEl
     setTimeout(() => {
       this.carousel = new Carousel(el, { interval: 5000 })

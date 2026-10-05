@@ -48,14 +48,4 @@ export default {
 .aboutBtn:hover .moveR::before {
   transform: translateX(6px);
 }
-@media (min-width: 912px) {
-  .areaBottom:first-of-type {
-    margin-top: 300px;
-  }
-}
-@media (min-width: 600px) {
-  .areaBottom:first-of-type {
-    margin-top: 500px;
-  }
-}
 </style>

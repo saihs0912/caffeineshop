@@ -1,6 +1,7 @@
 <template>
   <div ref="body" class="bg-rice-white">
     <nav-bar ref="navBar" />
+    <slide-show />
     <div class="container content-height">
       <div class="row justify-content-center pt-lg-md">
         <div class="col pt-lg-3 pt-0">
@@ -18,6 +19,7 @@
 
 <script>
 import NavBar from '@/components/front/NavBar.vue'
+import SlideShow from '@/components/front/SlideShow.vue'
 import FooterArea from '@/components/front/FooterArea.vue'
 import ToastMessages from '@/components/back/ToastMessages.vue'
 import emitter from '@/methods/emitter'
@@ -25,6 +27,7 @@ import _ from 'lodash'
 
 export default {
   components: {
+    SlideShow,
     NavBar,
     FooterArea,
     ToastMessages
