@@ -4,7 +4,7 @@
     style="z-index: 1000"
     ref="navOut"
   >
-    <div class="container" style="width: 100%">
+    <div class="container" style="width: 100%; max-width: 100%">
       <div class="row mx-auto" style="width: 100%; box-sizing: border-box">
         <div class="col-lg-4 col-md-6 col-sm-6 col-6 m-0 p-0">
           <div class="d-flex">
@@ -66,7 +66,7 @@
           class="col-lg-6 col-md-2 col-sm-2 col-2 m-0 p-0 text-end order-lg-2 order-md-2 order-sm-2 order-last d-flex align-items-center justify-content-end"
         >
           <button
-            class="navbar-toggler"
+            class="navbar-toggler navbar-dark"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav01"
@@ -77,9 +77,9 @@
             style="z-index: 999"
             @click="navOpen = !navOpen"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon navbar-dark"></span>
           </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNav01">
+          <div class="collapse navbar-collapse justify-content-end bg-bake-brown" id="navbarNav01">
             <ul
               class="navbar-nav"
               @mouseleave="mouseLeave"
@@ -244,10 +244,9 @@ export default {
 @media (max-width: 991px) {
   #navbarNav01 {
     position: fixed;
-    width: 696px;
+    width: 100%;
     top: 54px;
-    right: calc(50% - 348px);
-    background-color: rgb(248, 249, 250);
+    left: 0;
     box-sizing: border-box;
     padding: 0 12px 12px 0;
   }
