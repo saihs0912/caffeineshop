@@ -28,7 +28,7 @@
               @click="sortByPrice"
               :disabled="!result"
             >
-              價格高低排序
+              價格高低
             </button>
           </div>
           <div
@@ -59,7 +59,7 @@
               @click="sortByDate"
               :disabled="!result"
             >
-              上架順序排序
+              上架順序
             </button>
           </div>
           <div
