@@ -38,6 +38,13 @@
       </div>
     </div>
   </div>
+  <div v-else-if="this.$route.path === '/about'">
+    <img src="../../assets/banners/about.jpg" class="d-block w-100" alt="關於我們" />
+  </div>
+  <div v-else-if="this.$route.path === '/caffeine'">test1</div>
+  <div v-else-if="this.$route.path === '/articles'">
+    <img src="../../assets/banners/articles.jpg" class="d-block w-100" alt="最新消息" />
+  </div>
 </template>
 
 <script>
