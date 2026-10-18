@@ -38,8 +38,16 @@
       </div>
     </div>
   </div>
-  <div v-else-if="this.$route.path === '/about'">
-    <img src="../../assets/banners/about.jpg" class="d-block w-100" alt="關於我們" />
+  <div v-else-if="this.$route.path === '/about'" class="position-relative">
+    <div class="position-absolute" style="max-width: 1170px">
+      <h2>關於咖啡因商店</h2>
+    </div>
+    <img
+      src="../../assets/banners/about.jpg"
+      class="d-block w-100"
+      alt="關於我們"
+      style="filter: opacity(0.2)"
+    />
   </div>
   <div v-else-if="this.$route.path === '/caffeine'">
     <img src="../../assets/banners/caffeine.jpg" class="d-block w-100" alt="咖啡與茶" />
