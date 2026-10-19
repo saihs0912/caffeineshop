@@ -38,21 +38,19 @@
       </div>
     </div>
   </div>
-  <div v-else-if="this.$route.path === '/about'" class="position-relative">
-    <div class="position-absolute" style="max-width: 1170px">
+  <div
+    v-else-if="this.$route.path === '/about'"
+    class="top-area"
+    style="background-image: url(../../assets/banners/about.jpg)"
+  >
+    <div class="top-area-title" style="max-width: 1170px">
       <h2>關於咖啡因商店</h2>
     </div>
-    <img
-      src="../../assets/banners/about.jpg"
-      class="d-block w-100"
-      alt="關於我們"
-      style="filter: opacity(0.2)"
-    />
   </div>
-  <div v-else-if="this.$route.path === '/caffeine'">
+  <div v-else-if="this.$route.path === '/caffeine'" class="top-area">
     <img src="../../assets/banners/caffeine.jpg" class="d-block w-100" alt="咖啡與茶" />
   </div>
-  <div v-else-if="this.$route.path === '/articles'">
+  <div v-else-if="this.$route.path === '/articles'" class="top-area">
     <img src="../../assets/banners/articles.jpg" class="d-block w-100" alt="最新消息" />
   </div>
 </template>
@@ -96,6 +94,15 @@ export default {
 }
 .text-shadow {
   text-shadow: 2px 2px 5px #1c1c1c;
+}
+.top-area {
+  width: 100%;
+  background-size: cover;
+  padding: 40px 0;
+}
+.top-area-titleBox {
+  max-width: 1170px;
+  margin: 0 auto;
 }
 @media (max-width: 767px) {
   .extend-box {
