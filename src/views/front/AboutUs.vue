@@ -13,7 +13,7 @@
                 經過長時間的磋商與討論，最終開成了這間咖啡因專屬的網路商店
               </p>
               <div class="mx-auto mb-5" style="max-width: 400px">
-                <img class="img-fluid" src="../../assets/img/aboutus03.jpg" alt="關於我們01" />
+                <img class="img-fluid" src="../../assets/img/about.jpg" alt="關於我們01" />
               </div>
               <h3 class="mb-3">一間存在於網路的商店</h3>
               <p>
