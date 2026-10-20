@@ -41,7 +41,7 @@
   <div
     v-else-if="this.$route.path === '/about'"
     class="top-area"
-    style="background-image: url(../../assets/banners/about.jpg)"
+    style="background-image: url('~@/../../assets/banners/about.jpg')"
   >
     <div class="top-area-title" style="max-width: 1170px">
       <h2>關於咖啡因商店</h2>
