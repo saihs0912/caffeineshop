@@ -42,8 +42,9 @@
     v-else-if="this.$route.path === '/about'"
     class="top-area"
     :style="{ backgroundImage: 'url(' + require('@/assets/banners/about.jpg') + ')' }"
+    style="background-color: rgba(255, 255, 255, 0.5)"
   >
-    <div class="top-area-title" style="max-width: 1170px">
+    <div class="top-area-titleBox" style="max-width: 1170px">
       <h2>關於咖啡因商店</h2>
     </div>
   </div>
@@ -67,16 +68,19 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$route, 'test')
-    const el = this.$refs.carouselEl
-    setTimeout(() => {
-      this.carousel = new Carousel(el, { interval: 5000 })
-      this.carousel.cycle()
-      this.isShow = true
-    }, 1500)
+    if (this.$route.path === '/') {
+      const el = this.$refs.carouselEl
+      setTimeout(() => {
+        this.carousel = new Carousel(el, { interval: 5000 })
+        this.carousel.cycle()
+        this.isShow = true
+      }, 1500)
+    }
   },
   beforeUnmount() {
-    if (this.carousel) this.carousel.dispose()
+    if (this.$route.path === '/') {
+      if (this.carousel) this.carousel.dispose()
+    }
   }
 }
 </script>
@@ -98,7 +102,7 @@ export default {
 .top-area {
   width: 100%;
   background-size: cover;
-  padding: 40px 0;
+  padding: 100px 0 40px 0;
 }
 .top-area-titleBox {
   max-width: 1170px;
