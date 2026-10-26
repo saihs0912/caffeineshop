@@ -2,19 +2,25 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <bread-crumb />
-        <h1>關於我們</h1>
         <div class="container">
           <div class="row">
-            <div class="col-12 pt-4 pb-4 text-center">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center">
               <p>
                 由一群志同道合的友人們所創立、經營<br />
                 分別在咖啡、茶等不同領域注入了新血與熱情<br />
                 經過長時間的磋商與討論，最終開成了這間咖啡因專屬的網路商店
               </p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center">
               <div class="mx-auto mb-5" style="max-width: 400px">
                 <img class="img-fluid" src="../../assets/img/about.jpg" alt="關於我們01" />
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-12 pt-4 pb-4 text-center">
               <h3 class="mb-3">一間存在於網路的商店</h3>
               <p>
                 我們沒有實體店面，但商品及服務皆可滿足您的需求<br />
@@ -75,8 +81,6 @@
 </template>
 
 <script>
-import BreadCrumb from '@/components/front/BreadCrumb.vue'
-
 export default {
   name: 'AboutUs',
   head() {
@@ -89,9 +93,6 @@ export default {
         { property: 'og:description', content: '一間販賣咖啡因商品的網路店鋪' }
       ]
     }
-  },
-  components: {
-    BreadCrumb
   }
 }
 </script>

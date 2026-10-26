@@ -42,10 +42,10 @@
     v-else-if="this.$route.path === '/about'"
     class="top-area"
     :style="{ backgroundImage: 'url(' + require('@/assets/banners/about.jpg') + ')' }"
-    style="background-color: rgba(255, 255, 255, 0.7); background-blend-mode: lighten"
+    style="background-color: rgba(255, 255, 255, 0.8); background-blend-mode: lighten"
   >
     <div class="top-area-titleBox" style="max-width: 1170px">
-      <h2>關於咖啡因商店</h2>
+      <h2 class="text-center fw-bold">關於我們</h2>
     </div>
   </div>
   <div v-else-if="this.$route.path === '/caffeine'" class="top-area">
@@ -102,7 +102,7 @@ export default {
 .top-area {
   width: 100%;
   background-size: cover;
-  padding: 100px 0 40px 0;
+  padding: 120px 0 60px 0;
 }
 .top-area-titleBox {
   max-width: 1170px;
