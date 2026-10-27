@@ -20,16 +20,24 @@
         </div>
         <div class="container">
           <div class="row">
-            <div class="col-12 pt-4 pb-4 text-center">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center">
               <h3 class="mb-3">一間存在於網路的商店</h3>
               <p>
                 我們沒有實體店面，但商品及服務皆可滿足您的需求<br />
                 打開手機或電腦，就能輕鬆選購、輕鬆下單<br />
                 接著只要滿懷期待等待商品的送達
               </p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center">
               <div class="mx-auto mb-5" style="max-width: 400px">
                 <img class="img-fluid" src="../../assets/img/aboutus01.jpg" alt="關於我們02" />
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-12 pt-4 pb-4 text-center">
               <h3 class="mb-3">因為咖啡因，所以我們存在</h3>
               <p>
                 在你的一生中，是否會需要攝取咖啡因的時候呢？<br />
