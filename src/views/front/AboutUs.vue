@@ -37,16 +37,24 @@
         </div>
         <div class="container">
           <div class="row">
-            <div class="col-12 pt-4 pb-4 text-center">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center">
               <h3 class="mb-3">因為咖啡因，所以我們存在</h3>
               <p>
                 在你的一生中，是否會需要攝取咖啡因的時候呢？<br />
                 我們就是為了這個時候而存在！<br />
                 無論是早上起床後、或是工作喘口氣時、甚至是假日放鬆時
               </p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center">
               <div class="mx-auto mb-5" style="max-width: 400px">
                 <img class="img-fluid" src="../../assets/img/aboutus02.jpg" alt="關於我們03" />
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center">
               <h3 class="mb-3">咖啡</h3>
               <p>
                 咖啡豆因種類，來自世界各地<br />
@@ -59,9 +67,17 @@
                 也提供各種咖啡相關器具、耗材等<br />
                 便於您沖泡美味的咖啡
               </p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center">
               <div class="mx-auto mb-5" style="max-width: 400px">
                 <img class="img-fluid" src="../../assets/img/aboutus04.jpg" alt="關於我們04" />
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center">
               <h3 class="mb-3">茶</h3>
               <p>
                 從綠茶、紅茶、烏龍茶<br />
@@ -77,6 +93,8 @@
                 除了提振精神外，也可以達到鎮定與放鬆的效果，對於休閒放鬆很有助益
               </p>
               <p>我們也提供相關的器具，方便您沖飲</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center">
               <div class="mx-auto mb-5" style="max-width: 400px">
                 <img class="img-fluid" src="../../assets/img/aboutus05.jpg" alt="關於我們05" />
               </div>
