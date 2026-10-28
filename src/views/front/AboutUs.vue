@@ -28,7 +28,9 @@
                 接著只要滿懷期待等待商品的送達
               </p>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center">
+            <div
+              class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 order-lg-first order-md-first text-center"
+            >
               <div class="mx-auto mb-5" style="max-width: 400px">
                 <img class="img-fluid" src="../../assets/img/aboutus01.jpg" alt="關於我們02" />
               </div>
@@ -68,7 +70,9 @@
                 便於您沖泡美味的咖啡
               </p>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center">
+            <div
+              class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 order-lg-first order-md-first text-center"
+            >
               <div class="mx-auto mb-5" style="max-width: 400px">
                 <img class="img-fluid" src="../../assets/img/aboutus04.jpg" alt="關於我們04" />
               </div>
