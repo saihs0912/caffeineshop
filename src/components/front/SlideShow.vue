@@ -108,6 +108,15 @@ export default {
   max-width: 1170px;
   margin: 0 auto;
 }
+.top-area-titleBox > h2 {
+  text-shadow:
+    0 0 10px #ffffff,
+    0 0 10px #ffffff,
+    0 0 10px #ffffff,
+    0 0 10px #ffffff,
+    0 0 10px #ffffff,
+    0 0 10px #ffffff;
+}
 @media (max-width: 767px) {
   .extend-box {
     width: 150%;

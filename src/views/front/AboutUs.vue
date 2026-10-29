@@ -11,8 +11,8 @@
                 經過長時間的磋商與討論，最終開成了這間咖啡因專屬的網路商店
               </p>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center">
-              <div class="mx-auto mb-5" style="max-width: 400px">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center m-0 p-0">
+              <div class="mx-auto m-0 p-0">
                 <img class="img-fluid" src="../../assets/img/about.jpg" alt="關於我們01" />
               </div>
             </div>
@@ -29,9 +29,9 @@
               </p>
             </div>
             <div
-              class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 order-lg-first order-md-first text-center"
+              class="col-lg-6 col-md-6 col-sm-12 col-12 order-lg-first order-md-first text-center m-0 p-0"
             >
-              <div class="mx-auto mb-5" style="max-width: 400px">
+              <div class="mx-auto m-0 p-0">
                 <img class="img-fluid" src="../../assets/img/aboutus01.jpg" alt="關於我們02" />
               </div>
             </div>
@@ -47,8 +47,8 @@
                 無論是早上起床後、或是工作喘口氣時、甚至是假日放鬆時
               </p>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center">
-              <div class="mx-auto mb-5" style="max-width: 400px">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center m-0 p-0">
+              <div class="mx-auto m-0 p-0">
                 <img class="img-fluid" src="../../assets/img/aboutus02.jpg" alt="關於我們03" />
               </div>
             </div>
@@ -71,9 +71,9 @@
               </p>
             </div>
             <div
-              class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 order-lg-first order-md-first text-center"
+              class="col-lg-6 col-md-6 col-sm-12 col-12 order-lg-first order-md-first text-center m-0 p-0"
             >
-              <div class="mx-auto mb-5" style="max-width: 400px">
+              <div class="mx-auto m-0 p-0">
                 <img class="img-fluid" src="../../assets/img/aboutus04.jpg" alt="關於我們04" />
               </div>
             </div>
@@ -98,8 +98,8 @@
               </p>
               <p>我們也提供相關的器具，方便您沖飲</p>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center">
-              <div class="mx-auto mb-5" style="max-width: 400px">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center m-0 p-0">
+              <div class="mx-auto m-0 p-0">
                 <img class="img-fluid" src="../../assets/img/aboutus05.jpg" alt="關於我們05" />
               </div>
             </div>
