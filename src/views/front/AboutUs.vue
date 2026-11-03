@@ -8,14 +8,21 @@
               class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center d-flex justifu-content-center align-items-center"
             >
               <p>
-                由一群志同道合的友人們所創立、經營<br />
-                分別在咖啡、茶等不同領域注入了新血與熱情<br />
+                由一群志同道合的友人們所創立、經營<br /><br />
+                在咖啡因上注入了熱情與專業<br /><br />
                 經過長時間的磋商與討論，最終開成了這間咖啡因專屬的網路商店
               </p>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center m-0 p-0">
               <div class="mx-auto m-0 p-0">
-                <img class="img-fluid" src="../../assets/img/aboutus00.jpg" alt="關於我們01" />
+                <picture alt title>
+                  <source
+                    media="(min-width: 992px)"
+                    srcset="../../assets/img/aboutus00-1.jpg"
+                    title
+                  />
+                  <img class="img-fluid" src="../../assets/img/aboutus00.jpg" alt="關於我們01" />
+                </picture>
               </div>
             </div>
           </div>
@@ -27,16 +34,23 @@
             >
               <h3 class="mb-3 w-100">一間存在於網路的商店</h3>
               <p class="w-100">
-                我們沒有實體店面，但商品及服務皆可滿足您的需求<br />
-                打開手機或電腦，就能輕鬆選購、輕鬆下單<br />
-                接著只要滿懷期待等待商品的送達
+                即便沒有實體店面，也可滿足您的需求<br /><br />
+                打開官網，就能輕鬆選購、輕鬆下單<br /><br />
+                最後只要滿懷期待等待商品的寄達
               </p>
             </div>
             <div
               class="col-lg-6 col-md-6 col-sm-12 col-12 order-lg-first order-md-first text-center m-0 p-0"
             >
               <div class="mx-auto m-0 p-0">
-                <img class="img-fluid" src="../../assets/img/aboutus01.jpg" alt="關於我們02" />
+                <picture alt title>
+                  <source
+                    media="(min-width: 992px)"
+                    srcset="../../assets/img/aboutus01-1.jpg"
+                    title
+                  />
+                  <img class="img-fluid" src="../../assets/img/aboutus01.jpg" alt="關於我們02" />
+                </picture>
               </div>
             </div>
           </div>
@@ -46,16 +60,23 @@
             <div
               class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center d-flex flex-wrap justifu-content-center align-items-center"
             >
-              <h3 class="mb-3 w-100">因為咖啡因，所以我們存在</h3>
+              <h3 class="mb-3 w-100">因咖啡因，所以我們存在</h3>
               <p class="w-100">
-                在你的一生中，是否會需要攝取咖啡因的時候呢？<br />
-                我們就是為了這個時候而存在！<br />
+                生活中，是否會需要攝取咖啡因的時候呢？<br /><br />
+                我們就是為了這個時候而存在！<br /><br />
                 無論是早上起床後、或是工作喘口氣時、甚至是假日放鬆時
               </p>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center m-0 p-0">
               <div class="mx-auto m-0 p-0">
-                <img class="img-fluid" src="../../assets/img/aboutus02.jpg" alt="關於我們03" />
+                <picture alt title>
+                  <source
+                    media="(min-width: 992px)"
+                    srcset="../../assets/img/aboutus02-1.jpg"
+                    title
+                  />
+                  <img class="img-fluid" src="../../assets/img/aboutus02.jpg" alt="關於我們03" />
+                </picture>
               </div>
             </div>
           </div>
@@ -67,14 +88,13 @@
             >
               <h3 class="mb-3 w-100">咖啡</h3>
               <p class="w-100">
-                咖啡豆因種類，來自世界各地<br />
+                咖啡豆因種類不同，來自不同地方<br /><br />
                 用累積的經驗來進行咖啡豆的品質確認、烘焙、調配<br />
                 都完成後，再將這些加工過的咖啡豆。依照需求<br />
-                包裝成一包包咖啡豆，或是磨成咖啡粉製成掛耳咖啡<br />
-                並使用宅配的方式，將平價又美味的咖啡商品送至您的所在地
+                包裝成一包包咖啡豆，或是磨成咖啡粉製成掛耳咖啡
               </p>
               <p class="w-100">
-                也提供各種咖啡相關器具、耗材等<br />
+                同時也販賣各種咖啡相關器具、耗材等<br />
                 便於您沖泡美味的咖啡
               </p>
             </div>
@@ -82,7 +102,14 @@
               class="col-lg-6 col-md-6 col-sm-12 col-12 order-lg-first order-md-first text-center m-0 p-0"
             >
               <div class="mx-auto m-0 p-0">
-                <img class="img-fluid" src="../../assets/img/aboutus04.jpg" alt="關於我們04" />
+                <picture alt title>
+                  <source
+                    media="(min-width: 992px)"
+                    srcset="../../assets/img/aboutus04-1.jpg"
+                    title
+                  />
+                  <img class="img-fluid" src="../../assets/img/aboutus04.jpg" alt="關於我們04" />
+                </picture>
               </div>
             </div>
           </div>
@@ -93,11 +120,6 @@
               class="col-lg-6 col-md-6 col-sm-12 col-12 pt-4 pb-4 text-center d-flex flex-wrap justifu-content-center align-items-center"
             >
               <h3 class="mb-3 w-100">茶</h3>
-              <p class="w-100">
-                從綠茶、紅茶、烏龍茶<br />
-                到抹茶、煎茶、焙茶、玄米茶<br />
-                以及花茶、水果茶皆有
-              </p>
               <p class="w-100">
                 茶的來源依照種類來自台灣、日本、中國、印度、斯里蘭卡等<br />
                 再由我們團隊進行品質確認，確保您可以品嘗到好的茶
@@ -110,7 +132,14 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center m-0 p-0">
               <div class="mx-auto m-0 p-0">
-                <img class="img-fluid" src="../../assets/img/aboutus05.jpg" alt="關於我們05" />
+                <picture alt title>
+                  <source
+                    media="(min-width: 992px)"
+                    srcset="../../assets/img/aboutus05-1.jpg"
+                    title
+                  />
+                  <img class="img-fluid" src="../../assets/img/aboutus05.jpg" alt="關於我們05" />
+                </picture>
               </div>
             </div>
           </div>
