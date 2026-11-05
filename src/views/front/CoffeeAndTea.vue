@@ -6,7 +6,7 @@
           <div class="row justify-content-center pt-5">
             <div class="col-lg-4 col-md-6 col-sm-6 col-12 text-center pb-2">
               <button
-                class="btn btn-outline-brown"
+                class="btn btn-outline-brown fs-4"
                 type="button"
                 style="width: 200px"
                 @click="coffee = true"
@@ -17,7 +17,7 @@
             </div>
             <div class="col-lg-4 col-md-6 col-sm-6 col-12 text-center">
               <button
-                class="btn btn-outline-brown"
+                class="btn btn-outline-brown fs-4"
                 type="button"
                 style="width: 200px"
                 @click="coffee = false"
