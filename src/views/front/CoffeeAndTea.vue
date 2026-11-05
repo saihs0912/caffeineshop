@@ -2,10 +2,6 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <bread-crumb></bread-crumb>
-      </div>
-      <div class="col-12">
-        <h1>咖啡與茶</h1>
         <div class="container">
           <div class="row justify-content-center pt-5">
             <div class="col-lg-4 col-md-6 col-sm-6 col-12 text-center pb-2">
@@ -206,8 +202,6 @@
 </template>
 
 <script>
-import BreadCrumb from '@/components/front/BreadCrumb.vue'
-
 export default {
   name: 'CoffeeAndTea',
   head() {
@@ -226,8 +220,7 @@ export default {
     return {
       coffee: true
     }
-  },
-  components: { BreadCrumb }
+  }
 }
 </script>
 

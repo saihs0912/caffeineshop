@@ -48,8 +48,15 @@
       <h2 class="text-center fw-bold">關於我們</h2>
     </div>
   </div>
-  <div v-else-if="this.$route.path === '/caffeine'" class="top-area">
-    <img src="../../assets/banners/caffeine.jpg" class="d-block w-100" alt="咖啡與茶" />
+  <div
+    v-else-if="this.$route.path === '/caffeine'"
+    class="top-area"
+    :style="{ backgroundImage: 'url(' + require('@/assets/banners/caffeine.jpg') + ')' }"
+    style="background-color: rgba(255, 255, 255, 0.8); background-blend-mode: lighten"
+  >
+    <div class="top-area-titleBox" style="max-width: 1170px">
+      <h2 class="text-center fw-bold">咖啡與茶</h2>
+    </div>
   </div>
   <div v-else-if="this.$route.path === '/articles'" class="top-area">
     <img src="../../assets/banners/articles.jpg" class="d-block w-100" alt="最新消息" />
