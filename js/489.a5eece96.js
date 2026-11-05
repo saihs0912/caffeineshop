@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkcaffeineshop"]=self["webpackChunkcaffeineshop"]||[]).push([[489],{4489:function(n,e,r){r.r(e),r.d(e,{default:function(){return s}});var u=r(6768);function t(n,e,r,t,a,f){return(0,u.uX)(),(0,u.CE)("h1",null,"文章管理")}var a={data(){return{}}},f=r(1241);const c=(0,f.A)(a,[["render",t]]);var s=c}}]);
+//# sourceMappingURL=489.a5eece96.js.map
