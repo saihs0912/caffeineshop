@@ -1,12 +1,15 @@
 <template>
   <div class="container">
     <div class="row">
+      <div class="col-12" v-show="!this.$route.path === '/caffeine'">
+        <bread-crumb />
+      </div>
       <div class="col-12">
         <div class="container">
-          <div class="row justify-content-center pt-5">
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12 text-center pb-2">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-6 col-12 text-center pb-2">
               <button
-                class="btn btn-outline-brown fs-4"
+                class="btn btn-outline-brown fs-4 rounded-pill"
                 type="button"
                 style="width: 200px"
                 @click="coffee = true"
@@ -14,10 +17,8 @@
               >
                 咖啡
               </button>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12 text-center">
               <button
-                class="btn btn-outline-brown fs-4"
+                class="btn btn-outline-tea-green fs-4 rounded-pill"
                 type="button"
                 style="width: 200px"
                 @click="coffee = false"
@@ -26,7 +27,7 @@
                 茶
               </button>
             </div>
-            <div class="col-lg-8 col-md-12 col-sm-12 col-12 pt-5 pb-2">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 pt-5 pb-2">
               <div v-if="coffee" class="pb-5">
                 <div class="float-lg-end float-md-end floatImg ps-2 pb-4">
                   <img src="../../assets/img/coffetea01.jpg" alt="衣索比亞" class="img-fluid" />
@@ -202,11 +203,12 @@
 </template>
 
 <script>
+import BreadCrumb from '@/components/front/BreadCrumb.vue'
+
 export default {
   name: 'CoffeeAndTea',
   head() {
     return {
-      title: '咖啡與茶 - 咖啡因商店',
       meta: [
         { name: 'description', content: '一間販賣咖啡因商品的網路店鋪' },
         { name: 'keywords', content: '咖啡因商店,咖啡豆,濾掛式咖啡,茶葉,茶包,甜點' },
@@ -215,6 +217,9 @@ export default {
         { property: 'og:description', content: '一間販賣咖啡因商品的網路店鋪' }
       ]
     }
+  },
+  components: {
+    BreadCrumb
   },
   data() {
     return {

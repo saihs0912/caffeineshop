@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <div class="row">
+      <div class="col-12" v-show="!this.$route.path === '/about'">
+        <bread-crumb />
+      </div>
       <div class="col-12">
         <div class="container">
           <div class="row">
@@ -147,6 +150,8 @@
 </template>
 
 <script>
+import BreadCrumb from '@/components/front/BreadCrumb.vue'
+
 export default {
   name: 'AboutUs',
   head() {
@@ -159,6 +164,9 @@ export default {
         { property: 'og:description', content: '一間販賣咖啡因商品的網路店鋪' }
       ]
     }
+  },
+  components: {
+    BreadCrumb
   }
 }
 </script>
