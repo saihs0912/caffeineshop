@@ -31,30 +31,39 @@
               <div class="container">
                 <div class="row">
                   <div v-if="coffee" class="col-12">
-                    <div class="pb-5">
-                      <div class="float-lg-end float-md-end floatImg ps-2 pb-4">
-                        <img
-                          src="../../assets/img/coffetea01.jpg"
-                          alt="衣索比亞"
-                          class="img-fluid"
-                        />
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                          <p>
+                            咖啡的確切起源無從得知，但最廣為人知的故事是，西元九世紀，傳說中的東非衣索比亞牧羊人卡爾迪（Kaldi）發現羊群們吃了一種紅色果實後會異常地興奮。他將果實帶到修道院，將果實以火烘烤後，他與修道院長聞到咖啡豆烤後的芳香，將豆子磨碎沖入熱水後，有提神的效果，可助於僧侶們長時間夜間祈禱保持清醒。
+                          </p>
+                          <p>在咖啡豆被發現後，被用於各種場合，並發揚於世界各地。</p>
+                          <p>
+                            目前世界上最普遍的咖啡樹種類即是<span class="fw-bold"
+                              >阿拉比卡（Arabica）</span
+                            >，同時也是前述衣索比亞咖啡的起源樹。其次還有<span class="fw-bold"
+                              >羅布斯塔（Robusta）</span
+                            >、<span class="fw-bold">利比里卡（Liberica）</span>與<span
+                              class="fw-bold"
+                              >卓別卡（Excelsa）</span
+                            >等種類。
+                          </p>
+                          <p>
+                            那麼我們在咖啡店或是便利超商看到的「藍山、「耶加雪菲（Yirgacheffe）」、「曼特寧（Mandheling）」、「耶加雪菲（Yirgacheffe）」等等，指的又是什麼呢？
+                          </p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="ps-2 pb-4">
+                            <img
+                              src="../../assets/img/coffetea01.jpg"
+                              alt="衣索比亞"
+                              class="img-fluid"
+                            />
+                          </div>
+                        </div>
                       </div>
-                      <p>
-                        咖啡的確切起源無從得知，但最廣為人知的故事是，西元九世紀，傳說中的東非衣索比亞牧羊人卡爾迪（Kaldi）發現羊群們吃了一種紅色果實後會異常地興奮。他將果實帶到修道院，將果實以火烘烤後，他與修道院長聞到咖啡豆烤後的芳香，將豆子磨碎沖入熱水後，有提神的效果，可助於僧侶們長時間夜間祈禱保持清醒。
-                      </p>
-                      <p>在咖啡豆被發現後，被用於各種場合，並發揚於世界各地。</p>
-                      <p>
-                        目前世界上最普遍的咖啡樹種類即是<span class="fw-bold"
-                          >阿拉比卡（Arabica）</span
-                        >，同時也是前述衣索比亞咖啡的起源樹。其次還有<span class="fw-bold"
-                          >羅布斯塔（Robusta）</span
-                        >、<span class="fw-bold">利比里卡（Liberica）</span>與<span class="fw-bold"
-                          >卓別卡（Excelsa）</span
-                        >等種類。
-                      </p>
-                      <p>
-                        那麼我們在咖啡店或是便利超商看到的「藍山、「耶加雪菲（Yirgacheffe）」、「曼特寧（Mandheling）」、「耶加雪菲（Yirgacheffe）」等等，指的又是什麼呢？
-                      </p>
+                    </div>
+                    <div class="pb-5">
                       <p class="text-center fw-bold mb-4 fs-4">這些名稱代表咖啡豆的產區。</p>
                       <div class="float-lg-start float-md-start floatImg pe-2 pb-4">
                         <img
