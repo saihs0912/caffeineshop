@@ -33,27 +33,24 @@
                   <div v-if="coffee" class="col-12">
                     <div class="container">
                       <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                          <p>
+                        <div
+                          class="col-lg-6 col-md-6 col-sm-12 col-12r d-flex flex-wrap justifu-content-center align-items-center"
+                        >
+                          <p class="w-100">
                             咖啡的確切起源無從得知，但最廣為人知的故事是，西元九世紀，傳說中的東非衣索比亞牧羊人卡爾迪（Kaldi）發現羊群們吃了一種紅色果實後會異常地興奮。他將果實帶到修道院，將果實以火烘烤後，他與修道院長聞到咖啡豆烤後的芳香，將豆子磨碎沖入熱水後，有提神的效果，可助於僧侶們長時間夜間祈禱保持清醒。
-                          </p>
-                          <p>在咖啡豆被發現後，被用於各種場合，並發揚於世界各地。</p>
-                          <p>
-                            目前世界上最普遍的咖啡樹種類即是<span class="fw-bold"
+                            <br /><br />在咖啡豆被發現後，被用於各種場合，並發揚於世界各地。<br /><br />目前世界上最普遍的咖啡樹種類即是<span
+                              class="fw-bold"
                               >阿拉比卡（Arabica）</span
                             >，同時也是前述衣索比亞咖啡的起源樹。其次還有<span class="fw-bold"
                               >羅布斯塔（Robusta）</span
                             >、<span class="fw-bold">利比里卡（Liberica）</span>與<span
                               class="fw-bold"
                               >卓別卡（Excelsa）</span
-                            >等種類。
-                          </p>
-                          <p>
-                            那麼我們在咖啡店或是便利超商看到的「藍山、「耶加雪菲（Yirgacheffe）」、「曼特寧（Mandheling）」、「耶加雪菲（Yirgacheffe）」等等，指的又是什麼呢？
+                            >等種類。<br /><br />那麼我們在咖啡店或是便利超商看到的「藍山、「耶加雪菲（Yirgacheffe）」、「曼特寧（Mandheling）」、「耶加雪菲（Yirgacheffe）」等等，指的又是什麼呢？
                           </p>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                          <div class="ps-2 pb-4">
+                          <div class="p-0 m-0">
                             <img
                               src="../../assets/img/coffetea01-1.jpg"
                               alt="衣索比亞"
@@ -63,71 +60,93 @@
                         </div>
                       </div>
                     </div>
-                    <div class="pb-5">
-                      <p class="text-center fw-bold mb-4 fs-4">這些名稱代表咖啡豆的產區。</p>
-                      <div class="float-lg-start float-md-start floatImg pe-2 pb-4">
-                        <img
-                          src="../../assets/img/coffetea02.jpg"
-                          alt="咖啡果實"
-                          class="img-fluid"
-                        />
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12r d-flex flex-wrap">
+                          <p class="text-center fw-bold mb-4 fs-4">這些名稱代表咖啡豆的產區。</p>
+                          <p>
+                            <span class="fw-bold fs-4">藍山：</span
+                            >產於是牙買加藍山山脈阿拉比卡種的咖啡豆，藍山咖啡是全世界最昂貴的咖啡之一，因產地等緣故產量稀少，且均勻、滑順、細緻的味道、加上沒有苦澀味，讓其身價不斐
+                          </p>
+                          <p>
+                            世上絕大多數都只是「藍山風味」的咖啡，包含咖啡店或市售咖啡飲料，因為純藍山咖啡昂貴，因此混了其他產地的咖啡豆，以較便宜的價格販售。
+                          </p>
+                          <p>
+                            因價格的緣故，也充斥著假貨，只有牙買加官方認證的才是真正的藍山咖啡豆！
+                          </p>
+                          <p>
+                            <span class="fw-bold fs-4">曼特寧：</span
+                            >產於印尼蘇門答臘島的阿拉比卡種咖啡豆。其口感濃郁醇厚、酸度低，以及複雜的層次風味。
+                          </p>
+                          <p>
+                            第二次世界大戰，日軍佔領印尼期間，日本軍人在蘇門答臘的咖啡店喝到美味的咖啡，便想詢問店家這是什麼咖啡，但由於語言不通，店員以為日軍在問自己是哪一族人，便回答「曼代寧族人（Mandailing）」，因此所謂的曼特寧，非指地名，而是民族名稱。
+                          </p>
+                        </div>
+                        <div
+                          class="col-lg-6 col-md-6 col-sm-12 col-12 order-lg-first order-md-first text-center m-0 p-0"
+                        >
+                          <div class="p-0 m-0">
+                            <img
+                              src="../../assets/img/coffetea02-1.jpg"
+                              alt="咖啡果實"
+                              class="img-fluid"
+                            />
+                          </div>
+                        </div>
                       </div>
-                      <p>
-                        <span class="fw-bold fs-4">藍山：</span
-                        >產於是牙買加藍山山脈阿拉比卡種的咖啡豆，藍山咖啡是全世界最昂貴的咖啡之一，因產地等緣故產量稀少，且均勻、滑順、細緻的味道、加上沒有苦澀味，讓其身價不斐
-                      </p>
-                      <p>
-                        世上絕大多數都只是「藍山風味」的咖啡，包含咖啡店或市售咖啡飲料，因為純藍山咖啡昂貴，因此混了其他產地的咖啡豆，以較便宜的價格販售。
-                      </p>
-                      <p>因價格的緣故，也充斥著假貨，只有牙買加官方認證的才是真正的藍山咖啡豆！</p>
-                      <p>
-                        <span class="fw-bold fs-4">曼特寧：</span
-                        >產於印尼蘇門答臘島的阿拉比卡種咖啡豆。其口感濃郁醇厚、酸度低，以及複雜的層次風味。
-                      </p>
-                      <p>
-                        第二次世界大戰，日軍佔領印尼期間，日本軍人在蘇門答臘的咖啡店喝到美味的咖啡，便想詢問店家這是什麼咖啡，但由於語言不通，店員以為日軍在問自己是哪一族人，便回答「曼代寧族人（Mandailing）」，因此所謂的曼特寧，非指地名，而是民族名稱。
-                      </p>
-                      <div class="float-lg-end float-md-end floatImg ps-2 pb-4">
-                        <img
-                          src="../../assets/img/coffetea03.jpg"
-                          alt="衣索比亞"
-                          class="img-fluid"
-                        />
+                    </div>
+                    <div class="container">
+                      <div class="row">
+                        <div
+                          class="col-lg-6 col-md-6 col-sm-12 col-12r d-flex flex-wrap justifu-content-center align-items-center"
+                        >
+                          <p>
+                            <span class="fw-bold fs-4">耶加雪菲：</span
+                            >生長於傳說中的咖啡發源地－衣索比亞，所以品種自然就是阿拉比卡，名稱由衣索比亞當地一個城鎮而來。種植於高原濕地上，提供絕佳的生長環境。
+                          </p>
+                          <p>帶有水果香氣或茶感，日曬處理法讓風味更加突出。</p>
+                          <p>
+                            <span class="fw-bold fs-4">哥倫比亞：</span
+                            >阿拉比卡種，如同其名，產於南美洲哥倫比亞。
+                          </p>
+                          <p>
+                            依照種植地區及海拔，有不同的風味。但整體而言口感乾淨、平順，因此成為許多咖啡愛好者的入門選項。在不同種的沖泡方式下，可以呈現不同的味道。
+                          </p>
+                          <p>
+                            <span class="fw-bold fs-4">巴西：</span
+                            >巴西產的阿拉比卡種，巴西是世界最大的咖啡豆生產國。以其龐大的數量及溫和且均勻的風味，佔有重要的地位。
+                          </p>
+                          <p>
+                            除了上述的風味外，還有堅果、巧克力、焦糖等甜感為主，讓口感更佳滑順。
+                          </p>
+                          <p>
+                            巴西咖啡豆也是現代許多綜合咖啡的基底，混合豆都可以看到它的身影，近期也在積極發展成精品咖啡。
+                          </p>
+                          <p class="text-center fw-bold mb-4 fs-4">怎麼好像都是阿拉比卡？</p>
+                          <p>
+                            阿拉比卡種在世界佔有70%，常見的產區咖啡豆皆是阿拉比卡樹種。最古早的阿拉比卡樹種從傳說之地東非衣索比亞傳至葉門，進入阿拉伯世界。後來歐洲雖然抵制，但最後仍然傳入，並融入當地文化。接著伴隨著大航海殖民時代，傳入亞洲、南美洲等。
+                          </p>
+                          <p>
+                            經過長時間的自然演化、人工培育、風土影響，而演變成現今多采多姿的咖啡品種。
+                          </p>
+                          <p>
+                            除了上述的品種外，阿拉比卡尚有藝伎、肯亞、吉利馬札羅、薇薇特南果...等等。
+                          </p>
+                          <p class="text-center fw-bold mb-4 fs-4">題外話，那美式咖啡是什麼？</p>
+                          <p>
+                            二戰時駐紮義大利的美國軍人，由於不習慣當地的小份量濃縮咖啡，因此在咖啡裡面加水稀釋，而形成如今的美式咖啡。因此美式咖啡的原型就是義式濃縮咖啡，而使用的豆子也會因為需求，使用單豆或混豆，而產生不同的風味。
+                          </p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                          <div class="ps-2 pb-4">
+                            <img
+                              src="../../assets/img/coffetea03-1.jpg"
+                              alt="衣索比亞"
+                              class="img-fluid"
+                            />
+                          </div>
+                        </div>
                       </div>
-                      <p>
-                        <span class="fw-bold fs-4">耶加雪菲：</span
-                        >生長於傳說中的咖啡發源地－衣索比亞，所以品種自然就是阿拉比卡，名稱由衣索比亞當地一個城鎮而來。種植於高原濕地上，提供絕佳的生長環境。
-                      </p>
-                      <p>帶有水果香氣或茶感，日曬處理法讓風味更加突出。</p>
-                      <p>
-                        <span class="fw-bold fs-4">哥倫比亞：</span
-                        >阿拉比卡種，如同其名，產於南美洲哥倫比亞。
-                      </p>
-                      <p>
-                        依照種植地區及海拔，有不同的風味。但整體而言口感乾淨、平順，因此成為許多咖啡愛好者的入門選項。在不同種的沖泡方式下，可以呈現不同的味道。
-                      </p>
-                      <p>
-                        <span class="fw-bold fs-4">巴西：</span
-                        >巴西產的阿拉比卡種，巴西是世界最大的咖啡豆生產國。以其龐大的數量及溫和且均勻的風味，佔有重要的地位。
-                      </p>
-                      <p>除了上述的風味外，還有堅果、巧克力、焦糖等甜感為主，讓口感更佳滑順。</p>
-                      <p>
-                        巴西咖啡豆也是現代許多綜合咖啡的基底，混合豆都可以看到它的身影，近期也在積極發展成精品咖啡。
-                      </p>
-                      <p class="text-center fw-bold mb-4 fs-4">怎麼好像都是阿拉比卡？</p>
-                      <p>
-                        阿拉比卡種在世界佔有70%，常見的產區咖啡豆皆是阿拉比卡樹種。最古早的阿拉比卡樹種從傳說之地東非衣索比亞傳至葉門，進入阿拉伯世界。後來歐洲雖然抵制，但最後仍然傳入，並融入當地文化。接著伴隨著大航海殖民時代，傳入亞洲、南美洲等。
-                      </p>
-                      <p>
-                        經過長時間的自然演化、人工培育、風土影響，而演變成現今多采多姿的咖啡品種。
-                      </p>
-                      <p>
-                        除了上述的品種外，阿拉比卡尚有藝伎、肯亞、吉利馬札羅、薇薇特南果...等等。
-                      </p>
-                      <p class="text-center fw-bold mb-4 fs-4">題外話，那美式咖啡是什麼？</p>
-                      <p>
-                        二戰時駐紮義大利的美國軍人，由於不習慣當地的小份量濃縮咖啡，因此在咖啡裡面加水稀釋，而形成如今的美式咖啡。因此美式咖啡的原型就是義式濃縮咖啡，而使用的豆子也會因為需求，使用單豆或混豆，而產生不同的風味。
-                      </p>
                     </div>
                   </div>
                   <div v-else class="col-12">
