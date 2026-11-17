@@ -96,6 +96,7 @@
                 href="#"
                 class="btn btn-tea-green d-block text-rice-white ms-auto"
                 to="/shopping"
+                @click.prevent="sendNum"
                 ><i class="bi bi-cart-fill"></i> 前往選購</router-link
               >
             </div>
@@ -129,6 +130,7 @@
                 href="#"
                 class="btn btn-tea-green d-block text-rice-white ms-auto"
                 to="/shopping"
+                @click.prevent="sendNum"
                 ><i class="bi bi-cart-fill"></i> 前往選購</router-link
               >
             </div>
@@ -152,6 +154,7 @@
 </template>
 
 <script>
+import emitter from '@/methods/emitter'
 import BreadCrumb from '@/components/front/BreadCrumb.vue'
 
 export default {
@@ -169,6 +172,11 @@ export default {
   },
   components: {
     BreadCrumb
+  },
+  methods: {
+    sendNum() {
+      emitter.emit('sendTo', '3')
+    }
   }
 }
 </script>
