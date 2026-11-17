@@ -177,20 +177,6 @@ export default {
           this.$refs.navbar.click()
         }
       }
-    },
-    activeElPos() {
-      const underline = this.$refs.underline
-      const navbarEl = this.$refs.navbarList
-      const items = navbarEl.querySelectorAll('.nav-item')
-      this.nowPath.forEach((item, i) => {
-        if (this.$route.fullPath === item) {
-          this.activeIndex = i
-          console.log(this.activeIndex, item, i)
-          const activeEl = items[this.activeIndex]
-          underline.style.width = `${activeEl.offsetWidth - 12}px`
-          underline.style.transform = `translateX(${activeEl.offsetLeft + 6}px)`
-        }
-      })
     }
   },
   watch: {
@@ -208,15 +194,29 @@ export default {
     emitter.on('updateCart', () => {
       this.getCart('cart')
     })
-  },
-  mounted() {
-    this.getCart('cart')
     emitter.on('sendTo', (data) => {
       console.log(data, '收到')
       this.activeIndex = data
-      console.log(this.activeIndex, 'activeindex')
-      this.activeElPos()
+
+      const underline = this.$refs.underline
+      const navbarEl = this.$refs.navbarList
+      const items = navbarEl.querySelectorAll('.nav-item')
+      const activeEl = items[this.activeIndex]
+      underline.style.width = `${activeEl.offsetWidth - 12}px`
+      underline.style.transform = `translateX(${activeEl.offsetLeft + 6}px)`
     })
+  },
+  mounted() {
+    if (this.activeIndex == null && this.$route.fullPath.includes('shopping')) {
+      this.activeIndex = 3
+      const underline = this.$refs.underline
+      const navbarEl = this.$refs.navbarList
+      const items = navbarEl.querySelectorAll('.nav-item')
+      const activeEl = items[3]
+      underline.style.width = `${activeEl.offsetWidth - 12}px`
+      underline.style.transform = `translateX(${activeEl.offsetLeft + 6}px)`
+    }
+    this.getCart('cart')
     const underline = this.$refs.underline
     const navbarEl = this.$refs.navbarList
     const items = navbarEl.querySelectorAll('.nav-item')
