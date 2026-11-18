@@ -177,6 +177,15 @@ export default {
           this.$refs.navbar.click()
         }
       }
+    },
+    indexChange(i) {
+      this.activeIndex = i
+      const underline = this.$refs.underline
+      const navbarEl = this.$refs.navbarList
+      const items = navbarEl.querySelectorAll('.nav-item')
+      const activeEl = items[this.activeIndex]
+      underline.style.width = `${activeEl.offsetWidth - 12}px`
+      underline.style.transform = `translateX(${activeEl.offsetLeft + 6}px)`
     }
   },
   watch: {
@@ -195,27 +204,11 @@ export default {
       this.getCart('cart')
     })
     emitter.on('sendTo', (data) => {
-      console.log(data, '收到')
-      this.activeIndex = data
-
-      const underline = this.$refs.underline
-      const navbarEl = this.$refs.navbarList
-      const items = navbarEl.querySelectorAll('.nav-item')
-      const activeEl = items[this.activeIndex]
-      underline.style.width = `${activeEl.offsetWidth - 12}px`
-      underline.style.transform = `translateX(${activeEl.offsetLeft + 6}px)`
+      this.indexChange(data)
     })
   },
   mounted() {
-    if (this.activeIndex == null && this.$route.fullPath.includes('shopping')) {
-      this.activeIndex = 3
-      const underline = this.$refs.underline
-      const navbarEl = this.$refs.navbarList
-      const items = navbarEl.querySelectorAll('.nav-item')
-      const activeEl = items[3]
-      underline.style.width = `${activeEl.offsetWidth - 12}px`
-      underline.style.transform = `translateX(${activeEl.offsetLeft + 6}px)`
-    }
+    if (this.activeIndex == null && this.$route.fullPath.includes('shopping')) this.indexChange(3)
     this.getCart('cart')
     const underline = this.$refs.underline
     const navbarEl = this.$refs.navbarList

@@ -8,7 +8,7 @@
         <div class="container">
           <div class="row">
             <div
-              class="col-lg-6 col-md-6 col-sm-12 col-12 p-4 d-flex flex-wrap justifu-content-center align-items-center"
+              class="col-lg-6 col-md-6 col-sm-12 col-12 p-4 d-flex flex-wrap justifu-content-center align-items-center order-2 order-md-1"
             >
               <h3 class="mb-3 w-100">我們是誰？</h3>
               <p>一群在咖啡、茶飲上注入熱情與心血、志同道合的友人們</p>
@@ -16,11 +16,21 @@
               <p>終於成功地開張了這間以咖啡因商品為主的網路商店</p>
               <p>以滿足顧客需求為經營方針持續努力</p>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center p-4">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center p-4 order-1 order-md-2">
               <div class="mx-auto m-0 p-0">
                 <picture alt title>
                   <source
                     media="(min-width: 992px)"
+                    srcset="../../assets/img/aboutus00-1.jpg"
+                    title
+                  />
+                  <source
+                    media="(min-width: 768px)"
+                    srcset="../../assets/img/aboutus00.jpg"
+                    title
+                  />
+                  <source
+                    media="(max-width: 767px)"
                     srcset="../../assets/img/aboutus00-1.jpg"
                     title
                   />
@@ -33,7 +43,7 @@
         <div class="container">
           <div class="row">
             <div
-              class="col-lg-6 col-md-6 col-sm-12 col-12 p-4 d-flex flex-wrap justifu-content-center align-items-center"
+              class="col-lg-6 col-md-6 col-sm-12 col-12 p-4 d-flex flex-wrap justifu-content-center align-items-center order-2 order-md-2"
             >
               <h3 class="mb-3 w-100">一間存在於網路的商店</h3>
               <p>雖然我們沒有實體店面，依然可以滿足您的需求</p>
@@ -41,13 +51,21 @@
               <p>不時也會推出優惠折扣活動，下手更划算</p>
               <p>最後只要滿懷期待等待商品寄達即可</p>
             </div>
-            <div
-              class="col-lg-6 col-md-6 col-sm-12 col-12 order-lg-first order-md-first text-center p-4"
-            >
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center p-4 order-1 order-md-1">
               <div class="mx-auto m-0 p-0">
                 <picture alt title>
                   <source
                     media="(min-width: 992px)"
+                    srcset="../../assets/img/aboutus01-1.jpg"
+                    title
+                  />
+                  <source
+                    media="(min-width: 768px)"
+                    srcset="../../assets/img/aboutus01.jpg"
+                    title
+                  />
+                  <source
+                    media="(max-width: 767px)"
                     srcset="../../assets/img/aboutus01-1.jpg"
                     title
                   />
@@ -60,7 +78,7 @@
         <div class="container">
           <div class="row">
             <div
-              class="col-lg-6 col-md-6 col-sm-12 col-12 p-4 d-flex flex-wrap justifu-content-center align-items-center"
+              class="col-lg-6 col-md-6 col-sm-12 col-12 p-4 d-flex flex-wrap justifu-content-center align-items-center order-2 order-md-1"
             >
               <h3 class="mb-3 w-100">因咖啡因，所以我們存在</h3>
               <p>在您的生活中，一定有需要攝取咖啡因的狀況</p>
@@ -68,11 +86,21 @@
               <p>無論是起床、工作、甚至假日來杯咖啡或茶</p>
               <p>都可達到提神、或是放鬆心情的效果</p>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center p-4">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center p-4 order-1 order-md-2">
               <div class="mx-auto m-0 p-0">
                 <picture alt title>
                   <source
                     media="(min-width: 992px)"
+                    srcset="../../assets/img/aboutus02-1.jpg"
+                    title
+                  />
+                  <source
+                    media="(min-width: 768px)"
+                    srcset="../../assets/img/aboutus02.jpg"
+                    title
+                  />
+                  <source
+                    media="(max-width: 767px)"
                     srcset="../../assets/img/aboutus02-1.jpg"
                     title
                   />
@@ -85,7 +113,7 @@
         <div class="container">
           <div class="row">
             <div
-              class="col-lg-6 col-md-6 col-sm-12 col-12 p-4 d-flex flex-wrap justifu-content-center align-items-center"
+              class="col-lg-6 col-md-6 col-sm-12 col-12 p-4 d-flex flex-wrap justifu-content-center align-items-center order-2 order-md-2"
             >
               <h3 class="mb-3 w-100">咖啡</h3>
               <p class="w-100">咖啡豆的產地來自巴西、印尼、哥倫比亞、牙買加等</p>
@@ -100,13 +128,21 @@
                 ><i class="bi bi-cart-fill"></i> 前往選購</router-link
               >
             </div>
-            <div
-              class="col-lg-6 col-md-6 col-sm-12 col-12 order-lg-first order-md-first text-center p-4"
-            >
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center p-4 order-1 order-md-1">
               <div class="mx-auto m-0 p-0">
                 <picture alt title>
                   <source
                     media="(min-width: 992px)"
+                    srcset="../../assets/img/aboutus04-1.jpg"
+                    title
+                  />
+                  <source
+                    media="(min-width: 768px)"
+                    srcset="../../assets/img/aboutus04.jpg"
+                    title
+                  />
+                  <source
+                    media="(max-width: 767px)"
                     srcset="../../assets/img/aboutus04-1.jpg"
                     title
                   />
@@ -119,7 +155,7 @@
         <div class="container">
           <div class="row">
             <div
-              class="col-lg-6 col-md-6 col-sm-12 col-12 p-4 d-flex flex-wrap justifu-content-center align-items-center"
+              class="col-lg-6 col-md-6 col-sm-12 col-12 p-4 d-flex flex-wrap justifu-content-center align-items-center order-2 order-md-1"
             >
               <h3 class="mb-3 w-100">茶</h3>
               <p class="w-100">茶葉來自台灣、日本、中國、印度、斯里蘭卡等主要產地</p>
@@ -134,11 +170,21 @@
                 ><i class="bi bi-cart-fill"></i> 前往選購</router-link
               >
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center p-4">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center p-4 order-1 order-md-2">
               <div class="mx-auto m-0 p-0">
                 <picture alt title>
                   <source
                     media="(min-width: 992px)"
+                    srcset="../../assets/img/aboutus05-1.jpg"
+                    title
+                  />
+                  <source
+                    media="(min-width: 768px)"
+                    srcset="../../assets/img/aboutus05.jpg"
+                    title
+                  />
+                  <source
+                    media="(max-width: 767px)"
                     srcset="../../assets/img/aboutus05-1.jpg"
                     title
                   />

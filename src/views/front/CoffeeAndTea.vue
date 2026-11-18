@@ -34,7 +34,7 @@
                     <div class="container">
                       <div class="row">
                         <div
-                          class="col-lg-6 col-md-6 col-sm-12 col-12r d-flex flex-wrap justifu-content-center align-items-center"
+                          class="col-lg-6 col-md-6 col-sm-12 col-12 p-4 d-flex flex-wrap justifu-content-center align-items-center order-2 order-md-1"
                         >
                           <p class="w-100">
                             咖啡的確切起源無從得知，但最廣為人知的故事是，西元九世紀，傳說中的東非衣索比亞牧羊人卡爾迪（Kaldi）發現羊群們吃了一種紅色果實後會異常地興奮。他將果實帶到修道院，將果實以火烘烤後，他與修道院長聞到咖啡豆烤後的芳香，將豆子磨碎沖入熱水後，有提神的效果，可助於僧侶們長時間夜間祈禱保持清醒。
@@ -49,7 +49,9 @@
                             >等種類。<br /><br />那麼我們在咖啡店或是便利超商看到的「藍山、「耶加雪菲（Yirgacheffe）」、「曼特寧（Mandheling）」、「耶加雪菲（Yirgacheffe）」等等，指的又是什麼呢？
                           </p>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div
+                          class="col-lg-6 col-md-6 col-sm-12 col-12 text-center p-4 order-1 order-md-2"
+                        >
                           <div class="p-0 m-0">
                             <img
                               src="../../assets/img/coffetea01-1.jpg"
@@ -62,7 +64,9 @@
                     </div>
                     <div class="container">
                       <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12r d-flex flex-wrap">
+                        <div
+                          class="col-lg-6 col-md-6 col-sm-12 col-12 p-4 d-flex flex-wrap justifu-content-center align-items-center order-2 order-md-2"
+                        >
                           <p class="text-center fw-bold mb-4 fs-4">這些名稱代表咖啡豆的產區。</p>
                           <p>
                             <span class="fw-bold fs-4">藍山：</span
@@ -83,7 +87,7 @@
                           </p>
                         </div>
                         <div
-                          class="col-lg-6 col-md-6 col-sm-12 col-12 order-lg-first order-md-first text-center m-0 p-0"
+                          class="col-lg-6 col-md-6 col-sm-12 col-12 text-center p-4 order-1 order-md-1"
                         >
                           <div class="p-0 m-0">
                             <img
@@ -98,7 +102,7 @@
                     <div class="container">
                       <div class="row">
                         <div
-                          class="col-lg-6 col-md-6 col-sm-12 col-12r d-flex flex-wrap justifu-content-center align-items-center"
+                          class="col-lg-6 col-md-6 col-sm-12 col-12 p-4 d-flex flex-wrap justifu-content-center align-items-center order-2 order-md-1"
                         >
                           <p>
                             <span class="fw-bold fs-4">耶加雪菲：</span
@@ -137,7 +141,9 @@
                             二戰時駐紮義大利的美國軍人，由於不習慣當地的小份量濃縮咖啡，因此在咖啡裡面加水稀釋，而形成如今的美式咖啡。因此美式咖啡的原型就是義式濃縮咖啡，而使用的豆子也會因為需求，使用單豆或混豆，而產生不同的風味。
                           </p>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div
+                          class="col-lg-6 col-md-6 col-sm-12 col-12 text-center p-4 order-1 order-md-2"
+                        >
                           <div class="ps-2 pb-4">
                             <img
                               src="../../assets/img/coffetea03-1.jpg"
